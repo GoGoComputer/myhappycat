@@ -9614,7 +9614,15 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         var cookName = arg;
         var baseCooking = GameData.CraftingRecipeData ? GameData.CraftingRecipeData.cooking : {};
         var cooking = mergeMaps(baseCooking, ExtraRecipes.cooking || {});
-        if (!cookName || !cooking || !cooking[cookName]) { replier.reply('요리 레시피가 없습니다.'); return; }
+        if (!cookName) {
+            var list = [];
+            for (var cname in cooking) list.push(cname);
+            if (list.length === 0) { replier.reply('요리 레시피가 없습니다.'); return; }
+            list.sort();
+            replier.reply('[요리 레시피]\n' + list.slice(0, 20).join('\n') + '\n사용: .요리 <아이템>' + buildNextActionHint('cook'));
+            return;
+        }
+        if (!cooking || !cooking[cookName]) { replier.reply('요리 레시피가 없습니다.'); return; }
         var cr = cooking[cookName];
         if (cr.levelReq && (player.professions.cooking || 1) < cr.levelReq) { replier.reply('요리 레벨 부족'); return; }
         if (findItemCount(player, cr.fish.name) < cr.fish.count) { replier.reply('물고기 부족'); return; }
