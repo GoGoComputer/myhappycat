@@ -760,6 +760,9 @@ function getItemMaxDurability(itemName, slotType) {
     if (item && item.level) base += item.level * 2;
     if (slotType === 'weapon') base += 20;
     if (slotType === 'armor') base += 30;
+    if (slotType === 'helmet') base += 18;
+    if (slotType === 'gloves') base += 15;
+    if (slotType === 'boots') base += 15;
     if (slotType === 'shield') base += 15;
     return Math.min(300, Math.max(50, base));
 }
@@ -782,6 +785,21 @@ function applyDurabilityLoss(p, wLoss, aLoss, sLoss) {
         ensureSlotDurability(p.equipment.armor, p.equipment.armor.name, 'armor');
         p.equipment.armor.durability = Math.max(0, p.equipment.armor.durability - (aLoss || 0));
         if (p.equipment.armor.durability === 0) notes.push('방어구 파손');
+    }
+    if (p.equipment.helmet && p.equipment.helmet.name) {
+        ensureSlotDurability(p.equipment.helmet, p.equipment.helmet.name, 'helmet');
+        p.equipment.helmet.durability = Math.max(0, p.equipment.helmet.durability - (aLoss || 0));
+        if (p.equipment.helmet.durability === 0) notes.push('투구 파손');
+    }
+    if (p.equipment.gloves && p.equipment.gloves.name) {
+        ensureSlotDurability(p.equipment.gloves, p.equipment.gloves.name, 'gloves');
+        p.equipment.gloves.durability = Math.max(0, p.equipment.gloves.durability - (aLoss || 0));
+        if (p.equipment.gloves.durability === 0) notes.push('장갑 파손');
+    }
+    if (p.equipment.boots && p.equipment.boots.name) {
+        ensureSlotDurability(p.equipment.boots, p.equipment.boots.name, 'boots');
+        p.equipment.boots.durability = Math.max(0, p.equipment.boots.durability - (aLoss || 0));
+        if (p.equipment.boots.durability === 0) notes.push('신발 파손');
     }
     if (p.equipment.shield && p.equipment.shield.name) {
         ensureSlotDurability(p.equipment.shield, p.equipment.shield.name, 'shield');
@@ -5605,10 +5623,33 @@ function calcScaledReward(base, level, bonus, isGold) {
     return Math.floor(base * (bonus || 1) * scale);
 }
 
-function getDropRate(battle) {
+function getLevelDiffScale(playerLevel, monsterLevel) {
+    if (!monsterLevel || !playerLevel) return 1;
+    var diff = playerLevel - monsterLevel;
+    if (diff >= 10) return 0.3;
+    if (diff >= 5) return 0.6;
+    if (diff <= -10) return 1.6;
+    if (diff <= -5) return 1.3;
+    return 1.0;
+}
+
+function applyRewardLevelDiff(base, playerLevel, monsterLevel) {
+    var scale = getLevelDiffScale(playerLevel, monsterLevel);
+    return Math.floor(base * scale);
+}
+
+function getDropRate(battle, player) {
     var rate = Config.DROP_RATE;
     if (battle && battle.bonus) rate *= Math.min(2.0, battle.bonus);
+    var monsterLevel = battle && battle.monster ? battle.monster.level : 0;
+    var playerLevel = player ? player.level : (battle ? battle.playerLevel : 0);
+    rate *= getLevelDiffScale(playerLevel, monsterLevel);
+    if (player) {
+        var acc = getAccessoryEffects(player);
+        rate *= (1 + (acc.dropRate || 0));
+    }
     if (rate > 0.8) rate = 0.8;
+    if (rate < 0.05) rate = 0.05;
     return rate;
 }
 
@@ -5679,7 +5720,20 @@ function buildNewPlayer(sender, jobName) {
         hp: job.baseStats.hp,
         mp: job.baseStats.mp,
         inventory: [{ name: '포션', count: 3 }, { name: '낡은단검', count: 1 }],
-        equipment: { weapon: { name: null }, armor: { name: null }, shield: { name: null } },
+        equipment: {
+            weapon: { name: null },
+            armor: { name: null },
+            shield: { name: null },
+            helmet: { name: null },
+            gloves: { name: null },
+            boots: { name: null },
+            ring1: { name: null },
+            ring2: { name: null },
+            necklace: { name: null },
+            earring: { name: null },
+            belt: { name: null },
+            cloak: { name: null }
+        },
         quests: {},
         fish: [],
         fishBag: [],
@@ -5695,17 +5749,38 @@ function getJob(jobName) {
 }
 
 function normalizePlayer(p) {
-    if (!p.equipment) p.equipment = { weapon: { name: null }, armor: { name: null }, shield: { name: null } };
+    if (!p.equipment) p.equipment = { weapon: { name: null }, armor: { name: null }, shield: { name: null }, helmet: { name: null }, gloves: { name: null }, boots: { name: null }, ring1: { name: null }, ring2: { name: null }, necklace: { name: null }, earring: { name: null }, belt: { name: null }, cloak: { name: null } };
     if (!p.equipment.weapon) p.equipment.weapon = { name: null };
     if (!p.equipment.armor) p.equipment.armor = { name: null };
     if (!p.equipment.shield) p.equipment.shield = { name: null };
+    if (!p.equipment.helmet) p.equipment.helmet = { name: null };
+    if (!p.equipment.gloves) p.equipment.gloves = { name: null };
+    if (!p.equipment.boots) p.equipment.boots = { name: null };
+    if (!p.equipment.ring1) p.equipment.ring1 = { name: null };
+    if (!p.equipment.ring2) p.equipment.ring2 = { name: null };
+    if (!p.equipment.necklace) p.equipment.necklace = { name: null };
+    if (!p.equipment.earring) p.equipment.earring = { name: null };
+    if (!p.equipment.belt) p.equipment.belt = { name: null };
+    if (!p.equipment.cloak) p.equipment.cloak = { name: null };
     if (p.equipment.weapon.enhance === undefined) p.equipment.weapon.enhance = 0;
     if (p.equipment.armor.enhance === undefined) p.equipment.armor.enhance = 0;
     if (p.equipment.shield.enhance === undefined) p.equipment.shield.enhance = 0;
+    if (p.equipment.helmet.enhance === undefined) p.equipment.helmet.enhance = 0;
+    if (p.equipment.gloves.enhance === undefined) p.equipment.gloves.enhance = 0;
+    if (p.equipment.boots.enhance === undefined) p.equipment.boots.enhance = 0;
+    if (p.equipment.ring1.enhance === undefined) p.equipment.ring1.enhance = 0;
+    if (p.equipment.ring2.enhance === undefined) p.equipment.ring2.enhance = 0;
+    if (p.equipment.necklace.enhance === undefined) p.equipment.necklace.enhance = 0;
+    if (p.equipment.earring.enhance === undefined) p.equipment.earring.enhance = 0;
+    if (p.equipment.belt.enhance === undefined) p.equipment.belt.enhance = 0;
+    if (p.equipment.cloak.enhance === undefined) p.equipment.cloak.enhance = 0;
     if (p.equipment.weapon.gem === undefined) p.equipment.weapon.gem = "";
     if (p.equipment.weapon.name) ensureSlotDurability(p.equipment.weapon, p.equipment.weapon.name, 'weapon');
     if (p.equipment.armor.name) ensureSlotDurability(p.equipment.armor, p.equipment.armor.name, 'armor');
     if (p.equipment.shield.name) ensureSlotDurability(p.equipment.shield, p.equipment.shield.name, 'shield');
+    if (p.equipment.helmet.name) ensureSlotDurability(p.equipment.helmet, p.equipment.helmet.name, 'helmet');
+    if (p.equipment.gloves.name) ensureSlotDurability(p.equipment.gloves, p.equipment.gloves.name, 'gloves');
+    if (p.equipment.boots.name) ensureSlotDurability(p.equipment.boots, p.equipment.boots.name, 'boots');
     if (!p.inventory) p.inventory = [];
     if (!p.quests) p.quests = {};
     if (!p.fish) p.fish = [];
@@ -5769,8 +5844,16 @@ function getPartyBuff(p) {
         if (role === '힐') hasHeal = true;
         if (role === '딜') hasDps = true;
     }
-    if (hasTank && hasHeal && hasDps) return { attMul: 1.05, defMul: 1.05, hpBonus: 30 };
-    return { attMul: 1.0, defMul: 1.0, hpBonus: 0 };
+    var buff = { attMul: 1.0, defMul: 1.0, hpBonus: 0 };
+    if (hasTank) { buff.defMul *= 1.06; buff.hpBonus += 40; }
+    if (hasHeal) { buff.hpBonus += 60; }
+    if (hasDps) { buff.attMul *= 1.06; }
+    if (hasTank && hasHeal && hasDps) {
+        buff.attMul *= 1.03;
+        buff.defMul *= 1.03;
+        buff.hpBonus += 30;
+    }
+    return buff;
 }
 
 function getBgEventBonus() {
@@ -5835,6 +5918,273 @@ function rollRewardTable(table) {
 function getJobSkillList(p) {
     var job = getJob(p.job);
     return (job && job.skills) ? job.skills : [];
+}
+
+function getSkillEmoji(skillName) {
+    var map = {
+        '기본공격': '⚔️',
+        '응급치료': '🩹',
+        '강타': '💥',
+        '방어태세': '🛡️',
+        '도발': '📣',
+        '돌진': '🏃',
+        '파이어볼': '🔥',
+        '아이스스피어': '❄️',
+        '번개충격': '⚡',
+        '마나실드': '🔮',
+        '정조준': '🎯',
+        '다중사격': '🏹',
+        '화살비': '🌧️',
+        '독화살': '☠️',
+        '기습': '🗡️',
+        '독칼날': '🧪',
+        '그림자걷기': '🌑',
+        '급소공격': '🎯',
+        '신성한심판': '🌟',
+        '광기의해방': '🩸',
+        '대마력포': '💫',
+        '죽음의춤': '💀',
+        '메테오스웜': '☄️',
+        '영혼참수': '🪓',
+        '라그나로크': '🌋',
+        '독바르기': '🧴',
+        '치유': '💚',
+        '성역의 빛': '✨',
+        '분노폭발': '😡',
+        '신성한 방패': '🛡️',
+        '메테오': '☄️',
+        '골렘소환': '🪨',
+        '암살': '🗡️',
+        '훔치기': '🧤',
+        '부활': '🕊️',
+        '아수라파천무': '👊',
+        '폭풍화살': '🌪️',
+        '어둠의 일격': '🌑',
+        '대지강타': '🌍',
+        '빙결파동': '🧊'
+    };
+    if (map[skillName]) return map[skillName];
+    if (skillName.indexOf('치유') !== -1 || skillName.indexOf('회복') !== -1) return '💚';
+    if (skillName.indexOf('방패') !== -1 || skillName.indexOf('보호') !== -1) return '🛡️';
+    if (skillName.indexOf('불') !== -1 || skillName.indexOf('화염') !== -1) return '🔥';
+    if (skillName.indexOf('얼음') !== -1 || skillName.indexOf('빙결') !== -1) return '❄️';
+    if (skillName.indexOf('번개') !== -1 || skillName.indexOf('뇌') !== -1) return '⚡';
+    if (skillName.indexOf('독') !== -1) return '☠️';
+    if (skillName.indexOf('검') !== -1 || skillName.indexOf('창') !== -1) return '⚔️';
+    return '✨';
+}
+
+function buildSkillBar(p) {
+    var skills = getJobSkillList(p) || [];
+    if (!skills.length) return '';
+    var maxShow = 6;
+    var shown = skills.slice(0, maxShow);
+    for (var i = 0; i < shown.length; i++) {
+        shown[i] = getSkillEmoji(shown[i]) + shown[i];
+    }
+    var more = skills.length > maxShow ? ' +' + (skills.length - maxShow) : '';
+    return '\n[스킬] ' + shown.join(' | ') + more + '\n사용: .스킬 <이름>';
+}
+
+function buildDurabilityStatus(p) {
+    var eq = p.equipment || {};
+    var slots = [
+        { key: 'weapon', label: '무기', type: 'weapon' },
+        { key: 'armor', label: '갑옷', type: 'armor' },
+        { key: 'shield', label: '방패', type: 'shield' },
+        { key: 'helmet', label: '투구', type: 'helmet' },
+        { key: 'gloves', label: '장갑', type: 'gloves' },
+        { key: 'boots', label: '신발', type: 'boots' }
+    ];
+    var parts = [];
+    var broken = [];
+    for (var i = 0; i < slots.length; i++) {
+        var slot = eq[slots[i].key];
+        if (!slot || !slot.name) continue;
+        ensureSlotDurability(slot, slot.name, slots[i].type);
+        var text = slots[i].label + ' ' + slot.durability + '/' + slot.maxDurability;
+        if (slot.durability <= 0) {
+            broken.push(slots[i].label);
+            text += '(파손)';
+        }
+        parts.push(text);
+    }
+    if (parts.length === 0) return '🧰 내구도: 장비 없음';
+    var line = '🧰 내구도: ' + parts.join(', ');
+    if (broken.length) line += '\n파손: ' + broken.join(', ');
+    return line;
+}
+
+function buildNextActionLine() {
+    return '\n다음 행동: .공격 / .스킬 / .사용';
+}
+
+function buildPlayerStatusLine(p) {
+    return '내 상태: 💚 ' + p.hp + '/' + getMaxHp(p) + ' | 🔷 ' + p.mp + '/' + getMaxMp(p);
+}
+
+function buildNextActionHint(context) {
+    if (context === 'shop-list') return '\n다음 행동: .상점 <상점명> [페이지] / .인벤 / .정보';
+    if (context === 'shop-view') return '\n다음 행동: .구매 <아이템> / .판매 <아이템> / .인벤';
+    if (context === 'inventory') return '\n다음 행동: .장착 <부위> <아이템> / .사용 <아이템> / .장비';
+    if (context === 'equipment') return '\n다음 행동: .장착 <부위> <아이템> / .해제 <부위> / .강화 <부위>'; 
+    if (context === 'status') return '\n다음 행동: .사냥 / .상점 / .인벤';
+    if (context === 'trade') return '\n다음 행동: .상점 / .인벤';
+    if (context === 'party') return '\n다음 행동: .파티역할 <탱/힐/딜> / .파티나가기';
+    if (context === 'item-info') return '\n다음 행동: .장착 <부위> <아이템> / .판매 <아이템> / .인벤';
+    if (context === 'profession') return '\n다음 행동: .채광 / .약초 / .제작 / .요리';
+    if (context === 'gather') return '\n다음 행동: .인벤 / .제작 / .상점';
+    if (context === 'repair') return '\n다음 행동: .수리 <부위> / .장비';
+    if (context === 'enhance') return '\n다음 행동: .강화 <부위> [강화석] / .장비';
+    if (context === 'gem') return '\n다음 행동: .보석장착 <보석> / .장비';
+    if (context === 'dungeon-list') return '\n다음 행동: .던전 <이름> [난이도] / .사냥';
+    if (context === 'dungeon-start') return '\n다음 행동: .공격 / .스킬 / .사용';
+    if (context === 'world-event') return '\n다음 행동: .침공 / .정보';
+    if (context === 'quest-list') return '\n다음 행동: .퀘스트수락 <ID> / .퀘스트현황';
+    if (context === 'daily-quest') return '\n다음 행동: .사냥 / .낚시 / .일일완료';
+    if (context === 'weekly-quest') return '\n다음 행동: .던전 / .전장참가 / .주간완료';
+    if (context === 'quest-progress') return '\n다음 행동: .퀘스트완료 <ID> / .퀘스트현황';
+    if (context === 'craft') return '\n다음 행동: .제작 <레시피> / .인벤';
+    if (context === 'cook') return '\n다음 행동: .요리 <레시피> / .인벤';
+    if (context === 'fishing') return '\n다음 행동: .낚시판매 / .인벤';
+    if (context === 'fishing-info') return '\n다음 행동: .낚시 / .낚시판매';
+    if (context === 'pet') return '\n다음 행동: .펫먹이 / .펫훈련 / .펫탐험';
+    if (context === 'mount') return '\n다음 행동: .탈것목록 / .탈것타기 <이름>'; 
+    if (context === 'zone') return '\n다음 행동: .지역이동 <이름> / .사냥';
+    if (context === 'explore') return '\n다음 행동: .탐험 / .사냥 / .보물상자';
+    if (context === 'treasure') return '\n다음 행동: .보물상자 <이름> / .인벤';
+    if (context === 'skills') return '\n다음 행동: .스킬 <이름> / .사냥';
+    if (context === 'equip-change') return '\n다음 행동: .장비 / .강화 <부위> / .수리';
+    if (context === 'use-item') return '\n다음 행동: .인벤 / .사냥 / .상점';
+    if (context === 'escape') return '\n다음 행동: .사냥 / .휴식 / .인벤';
+    if (context === 'enhance-fail') return '\n다음 행동: .수리 / .강화 <부위> [강화석] / .상점';
+    if (context === 'gem-fail') return '\n다음 행동: .보석장착 <보석> / .상점 / .인벤';
+    if (context === 'quest-reward') return '\n다음 행동: .퀘스트목록 / .일일퀘스트 / .던전';
+    if (context === 'battle-end') return '\n다음 행동: .사냥 / .던전 / .상점';
+    return '\n다음 행동: .사냥 / .상점 / .인벤';
+}
+
+function buildBattleEndHint(p) {
+    var zoneName = p.currentZone || '묘냥의 숲';
+    var zone = GameData.ZoneData ? GameData.ZoneData[zoneName] : null;
+    var maxHp = getMaxHp(p);
+    var maxMp = getMaxMp(p);
+    var lowHp = maxHp > 0 && (p.hp / maxHp) < 0.4;
+    var lowMp = maxMp > 0 && (p.mp / maxMp) < 0.25;
+    var base = '\n다음 행동: ';
+
+    if (lowHp || lowMp) {
+        return base + '.휴식 / .사용 <포션> / .상점';
+    }
+
+    if (zone && zone.levelReq && p.level < zone.levelReq) {
+        return base + '.지역이동 / .지역목록 / .상점';
+    }
+
+    if (p.level < 10) {
+        return base + '.사냥 / .지역이동 / .상점';
+    }
+
+    if (p.level < 30) {
+        return base + '.던전 / .사냥 / .상점';
+    }
+
+    return base + '.던전 / .월드이벤트 / .상점';
+}
+
+var AccessoryEffectTable = {
+    // 반지 (치명타)
+    '철반지': { healPct: 0, critPct: 0.02, dropPct: 0 },
+    '은반지': { healPct: 0, critPct: 0.03, dropPct: 0 },
+    '금반지': { healPct: 0, critPct: 0.04, dropPct: 0 },
+    '루비반지': { healPct: 0, critPct: 0.05, dropPct: 0 },
+    '사파이어반지': { healPct: 0, critPct: 0.05, dropPct: 0 },
+    '에메랄드반지': { healPct: 0, critPct: 0.04, dropPct: 0 },
+    '다이아몬드반지': { healPct: 0, critPct: 0.07, dropPct: 0 },
+    '생명의반지': { healPct: 0, critPct: 0.06, dropPct: 0 },
+    '힘의반지': { healPct: 0, critPct: 0.08, dropPct: 0 },
+    '마력의반지': { healPct: 0, critPct: 0.08, dropPct: 0 },
+    '전설의반지': { healPct: 0, critPct: 0.12, dropPct: 0 },
+    // 목걸이 (치유)
+    '가죽목걸이': { healPct: 0.02, critPct: 0, dropPct: 0 },
+    '은목걸이': { healPct: 0.03, critPct: 0, dropPct: 0 },
+    '금목걸이': { healPct: 0.04, critPct: 0, dropPct: 0 },
+    '호신부': { healPct: 0.05, critPct: 0, dropPct: 0 },
+    '마력의목걸이': { healPct: 0.06, critPct: 0, dropPct: 0 },
+    '불사조의깃털': { healPct: 0.07, critPct: 0, dropPct: 0 },
+    '드래곤펜던트': { healPct: 0.08, critPct: 0, dropPct: 0 },
+    '영혼의목걸이': { healPct: 0.12, critPct: 0, dropPct: 0 },
+    // 귀걸이 (드랍)
+    '은귀걸이': { healPct: 0, critPct: 0, dropPct: 0.02 },
+    '금귀걸이': { healPct: 0, critPct: 0, dropPct: 0.03 },
+    '진주귀걸이': { healPct: 0, critPct: 0, dropPct: 0.04 },
+    '다이아귀걸이': { healPct: 0, critPct: 0, dropPct: 0.05 },
+    '정령의귀걸이': { healPct: 0, critPct: 0, dropPct: 0.07 },
+    '천사의귀걸이': { healPct: 0, critPct: 0, dropPct: 0.10 },
+    // 벨트 (치명타)
+    '가죽벨트': { healPct: 0, critPct: 0.02, dropPct: 0 },
+    '철벨트': { healPct: 0, critPct: 0.03, dropPct: 0 },
+    '전사의벨트': { healPct: 0, critPct: 0.05, dropPct: 0 },
+    '영웅의벨트': { healPct: 0, critPct: 0.07, dropPct: 0 },
+    '타이탄벨트': { healPct: 0, critPct: 0.10, dropPct: 0 },
+    // 망토 (드랍)
+    '천망토': { healPct: 0, critPct: 0, dropPct: 0.02 },
+    '가죽망토': { healPct: 0, critPct: 0, dropPct: 0.03 },
+    '마법망토': { healPct: 0, critPct: 0, dropPct: 0.05 },
+    '은신의망토': { healPct: 0, critPct: 0, dropPct: 0.06 },
+    '영웅의망토': { healPct: 0, critPct: 0, dropPct: 0.08 },
+    '드래곤망토': { healPct: 0, critPct: 0, dropPct: 0.10 },
+    '불사조의날개망토': { healPct: 0, critPct: 0, dropPct: 0.13 }
+};
+
+function getAccessoryEffectFromItem(item) {
+    if (!item || !item.type || item.type !== 'accessory') return { healPct: 0, critPct: 0, dropPct: 0 };
+    if (item.specialEffect) return item.specialEffect;
+    var name = item.name || '';
+    if (AccessoryEffectTable[name]) return AccessoryEffectTable[name];
+    var prefixes = [
+        { prefix: '강화된 ', mult: 1.2 },
+        { prefix: '정련된 ', mult: 1.35 },
+        { prefix: '명품 ', mult: 1.6 },
+        { prefix: '고대의 ', mult: 2.0 }
+    ];
+    for (var i = 0; i < prefixes.length; i++) {
+        if (name.indexOf(prefixes[i].prefix) === 0) {
+            var baseName = name.substring(prefixes[i].prefix.length);
+            var baseEff = AccessoryEffectTable[baseName];
+            if (baseEff) {
+                return {
+                    healPct: Math.min(0.25, (baseEff.healPct || 0) * prefixes[i].mult),
+                    critPct: Math.min(0.25, (baseEff.critPct || 0) * prefixes[i].mult),
+                    dropPct: Math.min(0.25, (baseEff.dropPct || 0) * prefixes[i].mult)
+                };
+            }
+        }
+    }
+    return { healPct: 0, critPct: 0, dropPct: 0 };
+}
+
+function getAccessoryEffects(p) {
+    var eq = p.equipment || {};
+    var slots = ['ring1', 'ring2', 'necklace', 'earring', 'belt', 'cloak'];
+    var total = { healPct: 0, critPct: 0, dropRate: 0 };
+    for (var i = 0; i < slots.length; i++) {
+        var slot = eq[slots[i]];
+        if (!slot || !slot.name) continue;
+        var item = GameData.ItemDatabase[slot.name];
+        var eff = getAccessoryEffectFromItem(item);
+        total.healPct += (eff.healPct || 0);
+        total.critPct += (eff.critPct || 0);
+        total.dropRate += (eff.dropPct || 0);
+    }
+    return total;
+}
+
+function applyCritDamage(p, dmg) {
+    var acc = getAccessoryEffects(p);
+    var critChance = Math.min(0.35, acc.critPct || 0);
+    if (Math.random() < critChance) return { dmg: Math.floor(dmg * 1.5), crit: true };
+    return { dmg: dmg, crit: false };
 }
 
 function getSkillData(skillName) {
@@ -5907,6 +6257,15 @@ function getMaxHp(p) {
     base += (p.petCollection ? p.petCollection.length * 2 : 0);
     base += (p.mounts ? p.mounts.length * 2 : 0);
     if (p.house && p.house.owned) base += 20 + (p.house.level || 0) * 10;
+    var eq = p.equipment || {};
+    var slotsHp = ['weapon', 'armor', 'shield', 'helmet', 'gloves', 'boots', 'ring1', 'ring2', 'necklace', 'earring', 'belt', 'cloak'];
+    for (var i = 0; i < slotsHp.length; i++) {
+        var slot = eq[slotsHp[i]];
+        if (slot && slot.name) {
+            var itemHp = GameData.ItemDatabase[slot.name];
+            if (itemHp && itemHp.hp) base += itemHp.hp;
+        }
+    }
     var mountBonus = getMountBonus(p);
     base = Math.floor(base * mountBonus.hpMul) + (mountBonus.hp || 0);
     var title = getTitleBonus(p);
@@ -5931,6 +6290,21 @@ function getAttack(p) {
         if (p.equipment.weapon.enhance) base += p.equipment.weapon.enhance * 2;
         if (p.equipment.weapon.gem) base += 5;
     }
+    }
+    var eq = p.equipment || {};
+    var attSlots = ['armor', 'shield', 'helmet', 'gloves', 'boots', 'ring1', 'ring2', 'necklace', 'earring', 'belt', 'cloak'];
+    for (var i = 0; i < attSlots.length; i++) {
+        var slot = eq[attSlots[i]];
+        if (!slot || !slot.name) continue;
+        var item = GameData.ItemDatabase[slot.name];
+        if (!item) continue;
+        if (attSlots[i] === 'armor') ensureSlotDurability(slot, slot.name, 'armor');
+        if (attSlots[i] === 'shield') ensureSlotDurability(slot, slot.name, 'shield');
+        if (attSlots[i] === 'helmet') ensureSlotDurability(slot, slot.name, 'helmet');
+        if (attSlots[i] === 'gloves') ensureSlotDurability(slot, slot.name, 'gloves');
+        if (attSlots[i] === 'boots') ensureSlotDurability(slot, slot.name, 'boots');
+        if (slot.durability !== undefined && slot.durability <= 0) continue;
+        if (item.att) base += item.att;
     }
     base += getPetBonus(p, 'att');
     if (p.talents) base += (p.talents.att || 0) * 2;
@@ -5961,6 +6335,38 @@ function getDefense(p) {
         if (s && s.def) base += s.def;
         if (p.equipment.shield.enhance) base += p.equipment.shield.enhance * 2;
     }
+    }
+    if (p.equipment.helmet && p.equipment.helmet.name) {
+    ensureSlotDurability(p.equipment.helmet, p.equipment.helmet.name, 'helmet');
+    if (p.equipment.helmet.durability > 0) {
+        var h = GameData.ItemDatabase[p.equipment.helmet.name];
+        if (h && h.def) base += h.def;
+        if (p.equipment.helmet.enhance) base += p.equipment.helmet.enhance * 2;
+    }
+    }
+    if (p.equipment.gloves && p.equipment.gloves.name) {
+    ensureSlotDurability(p.equipment.gloves, p.equipment.gloves.name, 'gloves');
+    if (p.equipment.gloves.durability > 0) {
+        var g = GameData.ItemDatabase[p.equipment.gloves.name];
+        if (g && g.def) base += g.def;
+        if (p.equipment.gloves.enhance) base += p.equipment.gloves.enhance * 2;
+    }
+    }
+    if (p.equipment.boots && p.equipment.boots.name) {
+    ensureSlotDurability(p.equipment.boots, p.equipment.boots.name, 'boots');
+    if (p.equipment.boots.durability > 0) {
+        var b = GameData.ItemDatabase[p.equipment.boots.name];
+        if (b && b.def) base += b.def;
+        if (p.equipment.boots.enhance) base += p.equipment.boots.enhance * 2;
+    }
+    }
+    var eq2 = p.equipment || {};
+    var accSlots = ['ring1', 'ring2', 'necklace', 'earring', 'belt', 'cloak'];
+    for (var ai = 0; ai < accSlots.length; ai++) {
+        var acc = eq2[accSlots[ai]];
+        if (!acc || !acc.name) continue;
+        var accItem = GameData.ItemDatabase[acc.name];
+        if (accItem && accItem.def) base += accItem.def;
     }
     base += getPetBonus(p, 'def');
     if (p.talents) base += (p.talents.def || 0) * 2;
@@ -6308,6 +6714,52 @@ function getDungeonMap() {
     return {};
 }
 
+function normalizeName(name) {
+    return (name || '').replace(/\s+/g, '');
+}
+
+function levenshteinDistance(a, b) {
+    if (a === b) return 0;
+    var alen = a.length, blen = b.length;
+    if (alen === 0) return blen;
+    if (blen === 0) return alen;
+    var matrix = [];
+    for (var i = 0; i <= alen; i++) {
+        matrix[i] = [i];
+    }
+    for (var j = 1; j <= blen; j++) {
+        matrix[0][j] = j;
+    }
+    for (var i2 = 1; i2 <= alen; i2++) {
+        for (var j2 = 1; j2 <= blen; j2++) {
+            var cost = a.charAt(i2 - 1) === b.charAt(j2 - 1) ? 0 : 1;
+            matrix[i2][j2] = Math.min(
+                matrix[i2 - 1][j2] + 1,
+                matrix[i2][j2 - 1] + 1,
+                matrix[i2 - 1][j2 - 1] + cost
+            );
+        }
+    }
+    return matrix[alen][blen];
+}
+
+function resolveDungeonName(input, dungeons) {
+    if (!input) return { name: null, suggestion: null };
+    if (dungeons[input]) return { name: input, suggestion: null };
+    var norm = normalizeName(input);
+    for (var key in dungeons) {
+        if (normalizeName(key) === norm) return { name: key, suggestion: null };
+    }
+    var bestKey = null;
+    var bestDist = 999;
+    for (var key2 in dungeons) {
+        var dist = levenshteinDistance(norm, normalizeName(key2));
+        if (dist < bestDist) { bestDist = dist; bestKey = key2; }
+    }
+    if (bestKey && bestDist <= 1) return { name: bestKey, suggestion: null };
+    return { name: null, suggestion: bestKey };
+}
+
 function getDungeonBoss(dungeon) {
     if (!dungeon || !dungeon.bosses || dungeon.bosses.length === 0) return null;
     var bossName = pickRandom(dungeon.bosses);
@@ -6417,7 +6869,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             if (sp) out += mark + ' 슬롯 ' + skey + ': ' + sp.name + ' / ' + sp.job + ' Lv.' + sp.level + '\n';
             else out += mark + ' 슬롯 ' + skey + ': (비어있음)\n';
         }
-        replier.reply(out.trim());
+        replier.reply(out.trim() + buildNextActionHint('inventory'));
         return;
     }
 
@@ -6615,9 +7067,10 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         for (var pm = 0; pm < party5.members.length; pm++) {
             var mem = party5.members[pm];
             var role2 = party5.roles[mem] || '-';
-            msg += '- ' + mem + ' (' + role2 + ')\n';
+            var roleIcon = (role2 === '탱') ? '🛡️ 탱' : (role2 === '힐') ? '💚 힐' : (role2 === '딜') ? '⚔️ 딜' : '—';
+            msg += '- ' + mem + ' (' + roleIcon + ')\n';
         }
-        replier.reply(msg.trim());
+        replier.reply(msg.trim() + buildNextActionHint('party'));
         return;
     }
 
@@ -6645,9 +7098,20 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         var loser = (winner === p1) ? p2 : p1;
         var winName = winner.name;
         var loseName = loser.name;
-        state.pvpRating[winName] = (state.pvpRating[winName] || 1000) + Config.PVP_WIN_RATING;
-        state.pvpRating[loseName] = Math.max(0, (state.pvpRating[loseName] || 1000) - Config.PVP_LOSE_RATING);
-        winner.gold += 100;
+        if (!state.pvpStreak) state.pvpStreak = {};
+        var winStreak = (state.pvpStreak[winName] || 0) + 1;
+        var loseStreak = Math.min(0, (state.pvpStreak[loseName] || 0) - 1);
+        state.pvpStreak[winName] = winStreak;
+        state.pvpStreak[loseName] = loseStreak;
+        var winFactor = Math.max(0.5, 1 - Math.max(0, winStreak - 3) * 0.1);
+        var loseFactor = Math.max(0.4, 1 - Math.max(0, Math.abs(loseStreak) - 3) * 0.15);
+        var winRating = Math.floor(Config.PVP_WIN_RATING * winFactor);
+        var loseRating = Math.floor(Config.PVP_LOSE_RATING * loseFactor);
+        state.pvpRating[winName] = (state.pvpRating[winName] || 1000) + winRating;
+        state.pvpRating[loseName] = Math.max(0, (state.pvpRating[loseName] || 1000) - loseRating);
+        var baseGold = 100;
+        var goldBonus = Math.floor(baseGold * winFactor);
+        winner.gold += baseGold + goldBonus;
         winner.stats.pvpWins = (winner.stats.pvpWins || 0) + 1;
         if (winner.stats.pvpWins >= 3) addAchievement(winner, '전장의 지배자', 'PVP 3승 달성', '전장의 지배자');
         delete state.duelRequests[sender];
@@ -6744,13 +7208,15 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             "[" + player.name + "]\n" +
             "직업: " + player.job + "\n" +
             "레벨: " + player.level + " (" + player.exp + "/" + player.maxExp + ")\n" +
-            "HP: " + player.hp + "/" + getMaxHp(player) + "\n" +
-            "MP: " + player.mp + "/" + getMaxMp(player) + "\n" +
+            "💚 HP: " + player.hp + "/" + getMaxHp(player) + "\n" +
+            "🔷 MP: " + player.mp + "/" + getMaxMp(player) + "\n" +
             "공격/방어: " + getAttack(player) + "/" + getDefense(player) + "\n" +
             "골드: " + player.gold + "\n" +
             "낚시: Lv." + player.fishingLevel + " (" + player.fishingExp + "/" + player.maxFishingExp + ")\n" +
             "지역: " + (player.currentZone || '묘냥의 숲') + "\n" +
-            "칭호: " + (player.activeTitle || '없음')
+            "칭호: " + (player.activeTitle || '없음') + "\n" +
+            buildDurabilityStatus(player) +
+            buildNextActionHint('status')
         );
         return;
     }
@@ -6772,14 +7238,14 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         if (data.price !== undefined) lines.push('가격: ' + data.price + 'G');
         if (data.description) lines.push('설명: ' + data.description);
         if (data.obtainMethod) lines.push('획득: ' + data.obtainMethod);
-        replier.reply(lines.join('\n'));
+        replier.reply(lines.join('\n') + buildNextActionHint('item-info'));
         return;
     }
 
     // 전문기술
     if (cmd === '전문기술') {
         var prof = player.professions || {};
-        replier.reply('[전문기술]\n채광 Lv.' + (prof.mining || 1) + '\n약초 Lv.' + (prof.herbal || 1) + '\n연금 Lv.' + (prof.alchemy || 1) + '\n대장 Lv.' + (prof.blacksmith || 1) + '\n요리 Lv.' + (prof.cooking || 1));
+        replier.reply('[전문기술]\n채광 Lv.' + (prof.mining || 1) + '\n약초 Lv.' + (prof.herbal || 1) + '\n연금 Lv.' + (prof.alchemy || 1) + '\n대장 Lv.' + (prof.blacksmith || 1) + '\n요리 Lv.' + (prof.cooking || 1) + buildNextActionHint('profession'));
         return;
     }
 
@@ -6790,7 +7256,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         if (Math.random() < 0.1) addItem(player, rollRareMaterial(), 1);
         player.professions.mining += 1;
         saveState();
-        replier.reply('채광 성공: ' + mReward + ' 획득!');
+        replier.reply('채광 성공: ' + mReward + ' 획득!' + buildNextActionHint('gather'));
         return;
     }
 
@@ -6801,7 +7267,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         if (Math.random() < 0.1) addItem(player, rollRareMaterial(), 1);
         player.professions.herbal += 1;
         saveState();
-        replier.reply('채집 성공: ' + hReward + ' 획득!');
+        replier.reply('채집 성공: ' + hReward + ' 획득!' + buildNextActionHint('gather'));
         return;
     }
 
@@ -6841,10 +7307,19 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         var today = getDateKey();
         if (state.daily[sender] === today) { replier.reply('오늘 보상은 이미 받았습니다.'); return; }
         state.daily[sender] = today;
-        player.gold += Config.DAILY_GOLD;
-        addExp(player, Config.DAILY_EXP);
+        var bonusGold = Math.floor(player.level * 15);
+        var bonusExp = Math.floor(player.level * 8);
+        var activityBonusGold = 0;
+        var activityBonusExp = 0;
+        if (player.stats.kills > 0) { activityBonusGold += 100; activityBonusExp += 50; }
+        if (player.stats.fishing > 0) { activityBonusGold += 80; activityBonusExp += 40; }
+        if (player.stats.dungeons > 0) { activityBonusGold += 200; activityBonusExp += 120; }
+        var totalGold = Config.DAILY_GOLD + bonusGold + activityBonusGold;
+        var totalExp = Config.DAILY_EXP + bonusExp + activityBonusExp;
+        player.gold += totalGold;
+        addExp(player, totalExp);
         saveState();
-        replier.reply('일일보상 지급! 골드 +' + Config.DAILY_GOLD + ', EXP +' + Config.DAILY_EXP);
+        replier.reply('일일보상 지급! 골드 +' + totalGold + ', EXP +' + totalExp);
         return;
     }
 
@@ -7196,7 +7671,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         if (getWeeklyLockout(player, lockKey) === getWeekKey()) { replier.reply('이번 주 길드 레이드는 이미 클리어했습니다.'); return; }
         var boss = getWorldBoss();
         boss = applyMountBalance(boss, player);
-        state.battles[sender] = { monster: boss, hp: boss.hp, bonus: 2.5, dungeon: lockKey, diff: '주간' };
+        state.battles[sender] = { monster: boss, hp: boss.hp, bonus: 2.5, dungeon: lockKey, diff: '주간', playerLevel: player.level };
         saveState();
         replier.reply('길드 레이드 시작! 보스 ' + boss.name + ' 등장');
         return;
@@ -7286,15 +7761,66 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 
     // 장비
     if (cmd === '장비') {
+        var isDetail = (arg === '상세' || arg === 'detail');
         if (player.equipment.weapon.name) ensureSlotDurability(player.equipment.weapon, player.equipment.weapon.name, 'weapon');
         if (player.equipment.armor.name) ensureSlotDurability(player.equipment.armor, player.equipment.armor.name, 'armor');
         if (player.equipment.shield.name) ensureSlotDurability(player.equipment.shield, player.equipment.shield.name, 'shield');
+        if (player.equipment.helmet.name) ensureSlotDurability(player.equipment.helmet, player.equipment.helmet.name, 'helmet');
+        if (player.equipment.gloves.name) ensureSlotDurability(player.equipment.gloves, player.equipment.gloves.name, 'gloves');
+        if (player.equipment.boots.name) ensureSlotDurability(player.equipment.boots, player.equipment.boots.name, 'boots');
+        var eq = player.equipment;
+        function fmtEquip(slot, label, showDurability) {
+            var name = slot.name || '없음';
+            var enh = slot.enhance || 0;
+            var dur = '';
+            if (showDurability && slot.name) {
+                dur = ' / 🧰 ' + slot.durability + '/' + slot.maxDurability;
+            }
+            return label + ': ' + name + ' (강화 +' + enh + ')' + dur;
+        }
+        if (!isDetail) {
+            var accLine = '💍 ' + (eq.ring1.name || '없음') + ' / 💍 ' + (eq.ring2.name || '없음') +
+                ' / 📿 ' + (eq.necklace.name || '없음') + ' / 👂 ' + (eq.earring.name || '없음') +
+                ' / 🎗️ ' + (eq.belt.name || '없음') + ' / 🧣 ' + (eq.cloak.name || '없음');
+            replier.reply(
+                "[장비 요약]\n" +
+                "👑 투구: " + (eq.helmet.name || '없음') + "\n" +
+                "🗡️ 무기: " + (eq.weapon.name || '없음') + "\n" +
+                "👕 갑옷: " + (eq.armor.name || '없음') + "\n" +
+                "🛡️ 방패: " + (eq.shield.name || '없음') + "\n" +
+                "🧤 장갑: " + (eq.gloves.name || '없음') + "\n" +
+                "👢 신발: " + (eq.boots.name || '없음') + "\n" +
+                "[액세서리]\n" + accLine + "\n" +
+                buildDurabilityStatus(player) + "\n" +
+                "상세: .장비 상세" +
+                buildNextActionHint('equipment')
+            );
+            return;
+        }
         replier.reply(
             "[장비]\n" +
-            "무기: " + (player.equipment.weapon.name || '없음') + " (강화 +" + (player.equipment.weapon.enhance || 0) + ")" + (player.equipment.weapon.name ? " / 내구도 " + player.equipment.weapon.durability + "/" + player.equipment.weapon.maxDurability : "") + "\n" +
-            "방어구: " + (player.equipment.armor.name || '없음') + " (강화 +" + (player.equipment.armor.enhance || 0) + ")" + (player.equipment.armor.name ? " / 내구도 " + player.equipment.armor.durability + "/" + player.equipment.armor.maxDurability : "") + "\n" +
-            "방패: " + (player.equipment.shield.name || '없음') + " (강화 +" + (player.equipment.shield.enhance || 0) + ")" + (player.equipment.shield.name ? " / 내구도 " + player.equipment.shield.durability + "/" + player.equipment.shield.maxDurability : "") + "\n" +
-            "보석: " + (player.equipment.weapon.gem || '없음')
+            "        [👑 투구]\n" +
+            "            │\n" +
+            "[🗡️ 무기]─[👕 갑옷]─[🛡️ 방패]\n" +
+            "            │\n" +
+            "        [🧤 장갑]\n" +
+            "            │\n" +
+            "        [👢 신발]\n\n" +
+            fmtEquip(eq.helmet, '👑 투구', true) + "\n" +
+            fmtEquip(eq.weapon, '🗡️ 무기', true) + "\n" +
+            fmtEquip(eq.armor, '👕 갑옷', true) + "\n" +
+            fmtEquip(eq.shield, '🛡️ 방패', true) + "\n" +
+            fmtEquip(eq.gloves, '🧤 장갑', true) + "\n" +
+            fmtEquip(eq.boots, '👢 신발', true) + "\n" +
+            "💎 보석: " + (eq.weapon.gem || '없음') + "\n\n" +
+            "[액세서리]\n" +
+            fmtEquip(eq.ring1, '💍 반지1', false) + "\n" +
+            fmtEquip(eq.ring2, '💍 반지2', false) + "\n" +
+            fmtEquip(eq.necklace, '📿 목걸이', false) + "\n" +
+            fmtEquip(eq.earring, '👂 귀걸이', false) + "\n" +
+            fmtEquip(eq.belt, '🎗️ 벨트', false) + "\n" +
+            fmtEquip(eq.cloak, '🧣 망토', false) +
+            buildNextActionHint('equipment')
         );
         return;
     }
@@ -7303,14 +7829,17 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
     if (cmd === '수리') {
         var target = arg || '전체';
         var targets = [];
-        if (target === '전체') targets = ['무기', '방어구', '방패'];
+        if (target === '전체') targets = ['무기', '갑옷', '방패', '투구', '장갑', '신발'];
         else targets = [target];
 
         var slots = [];
         for (var t = 0; t < targets.length; t++) {
             if (targets[t] === '무기' && player.equipment.weapon.name) slots.push({ slot: '무기', obj: player.equipment.weapon, type: 'weapon' });
-            if (targets[t] === '방어구' && player.equipment.armor.name) slots.push({ slot: '방어구', obj: player.equipment.armor, type: 'armor' });
+            if ((targets[t] === '방어구' || targets[t] === '갑옷') && player.equipment.armor.name) slots.push({ slot: '갑옷', obj: player.equipment.armor, type: 'armor' });
             if (targets[t] === '방패' && player.equipment.shield.name) slots.push({ slot: '방패', obj: player.equipment.shield, type: 'shield' });
+            if (targets[t] === '투구' && player.equipment.helmet.name) slots.push({ slot: '투구', obj: player.equipment.helmet, type: 'helmet' });
+            if (targets[t] === '장갑' && player.equipment.gloves.name) slots.push({ slot: '장갑', obj: player.equipment.gloves, type: 'gloves' });
+            if ((targets[t] === '신발' || targets[t] === '부츠') && player.equipment.boots.name) slots.push({ slot: '신발', obj: player.equipment.boots, type: 'boots' });
         }
         if (slots.length === 0) { replier.reply('수리할 장비가 없습니다.'); return; }
 
@@ -7322,7 +7851,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             removeItem(player, '수리도구', 1);
             for (var r = 0; r < slots.length; r++) slots[r].obj.durability = slots[r].obj.maxDurability;
             saveState();
-            replier.reply('수리도구 사용 완료: ' + slots.map(function(s) { return s.slot; }).join(', '));
+            replier.reply('수리도구 사용 완료: ' + slots.map(function(s) { return s.slot; }).join(', ') + buildNextActionHint('repair'));
             return;
         }
 
@@ -7332,7 +7861,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             var missing = obj.maxDurability - obj.durability;
             if (missing <= 0) continue;
             var itemData = GameData.ItemDatabase[obj.name] || {};
-            var baseCost = Math.max(10, Math.floor(missing * 2 + (itemData.price || 0) * 0.02));
+            var baseCost = Math.max(10, Math.floor(missing * 3 + (obj.maxDurability || 0) * 0.4 + (itemData.price || 0) * 0.03));
             cost += baseCost;
         }
         if (cost <= 0) { replier.reply('수리가 필요하지 않습니다.'); return; }
@@ -7341,7 +7870,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         player.gold -= cost;
         for (var r2 = 0; r2 < slots.length; r2++) slots[r2].obj.durability = slots[r2].obj.maxDurability;
         saveState();
-        replier.reply('수리 완료. 소모 골드: ' + cost + 'G');
+        replier.reply('수리 완료. 소모 골드: ' + cost + 'G' + buildNextActionHint('repair'));
         return;
     }
 
@@ -7387,32 +7916,103 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 
     // 장착
     if (cmd === '장착') {
-        var itemName = arg;
-        if (!itemName) { replier.reply('사용: .장착 <아이템>'); return; }
+        var rawEquip = (arg || '').trim();
+        if (!rawEquip) { replier.reply('사용: .장착 <아이템> 또는 .장착 <부위> <아이템>'); return; }
+        var equipTokens = rawEquip.split(/\s+/);
+        var slotName = '';
+        var itemName = rawEquip;
+        var slotAliases = {
+            '무기': 'weapon',
+            '갑옷': 'armor',
+            '방어구': 'armor',
+            '방패': 'shield',
+            '투구': 'helmet',
+            '장갑': 'gloves',
+            '신발': 'boots',
+            '부츠': 'boots',
+            '반지': 'ring',
+            '반지1': 'ring1',
+            '반지2': 'ring2',
+            '목걸이': 'necklace',
+            '귀걸이': 'earring',
+            '벨트': 'belt',
+            '망토': 'cloak'
+        };
+        if (slotAliases[equipTokens[0]]) {
+            slotName = equipTokens[0];
+            itemName = equipTokens.slice(1).join(' ').trim();
+            if (!itemName) { replier.reply('사용: .장착 <부위> <아이템>'); return; }
+        }
         if (findItemCount(player, itemName) <= 0) { replier.reply('아이템이 없습니다.'); return; }
         var item = GameData.ItemDatabase[itemName];
         if (!item || !item.type) { replier.reply('장착할 수 없는 아이템입니다.'); return; }
-        if (item.type === 'weapon') {
-            player.equipment.weapon.name = itemName;
-            player.equipment.weapon.enhance = player.equipment.weapon.enhance || 0;
-            player.equipment.weapon.gem = player.equipment.weapon.gem || "";
-            player.equipment.weapon.maxDurability = getItemMaxDurability(itemName, 'weapon');
-            player.equipment.weapon.durability = player.equipment.weapon.maxDurability;
+        var resolvedSlot = '';
+        var subtype = item.subtype || '';
+        if (slotName) {
+            resolvedSlot = slotAliases[slotName] || '';
+        } else if (item.type === 'weapon') {
+            resolvedSlot = 'weapon';
+        } else if (item.type === 'armor') {
+            if (subtype === 'shield') resolvedSlot = 'shield';
+            else if (subtype === 'helmet') resolvedSlot = 'helmet';
+            else if (subtype === 'gloves') resolvedSlot = 'gloves';
+            else if (subtype === 'boots') resolvedSlot = 'boots';
+            else resolvedSlot = 'armor';
+        } else if (item.type === 'accessory') {
+            if (subtype === 'ring') resolvedSlot = (player.equipment.ring1.name ? (player.equipment.ring2.name ? 'ring1' : 'ring2') : 'ring1');
+            else if (subtype === 'necklace') resolvedSlot = 'necklace';
+            else if (subtype === 'earring') resolvedSlot = 'earring';
+            else if (subtype === 'belt') resolvedSlot = 'belt';
+            else if (subtype === 'cloak') resolvedSlot = 'cloak';
         }
-        else if (item.type === 'armor') {
-            player.equipment.armor.name = itemName;
-            player.equipment.armor.enhance = player.equipment.armor.enhance || 0;
-            player.equipment.armor.maxDurability = getItemMaxDurability(itemName, 'armor');
-            player.equipment.armor.durability = player.equipment.armor.maxDurability;
+
+        if (resolvedSlot === 'ring' && slotName === '반지') {
+            resolvedSlot = (player.equipment.ring1.name ? (player.equipment.ring2.name ? 'ring1' : 'ring2') : 'ring1');
         }
-        else if (item.type === 'shield') {
-            player.equipment.shield.name = itemName;
-            player.equipment.shield.enhance = player.equipment.shield.enhance || 0;
-            player.equipment.shield.maxDurability = getItemMaxDurability(itemName, 'shield');
-            player.equipment.shield.durability = player.equipment.shield.maxDurability;
+
+        if (!resolvedSlot) { replier.reply('장착할 수 없는 타입입니다.'); return; }
+
+        if (resolvedSlot === 'weapon' && item.type !== 'weapon') { replier.reply('해당 슬롯에 장착할 수 없는 아이템입니다.'); return; }
+        if ((resolvedSlot === 'armor' || resolvedSlot === 'helmet' || resolvedSlot === 'gloves' || resolvedSlot === 'boots' || resolvedSlot === 'shield') && item.type !== 'armor') { replier.reply('해당 슬롯에 장착할 수 없는 아이템입니다.'); return; }
+        if (resolvedSlot === 'shield' && item.subtype !== 'shield') { replier.reply('해당 슬롯에 장착할 수 없는 아이템입니다.'); return; }
+        if (resolvedSlot === 'helmet' && item.subtype !== 'helmet') { replier.reply('해당 슬롯에 장착할 수 없는 아이템입니다.'); return; }
+        if (resolvedSlot === 'gloves' && item.subtype !== 'gloves') { replier.reply('해당 슬롯에 장착할 수 없는 아이템입니다.'); return; }
+        if (resolvedSlot === 'boots' && item.subtype !== 'boots') { replier.reply('해당 슬롯에 장착할 수 없는 아이템입니다.'); return; }
+        if ((resolvedSlot === 'ring1' || resolvedSlot === 'ring2') && item.type !== 'accessory') { replier.reply('해당 슬롯에 장착할 수 없는 아이템입니다.'); return; }
+        if (resolvedSlot === 'necklace' && item.subtype !== 'necklace') { replier.reply('해당 슬롯에 장착할 수 없는 아이템입니다.'); return; }
+        if (resolvedSlot === 'earring' && item.subtype !== 'earring') { replier.reply('해당 슬롯에 장착할 수 없는 아이템입니다.'); return; }
+        if (resolvedSlot === 'belt' && item.subtype !== 'belt') { replier.reply('해당 슬롯에 장착할 수 없는 아이템입니다.'); return; }
+        if (resolvedSlot === 'cloak' && item.subtype !== 'cloak') { replier.reply('해당 슬롯에 장착할 수 없는 아이템입니다.'); return; }
+
+        var targetSlot = player.equipment[resolvedSlot];
+        targetSlot.name = itemName;
+        targetSlot.enhance = targetSlot.enhance || 0;
+        if (resolvedSlot === 'weapon') {
+            targetSlot.gem = targetSlot.gem || "";
+            targetSlot.maxDurability = getItemMaxDurability(itemName, 'weapon');
+            targetSlot.durability = targetSlot.maxDurability;
+        } else if (resolvedSlot === 'armor') {
+            targetSlot.maxDurability = getItemMaxDurability(itemName, 'armor');
+            targetSlot.durability = targetSlot.maxDurability;
+        } else if (resolvedSlot === 'shield') {
+            targetSlot.maxDurability = getItemMaxDurability(itemName, 'shield');
+            targetSlot.durability = targetSlot.maxDurability;
+        } else if (resolvedSlot === 'helmet') {
+            targetSlot.maxDurability = getItemMaxDurability(itemName, 'helmet');
+            targetSlot.durability = targetSlot.maxDurability;
+        } else if (resolvedSlot === 'gloves') {
+            targetSlot.maxDurability = getItemMaxDurability(itemName, 'gloves');
+            targetSlot.durability = targetSlot.maxDurability;
+        } else if (resolvedSlot === 'boots') {
+            targetSlot.maxDurability = getItemMaxDurability(itemName, 'boots');
+            targetSlot.durability = targetSlot.maxDurability;
         }
-        else { replier.reply('장착할 수 없는 타입입니다.'); return; }
-        replier.reply(itemName + ' 장착 완료.');
+
+        var slotLabel = {
+            weapon: '무기', armor: '갑옷', shield: '방패', helmet: '투구', gloves: '장갑', boots: '신발',
+            ring1: '반지1', ring2: '반지2', necklace: '목걸이', earring: '귀걸이', belt: '벨트', cloak: '망토'
+        }[resolvedSlot] || resolvedSlot;
+        replier.reply(itemName + ' 장착 완료. (' + slotLabel + ')' + buildNextActionHint('equip-change'));
         return;
     }
 
@@ -7420,28 +8020,69 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
     if (cmd === '해제') {
         var slot = arg;
         if (slot === '무기') player.equipment.weapon.name = null;
-        else if (slot === '방어구') player.equipment.armor.name = null;
+        else if (slot === '갑옷' || slot === '방어구') player.equipment.armor.name = null;
         else if (slot === '방패') player.equipment.shield.name = null;
-        else { replier.reply('슬롯: 무기/방어구/방패'); return; }
-        replier.reply(slot + ' 해제 완료.');
+        else if (slot === '투구') player.equipment.helmet.name = null;
+        else if (slot === '장갑') player.equipment.gloves.name = null;
+        else if (slot === '신발' || slot === '부츠') player.equipment.boots.name = null;
+        else if (slot === '반지1') player.equipment.ring1.name = null;
+        else if (slot === '반지2') player.equipment.ring2.name = null;
+        else if (slot === '반지') { player.equipment.ring1.name = null; player.equipment.ring2.name = null; }
+        else if (slot === '목걸이') player.equipment.necklace.name = null;
+        else if (slot === '귀걸이') player.equipment.earring.name = null;
+        else if (slot === '벨트') player.equipment.belt.name = null;
+        else if (slot === '망토') player.equipment.cloak.name = null;
+        else { replier.reply('슬롯: 무기/갑옷/방패/투구/장갑/신발/반지1/반지2/목걸이/귀걸이/벨트/망토'); return; }
+        replier.reply(slot + ' 해제 완료.' + buildNextActionHint('equip-change'));
         return;
     }
 
     // 강화
     if (cmd === '강화') {
-        var t = arg;
-        if (t !== '무기' && t !== '방어구' && t !== '방패') { replier.reply('사용: .강화 <무기/방어구/방패>'); return; }
-        var slotObj = (t === '무기') ? player.equipment.weapon : (t === '방어구' ? player.equipment.armor : player.equipment.shield);
+        var parts = (arg || '').trim().split(/\s+/).filter(function(s) { return s; });
+        var t = parts[0];
+        var stone = parts.length > 1 ? parts.slice(1).join(' ') : '';
+        if (t !== '무기' && t !== '방어구' && t !== '갑옷' && t !== '방패' && t !== '투구' && t !== '장갑' && t !== '신발' && t !== '부츠') {
+            replier.reply('사용: .강화 <무기/갑옷/방패/투구/장갑/신발> [강화석/축복의강화석/안전한강화석]');
+            return;
+        }
+        var slotObj = (t === '무기') ? player.equipment.weapon
+            : (t === '방어구' || t === '갑옷') ? player.equipment.armor
+            : (t === '방패') ? player.equipment.shield
+            : (t === '투구') ? player.equipment.helmet
+            : (t === '장갑') ? player.equipment.gloves
+            : player.equipment.boots;
         if (!slotObj || !slotObj.name) { replier.reply('장착된 아이템이 없습니다.'); return; }
+        var itemData = GameData.ItemDatabase[slotObj.name] || {};
+        var itemLevel = itemData.level || 1;
+        var isLegendary = !!itemData.legendary;
+        var cap = (itemLevel <= 10 ? 3 : itemLevel <= 30 ? 6 : itemLevel <= 50 ? 9 : itemLevel <= 70 ? 12 : itemLevel <= 90 ? 15 : 18);
+        if (isLegendary) cap += 2;
+        if ((slotObj.enhance || 0) >= cap) { replier.reply('해당 장비는 +' + cap + ' 까지 강화 가능합니다.'); return; }
+
         var cost = (slotObj.enhance + 1) * 200;
         if (player.gold < cost) { replier.reply('골드 부족. 필요: ' + cost); return; }
+        var stoneRate = 0;
+        var safeFail = false;
+        if (stone) {
+            if (findItemCount(player, stone) <= 0) { replier.reply('강화석이 없습니다.'); return; }
+            removeItem(player, stone, 1);
+            if (stone === '강화석') stoneRate = 10;
+            if (stone === '축복의강화석') stoneRate = 20;
+            if (stone === '안전한강화석') { stoneRate = 5; safeFail = true; }
+        }
         player.gold -= cost;
-        var successRate = Math.max(20, 80 - slotObj.enhance * 10);
+        var successRate = Math.max(20, 80 - slotObj.enhance * 8 + stoneRate);
         if (Math.random() * 100 < successRate) {
             slotObj.enhance += 1;
-            replier.reply('강화 성공! +' + slotObj.enhance);
+            replier.reply('강화 성공! +' + slotObj.enhance + buildNextActionHint('enhance'));
         } else {
-            replier.reply('강화 실패.');
+            var refund = Math.floor(cost * (stone ? 0.5 : 0.3));
+            player.gold += refund;
+            if (!safeFail && slotObj.enhance > 0 && Math.random() < 0.3) slotObj.enhance -= 1;
+            var stoneRefunded = false;
+            if (stone && Math.random() < 0.4) { addItem(player, stone, 1); stoneRefunded = true; }
+            replier.reply('강화 실패. 골드 환급 +' + refund + (stoneRefunded ? ', 재료 환급' : '') + buildNextActionHint('enhance-fail'));
         }
         saveState();
         return;
@@ -7451,13 +8092,13 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
     if (cmd === '보석장착') {
         var gem = arg;
         if (!gem) { replier.reply('사용: .보석장착 <보석>'); return; }
-        if (findItemCount(player, gem) <= 0) { replier.reply('보석이 없습니다.'); return; }
+        if (findItemCount(player, gem) <= 0) { replier.reply('보석이 없습니다.' + buildNextActionHint('gem-fail')); return; }
         if (!player.equipment.weapon || !player.equipment.weapon.name) { replier.reply('무기를 먼저 장착하세요.'); return; }
-        if (gem.indexOf('보석') === -1 && gem.indexOf('룬') === -1) { replier.reply('보석/룬 아이템만 장착 가능합니다.'); return; }
+        if (gem.indexOf('보석') === -1 && gem.indexOf('룬') === -1) { replier.reply('보석/룬 아이템만 장착 가능합니다.' + buildNextActionHint('gem-fail')); return; }
         removeItem(player, gem, 1);
         player.equipment.weapon.gem = gem;
         saveState();
-        replier.reply('보석 장착 완료: ' + gem);
+        replier.reply('보석 장착 완료: ' + gem + buildNextActionHint('gem'));
         return;
     }
 
@@ -7471,7 +8112,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         removeItem(player, useItem, 1);
         var result = effect(player);
         saveState();
-        replier.reply(useItem + ' 사용: ' + result);
+        replier.reply(useItem + ' 사용: ' + result + buildNextActionHint('use-item'));
         return;
     }
 
@@ -7480,9 +8121,9 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         var zoneName = player.currentZone || '묘냥의 숲';
         var monster = pickMonsterForZone(zoneName, player.level);
         monster = applyMountBalance(monster, player);
-        state.battles[sender] = { monster: monster, hp: monster.hp, bonus: 1 };
+        state.battles[sender] = { monster: monster, hp: monster.hp, bonus: 1, playerLevel: player.level };
         saveState();
-        replier.reply('[' + zoneName + '] 야생의 ' + monster.name + ' 발견! HP ' + monster.hp + '\n.공격 으로 전투');
+        replier.reply('[' + zoneName + '] 야생의 ' + monster.name + ' 발견! 💚 HP ' + monster.hp + '\n다음 행동: .공격 / .스킬 / .사용');
         return;
     }
 
@@ -7490,47 +8131,198 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
     if (cmd === '스킬목록') {
         var skills = getJobSkillList(player);
         if (!skills || skills.length === 0) { replier.reply('사용 가능한 스킬이 없습니다.'); return; }
-        replier.reply('[스킬목록]\n' + skills.join('\n'));
+        replier.reply('[스킬목록]\n' + skills.join('\n') + buildNextActionHint('skills'));
         return;
     }
 
     // 스킬
     if (cmd === '스킬') {
-        var skillName = arg;
-        if (!skillName) { replier.reply('사용: .스킬 <이름>'); return; }
-        var battleSkill = state.battles[sender];
-        if (!battleSkill) { replier.reply('전투 중이 아닙니다. .사냥'); return; }
-        var allow = false;
+        var rawSkill = (arg || '').trim();
+        if (!rawSkill) { replier.reply('사용: .스킬 <이름>'); return; }
         var skillList = getJobSkillList(player);
+        var tokens = rawSkill.split(/\s+/);
+        var skillName = '';
+        var targetName = '';
+        for (var ti = tokens.length; ti >= 1; ti--) {
+            var candidate = tokens.slice(0, ti).join(' ');
+            for (var sj = 0; sj < skillList.length; sj++) {
+                if (skillList[sj] === candidate) {
+                    skillName = candidate;
+                    targetName = tokens.slice(ti).join(' ').trim();
+                    break;
+                }
+            }
+            if (skillName) break;
+        }
+        if (!skillName) {
+            skillName = rawSkill;
+            targetName = '';
+        }
+
+        var allow = false;
         for (var si = 0; si < skillList.length; si++) if (skillList[si] === skillName) allow = true;
         if (!allow) { replier.reply('현재 직업으로 사용할 수 없는 스킬입니다.'); return; }
 
+        var battleSkill = state.battles[sender];
         var sdata = getSkillData(skillName) || {};
         var mpCost = sdata.mpCost || 10;
+        var isHealSkill = (skillName === '치유' || skillName === '성역의 빛' || skillName === '응급치료' || sdata.healAmount || sdata.heal);
+        var isReviveSkill = (skillName === '부활');
+
+        if (isHealSkill || isReviveSkill) {
+            var party = getParty(sender);
+            if (isReviveSkill) {
+                if (!targetName) { replier.reply('사용: .스킬 부활 <유저>'); return; }
+                if (!party || !party.members || party.members.indexOf(targetName) === -1) { replier.reply('파티원만 부활시킬 수 있습니다.'); return; }
+                var reviveTarget = ensurePlayer(targetName);
+                if (!reviveTarget) { replier.reply('대상을 찾을 수 없습니다.'); return; }
+                var reviveMax = getMaxHp(reviveTarget);
+                if (reviveTarget.hp > 1) { replier.reply('대상이 전투 불능 상태가 아닙니다.'); return; }
+                if (player.mp < mpCost) { replier.reply('MP 부족'); return; }
+                player.mp -= mpCost;
+                var reviveHp = Math.max(1, Math.floor(reviveMax * 0.3));
+                reviveTarget.hp = reviveHp;
+                var reviveLog = player.name + '의 ' + skillName + '! ' + reviveTarget.name + ' HP ' + reviveHp + '/' + reviveMax;
+                if (battleSkill) {
+                    var bmRev = battleSkill.monster;
+                    var zoneRev = player.currentZone || '묘냥의 숲';
+                    var rDmgRev = Math.max(1, (bmRev.att || 5) - Math.floor(getDefense(player) * 0.4));
+                    player.hp -= rDmgRev;
+                    var durNotesRev = applyDurabilityLoss(player, 0, 1, 1);
+                    reviveLog = '[' + zoneRev + '] ' + reviveLog + '\n' + bmRev.name + '의 반격! ' + rDmgRev + ' 데미지\n';
+                    if (durNotesRev.length) reviveLog += '🧰 내구도: ' + durNotesRev.join(', ') + '\n';
+                    if (player.hp <= 0) {
+                        player.hp = 1;
+                        delete state.battles[sender];
+                        saveState();
+                        replier.reply(reviveLog + '기절... HP 1로 회복');
+                        return;
+                    }
+                    reviveLog += '💚 ' + bmRev.name + ' HP: ' + battleSkill.hp + '/' + bmRev.hp + '\n' + buildPlayerStatusLine(player) + buildNextActionLine();
+                }
+                saveState();
+                replier.reply(reviveLog);
+                return;
+            }
+
+            if (skillName === '성역의 빛') {
+                var healTargets = [];
+                var members = (party && party.members && party.members.length) ? party.members : [player.name];
+                for (var mi = 0; mi < members.length; mi++) {
+                    var memberName = members[mi];
+                    var member = ensurePlayer(memberName);
+                    if (!member) continue;
+                    var memberMax = getMaxHp(member);
+                    var healBonusPct = getAccessoryEffects(player).healPct || 0;
+                    var healAmount = Math.max(1, Math.floor(memberMax * (0.35 + healBonusPct)));
+                    var missing = memberMax - member.hp;
+                    if (missing > 0) {
+                        var actualHeal = Math.min(missing, healAmount);
+                        healTargets.push({ target: member, amount: actualHeal, maxHp: memberMax });
+                    }
+                }
+                if (healTargets.length === 0) { replier.reply('모두 최대 HP입니다.'); return; }
+                if (player.mp < mpCost) { replier.reply('MP 부족'); return; }
+                player.mp -= mpCost;
+                var hlog = player.name + '의 ' + skillName + '! 파티 HP 회복\n';
+                for (var hi = 0; hi < healTargets.length; hi++) {
+                    var entry = healTargets[hi];
+                    entry.target.hp += entry.amount;
+                    hlog += entry.target.name + ' +' + entry.amount + ' (' + entry.target.hp + '/' + entry.maxHp + ')\n';
+                }
+                if (battleSkill) {
+                    var bmHeal = battleSkill.monster;
+                    var zoneHeal = player.currentZone || '묘냥의 숲';
+                    var rDmgHeal = Math.max(1, (bmHeal.att || 5) - Math.floor(getDefense(player) * 0.4));
+                    player.hp -= rDmgHeal;
+                    var durNotesHeal = applyDurabilityLoss(player, 0, 1, 1);
+                    hlog = '[' + zoneHeal + '] ' + hlog + bmHeal.name + '의 반격! ' + rDmgHeal + ' 데미지\n';
+                    if (durNotesHeal.length) hlog += '🧰 내구도: ' + durNotesHeal.join(', ') + '\n';
+                    if (player.hp <= 0) {
+                        player.hp = 1;
+                        delete state.battles[sender];
+                        saveState();
+                        replier.reply(hlog + '기절... HP 1로 회복');
+                        return;
+                    }
+                    hlog += '💚 ' + bmHeal.name + ' HP: ' + battleSkill.hp + '/' + bmHeal.hp + '\n' + buildPlayerStatusLine(player) + buildNextActionLine();
+                }
+                saveState();
+                replier.reply(hlog.trim());
+                return;
+            }
+
+            var healTargetName = targetName || player.name;
+            if (healTargetName !== player.name) {
+                if (!party || !party.members || party.members.indexOf(healTargetName) === -1) { replier.reply('파티원만 치유할 수 있습니다.'); return; }
+            }
+            var healTarget = ensurePlayer(healTargetName);
+            if (!healTarget) { replier.reply('대상을 찾을 수 없습니다.'); return; }
+            var healMax = getMaxHp(healTarget);
+            var baseHeal = sdata.healAmount || sdata.heal || 80;
+            var healBonusPct2 = getAccessoryEffects(player).healPct || 0;
+            baseHeal = Math.floor(baseHeal * (1 + healBonusPct2));
+            var missingHeal = healMax - healTarget.hp;
+            if (missingHeal <= 0) { replier.reply('이미 최대 HP입니다.'); return; }
+            if (player.mp < mpCost) { replier.reply('MP 부족'); return; }
+            player.mp -= mpCost;
+            var actualHeal2 = Math.min(missingHeal, baseHeal);
+            healTarget.hp += actualHeal2;
+            var singleLog = player.name + '의 ' + skillName + '! ' + healTarget.name + ' HP +' + actualHeal2 + ' (' + healTarget.hp + '/' + healMax + ')';
+            if (battleSkill) {
+                var bmHealOne = battleSkill.monster;
+                var zoneHealOne = player.currentZone || '묘냥의 숲';
+                var rDmgHealOne = Math.max(1, (bmHealOne.att || 5) - Math.floor(getDefense(player) * 0.4));
+                player.hp -= rDmgHealOne;
+                var durNotesHealOne = applyDurabilityLoss(player, 0, 1, 1);
+                singleLog = '[' + zoneHealOne + '] ' + singleLog + '\n' + bmHealOne.name + '의 반격! ' + rDmgHealOne + ' 데미지\n';
+                if (durNotesHealOne.length) singleLog += '🧰 내구도: ' + durNotesHealOne.join(', ') + '\n';
+                if (player.hp <= 0) {
+                    player.hp = 1;
+                    delete state.battles[sender];
+                    saveState();
+                    replier.reply(singleLog + '기절... HP 1로 회복');
+                    return;
+                }
+                singleLog += '💚 ' + bmHealOne.name + ' HP: ' + battleSkill.hp + '/' + bmHealOne.hp + '\n' + buildPlayerStatusLine(player) + buildNextActionLine();
+            }
+            saveState();
+            replier.reply(singleLog);
+            return;
+        }
+
+        if (!battleSkill) { replier.reply('전투 중이 아닙니다. .사냥'); return; }
         if (player.mp < mpCost) { replier.reply('MP 부족'); return; }
         player.mp -= mpCost;
         var base = getAttack(player);
         var dmg = sdata.baseDamage || Math.floor(base * (sdata.damageMultiplier || 1.5));
+        var critInfo = applyCritDamage(player, dmg);
+        dmg = critInfo.dmg;
         var bm = battleSkill.monster;
         battleSkill.hp -= dmg;
         var zoneName = player.currentZone || '묘냥의 숲';
-        var slog = '[' + zoneName + '] ' + player.name + '의 ' + skillName + '! ' + bm.name + '에게 ' + dmg + ' 데미지\n';
+        var slog = '[' + zoneName + '] ' + player.name + '의 ' + skillName + '! ' + bm.name + '에게 ' + dmg + ' 데미지';
+        if (critInfo.crit) slog += ' (치명타!)';
+        slog += '\n';
         var durNotes = applyDurabilityLoss(player, 1, 0, 0);
-        if (durNotes.length) slog += '내구도: ' + durNotes.join(', ') + '\n';
+        if (durNotes.length) slog += '🧰 내구도: ' + durNotes.join(', ') + '\n';
         if (battleSkill.hp <= 0) {
             var exp2 = bm.exp || 10;
             var gold2 = bm.gold || 5;
             var bonus2 = battleSkill.bonus || 1;
             exp2 = calcScaledReward(exp2, player.level, bonus2, false);
             gold2 = calcScaledReward(gold2, player.level, bonus2, true);
+            exp2 = applyRewardLevelDiff(exp2, player.level, bm.level);
+            gold2 = applyRewardLevelDiff(gold2, player.level, bm.level);
             var leveled2 = addExp(player, exp2);
             player.gold += gold2;
             updateQuestProgress(player, bm.name);
             player.stats.kills = (player.stats.kills || 0) + 1;
-            if (bm.items && bm.items.length > 0 && Math.random() < getDropRate(battleSkill)) {
+            var drops = [];
+            if (bm.items && bm.items.length > 0 && Math.random() < getDropRate(battleSkill, player)) {
                 var drop2 = pickRandom(bm.items);
                 addItem(player, drop2, 1);
-                slog += '드랍: ' + drop2 + '\n';
+                drops.push(drop2);
             }
             if (battleSkill.dungeon) {
                 player.stats.dungeons = (player.stats.dungeons || 0) + 1;
@@ -7540,7 +8332,9 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             if (player.level >= 10) addAchievement(player, '성장 시작', '레벨 10 달성', '전설의 모험가');
             if (player.stats.dungeons >= 3) addAchievement(player, '던전 정복자', '던전 3회 클리어', '던전 정복자');
             if (player.gold >= 10000) addAchievement(player, '부자', '골드 10,000 달성', '전설의 모험가');
-            slog += '승리! EXP +' + exp2 + ', 골드 +' + gold2;
+            var summary2 = '보상 요약: EXP +' + exp2 + ', 골드 +' + gold2 + ', 드랍 ' + (drops.length || 0);
+            var detail2 = '상세: EXP +' + exp2 + ', 골드 +' + gold2 + (drops.length ? ', 드랍: ' + drops.join(', ') : '');
+            slog += summary2 + '\n' + detail2 + buildBattleEndHint(player);
             if (leveled2) slog += '\n레벨 업! 현재 레벨: ' + player.level;
             delete state.battles[sender];
             saveState();
@@ -7551,7 +8345,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         player.hp -= rDmg;
         var durNotes2 = applyDurabilityLoss(player, 0, 1, 1);
         slog += bm.name + '의 반격! ' + rDmg + ' 데미지\n';
-        if (durNotes2.length) slog += '내구도: ' + durNotes2.join(', ') + '\n';
+        if (durNotes2.length) slog += '🧰 내구도: ' + durNotes2.join(', ') + '\n';
         if (player.hp <= 0) {
             player.hp = 1;
             delete state.battles[sender];
@@ -7560,7 +8354,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             return;
         }
         saveState();
-        replier.reply(slog + bm.name + ' HP: ' + battleSkill.hp + '/' + bm.hp);
+        replier.reply(slog + '💚 ' + bm.name + ' HP: ' + battleSkill.hp + '/' + bm.hp + '\n' + buildPlayerStatusLine(player) + buildNextActionLine());
         return;
     }
 
@@ -7570,27 +8364,34 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         if (!battle) { replier.reply('전투 중이 아닙니다. .사냥'); return; }
         var m = battle.monster;
         var dmg = Math.max(1, getAttack(player) - Math.floor(m.def * 0.5));
+        var critInfo2 = applyCritDamage(player, dmg);
+        dmg = critInfo2.dmg;
         battle.hp -= dmg;
         var zoneName = player.currentZone || '묘냥의 숲';
-        var log = '[' + zoneName + '] ' + player.name + '의 공격! ' + m.name + '에게 ' + dmg + ' 데미지\n';
+        var log = '[' + zoneName + '] ' + player.name + '의 공격! ' + m.name + '에게 ' + dmg + ' 데미지';
+        if (critInfo2.crit) log += ' (치명타!)';
+        log += '\n';
         var dnotes = applyDurabilityLoss(player, 1, 0, 0);
-        if (dnotes.length) log += '내구도: ' + dnotes.join(', ') + '\n';
+        if (dnotes.length) log += '🧰 내구도: ' + dnotes.join(', ') + '\n';
         if (battle.hp <= 0) {
             var exp = m.exp || 10;
             var gold = m.gold || 5;
             var bonus = battle.bonus || 1;
             exp = calcScaledReward(exp, player.level, bonus, false);
             gold = calcScaledReward(gold, player.level, bonus, true);
+            exp = applyRewardLevelDiff(exp, player.level, m.level);
+            gold = applyRewardLevelDiff(gold, player.level, m.level);
             var leveled = addExp(player, exp);
             player.gold += gold;
             updateQuestProgress(player, m.name);
             player.stats.kills = (player.stats.kills || 0) + 1;
 
             // 드랍
-            if (m.items && m.items.length > 0 && Math.random() < getDropRate(battle)) {
+            var drops2 = [];
+            if (m.items && m.items.length > 0 && Math.random() < getDropRate(battle, player)) {
                 var drop = pickRandom(m.items);
                 addItem(player, drop, 1);
-                log += '드랍: ' + drop + '\n';
+                drops2.push(drop);
             }
             if (battle.dungeon) {
                 player.stats.dungeons = (player.stats.dungeons || 0) + 1;
@@ -7616,7 +8417,9 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             if (player.level >= 10) addAchievement(player, '성장 시작', '레벨 10 달성', '전설의 모험가');
             if (player.stats.dungeons >= 3) addAchievement(player, '던전 정복자', '던전 3회 클리어', '던전 정복자');
             if (player.gold >= 10000) addAchievement(player, '부자', '골드 10,000 달성', '전설의 모험가');
-            log += '승리! EXP +' + exp + ', 골드 +' + gold;
+            var summary = '보상 요약: EXP +' + exp + ', 골드 +' + gold + ', 드랍 ' + (drops2.length || 0);
+            var detail = '상세: EXP +' + exp + ', 골드 +' + gold + (drops2.length ? ', 드랍: ' + drops2.join(', ') : '');
+            log += summary + '\n' + detail + buildBattleEndHint(player);
             if (leveled) log += '\n레벨 업! 현재 레벨: ' + player.level;
             delete state.battles[sender];
             saveState();
@@ -7629,7 +8432,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         player.hp -= mdmg;
         var dnotes2 = applyDurabilityLoss(player, 0, 1, 1);
         log += m.name + '의 반격! ' + mdmg + ' 데미지\n';
-        if (dnotes2.length) log += '내구도: ' + dnotes2.join(', ') + '\n';
+        if (dnotes2.length) log += '🧰 내구도: ' + dnotes2.join(', ') + '\n';
         if (player.hp <= 0) {
             player.hp = 1;
             delete state.battles[sender];
@@ -7637,15 +8440,16 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             replier.reply(log + '기절... HP 1로 회복');
             return;
         }
+        var skillBar = buildSkillBar(player);
         saveState();
-        replier.reply(log + m.name + ' HP: ' + battle.hp + '/' + m.hp);
+        replier.reply(log + '💚 ' + m.name + ' HP: ' + battle.hp + '/' + m.hp + '\n' + buildPlayerStatusLine(player) + buildNextActionLine() + skillBar);
         return;
     }
 
     // 도망
     if (cmd === '도망') {
         if (state.battles[sender]) { delete state.battles[sender]; saveState(); }
-        replier.reply('도망쳤습니다.');
+        replier.reply('도망쳤습니다.' + buildNextActionHint('escape'));
         return;
     }
 
@@ -7656,22 +8460,30 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         for (var dn in dmap) dlist.push(dn);
         if (dlist.length === 0) { replier.reply('던전 데이터가 없습니다.'); return; }
         dlist.sort();
-        replier.reply('[던전 목록]\n' + dlist.slice(0, 10).join('\n'));
+        replier.reply('[던전 목록]\n' + dlist.slice(0, 10).join('\n') + buildNextActionHint('dungeon-list'));
         return;
     }
 
     // 던전/인던
     if (cmd === '던전' || cmd === '인던') {
+        if (!arg) { replier.reply('사용: .던전 <이름> [노말/영웅/신화]'); return; }
         var args = arg.split(/\s+/);
-        var dungeonName = args[0];
-        var diff = (args[1] || '노말');
+        var diffToken = args[args.length - 1];
+        var diff = (diffToken === '노말' || diffToken === '영웅' || diffToken === '신화') ? diffToken : '노말';
+        var dungeonName = (diffToken === '노말' || diffToken === '영웅' || diffToken === '신화') ? args.slice(0, -1).join(' ') : arg;
         if (!dungeonName) { replier.reply('사용: .던전 <이름> [노말/영웅/신화]'); return; }
         var dungeons = getDungeonMap();
+        var resolved = resolveDungeonName(dungeonName, dungeons);
+        if (!resolved.name) {
+            var hint = resolved.suggestion ? '\n혹시 이건가요? ' + resolved.suggestion : '';
+            replier.reply('던전이 없습니다. .던전목록' + hint);
+            return;
+        }
+        dungeonName = resolved.name;
         var dungeon = dungeons[dungeonName];
-        if (!dungeon) { replier.reply('던전이 없습니다. .던전목록'); return; }
         if (dungeon.minLevel && player.level < dungeon.minLevel) { replier.reply('레벨이 낮습니다.'); return; }
 
-        var diffKey = (diff === '영웅' || diff === '신화') ? diff : '노말';
+        var diffKey = diff;
         var lockKey = dungeonName + ':' + diffKey;
         if (getWeeklyLockout(player, lockKey) === getWeekKey()) {
             replier.reply('이번 주에는 이미 클리어했습니다.');
@@ -7693,9 +8505,9 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         };
 
         boss = applyMountBalance(boss, player);
-        state.battles[sender] = { monster: boss, hp: boss.hp, bonus: Config.DUNGEON_BONUS_MULT * mult, dungeon: dungeonName, diff: diffKey };
+        state.battles[sender] = { monster: boss, hp: boss.hp, bonus: Config.DUNGEON_BONUS_MULT * mult, dungeon: dungeonName, diff: diffKey, playerLevel: player.level };
         saveState();
-        replier.reply('던전 입장: ' + dungeonName + ' (' + diffKey + ')\n보스 ' + boss.name + ' 등장!');
+        replier.reply('던전 입장: ' + dungeonName + ' (' + diffKey + ')\n보스 ' + boss.name + ' 등장!' + buildNextActionHint('dungeon-start'));
         return;
     }
 
@@ -7708,7 +8520,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             saveState();
         }
         var b = state.worldEvent.boss;
-        replier.reply('[월드 이벤트]\n이번 주 보스: ' + b.name + '\n.침공 으로 전투');
+        replier.reply('[월드 이벤트]\n이번 주 보스: ' + b.name + '\n.침공 으로 전투' + buildNextActionHint('world-event'));
         return;
     }
 
@@ -7722,9 +8534,9 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         if (getWeeklyLockout(player, '월드보스:주간') === wk2) { replier.reply('이번 주 보상은 이미 받았습니다.'); return; }
         var wb = state.worldEvent.boss;
         wb = applyMountBalance(wb, player);
-        state.battles[sender] = { monster: wb, hp: wb.hp, bonus: 2.0, dungeon: '월드보스', diff: '주간' };
+        state.battles[sender] = { monster: wb, hp: wb.hp, bonus: 2.0, dungeon: '월드보스', diff: '주간', playerLevel: player.level };
         saveState();
-        replier.reply('침공 시작! ' + wb.name + ' 등장!');
+        replier.reply('침공 시작! ' + wb.name + ' 등장!' + buildNextActionHint('dungeon-start'));
         return;
     }
 
@@ -7736,7 +8548,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             if ((q.levelReq || 1) <= player.level) list.push(id + ' - ' + q.title);
             if (list.length >= 10) break;
         }
-        replier.reply('[퀘스트 목록]\n' + (list.length ? list.join('\n') : '없음'));
+        replier.reply('[퀘스트 목록]\n' + (list.length ? list.join('\n') : '없음') + buildNextActionHint('quest-list'));
         return;
     }
 
@@ -7744,7 +8556,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
     if (cmd === '일일퀘스트') {
         if (!player.dailyQuest || player.dailyQuest.date !== getDateKey()) player.dailyQuest = generateDailyQuest(player);
         var dq = player.dailyQuest;
-        replier.reply('[일일퀘스트]\n' + dq.target + ' ' + dq.progress + '/' + dq.count);
+        replier.reply('[일일퀘스트]\n' + dq.target + ' ' + dq.progress + '/' + dq.count + buildNextActionHint('daily-quest'));
         return;
     }
 
@@ -7752,7 +8564,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
     if (cmd === '주간퀘스트') {
         if (!player.weeklyQuest || player.weeklyQuest.week !== getWeekKey()) player.weeklyQuest = generateWeeklyQuest(player);
         var wq = player.weeklyQuest;
-        replier.reply('[주간퀘스트]\n' + wq.target + ' ' + wq.progress + '/' + wq.count);
+        replier.reply('[주간퀘스트]\n' + wq.target + ' ' + wq.progress + '/' + wq.count + buildNextActionHint('weekly-quest'));
         return;
     }
 
@@ -7761,11 +8573,13 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         var dq2 = player.dailyQuest;
         if (!dq2 || dq2.date !== getDateKey()) { replier.reply('일일 퀘스트가 없습니다.'); return; }
         if (dq2.progress < dq2.count) { replier.reply('목표를 달성하지 못했습니다.'); return; }
-        player.gold += dq2.reward.gold;
-        addExp(player, dq2.reward.exp);
+        var dailyGold = dq2.reward.gold + Math.floor(player.level * 8);
+        var dailyExp = dq2.reward.exp + Math.floor(player.level * 5);
+        player.gold += dailyGold;
+        addExp(player, dailyExp);
         player.dailyQuest = null;
         saveState();
-        replier.reply('일일 퀘스트 완료!');
+        replier.reply('일일 퀘스트 완료! 골드 +' + dailyGold + ', EXP +' + dailyExp + buildNextActionHint('quest-reward'));
         return;
     }
 
@@ -7774,11 +8588,13 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         var wq2 = player.weeklyQuest;
         if (!wq2 || wq2.week !== getWeekKey()) { replier.reply('주간 퀘스트가 없습니다.'); return; }
         if (wq2.progress < wq2.count) { replier.reply('목표를 달성하지 못했습니다.'); return; }
-        player.gold += wq2.reward.gold;
-        addExp(player, wq2.reward.exp);
+        var weeklyGold = Math.floor(wq2.reward.gold * 1.2) + Math.floor(player.level * 20);
+        var weeklyExp = Math.floor(wq2.reward.exp * 1.2) + Math.floor(player.level * 12);
+        player.gold += weeklyGold;
+        addExp(player, weeklyExp);
         player.weeklyQuest = null;
         saveState();
-        replier.reply('주간 퀘스트 완료!');
+        replier.reply('주간 퀘스트 완료! 골드 +' + weeklyGold + ', EXP +' + weeklyExp + buildNextActionHint('quest-reward'));
         return;
     }
 
@@ -7790,7 +8606,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         if (player.quests[qid]) { replier.reply('이미 수락한 퀘스트입니다.'); return; }
         player.quests[qid] = { progress: {} };
         saveState();
-        replier.reply('퀘스트 수락: ' + qdata.title);
+        replier.reply('퀘스트 수락: ' + qdata.title + buildNextActionHint('quest-progress'));
         return;
     }
 
@@ -7804,7 +8620,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             has = true;
             outQ += q + ' - ' + qinfo.title + '\n';
         }
-        replier.reply(has ? outQ.trim() : '진행중인 퀘스트가 없습니다.');
+        replier.reply((has ? outQ.trim() : '진행중인 퀘스트가 없습니다.') + buildNextActionHint('quest-progress'));
         return;
     }
 
@@ -7834,7 +8650,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         }
         delete player.quests[qc];
         saveState();
-        replier.reply('퀘스트 완료! 보상 지급.');
+        replier.reply('퀘스트 완료! 보상 지급.' + buildNextActionHint('quest-reward'));
         return;
     }
 
@@ -7853,7 +8669,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         player.gold -= r.cost || 0;
         addItem(player, r.result.name, r.result.count || 1);
         saveState();
-        replier.reply('제작 완료: ' + r.result.name);
+        replier.reply('제작 완료: ' + r.result.name + buildNextActionHint('craft'));
         return;
     }
 
@@ -7870,7 +8686,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         addItem(player, cr.result.name, cr.result.count || 1);
         if (player.professions) player.professions.cooking += 1;
         saveState();
-        replier.reply('요리 완료: ' + cr.result.name);
+        replier.reply('요리 완료: ' + cr.result.name + buildNextActionHint('cook'));
         return;
     }
 
@@ -7889,13 +8705,13 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         player.stats.fishing = (player.stats.fishing || 0) + 1;
         if (player.stats.fishing >= 10) addAchievement(player, '낚시왕', '물고기 10마리 낚기', '낚시왕');
         saveState();
-        replier.reply('낚시 성공! ' + f.name + ' (' + rarity + ', 크기 ' + size + 'm)\n' + (leveledFish ? '낚시 레벨 업! Lv.' + player.fishingLevel : ''));
+        replier.reply('낚시 성공! ' + f.name + ' (' + rarity + ', 크기 ' + size + 'm)\n' + (leveledFish ? '낚시 레벨 업! Lv.' + player.fishingLevel : '') + buildNextActionHint('fishing'));
         return;
     }
 
     // 낚시정보
     if (cmd === '낚시정보') {
-        replier.reply('낚시 Lv.' + player.fishingLevel + ' (' + player.fishingExp + '/' + player.maxFishingExp + ')');
+        replier.reply('낚시 Lv.' + player.fishingLevel + ' (' + player.fishingExp + '/' + player.maxFishingExp + ')' + buildNextActionHint('fishing-info'));
         return;
     }
 
@@ -7904,7 +8720,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         var sold = sellAllFish(player);
         player.gold += sold;
         saveState();
-        replier.reply('물고기 판매 완료. 골드 +' + sold);
+        replier.reply('물고기 판매 완료. 골드 +' + sold + buildNextActionHint('fishing'));
         return;
     }
 
@@ -7929,7 +8745,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
     if (cmd === '펫정보') {
         if (!player.pet || !player.pet.type) { replier.reply('펫이 없습니다.'); return; }
         var nick = player.pet.nickname ? ' (' + player.pet.nickname + ')' : '';
-        replier.reply('펫: ' + player.pet.type + nick + ' Lv.' + player.pet.level + ' EXP ' + player.pet.exp + '/' + Config.PET_LEVEL_EXP);
+        replier.reply('펫: ' + player.pet.type + nick + ' Lv.' + player.pet.level + ' EXP ' + player.pet.exp + '/' + Config.PET_LEVEL_EXP + buildNextActionHint('pet'));
         return;
     }
 
@@ -7942,7 +8758,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         if (player.pet.exp >= Config.PET_LEVEL_EXP) { player.pet.exp = 0; player.pet.level += 1; }
         if (player.pet.level >= 5) addAchievement(player, '펫 친구', '펫 레벨 5 달성', '전설의 모험가');
         saveState();
-        replier.reply('펫 먹이 사용. 펫 레벨: ' + player.pet.level);
+        replier.reply('펫 먹이 사용. 펫 레벨: ' + player.pet.level + buildNextActionHint('pet'));
         return;
     }
 
@@ -7955,7 +8771,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         if (player.pet.exp >= Config.PET_LEVEL_EXP) { player.pet.exp = 0; player.pet.level += 1; }
         if (player.pet.level >= 5) addAchievement(player, '펫 친구', '펫 레벨 5 달성', '전설의 모험가');
         saveState();
-        replier.reply('펫 훈련 완료! 펫 레벨: ' + player.pet.level);
+        replier.reply('펫 훈련 완료! 펫 레벨: ' + player.pet.level + buildNextActionHint('pet'));
         return;
     }
 
@@ -7995,7 +8811,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         if (player.pet.level >= 5) addAchievement(player, '펫 친구', '펫 레벨 5 달성', '전설의 모험가');
         if (Math.random() < 0.3) addItem(player, '펫 먹이', 1);
         saveState();
-        replier.reply('펫 탐험 완료! 골드 +' + rewardGold + (Math.random() < 0.3 ? '\n펫 먹이 획득!' : ''));
+        replier.reply('펫 탐험 완료! 골드 +' + rewardGold + (Math.random() < 0.3 ? '\n펫 먹이 획득!' : '') + buildNextActionHint('pet'));
         return;
     }
 
@@ -8015,7 +8831,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
     // 탈것 목록
     if (cmd === '탈것목록') {
         if (!player.mounts || player.mounts.length === 0) { replier.reply('보유한 탈것이 없습니다.'); return; }
-        replier.reply('[탈것]\n' + player.mounts.join('\n'));
+        replier.reply('[탈것]\n' + player.mounts.join('\n') + buildNextActionHint('mount'));
         return;
     }
 
@@ -8025,7 +8841,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         if (player.mounts.indexOf(arg) === -1) { replier.reply('보유한 탈것이 아닙니다.'); return; }
         player.activeMount = arg;
         saveState();
-        replier.reply('탈것 탑승: ' + arg);
+        replier.reply('탈것 탑승: ' + arg + buildNextActionHint('mount'));
         return;
     }
 
@@ -8043,7 +8859,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         var zlist = [];
         for (var zn in zones) zlist.push(zn);
         if (zlist.length === 0) { replier.reply('지역 데이터가 없습니다.'); return; }
-        replier.reply('[지역 목록]\n' + zlist.slice(0, 10).join('\n'));
+        replier.reply('[지역 목록]\n' + zlist.slice(0, 10).join('\n') + buildNextActionHint('zone'));
         return;
     }
 
@@ -8063,7 +8879,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         player.currentZone = zname;
         if (player.discoveredZones.indexOf(zname) === -1) player.discoveredZones.push(zname);
         saveState();
-        replier.reply('지역 이동: ' + zname);
+        replier.reply('지역 이동: ' + zname + buildNextActionHint('zone'));
         return;
     }
 
@@ -8078,7 +8894,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         var treasure = Math.random() < 0.2;
         if (treasure) addItem(player, '낡은 보물상자', 1);
         saveState();
-        replier.reply('탐험 성공: ' + found + (treasure ? '\n보물상자 발견!' : ''));
+        replier.reply('탐험 성공: ' + found + (treasure ? '\n보물상자 발견!' : '') + buildNextActionHint('explore'));
         return;
     }
 
@@ -8105,7 +8921,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
                 var resolvedName = resolveTreasureBoxName(it.name);
                 if (TreasureBoxData[resolvedName]) owned.push(it.name + ' x' + it.count);
             }
-            replier.reply('사용: .보물상자 <이름>\n보유 상자: ' + (owned.length ? '\n' + owned.join('\n') : '없음'));
+            replier.reply('사용: .보물상자 <이름>\n보유 상자: ' + (owned.length ? '\n' + owned.join('\n') : '없음') + buildNextActionHint('treasure'));
             return;
         }
 
@@ -8131,7 +8947,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         var result = rollTreasureBoxReward(boxTable);
         addItem(player, result.item, result.count || 1);
         saveState();
-        replier.reply('보물상자 결과: ' + result.item + ' x' + (result.count || 1));
+        replier.reply('보물상자 결과: ' + result.item + ' x' + (result.count || 1) + buildNextActionHint('treasure'));
         return;
     }
 
@@ -8169,7 +8985,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         for (var k = 0; k < mountList.length; k++) combined.push('[탈것] ' + mountList[k]);
         var slice = combined.slice(start, start + perPage);
         var title = '[상점 비판매 목록' + (filter ? ' - ' + filter : '') + ']';
-        replier.reply(title + ' (' + page + '/' + totalPages + ')\n' + slice.join('\n'));
+        replier.reply(title + ' (' + page + '/' + totalPages + ')\n' + slice.join('\n') + buildNextActionHint('shop-list'));
         return;
     }
 
@@ -8195,7 +9011,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             listPage = Math.max(1, Math.min(totalPages, listPage));
             var start = (listPage - 1) * perPage;
             var slice = shopKeys.slice(start, start + perPage);
-            replier.reply('[상점 목록] (' + listPage + '/' + totalPages + ')\n' + slice.join('\n') + '\n사용: .상점 <상점명> [페이지]');
+            replier.reply('[상점 목록] (' + listPage + '/' + totalPages + ')\n' + slice.join('\n') + '\n사용: .상점 <상점명> [페이지]' + buildNextActionHint('shop-list'));
             return;
         }
 
@@ -8218,7 +9034,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             outShop += '- ' + itemName + (price ? ' (' + price + 'G)' : '') + '\n';
         }
         outShop += '구매: .구매 <아이템>';
-        replier.reply(outShop.trim());
+        replier.reply(outShop.trim() + buildNextActionHint('shop-view'));
         return;
     }
 
@@ -8250,7 +9066,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         addItem(player, buy, 1);
         if (limit > 0) player.shopPurchases[key] = (player.shopPurchases[key] || 0) + 1;
         saveState();
-        replier.reply('구매 완료: ' + buy);
+        replier.reply('구매 완료: ' + buy + buildNextActionHint('trade'));
         return;
     }
 
@@ -8263,7 +9079,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         removeItem(player, sell, 1);
         player.gold += value;
         saveState();
-        replier.reply('판매 완료: ' + sell + ' (+ ' + value + 'G)');
+        replier.reply('판매 완료: ' + sell + ' (+ ' + value + 'G)' + buildNextActionHint('trade'));
         return;
     }
 
