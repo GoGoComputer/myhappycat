@@ -754,6 +754,42 @@ var DungeonData = {
 if (typeof module !== 'undefined') {
     module.exports = { ZoneData: ZoneData, DungeonData: DungeonData };
 }
+function getItemMaxDurability(itemName, slotType) {
+    var item = GameData.ItemDatabase && GameData.ItemDatabase[itemName];
+    var base = 80;
+    if (item && item.level) base += item.level * 2;
+    if (slotType === 'weapon') base += 20;
+    if (slotType === 'armor') base += 30;
+    if (slotType === 'shield') base += 15;
+    return Math.min(300, Math.max(50, base));
+}
+
+function ensureSlotDurability(slot, itemName, slotType) {
+    if (!slot || !itemName) return;
+    if (!slot.maxDurability) slot.maxDurability = getItemMaxDurability(itemName, slotType);
+    if (slot.durability === undefined || slot.durability === null) slot.durability = slot.maxDurability;
+    if (slot.durability > slot.maxDurability) slot.durability = slot.maxDurability;
+}
+
+function applyDurabilityLoss(p, wLoss, aLoss, sLoss) {
+    var notes = [];
+    if (p.equipment.weapon && p.equipment.weapon.name) {
+        ensureSlotDurability(p.equipment.weapon, p.equipment.weapon.name, 'weapon');
+        p.equipment.weapon.durability = Math.max(0, p.equipment.weapon.durability - (wLoss || 0));
+        if (p.equipment.weapon.durability === 0) notes.push('무기 파손');
+    }
+    if (p.equipment.armor && p.equipment.armor.name) {
+        ensureSlotDurability(p.equipment.armor, p.equipment.armor.name, 'armor');
+        p.equipment.armor.durability = Math.max(0, p.equipment.armor.durability - (aLoss || 0));
+        if (p.equipment.armor.durability === 0) notes.push('방어구 파손');
+    }
+    if (p.equipment.shield && p.equipment.shield.name) {
+        ensureSlotDurability(p.equipment.shield, p.equipment.shield.name, 'shield');
+        p.equipment.shield.durability = Math.max(0, p.equipment.shield.durability - (sLoss || 0));
+        if (p.equipment.shield.durability === 0) notes.push('방패 파손');
+    }
+    return notes;
+}
 
 
 // ---------- gameData/monsters.js ----------
@@ -5667,6 +5703,9 @@ function normalizePlayer(p) {
     if (p.equipment.armor.enhance === undefined) p.equipment.armor.enhance = 0;
     if (p.equipment.shield.enhance === undefined) p.equipment.shield.enhance = 0;
     if (p.equipment.weapon.gem === undefined) p.equipment.weapon.gem = "";
+    if (p.equipment.weapon.name) ensureSlotDurability(p.equipment.weapon, p.equipment.weapon.name, 'weapon');
+    if (p.equipment.armor.name) ensureSlotDurability(p.equipment.armor, p.equipment.armor.name, 'armor');
+    if (p.equipment.shield.name) ensureSlotDurability(p.equipment.shield, p.equipment.shield.name, 'shield');
     if (!p.inventory) p.inventory = [];
     if (!p.quests) p.quests = {};
     if (!p.fish) p.fish = [];
@@ -5883,10 +5922,15 @@ function getMaxMp(p) { return getBaseStat(p, 'mp'); }
 function getAttack(p) {
     var base = getBaseStat(p, 'att');
     if (p.equipment.weapon && p.equipment.weapon.name) {
+    ensureSlotDurability(p.equipment.weapon, p.equipment.weapon.name, 'weapon');
+    if (p.equipment.weapon.durability <= 0) {
+        // 파손된 무기는 공격력 적용 없음
+    } else {
         var w = GameData.ItemDatabase[p.equipment.weapon.name];
         if (w && w.att) base += w.att;
         if (p.equipment.weapon.enhance) base += p.equipment.weapon.enhance * 2;
         if (p.equipment.weapon.gem) base += 5;
+    }
     }
     base += getPetBonus(p, 'att');
     if (p.talents) base += (p.talents.att || 0) * 2;
@@ -5903,14 +5947,20 @@ function getAttack(p) {
 function getDefense(p) {
     var base = getBaseStat(p, 'def');
     if (p.equipment.armor && p.equipment.armor.name) {
+    ensureSlotDurability(p.equipment.armor, p.equipment.armor.name, 'armor');
+    if (p.equipment.armor.durability > 0) {
         var a = GameData.ItemDatabase[p.equipment.armor.name];
         if (a && a.def) base += a.def;
         if (p.equipment.armor.enhance) base += p.equipment.armor.enhance * 2;
     }
+    }
     if (p.equipment.shield && p.equipment.shield.name) {
+    ensureSlotDurability(p.equipment.shield, p.equipment.shield.name, 'shield');
+    if (p.equipment.shield.durability > 0) {
         var s = GameData.ItemDatabase[p.equipment.shield.name];
         if (s && s.def) base += s.def;
         if (p.equipment.shield.enhance) base += p.equipment.shield.enhance * 2;
+    }
     }
     base += getPetBonus(p, 'def');
     if (p.talents) base += (p.talents.def || 0) * 2;
@@ -6340,6 +6390,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             ".탈것획득 .탈것목록 .탈것타기 <이름> .도감\n" +
             ".지역목록 .지역이동 <이름> .탐험\n" +
             ".강화 <무기/방어구/방패> .보석장착 <보석>\n" +
+            ".수리 <무기/방어구/방패/전체>\n" +
             ".일일퀘스트 .주간퀘스트 .일일완료 .주간완료\n" +
             ".인벤 .장비 .장착 <아이템> .해제 <슬롯>\n" +
             ".사용 <아이템> .상점 <상점명> [페이지] .구매 <아이템> .판매 <아이템>\n" +
@@ -6701,6 +6752,27 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             "지역: " + (player.currentZone || '묘냥의 숲') + "\n" +
             "칭호: " + (player.activeTitle || '없음')
         );
+        return;
+    }
+
+    // 아이템정보
+    if (cmd === '아이템정보') {
+        var itemName = arg;
+        if (!itemName) { replier.reply('사용: .아이템정보 <이름>'); return; }
+        var data = GameData.ItemDatabase && GameData.ItemDatabase[itemName];
+        if (!data) { replier.reply('아이템 정보가 없습니다.'); return; }
+        var lines = [];
+        lines.push('[아이템 정보] ' + itemName);
+        if (data.type) lines.push('분류: ' + data.type + (data.subtype ? '/' + data.subtype : ''));
+        if (data.level) lines.push('레벨: ' + data.level);
+        if (data.att) lines.push('공격력: ' + data.att);
+        if (data.def) lines.push('방어력: ' + data.def);
+        if (data.magic) lines.push('마력: ' + data.magic);
+        if (data.hp) lines.push('HP: ' + data.hp);
+        if (data.price !== undefined) lines.push('가격: ' + data.price + 'G');
+        if (data.description) lines.push('설명: ' + data.description);
+        if (data.obtainMethod) lines.push('획득: ' + data.obtainMethod);
+        replier.reply(lines.join('\n'));
         return;
     }
 
@@ -7214,13 +7286,62 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 
     // 장비
     if (cmd === '장비') {
+        if (player.equipment.weapon.name) ensureSlotDurability(player.equipment.weapon, player.equipment.weapon.name, 'weapon');
+        if (player.equipment.armor.name) ensureSlotDurability(player.equipment.armor, player.equipment.armor.name, 'armor');
+        if (player.equipment.shield.name) ensureSlotDurability(player.equipment.shield, player.equipment.shield.name, 'shield');
         replier.reply(
             "[장비]\n" +
-            "무기: " + (player.equipment.weapon.name || '없음') + " (강화 +" + (player.equipment.weapon.enhance || 0) + ")\n" +
-            "방어구: " + (player.equipment.armor.name || '없음') + " (강화 +" + (player.equipment.armor.enhance || 0) + ")\n" +
-            "방패: " + (player.equipment.shield.name || '없음') + " (강화 +" + (player.equipment.shield.enhance || 0) + ")\n" +
+            "무기: " + (player.equipment.weapon.name || '없음') + " (강화 +" + (player.equipment.weapon.enhance || 0) + ")" + (player.equipment.weapon.name ? " / 내구도 " + player.equipment.weapon.durability + "/" + player.equipment.weapon.maxDurability : "") + "\n" +
+            "방어구: " + (player.equipment.armor.name || '없음') + " (강화 +" + (player.equipment.armor.enhance || 0) + ")" + (player.equipment.armor.name ? " / 내구도 " + player.equipment.armor.durability + "/" + player.equipment.armor.maxDurability : "") + "\n" +
+            "방패: " + (player.equipment.shield.name || '없음') + " (강화 +" + (player.equipment.shield.enhance || 0) + ")" + (player.equipment.shield.name ? " / 내구도 " + player.equipment.shield.durability + "/" + player.equipment.shield.maxDurability : "") + "\n" +
             "보석: " + (player.equipment.weapon.gem || '없음')
         );
+        return;
+    }
+
+    // 수리
+    if (cmd === '수리') {
+        var target = arg || '전체';
+        var targets = [];
+        if (target === '전체') targets = ['무기', '방어구', '방패'];
+        else targets = [target];
+
+        var slots = [];
+        for (var t = 0; t < targets.length; t++) {
+            if (targets[t] === '무기' && player.equipment.weapon.name) slots.push({ slot: '무기', obj: player.equipment.weapon, type: 'weapon' });
+            if (targets[t] === '방어구' && player.equipment.armor.name) slots.push({ slot: '방어구', obj: player.equipment.armor, type: 'armor' });
+            if (targets[t] === '방패' && player.equipment.shield.name) slots.push({ slot: '방패', obj: player.equipment.shield, type: 'shield' });
+        }
+        if (slots.length === 0) { replier.reply('수리할 장비가 없습니다.'); return; }
+
+        for (var s = 0; s < slots.length; s++) {
+            ensureSlotDurability(slots[s].obj, slots[s].obj.name, slots[s].type);
+        }
+
+        if (findItemCount(player, '수리도구') > 0) {
+            removeItem(player, '수리도구', 1);
+            for (var r = 0; r < slots.length; r++) slots[r].obj.durability = slots[r].obj.maxDurability;
+            saveState();
+            replier.reply('수리도구 사용 완료: ' + slots.map(function(s) { return s.slot; }).join(', '));
+            return;
+        }
+
+        var cost = 0;
+        for (var c = 0; c < slots.length; c++) {
+            var obj = slots[c].obj;
+            var missing = obj.maxDurability - obj.durability;
+            if (missing <= 0) continue;
+            var itemData = GameData.ItemDatabase[obj.name] || {};
+            var baseCost = Math.max(10, Math.floor(missing * 2 + (itemData.price || 0) * 0.02));
+            cost += baseCost;
+        }
+        if (cost <= 0) { replier.reply('수리가 필요하지 않습니다.'); return; }
+        if (player.gold < cost) { replier.reply('골드 부족. 필요: ' + cost + 'G'); return; }
+
+        player.gold -= cost;
+        for (var r2 = 0; r2 < slots.length; r2++) slots[r2].obj.durability = slots[r2].obj.maxDurability;
+        saveState();
+        replier.reply('수리 완료. 소모 골드: ' + cost + 'G');
         return;
     }
 
@@ -7271,9 +7392,25 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         if (findItemCount(player, itemName) <= 0) { replier.reply('아이템이 없습니다.'); return; }
         var item = GameData.ItemDatabase[itemName];
         if (!item || !item.type) { replier.reply('장착할 수 없는 아이템입니다.'); return; }
-        if (item.type === 'weapon') { player.equipment.weapon.name = itemName; player.equipment.weapon.enhance = player.equipment.weapon.enhance || 0; player.equipment.weapon.gem = player.equipment.weapon.gem || ""; }
-        else if (item.type === 'armor') { player.equipment.armor.name = itemName; player.equipment.armor.enhance = player.equipment.armor.enhance || 0; }
-        else if (item.type === 'shield') { player.equipment.shield.name = itemName; player.equipment.shield.enhance = player.equipment.shield.enhance || 0; }
+        if (item.type === 'weapon') {
+            player.equipment.weapon.name = itemName;
+            player.equipment.weapon.enhance = player.equipment.weapon.enhance || 0;
+            player.equipment.weapon.gem = player.equipment.weapon.gem || "";
+            player.equipment.weapon.maxDurability = getItemMaxDurability(itemName, 'weapon');
+            player.equipment.weapon.durability = player.equipment.weapon.maxDurability;
+        }
+        else if (item.type === 'armor') {
+            player.equipment.armor.name = itemName;
+            player.equipment.armor.enhance = player.equipment.armor.enhance || 0;
+            player.equipment.armor.maxDurability = getItemMaxDurability(itemName, 'armor');
+            player.equipment.armor.durability = player.equipment.armor.maxDurability;
+        }
+        else if (item.type === 'shield') {
+            player.equipment.shield.name = itemName;
+            player.equipment.shield.enhance = player.equipment.shield.enhance || 0;
+            player.equipment.shield.maxDurability = getItemMaxDurability(itemName, 'shield');
+            player.equipment.shield.durability = player.equipment.shield.maxDurability;
+        }
         else { replier.reply('장착할 수 없는 타입입니다.'); return; }
         replier.reply(itemName + ' 장착 완료.');
         return;
@@ -7378,6 +7515,8 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         battleSkill.hp -= dmg;
         var zoneName = player.currentZone || '묘냥의 숲';
         var slog = '[' + zoneName + '] ' + player.name + '의 ' + skillName + '! ' + bm.name + '에게 ' + dmg + ' 데미지\n';
+        var durNotes = applyDurabilityLoss(player, 1, 0, 0);
+        if (durNotes.length) slog += '내구도: ' + durNotes.join(', ') + '\n';
         if (battleSkill.hp <= 0) {
             var exp2 = bm.exp || 10;
             var gold2 = bm.gold || 5;
@@ -7410,7 +7549,9 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         }
         var rDmg = Math.max(1, (bm.att || 5) - Math.floor(getDefense(player) * 0.4));
         player.hp -= rDmg;
+        var durNotes2 = applyDurabilityLoss(player, 0, 1, 1);
         slog += bm.name + '의 반격! ' + rDmg + ' 데미지\n';
+        if (durNotes2.length) slog += '내구도: ' + durNotes2.join(', ') + '\n';
         if (player.hp <= 0) {
             player.hp = 1;
             delete state.battles[sender];
@@ -7432,6 +7573,8 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         battle.hp -= dmg;
         var zoneName = player.currentZone || '묘냥의 숲';
         var log = '[' + zoneName + '] ' + player.name + '의 공격! ' + m.name + '에게 ' + dmg + ' 데미지\n';
+        var dnotes = applyDurabilityLoss(player, 1, 0, 0);
+        if (dnotes.length) log += '내구도: ' + dnotes.join(', ') + '\n';
         if (battle.hp <= 0) {
             var exp = m.exp || 10;
             var gold = m.gold || 5;
@@ -7484,7 +7627,9 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         // 몬스터 반격
         var mdmg = Math.max(1, (m.att || 5) - Math.floor(getDefense(player) * 0.4));
         player.hp -= mdmg;
+        var dnotes2 = applyDurabilityLoss(player, 0, 1, 1);
         log += m.name + '의 반격! ' + mdmg + ' 데미지\n';
+        if (dnotes2.length) log += '내구도: ' + dnotes2.join(', ') + '\n';
         if (player.hp <= 0) {
             player.hp = 1;
             delete state.battles[sender];
@@ -8191,8 +8336,5 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         return;
     }
 }
-
-
-
 
 
