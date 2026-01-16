@@ -5424,6 +5424,106 @@ var MutationRulePool = [
     { name: '피의 대가', desc: '플레이어 공격 증가, 방어 감소', playerAttMul: 1.08, playerDefMul: 0.88 }
 ];
 
+var TarotCardPool = [
+    // Major Arcana (22)
+    { id: 'fool', name: '바보', desc: '새로운 시작', effects: { expBonus: 0.06 } },
+    { id: 'magician', name: '마법사', desc: '집중된 힘', effects: { attMul: 1.08 } },
+    { id: 'high_priestess', name: '여사제', desc: '직관의 빛', effects: { healPct: 0.06 } },
+    { id: 'empress', name: '여제', desc: '풍요와 성장', effects: { hpBonus: 80 } },
+    { id: 'emperor', name: '황제', desc: '굳건한 수호', effects: { defMul: 1.08 } },
+    { id: 'hierophant', name: '교황', desc: '치유와 가호', effects: { healPct: 0.08, defMul: 1.04 } },
+    { id: 'lovers', name: '연인', desc: '조화와 선택', effects: { goldBonus: 0.06 } },
+    { id: 'chariot', name: '전차', desc: '진격의 기세', effects: { attMul: 1.06, defMul: 1.04 } },
+    { id: 'strength', name: '힘', desc: '의지와 용기', effects: { attMul: 1.06 } },
+    { id: 'hermit', name: '은둔자', desc: '내면의 통찰', effects: { expBonus: 0.08 } },
+    { id: 'wheel', name: '운명의 수레바퀴', desc: '행운의 흐름', effects: { dropRate: 0.06, goldBonus: 0.08 } },
+    { id: 'justice', name: '정의', desc: '균형의 심판', effects: { defMul: 1.05 } },
+    { id: 'hanged_man', name: '매달린 남자', desc: '인내의 시간', effects: { expBonus: 0.07 } },
+    { id: 'death', name: '죽음', desc: '새로운 전환', effects: { attMul: 1.05, dropRate: 0.05 } },
+    { id: 'temperance', name: '절제', desc: '회복과 안정', effects: { healPct: 0.1 } },
+    { id: 'devil', name: '악마', desc: '유혹과 대가', effects: { attMul: 1.08, defMul: 0.96 } },
+    { id: 'tower', name: '탑', desc: '격변과 시험', effects: { expBonus: 0.1 } },
+    { id: 'star', name: '별', desc: '회복과 희망', effects: { healPct: 0.12, hpBonus: 60 } },
+    { id: 'moon', name: '달', desc: '신비한 기운', effects: { dropRate: 0.08 } },
+    { id: 'sun', name: '태양', desc: '활력과 번영', effects: { expBonus: 0.12, goldBonus: 0.12 } },
+    { id: 'judgement', name: '심판', desc: '각성과 결단', effects: { attMul: 1.07, expBonus: 0.06 } },
+    { id: 'world', name: '세계', desc: '완성과 보상', effects: { goldBonus: 0.12, dropRate: 0.05 } },
+
+    // Minor Arcana (56) - Wands
+    { id: 'wands_ace', name: '완드 에이스', desc: '불꽃의 시작' },
+    { id: 'wands_2', name: '완드 2', desc: '계획과 방향' },
+    { id: 'wands_3', name: '완드 3', desc: '확장과 준비' },
+    { id: 'wands_4', name: '완드 4', desc: '안정과 축하' },
+    { id: 'wands_5', name: '완드 5', desc: '경쟁과 자극' },
+    { id: 'wands_6', name: '완드 6', desc: '승리와 인정' },
+    { id: 'wands_7', name: '완드 7', desc: '방어와 결의' },
+    { id: 'wands_8', name: '완드 8', desc: '속도와 진전' },
+    { id: 'wands_9', name: '완드 9', desc: '인내와 대비' },
+    { id: 'wands_10', name: '완드 10', desc: '과중한 책임' },
+    { id: 'wands_page', name: '완드 페이지', desc: '호기심과 소식' },
+    { id: 'wands_knight', name: '완드 기사', desc: '열정과 돌진' },
+    { id: 'wands_queen', name: '완드 여왕', desc: '자신감과 매력' },
+    { id: 'wands_king', name: '완드 왕', desc: '지도력과 비전' },
+
+    // Cups
+    { id: 'cups_ace', name: '컵 에이스', desc: '감정의 시작' },
+    { id: 'cups_2', name: '컵 2', desc: '조화와 동맹' },
+    { id: 'cups_3', name: '컵 3', desc: '우정과 축하' },
+    { id: 'cups_4', name: '컵 4', desc: '권태와 숙고' },
+    { id: 'cups_5', name: '컵 5', desc: '아쉬움과 회복' },
+    { id: 'cups_6', name: '컵 6', desc: '향수와 회상' },
+    { id: 'cups_7', name: '컵 7', desc: '환상과 선택' },
+    { id: 'cups_8', name: '컵 8', desc: '결별과 전진' },
+    { id: 'cups_9', name: '컵 9', desc: '소원과 만족' },
+    { id: 'cups_10', name: '컵 10', desc: '완성된 조화' },
+    { id: 'cups_page', name: '컵 페이지', desc: '감성의 소식' },
+    { id: 'cups_knight', name: '컵 기사', desc: '이상과 제안' },
+    { id: 'cups_queen', name: '컵 여왕', desc: '공감과 배려' },
+    { id: 'cups_king', name: '컵 왕', desc: '성숙한 감정' },
+
+    // Swords
+    { id: 'swords_ace', name: '소드 에이스', desc: '결단과 진실' },
+    { id: 'swords_2', name: '소드 2', desc: '갈등과 선택' },
+    { id: 'swords_3', name: '소드 3', desc: '아픔과 이별' },
+    { id: 'swords_4', name: '소드 4', desc: '휴식과 회복' },
+    { id: 'swords_5', name: '소드 5', desc: '손실과 교훈' },
+    { id: 'swords_6', name: '소드 6', desc: '이동과 전환' },
+    { id: 'swords_7', name: '소드 7', desc: '전략과 기지' },
+    { id: 'swords_8', name: '소드 8', desc: '제한과 인내' },
+    { id: 'swords_9', name: '소드 9', desc: '불안과 악몽' },
+    { id: 'swords_10', name: '소드 10', desc: '끝과 전환' },
+    { id: 'swords_page', name: '소드 페이지', desc: '경계와 관찰' },
+    { id: 'swords_knight', name: '소드 기사', desc: '결단과 돌격' },
+    { id: 'swords_queen', name: '소드 여왕', desc: '명확함과 절제' },
+    { id: 'swords_king', name: '소드 왕', desc: '권위와 판단' },
+
+    // Pentacles
+    { id: 'pentacles_ace', name: '펜타클 에이스', desc: '기회의 씨앗' },
+    { id: 'pentacles_2', name: '펜타클 2', desc: '균형과 조율' },
+    { id: 'pentacles_3', name: '펜타클 3', desc: '협업과 기술' },
+    { id: 'pentacles_4', name: '펜타클 4', desc: '보호와 소유' },
+    { id: 'pentacles_5', name: '펜타클 5', desc: '결핍과 지원' },
+    { id: 'pentacles_6', name: '펜타클 6', desc: '균형과 나눔' },
+    { id: 'pentacles_7', name: '펜타클 7', desc: '인내와 성장' },
+    { id: 'pentacles_8', name: '펜타클 8', desc: '수련과 집중' },
+    { id: 'pentacles_9', name: '펜타클 9', desc: '성취와 보상' },
+    { id: 'pentacles_10', name: '펜타클 10', desc: '유산과 안정' },
+    { id: 'pentacles_page', name: '펜타클 페이지', desc: '실천과 탐구' },
+    { id: 'pentacles_knight', name: '펜타클 기사', desc: '성실과 지속' },
+    { id: 'pentacles_queen', name: '펜타클 여왕', desc: '풍요와 배려' },
+    { id: 'pentacles_king', name: '펜타클 왕', desc: '확고한 기반' }
+];
+
+var TarotFocusTable = {
+    att: { label: '공격', text: '공격 x1.04' },
+    def: { label: '방어', text: '방어 x1.04' },
+    hp: { label: '체력', text: 'HP +70' },
+    drop: { label: '드랍', text: '드랍 +3%' },
+    exp: { label: '경험', text: 'EXP +3%' },
+    gold: { label: '골드', text: '골드 +3%' },
+    heal: { label: '치유', text: '치유 +3%' }
+};
+
 var ExtraDungeons = {
     '초보자 수련동굴': {
         minLevel: 1,
@@ -5635,6 +5735,7 @@ var state = loadJson(dataFilePath, {
     seasonDungeonRank: {},
     seasonDungeonRewards: {},
     seasonDungeon: {},
+    tarotDaily: {},
     market: { listings: [] },
     guilds: {},
     guildInvites: {},
@@ -5660,6 +5761,7 @@ if (!state.weeklyLockouts) state.weeklyLockouts = {};
 if (!state.seasonDungeonRank) state.seasonDungeonRank = {};
 if (!state.seasonDungeonRewards) state.seasonDungeonRewards = {};
 if (!state.seasonDungeon) state.seasonDungeon = {};
+if (!state.tarotDaily) state.tarotDaily = {};
 if (!state.market) state.market = { listings: [] };
 if (!state.market.listings) state.market.listings = [];
 if (!state.guilds) state.guilds = {};
@@ -5700,9 +5802,11 @@ function mergeMaps(a, b) {
     return out;
 }
 
-function calcScaledReward(base, level, bonus, isGold) {
+function calcScaledReward(base, level, bonus, isGold, player) {
     var scale = 1 + (level * (isGold ? Config.LEVEL_GOLD_SCALE : Config.LEVEL_EXP_SCALE));
-    return Math.floor(base * (bonus || 1) * scale);
+    var tarot = player ? getTarotBonus(player) : null;
+    var tarotBonus = tarot ? (isGold ? (tarot.goldBonus || 0) : (tarot.expBonus || 0)) : 0;
+    return Math.floor(base * (bonus || 1) * scale * (1 + tarotBonus));
 }
 
 function getLevelDiffScale(playerLevel, monsterLevel) {
@@ -5729,7 +5833,8 @@ function getDropRate(battle, player) {
     if (player) {
         var acc = getAccessoryEffects(player);
         var rune = getRuneEffects(player);
-        rate *= (1 + (acc.dropRate || 0) + (rune.dropRate || 0));
+        var tarot = getTarotBonus(player);
+        rate *= (1 + (acc.dropRate || 0) + (rune.dropRate || 0) + (tarot.dropRate || 0));
     }
     if (rate > 0.8) rate = 0.8;
     if (rate < 0.05) rate = 0.05;
@@ -5755,6 +5860,132 @@ function getWeekKey() {
 function getSeasonKey() {
     var d = new Date();
     return d.getFullYear() + "-" + (d.getMonth() + 1);
+}
+
+function normalizeTarotFocusType(input) {
+    if (!input) return null;
+    var v = String(input).replace(/\s+/g, '').toLowerCase();
+    if (v === '공격' || v === '공' || v === '딜' || v === '딜링' || v === 'att' || v === 'attack') return 'att';
+    if (v === '방어' || v === '방' || v === '탱' || v === '탱킹' || v === 'def' || v === 'defense') return 'def';
+    if (v === '체력' || v === 'hp') return 'hp';
+    if (v === '드랍' || v === '드롭' || v === '드랍률' || v === '드롭률' || v === 'drop') return 'drop';
+    if (v === '경험' || v === '경험치' || v === 'exp' || v === 'experience') return 'exp';
+    if (v === '골드' || v === '돈' || v === '머니' || v === 'gold') return 'gold';
+    if (v === '치유' || v === '회복' || v === '힐' || v === 'heal') return 'heal';
+    return null;
+}
+
+function getTarotFocusInfo(type) {
+    return TarotFocusTable[type] || null;
+}
+
+function applyTarotFocusBonus(base, focusType) {
+    if (!base || !focusType) return base;
+    if (focusType === 'att') base.attMul *= 1.04;
+    else if (focusType === 'def') base.defMul *= 1.04;
+    else if (focusType === 'hp') base.hpBonus += 70;
+    else if (focusType === 'drop') base.dropRate += 0.03;
+    else if (focusType === 'exp') base.expBonus += 0.03;
+    else if (focusType === 'gold') base.goldBonus += 0.03;
+    else if (focusType === 'heal') base.healPct += 0.03;
+
+    base.dropRate = Math.min(0.2, base.dropRate);
+    base.expBonus = Math.min(0.3, base.expBonus);
+    base.goldBonus = Math.min(0.3, base.goldBonus);
+    base.healPct = Math.min(0.2, base.healPct);
+    return base;
+}
+
+function formatTarotFocus(entry) {
+    if (!entry || !entry.focus || !entry.focus.type) return '';
+    var info = getTarotFocusInfo(entry.focus.type);
+    if (!info) return '집중: ' + entry.focus.type;
+    return '집중: ' + info.label + ' (' + info.text + ')';
+}
+
+function getTarotState(p) {
+    if (!state.tarotDaily) state.tarotDaily = {};
+    var key = p.name;
+    var entry = state.tarotDaily[key];
+    if (!entry || entry.date !== getDateKey()) return null;
+    return entry;
+}
+
+function drawTarotCard(p) {
+    if (!state.tarotDaily) state.tarotDaily = {};
+    var key = p.name;
+    var today = getDateKey();
+    var entry = state.tarotDaily[key];
+    if (entry && entry.date === today) return entry;
+    var pool = TarotCardPool.slice();
+    var cards = [];
+    for (var i = 0; i < 3 && pool.length > 0; i++) {
+        var idx = rand(0, pool.length - 1);
+        cards.push(pool[idx]);
+        pool.splice(idx, 1);
+    }
+    entry = { date: today, cards: cards };
+    state.tarotDaily[key] = entry;
+    return entry;
+}
+
+function getTarotBonus(p) {
+    var base = { attMul: 1, defMul: 1, hpBonus: 0, dropRate: 0, expBonus: 0, goldBonus: 0, healPct: 0 };
+    if (!p) return base;
+    var entry = getTarotState(p);
+    if (!entry || !entry.cards || !entry.cards.length) return base;
+    var bonus = computeTarotBonusFromCards(entry.cards);
+    if (entry.focus && entry.focus.type) bonus = applyTarotFocusBonus(bonus, entry.focus.type);
+    return bonus;
+}
+
+function computeTarotBonusFromCards(cards) {
+    var base = { attMul: 1, defMul: 1, hpBonus: 0, dropRate: 0, expBonus: 0, goldBonus: 0, healPct: 0 };
+    if (!cards || !cards.length) return base;
+    for (var i = 0; i < cards.length; i++) {
+        var eff = cards[i].effects || {};
+        if (eff.attMul) base.attMul *= eff.attMul;
+        if (eff.defMul) base.defMul *= eff.defMul;
+        if (eff.hpBonus) base.hpBonus += eff.hpBonus;
+        if (eff.dropRate) base.dropRate += eff.dropRate;
+        if (eff.expBonus) base.expBonus += eff.expBonus;
+        if (eff.goldBonus) base.goldBonus += eff.goldBonus;
+        if (eff.healPct) base.healPct += eff.healPct;
+    }
+    base.dropRate = Math.min(0.2, base.dropRate);
+    base.expBonus = Math.min(0.3, base.expBonus);
+    base.goldBonus = Math.min(0.3, base.goldBonus);
+    base.healPct = Math.min(0.2, base.healPct);
+    return base;
+}
+
+function formatTarotEffects(eff) {
+    if (!eff) return '없음';
+    var parts = [];
+    if (eff.attMul) parts.push('공격 x' + eff.attMul.toFixed(2));
+    if (eff.defMul) parts.push('방어 x' + eff.defMul.toFixed(2));
+    if (eff.hpBonus) parts.push('HP +' + eff.hpBonus);
+    if (eff.dropRate) parts.push('드랍 +' + Math.floor(eff.dropRate * 100) + '%');
+    if (eff.expBonus) parts.push('EXP +' + Math.floor(eff.expBonus * 100) + '%');
+    if (eff.goldBonus) parts.push('골드 +' + Math.floor(eff.goldBonus * 100) + '%');
+    if (eff.healPct) parts.push('치유 +' + Math.floor(eff.healPct * 100) + '%');
+    return parts.length ? parts.join(', ') : '없음';
+}
+
+function formatTarotSpread(entry) {
+    if (!entry || !entry.cards || !entry.cards.length) return '카드 없음';
+    var labels = ['과거', '현재', '미래'];
+    var lines = [];
+    for (var i = 0; i < entry.cards.length; i++) {
+        var card = entry.cards[i];
+        lines.push((labels[i] || ('카드 ' + (i + 1))) + ': ' + card.name + ' - ' + card.desc);
+    }
+    var total = computeTarotBonusFromCards(entry.cards);
+    if (entry.focus && entry.focus.type) total = applyTarotFocusBonus(total, entry.focus.type);
+    var out = lines.join('\n') + '\n보너스: ' + formatTarotEffects(total);
+    var focusLine = formatTarotFocus(entry);
+    if (focusLine) out += '\n' + focusLine;
+    return out;
 }
 
 function getSlotState(sender) {
@@ -6162,6 +6393,7 @@ function buildNextActionHint(context) {
     if (context === 'rune') return '\n다음 행동: .룬각인 <부위> <룬> / .룬확인';
     if (context === 'mutation') return '\n다음 행동: .변이던전 <이름> / .도전모드 <이름>';
     if (context === 'season-dungeon') return '\n다음 행동: .시즌던전랭킹 / .시즌던전보상';
+    if (context === 'tarot') return '\n다음 행동: .타로상태 / .타로집중 / .사냥 / .던전';
     return '\n다음 행동: .사냥 / .상점 / .인벤';
 }
 
@@ -6583,9 +6815,10 @@ function getMaxHp(p) {
     var setBonus = getRaidSetBonus(p);
     var bg = getBgEventBonus();
     var rune = getRuneEffects(p);
+    var tarot = getTarotBonus(p);
     base += title.hpBonus + party.hpBonus;
     base += setBonus.hpBonus + (bg.hp || 0);
-    base += rune.hpBonus || 0;
+    base += (rune.hpBonus || 0) + (tarot.hpBonus || 0);
     return Math.floor(base);
 }
 function getMaxMp(p) { return getBaseStat(p, 'mp'); }
@@ -6628,7 +6861,8 @@ function getAttack(p) {
     var bg = getBgEventBonus();
     var bgMul = bg.att ? bg.att : 1;
     var rune = getRuneEffects(p);
-    return Math.floor(base * title.attMul * party.attMul * setBonus.attMul * bgMul * (rune.attMul || 1));
+    var tarot = getTarotBonus(p);
+    return Math.floor(base * title.attMul * party.attMul * setBonus.attMul * bgMul * (rune.attMul || 1) * (tarot.attMul || 1));
 }
 
 function getDefense(p) {
@@ -6691,7 +6925,8 @@ function getDefense(p) {
     var bg = getBgEventBonus();
     var bgMul = bg.def ? bg.def : 1;
     var rune = getRuneEffects(p);
-    return Math.floor(base * title.defMul * party.defMul * setBonus.defMul * bgMul * (rune.defMul || 1));
+    var tarot = getTarotBonus(p);
+    return Math.floor(base * title.defMul * party.defMul * setBonus.defMul * bgMul * (rune.defMul || 1) * (tarot.defMul || 1));
 }
 
 function getBattleAttack(p, battle) {
@@ -7382,6 +7617,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             ".퀘스트목록 .퀘스트수락 <ID> .퀘스트현황 .퀘스트완료 <ID>\n" +
             ".제작 <아이템> .요리 <아이템>\n" +
             ".펫획득 .펫정보 .펫먹이 .펫훈련 .펫진화 .펫이름 <이름> .펫방생 .펫탐험\n" +
+            ".타로카드 .타로상태 .타로집중 <공격/방어/체력/드랍/경험/골드/치유>\n" +
             ".보물상자 <이름>"
         );
         return;
@@ -7785,6 +8021,49 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
     // 추천 루트
     if (cmd === '추천루트') {
         replier.reply(buildRecommendedRoute(player));
+        return;
+    }
+
+    // 타로 카드
+    if (cmd === '타로카드') {
+        var entry = drawTarotCard(player);
+        saveState();
+        replier.reply('[오늘의 타로카드]\n' + formatTarotSpread(entry) + buildNextActionHint('tarot'));
+        return;
+    }
+
+    if (cmd === '타로상태' || cmd === '타로카드상태') {
+        var cur = getTarotState(player);
+        if (!cur) { replier.reply('오늘의 타로카드가 없습니다. .타로카드'); return; }
+        replier.reply('[타로카드 상태]\n' + formatTarotSpread(cur) + buildNextActionHint('tarot'));
+        return;
+    }
+
+    if (cmd === '타로집중') {
+        var focusEntry = getTarotState(player);
+        if (!focusEntry) { replier.reply('오늘의 타로카드가 없습니다. .타로카드'); return; }
+        if (!arg) {
+            var focusLine = formatTarotFocus(focusEntry);
+            var baseMsg = '사용: .타로집중 <공격/방어/체력/드랍/경험/골드/치유>';
+            if (focusLine) baseMsg += '\n현재 ' + focusLine;
+            replier.reply(baseMsg + buildNextActionHint('tarot'));
+            return;
+        }
+        var focusType = normalizeTarotFocusType(arg);
+        if (!focusType) {
+            replier.reply('집중 옵션: 공격/방어/체력/드랍/경험/골드/치유');
+            return;
+        }
+        if (focusEntry.focus && focusEntry.focus.type) {
+            replier.reply('오늘은 이미 타로 집중을 선택했습니다.\n' + formatTarotFocus(focusEntry) + buildNextActionHint('tarot'));
+            return;
+        }
+        focusEntry.focus = { type: focusType };
+        saveState();
+        var focusInfo = getTarotFocusInfo(focusType);
+        var msg = '타로 집중 적용: ' + (focusInfo ? focusInfo.label : focusType);
+        if (focusInfo && focusInfo.text) msg += ' (' + focusInfo.text + ')';
+        replier.reply(msg + '\n' + formatTarotSpread(focusEntry) + buildNextActionHint('tarot'));
         return;
     }
 
@@ -8885,7 +9164,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
                     var member = ensurePlayer(memberName);
                     if (!member) continue;
                     var memberMax = getMaxHp(member);
-                    var healBonusPct = (getAccessoryEffects(player).healPct || 0) + (getRuneEffects(player).healPct || 0);
+                    var healBonusPct = (getAccessoryEffects(player).healPct || 0) + (getRuneEffects(player).healPct || 0) + (getTarotBonus(player).healPct || 0);
                     var healAmount = Math.max(1, Math.floor(memberMax * (0.35 + healBonusPct)));
                     var missing = memberMax - member.hp;
                     if (missing > 0) {
@@ -8935,7 +9214,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             if (!healTarget) { replier.reply('대상을 찾을 수 없습니다.'); return; }
             var healMax = getMaxHp(healTarget);
             var baseHeal = sdata.healAmount || sdata.heal || 80;
-            var healBonusPct2 = (getAccessoryEffects(player).healPct || 0) + (getRuneEffects(player).healPct || 0);
+            var healBonusPct2 = (getAccessoryEffects(player).healPct || 0) + (getRuneEffects(player).healPct || 0) + (getTarotBonus(player).healPct || 0);
             baseHeal = Math.floor(baseHeal * (1 + healBonusPct2));
             var missingHeal = healMax - healTarget.hp;
             if (missingHeal <= 0) { replier.reply('이미 최대 HP입니다.'); return; }
@@ -8990,8 +9269,8 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             var gold2 = noReward ? 0 : (bm.gold || 5);
             var bonus2 = battleSkill.bonus || 1;
             if (!noReward) {
-                exp2 = calcScaledReward(exp2, player.level, bonus2, false);
-                gold2 = calcScaledReward(gold2, player.level, bonus2, true);
+                exp2 = calcScaledReward(exp2, player.level, bonus2, false, player);
+                gold2 = calcScaledReward(gold2, player.level, bonus2, true, player);
                 exp2 = applyRewardLevelDiff(exp2, player.level, bm.level);
                 gold2 = applyRewardLevelDiff(gold2, player.level, bm.level);
             }
@@ -9091,8 +9370,8 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             var gold = noReward ? 0 : (m.gold || 5);
             var bonus = battle.bonus || 1;
             if (!noReward) {
-                exp = calcScaledReward(exp, player.level, bonus, false);
-                gold = calcScaledReward(gold, player.level, bonus, true);
+                exp = calcScaledReward(exp, player.level, bonus, false, player);
+                gold = calcScaledReward(gold, player.level, bonus, true, player);
                 exp = applyRewardLevelDiff(exp, player.level, m.level);
                 gold = applyRewardLevelDiff(gold, player.level, m.level);
             }
