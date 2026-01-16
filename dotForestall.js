@@ -1366,6 +1366,14 @@ var ItemDatabase = {
     }
 })();
 
+// 룬 아이템 추가
+ItemDatabase['맹공 룬'] = { name: '맹공 룬', type: 'rune', subtype: 'attack', price: 2000, level: 20, description: '공격력 각인에 사용' };
+ItemDatabase['수호 룬'] = { name: '수호 룬', type: 'rune', subtype: 'defense', price: 2000, level: 20, description: '방어력 각인에 사용' };
+ItemDatabase['생명 룬'] = { name: '생명 룬', type: 'rune', subtype: 'hp', price: 2500, level: 25, description: '체력 각인에 사용' };
+ItemDatabase['치명 룬'] = { name: '치명 룬', type: 'rune', subtype: 'crit', price: 3000, level: 30, description: '치명타 각인에 사용' };
+ItemDatabase['회복 룬'] = { name: '회복 룬', type: 'rune', subtype: 'heal', price: 3000, level: 30, description: '회복 각인에 사용' };
+ItemDatabase['풍요 룬'] = { name: '풍요 룬', type: 'rune', subtype: 'drop', price: 3500, level: 35, description: '드랍 보너스 각인에 사용' };
+
 // Export
 if (typeof module !== 'undefined') {
     module.exports = { ItemDatabase: ItemDatabase };
@@ -3017,10 +3025,6 @@ var SkillDatabase = {
     
     // 궁극기
     '신성한심판': { name: '신성한심판', type: 'ultimate', damage: 500, element: 'holy', heal: 200, mpCost: 100, cooldown: 180, description: '신성한 빛으로 적을 심판하고 아군을 치유' },
-    '광기의해방': { name: '광기의해방', type: 'ultimate', attBonus: 100, speedBonus: 50, duration: 30, mpCost: 80, cooldown: 180, description: '모든 것을 파괴하는 광기' },
-    '대마력포': { name: '대마력포', type: 'ultimate', damage: 800, aoe: true, mpCost: 150, cooldown: 180, description: '거대한 마력 포탄' },
-    '죽음의춤': { name: '죽음의춤', type: 'ultimate', damage: 150, hits: 10, mpCost: 100, cooldown: 180, description: '10연속 공격' },
-    '메테오스웜': { name: '메테오스웜', type: 'ultimate', damage: 1000, aoe: true, element: 'fire', mpCost: 200, cooldown: 300, description: '하늘에서 운석 폭격' },
     '영혼참수': { name: '영혼참수', type: 'ultimate', damage: 1500, execute: true, mpCost: 150, cooldown: 300, description: '체력 20% 이하 적 즉사' },
     '라그나로크': { name: '라그나로크', type: 'ultimate', damage: 2000, selfDamage: 50, mpCost: 0, cooldown: 360, description: '자신의 체력을 깎아 최대 피해' }
 };
@@ -5384,7 +5388,79 @@ var Config = {
     PVP_WIN_RATING: 20,
     PVP_LOSE_RATING: 10,
     GUILD_CREATE_COST: 1000,
-    HOUSE_COST: 5000
+    HOUSE_COST: 5000,
+    BEGINNER_DUNGEON_MAX_LEVEL: 15,
+    MID_DUNGEON_MIN_LEVEL: 16,
+    MID_DUNGEON_MAX_LEVEL: 35,
+    ENDGAME_DUNGEON_MIN_LEVEL: 50,
+    CHALLENGE_TIME_LIMIT_SEC: 90,
+    MUTATION_REWARD_MULT: 1.8,
+    SEASON_DUNGEON_MIN_LEVEL: 30,
+    SEASON_DUNGEON_REWARD_GOLD: 3000
+};
+
+var TutorialQuestLine = [
+    { id: 'TQ1', title: '첫 사냥', type: 'kill', count: 3, reward: { exp: 40, gold: 60, items: ['포션'] }, hint: '.사냥' },
+    { id: 'TQ2', title: '장비 착용', type: 'equip', count: 1, reward: { exp: 60, gold: 80, items: ['낡은 보물상자'] }, hint: '.장착 <부위> <아이템>' },
+    { id: 'TQ3', title: '강화 맛보기', type: 'enhance', count: 1, reward: { exp: 80, gold: 100, items: ['강화석'] }, hint: '.강화 <부위>' },
+    { id: 'TQ4', title: '던전 입장', type: 'dungeon', count: 1, reward: { exp: 120, gold: 150, items: ['룬각인서'] }, hint: '.던전 <이름>' }
+];
+
+var RuneEffectTable = {
+    '맹공 룬': { attMul: 1.06 },
+    '수호 룬': { defMul: 1.06 },
+    '생명 룬': { hpBonus: 80 },
+    '치명 룬': { critPct: 0.06 },
+    '회복 룬': { healPct: 0.08 },
+    '풍요 룬': { dropRate: 0.05 }
+};
+
+var MutationRulePool = [
+    { name: '광폭', desc: '몬스터 공격력 강화', monsterAttMul: 1.35 },
+    { name: '거대화', desc: '몬스터 HP 강화', monsterHpMul: 1.45 },
+    { name: '강철', desc: '몬스터 방어력 강화', monsterDefMul: 1.35 },
+    { name: '저주', desc: '플레이어 공격/방어 감소', playerAttMul: 0.9, playerDefMul: 0.9 },
+    { name: '쇠약', desc: '플레이어 방어 감소', playerDefMul: 0.85 },
+    { name: '피의 대가', desc: '플레이어 공격 증가, 방어 감소', playerAttMul: 1.08, playerDefMul: 0.88 }
+];
+
+var ExtraDungeons = {
+    '초보자 수련동굴': {
+        minLevel: 1,
+        maxLevel: 15,
+        zone: '묘냥의 숲',
+        type: 'beginner',
+        monsters: ['슬라임', '고블린', '박쥐'],
+        bosses: [{ name: '훈련용 골렘', hp: 260, att: 18, def: 6, exp: 80, gold: 70, level: 6, items: ['낡은 보물상자', '강화석'] }],
+        dropItems: ['낡은 보물상자', '강화석']
+    },
+    '정예 훈련장': {
+        minLevel: 16,
+        maxLevel: 35,
+        zone: '초원 평야',
+        type: 'mid',
+        monsters: ['도적', '초원늑대', '하피', '켄타우로스전사'],
+        bosses: [{ name: '정예 교관 크로넌', hp: 900, att: 70, def: 25, exp: 260, gold: 220, level: 25, items: ['화려한 보물상자', '강화석'] }],
+        dropItems: ['화려한 보물상자', '강화석', '룬석']
+    },
+    '룬의 심연': {
+        minLevel: 50,
+        zone: '심연의 균열',
+        type: 'endgame',
+        monsters: ['데스나이트', '리치', '그림자전사'],
+        bosses: [{ name: '심연의 감시자', hp: 2800, att: 160, def: 60, exp: 900, gold: 700, level: 60, items: ['룬각인서', '룬석'] }],
+        dropItems: ['룬석', '맹공 룬', '수호 룬', '생명 룬', '치명 룬', '회복 룬', '풍요 룬', '어비스의 숨결', '드래곤의 심장']
+    }
+};
+
+var SeasonDungeonData = {
+    name: '시즌 랭크 던전',
+    minLevel: 30,
+    zone: '황혼의 습지',
+    type: 'season',
+    monsters: ['습지좀비', '안개유령', '저주받은사제', '부패골렘'],
+    bosses: [{ name: '시즌의 심판자', hp: 1800, att: 120, def: 45, exp: 600, gold: 450, level: 45, items: ['룬각인서'] }],
+    dropItems: ['룬각인서', '룬석']
 };
 
 var BattlegroundMaps = [
@@ -5556,6 +5632,9 @@ var state = loadJson(dataFilePath, {
     bgEvent: { name: '', bonus: {}, date: '' },
     logs: { dungeon: {}, raid: {} },
     weeklyLockouts: {},
+    seasonDungeonRank: {},
+    seasonDungeonRewards: {},
+    seasonDungeon: {},
     market: { listings: [] },
     guilds: {},
     guildInvites: {},
@@ -5578,6 +5657,9 @@ if (!state.logs) state.logs = { dungeon: {}, raid: {} };
 if (!state.logs.dungeon) state.logs.dungeon = {};
 if (!state.logs.raid) state.logs.raid = {};
 if (!state.weeklyLockouts) state.weeklyLockouts = {};
+if (!state.seasonDungeonRank) state.seasonDungeonRank = {};
+if (!state.seasonDungeonRewards) state.seasonDungeonRewards = {};
+if (!state.seasonDungeon) state.seasonDungeon = {};
 if (!state.market) state.market = { listings: [] };
 if (!state.market.listings) state.market.listings = [];
 if (!state.guilds) state.guilds = {};
@@ -5646,7 +5728,8 @@ function getDropRate(battle, player) {
     rate *= getLevelDiffScale(playerLevel, monsterLevel);
     if (player) {
         var acc = getAccessoryEffects(player);
-        rate *= (1 + (acc.dropRate || 0));
+        var rune = getRuneEffects(player);
+        rate *= (1 + (acc.dropRate || 0) + (rune.dropRate || 0));
     }
     if (rate > 0.8) rate = 0.8;
     if (rate < 0.05) rate = 0.05;
@@ -5775,6 +5858,18 @@ function normalizePlayer(p) {
     if (p.equipment.belt.enhance === undefined) p.equipment.belt.enhance = 0;
     if (p.equipment.cloak.enhance === undefined) p.equipment.cloak.enhance = 0;
     if (p.equipment.weapon.gem === undefined) p.equipment.weapon.gem = "";
+    if (p.equipment.weapon.rune === undefined) p.equipment.weapon.rune = "";
+    if (p.equipment.armor.rune === undefined) p.equipment.armor.rune = "";
+    if (p.equipment.shield.rune === undefined) p.equipment.shield.rune = "";
+    if (p.equipment.helmet.rune === undefined) p.equipment.helmet.rune = "";
+    if (p.equipment.gloves.rune === undefined) p.equipment.gloves.rune = "";
+    if (p.equipment.boots.rune === undefined) p.equipment.boots.rune = "";
+    if (p.equipment.ring1.rune === undefined) p.equipment.ring1.rune = "";
+    if (p.equipment.ring2.rune === undefined) p.equipment.ring2.rune = "";
+    if (p.equipment.necklace.rune === undefined) p.equipment.necklace.rune = "";
+    if (p.equipment.earring.rune === undefined) p.equipment.earring.rune = "";
+    if (p.equipment.belt.rune === undefined) p.equipment.belt.rune = "";
+    if (p.equipment.cloak.rune === undefined) p.equipment.cloak.rune = "";
     if (p.equipment.weapon.name) ensureSlotDurability(p.equipment.weapon, p.equipment.weapon.name, 'weapon');
     if (p.equipment.armor.name) ensureSlotDurability(p.equipment.armor, p.equipment.armor.name, 'armor');
     if (p.equipment.shield.name) ensureSlotDurability(p.equipment.shield, p.equipment.shield.name, 'shield');
@@ -5810,6 +5905,8 @@ function normalizePlayer(p) {
     if (!p.professions) p.professions = { mining: 1, herbal: 1, alchemy: 1, blacksmith: 1, cooking: 1 };
     if (!p.currentZone) p.currentZone = '묘냥의 숲';
     if (!p.shopPurchases) p.shopPurchases = {};
+    if (!p.tutorial) p.tutorial = { step: 0, progress: {}, completed: false };
+    if (!p.challengeRecords) p.challengeRecords = {};
 }
 
 function getTitleBonus(p) {
@@ -6061,7 +6158,107 @@ function buildNextActionHint(context) {
     if (context === 'gem-fail') return '\n다음 행동: .보석장착 <보석> / .상점 / .인벤';
     if (context === 'quest-reward') return '\n다음 행동: .퀘스트목록 / .일일퀘스트 / .던전';
     if (context === 'battle-end') return '\n다음 행동: .사냥 / .던전 / .상점';
+    if (context === 'tutorial') return '\n다음 행동: .튜토리얼 / .추천루트';
+    if (context === 'rune') return '\n다음 행동: .룬각인 <부위> <룬> / .룬확인';
+    if (context === 'mutation') return '\n다음 행동: .변이던전 <이름> / .도전모드 <이름>';
+    if (context === 'season-dungeon') return '\n다음 행동: .시즌던전랭킹 / .시즌던전보상';
     return '\n다음 행동: .사냥 / .상점 / .인벤';
+}
+
+function findRecommendedZoneForLevel(level) {
+    var zones = GameData.ZoneData || {};
+    var best = null;
+    var bestScore = 9999;
+    for (var name in zones) {
+        var z = zones[name];
+        if (!z || !z.level) continue;
+        var min = z.level.min || 1;
+        var max = z.level.max || min + 5;
+        var score = 0;
+        if (level < min) score = min - level;
+        else if (level > max) score = level - max;
+        if (score < bestScore) { bestScore = score; best = name; }
+    }
+    return best;
+}
+
+function getEquipmentGaps(p) {
+    var eq = p.equipment || {};
+    var gaps = [];
+    if (!eq.weapon || !eq.weapon.name) gaps.push('무기');
+    if (!eq.armor || !eq.armor.name) gaps.push('갑옷');
+    if (!eq.helmet || !eq.helmet.name) gaps.push('투구');
+    if (!eq.gloves || !eq.gloves.name) gaps.push('장갑');
+    if (!eq.boots || !eq.boots.name) gaps.push('신발');
+    return gaps;
+}
+
+function buildRecommendedRoute(p) {
+    var lines = ['[추천 루트]'];
+    var t = getTutorialState(p);
+    if (!t.completed && p.level <= Config.BEGINNER_DUNGEON_MAX_LEVEL) {
+        lines.push('튜토리얼: ' + formatTutorialProgress(p));
+    }
+
+    var gaps = getEquipmentGaps(p);
+    if (gaps.length) {
+        lines.push('장비 추천: ' + gaps.join(', ') + ' 확보 → .상점 / .장착');
+    }
+
+    var zoneName = p.currentZone || '묘냥의 숲';
+    var currentZone = GameData.ZoneData ? GameData.ZoneData[zoneName] : null;
+    if (currentZone && currentZone.level) {
+        var max = currentZone.level.max || p.level;
+        if (p.level > max + 2) {
+            var nextZone = findRecommendedZoneForLevel(p.level);
+            if (nextZone && nextZone !== zoneName) lines.push('지역 이동 추천: .지역이동 ' + nextZone);
+        }
+    }
+
+    if (p.level <= Config.BEGINNER_DUNGEON_MAX_LEVEL) {
+        lines.push('초보 던전: .초보던전 또는 .던전 초보자 수련동굴');
+    } else if (p.level >= Config.MID_DUNGEON_MIN_LEVEL && p.level <= Config.MID_DUNGEON_MAX_LEVEL) {
+        lines.push('중급 콘텐츠: .중급던전 / .정예사냥');
+    } else if (p.level >= Config.ENDGAME_DUNGEON_MIN_LEVEL) {
+        lines.push('엔드게임 파밍: .던전 룬의 심연 / .변이던전 <이름>');
+    } else {
+        lines.push('던전 도전: .던전 <이름> [난이도]');
+    }
+
+    lines.push('자동 추천 다시보기: .추천루트');
+    return lines.join('\n');
+}
+
+function checkChallengeTimeout(battle) {
+    if (!battle || !battle.challenge) return null;
+    var limit = (battle.challenge.timeLimitSec || Config.CHALLENGE_TIME_LIMIT_SEC) * 1000;
+    if (Date.now() - battle.challenge.startedAt > limit) return '도전 실패: 제한 시간 초과';
+    return null;
+}
+
+function recordChallengeResult(p, battle, success, reason) {
+    if (!battle || !battle.challenge) return '';
+    var key = battle.challenge.key || '도전 모드';
+    var elapsed = Math.max(1, Math.floor((Date.now() - battle.challenge.startedAt) / 1000));
+    if (!p.challengeRecords) p.challengeRecords = {};
+    if (!p.challengeRecords[key] || (success && elapsed < p.challengeRecords[key].timeSec)) {
+        p.challengeRecords[key] = { timeSec: elapsed, success: success, date: getDateKey() };
+    }
+    return '\n[도전 모드] ' + key + ' ' + (success ? '성공' : '실패') + ' (' + elapsed + '초) ' + (reason ? '- ' + reason : '');
+}
+
+function recordSeasonDungeonScore(p, battle) {
+    if (!battle || !battle.seasonDungeon) return '';
+    ensureSeasonDungeon();
+    var sid = state.seasonDungeon.id;
+    if (!state.seasonDungeonRank[sid]) state.seasonDungeonRank[sid] = {};
+    var elapsed = Math.max(1, Math.floor((Date.now() - battle.seasonDungeon.startedAt) / 1000));
+    var score = Math.max(1, Math.floor(10000 / (elapsed + 30)) + Math.floor(p.level * 5));
+    var prev = state.seasonDungeonRank[sid][p.name];
+    if (!prev || score > prev.score) {
+        state.seasonDungeonRank[sid][p.name] = { score: score, timeSec: elapsed, date: getDateKey() };
+    }
+    return '\n[시즌 던전] 기록 갱신: 점수 ' + score + ' (시간 ' + elapsed + '초)';
 }
 
 function buildBattleEndHint(p) {
@@ -6180,9 +6377,122 @@ function getAccessoryEffects(p) {
     return total;
 }
 
+function getRuneEffects(p) {
+    var eq = p.equipment || {};
+    var slots = ['weapon', 'armor', 'shield', 'helmet', 'gloves', 'boots', 'ring1', 'ring2', 'necklace', 'earring', 'belt', 'cloak'];
+    var total = { attMul: 1, defMul: 1, hpBonus: 0, critPct: 0, healPct: 0, dropRate: 0 };
+    for (var i = 0; i < slots.length; i++) {
+        var slot = eq[slots[i]];
+        if (!slot || !slot.rune) continue;
+        var eff = RuneEffectTable[slot.rune];
+        if (!eff) continue;
+        if (eff.attMul) total.attMul *= eff.attMul;
+        if (eff.defMul) total.defMul *= eff.defMul;
+        if (eff.hpBonus) total.hpBonus += eff.hpBonus;
+        if (eff.critPct) total.critPct += eff.critPct;
+        if (eff.healPct) total.healPct += eff.healPct;
+        if (eff.dropRate) total.dropRate += eff.dropRate;
+    }
+    total.critPct = Math.min(0.35, total.critPct);
+    total.healPct = Math.min(0.25, total.healPct);
+    total.dropRate = Math.min(0.25, total.dropRate);
+    return total;
+}
+
+function getTutorialState(p) {
+    if (!p.tutorial) p.tutorial = { step: 0, progress: {}, completed: false };
+    return p.tutorial;
+}
+
+function getTutorialStep(p) {
+    var t = getTutorialState(p);
+    if (t.completed) return null;
+    return TutorialQuestLine[t.step] || null;
+}
+
+function formatTutorialProgress(p) {
+    var step = getTutorialStep(p);
+    if (!step) return '튜토리얼 완료!';
+    var t = getTutorialState(p);
+    var cur = t.progress[step.type] || 0;
+    return '[튜토리얼] ' + step.title + ' (' + cur + '/' + step.count + ')\n힌트: ' + step.hint;
+}
+
+function advanceTutorialStep(p) {
+    var t = getTutorialState(p);
+    t.step += 1;
+    t.progress = {};
+    if (t.step >= TutorialQuestLine.length) t.completed = true;
+}
+
+function applyTutorialProgress(p, type) {
+    var step = getTutorialStep(p);
+    if (!step || step.type !== type) return '';
+    var t = getTutorialState(p);
+    t.progress[step.type] = (t.progress[step.type] || 0) + 1;
+    if (t.progress[step.type] < step.count) return '\n' + formatTutorialProgress(p);
+
+    if (step.reward) {
+        if (step.reward.gold) p.gold += step.reward.gold;
+        if (step.reward.exp) addExp(p, step.reward.exp);
+        if (step.reward.items) {
+            for (var i = 0; i < step.reward.items.length; i++) addItem(p, step.reward.items[i], 1);
+        }
+    }
+    var rewardText = step.reward ? ('보상: ' + (step.reward.gold || 0) + 'G, EXP ' + (step.reward.exp || 0)) : '보상 없음';
+    advanceTutorialStep(p);
+    var next = getTutorialStep(p);
+    var nextText = next ? ('다음: ' + next.title) : '튜토리얼 완료!';
+    return '\n[튜토리얼 완료] ' + step.title + '\n' + rewardText + '\n' + nextText;
+}
+
+function buildMutationData() {
+    var count = 2 + rand(0, 1);
+    var picked = [];
+    var rules = MutationRulePool.slice();
+    for (var i = 0; i < count && rules.length > 0; i++) {
+        var idx = rand(0, rules.length - 1);
+        picked.push(rules[idx]);
+        rules.splice(idx, 1);
+    }
+    var data = {
+        rules: picked,
+        monsterHpMul: 1,
+        monsterAttMul: 1,
+        monsterDefMul: 1,
+        playerAttMul: 1,
+        playerDefMul: 1
+    };
+    for (var r = 0; r < picked.length; r++) {
+        data.monsterHpMul *= (picked[r].monsterHpMul || 1);
+        data.monsterAttMul *= (picked[r].monsterAttMul || 1);
+        data.monsterDefMul *= (picked[r].monsterDefMul || 1);
+        data.playerAttMul *= (picked[r].playerAttMul || 1);
+        data.playerDefMul *= (picked[r].playerDefMul || 1);
+    }
+    return data;
+}
+
+function formatMutationRules(data) {
+    if (!data || !data.rules || !data.rules.length) return '';
+    var lines = [];
+    for (var i = 0; i < data.rules.length; i++) lines.push('- ' + data.rules[i].name + ': ' + data.rules[i].desc);
+    return lines.join('\n');
+}
+
+function ensureSeasonDungeon() {
+    var seasonKey = getSeasonKey();
+    if (!state.seasonDungeon || state.seasonDungeon.id !== seasonKey) {
+        state.seasonDungeon = { id: seasonKey, started: getDateKey() };
+        state.seasonDungeonRank = state.seasonDungeonRank || {};
+        state.seasonDungeonRank[seasonKey] = {};
+    }
+}
+
 function applyCritDamage(p, dmg) {
     var acc = getAccessoryEffects(p);
-    var critChance = Math.min(0.35, acc.critPct || 0);
+    var rune = getRuneEffects(p);
+    var critChance = Math.min(0.45, (acc.critPct || 0) + (rune.critPct || 0));
     if (Math.random() < critChance) return { dmg: Math.floor(dmg * 1.5), crit: true };
     return { dmg: dmg, crit: false };
 }
@@ -6272,8 +6582,10 @@ function getMaxHp(p) {
     var party = getPartyBuff(p);
     var setBonus = getRaidSetBonus(p);
     var bg = getBgEventBonus();
+    var rune = getRuneEffects(p);
     base += title.hpBonus + party.hpBonus;
     base += setBonus.hpBonus + (bg.hp || 0);
+    base += rune.hpBonus || 0;
     return Math.floor(base);
 }
 function getMaxMp(p) { return getBaseStat(p, 'mp'); }
@@ -6315,7 +6627,8 @@ function getAttack(p) {
     var setBonus = getRaidSetBonus(p);
     var bg = getBgEventBonus();
     var bgMul = bg.att ? bg.att : 1;
-    return Math.floor(base * title.attMul * party.attMul * setBonus.attMul * bgMul);
+    var rune = getRuneEffects(p);
+    return Math.floor(base * title.attMul * party.attMul * setBonus.attMul * bgMul * (rune.attMul || 1));
 }
 
 function getDefense(p) {
@@ -6377,7 +6690,20 @@ function getDefense(p) {
     var setBonus = getRaidSetBonus(p);
     var bg = getBgEventBonus();
     var bgMul = bg.def ? bg.def : 1;
-    return Math.floor(base * title.defMul * party.defMul * setBonus.defMul * bgMul);
+    var rune = getRuneEffects(p);
+    return Math.floor(base * title.defMul * party.defMul * setBonus.defMul * bgMul * (rune.defMul || 1));
+}
+
+function getBattleAttack(p, battle) {
+    var base = getAttack(p);
+    var mult = (battle && battle.playerAttMul) ? battle.playerAttMul : 1;
+    return Math.floor(base * mult);
+}
+
+function getBattleDefense(p, battle) {
+    var base = getDefense(p);
+    var mult = (battle && battle.playerDefMul) ? battle.playerDefMul : 1;
+    return Math.floor(base * mult);
 }
 
 function addItem(p, name, count) {
@@ -6709,9 +7035,10 @@ function ensureSeason() {
 }
 
 function getDungeonMap() {
-    if (GameData.DungeonData && Object.keys(GameData.DungeonData).length > 0) return GameData.DungeonData;
-    if (GameData.DungeonSystemData && GameData.DungeonSystemData.dungeons) return GameData.DungeonSystemData.dungeons;
-    return {};
+    var base = {};
+    if (GameData.DungeonData && Object.keys(GameData.DungeonData).length > 0) base = GameData.DungeonData;
+    else if (GameData.DungeonSystemData && GameData.DungeonSystemData.dungeons) base = GameData.DungeonSystemData.dungeons;
+    return mergeMaps(base, ExtraDungeons || {});
 }
 
 function normalizeName(name) {
@@ -6762,10 +7089,193 @@ function resolveDungeonName(input, dungeons) {
 
 function getDungeonBoss(dungeon) {
     if (!dungeon || !dungeon.bosses || dungeon.bosses.length === 0) return null;
-    var bossName = pickRandom(dungeon.bosses);
+    var bossEntry = pickRandom(dungeon.bosses);
+    var bossName = bossEntry;
+    if (bossEntry && typeof bossEntry === 'object') {
+        if (bossEntry.name) bossName = bossEntry.name;
+        else if (bossEntry.id) bossName = bossEntry.id;
+    }
+    if (typeof bossName !== 'string') bossName = String(bossName);
     var boss = GameData.MonsterDatabase[bossName];
     if (boss) return boss;
+    if (bossEntry && typeof bossEntry === 'object') {
+        var fallback = {
+            name: bossName,
+            hp: bossEntry.hp || (300 + rand(0, 200)),
+            att: bossEntry.att || (35 + rand(0, 15)),
+            def: bossEntry.def || (10 + rand(0, 5)),
+            exp: bossEntry.exp || 120,
+            gold: bossEntry.gold || 80,
+            level: bossEntry.level || dungeon.minLevel || 10,
+            items: bossEntry.items || ['보물상자']
+        };
+        return fallback;
+    }
     return { name: bossName, hp: 300 + rand(0, 200), att: 35 + rand(0, 15), def: 10 + rand(0, 5), exp: 120, gold: 80, level: dungeon.minLevel || 10, items: ['보물상자'] };
+}
+
+function cloneMonsterData(m) {
+    if (!m) return null;
+    return {
+        name: m.name,
+        hp: m.hp,
+        att: m.att,
+        def: m.def,
+        exp: m.exp,
+        gold: m.gold,
+        level: m.level,
+        items: m.items ? m.items.slice() : []
+    };
+}
+
+function scaleMonsterStats(mon, mult) {
+    var m = cloneMonsterData(mon);
+    if (!m) return null;
+    var scale = mult || 1;
+    var pack = (typeof scale === 'object') ? scale : null;
+    var hpMul = pack ? (pack.hp || 1) : scale;
+    var attMul = pack ? (pack.att || 1) : scale;
+    var defMul = pack ? (pack.def || 1) : scale;
+    var expMul = pack ? (pack.exp || 1) : scale;
+    var goldMul = pack ? (pack.gold || 1) : scale;
+    m.hp = Math.max(1, Math.floor((m.hp || 50) * hpMul));
+    m.att = Math.max(1, Math.floor((m.att || 10) * attMul));
+    m.def = Math.max(0, Math.floor((m.def || 5) * defMul));
+    m.exp = Math.max(1, Math.floor((m.exp || 20) * expMul));
+    m.gold = Math.max(1, Math.floor((m.gold || 10) * goldMul));
+    return m;
+}
+
+function buildDungeonStages(dungeonName, dungeonData, diffKey, player, options) {
+    var opts = options || {};
+    var diffMult = (diffKey === '영웅') ? 1.5 : (diffKey === '신화' ? 2.2 : 1.0);
+    var isRaid = !!opts.isRaid || (dungeonData && (dungeonData.type === 'raid' || dungeonData.type === 'mythic'));
+    var baseStages = diffKey === '신화' ? 5 : (diffKey === '영웅' ? 4 : 3);
+    if (isRaid) baseStages += 2;
+    var totalStages = Math.max(3, baseStages + rand(0, 1));
+    if (opts.stageCount !== undefined && opts.stageCount !== null) {
+        totalStages = Math.max(2, Math.floor(opts.stageCount));
+    }
+
+    var zoneName = (dungeonData && dungeonData.zone) ? dungeonData.zone : (player.currentZone || '묘냥의 숲');
+    var zone = GameData.ZoneData ? GameData.ZoneData[zoneName] : null;
+    var trashPool = (dungeonData && dungeonData.monsters && dungeonData.monsters.length) ? dungeonData.monsters
+        : (zone && zone.monsters && zone.monsters.length) ? zone.monsters
+        : Object.keys(GameData.MonsterDatabase || {});
+    if (!trashPool || trashPool.length === 0) trashPool = ['슬라임'];
+
+    var bossCandidates = (dungeonData && dungeonData.bosses && dungeonData.bosses.length) ? dungeonData.bosses.slice() : [];
+    var namedCandidates = bossCandidates.slice();
+
+    var stages = [];
+    var typePool = ['trash', 'named', 'midboss'];
+    while (stages.length < totalStages - 1) {
+        stages.push(typePool[rand(0, typePool.length - 1)]);
+    }
+    // ensure at least one named and one midboss if possible
+    if (stages.indexOf('named') === -1) stages[0] = 'named';
+    if (stages.indexOf('midboss') === -1 && stages.length > 1) stages[1] = 'midboss';
+    // shuffle
+    for (var i = stages.length - 1; i > 0; i--) {
+        var j = rand(0, i);
+        var tmp = stages[i]; stages[i] = stages[j]; stages[j] = tmp;
+    }
+
+    var stageList = [];
+    var typeMult = { trash: 0.6, named: 0.85, midboss: 1.05, boss: 1.35 };
+    if (isRaid) { typeMult.named += 0.1; typeMult.midboss += 0.15; typeMult.boss += 0.2; }
+
+    var extraItems = (dungeonData && dungeonData.dropItems) ? dungeonData.dropItems : (opts.extraItems || []);
+    for (var s = 0; s < stages.length; s++) {
+        var t = stages[s];
+        var namePick = (t === 'trash') ? pickRandom(trashPool) : null;
+        var bossEntry = null;
+        if (t !== 'trash' && namedCandidates.length > 0) {
+            bossEntry = pickRandom(namedCandidates);
+            namePick = (bossEntry && typeof bossEntry === 'object') ? (bossEntry.name || bossEntry.id) : bossEntry;
+        }
+        if (!namePick) namePick = pickRandom(trashPool);
+        var baseMon = GameData.MonsterDatabase[namePick] || bossEntry || { name: namePick, hp: 300, att: 35, def: 10, exp: 120, gold: 80, level: (dungeonData && dungeonData.level ? dungeonData.level.min : player.level) };
+        var baseScale = diffMult * (typeMult[t] || 1);
+        var scalePack = {
+            hp: baseScale,
+            att: baseScale,
+            def: baseScale,
+            exp: baseScale,
+            gold: baseScale
+        };
+        if (opts.monsterMult) {
+            scalePack.hp *= opts.monsterMult;
+            scalePack.att *= opts.monsterMult;
+            scalePack.def *= opts.monsterMult;
+            scalePack.exp *= opts.monsterMult;
+            scalePack.gold *= opts.monsterMult;
+        }
+        if (opts.monsterHpMul) scalePack.hp *= opts.monsterHpMul;
+        if (opts.monsterAttMul) scalePack.att *= opts.monsterAttMul;
+        if (opts.monsterDefMul) scalePack.def *= opts.monsterDefMul;
+        var scaled = scaleMonsterStats(baseMon, scalePack);
+        scaled.items = baseMon.items || (t === 'trash' ? [] : ['보물상자']);
+        if (extraItems && extraItems.length) scaled.items = scaled.items.concat(extraItems);
+        scaled = applyMountBalance(scaled, player);
+        stageList.push({ type: t, monster: scaled });
+    }
+
+    var finalBoss = opts.finalBoss || getDungeonBoss(dungeonData || { bosses: bossCandidates, minLevel: player.level });
+    var baseBossScale = diffMult * (typeMult.boss || 1);
+    var bossScalePack = {
+        hp: baseBossScale,
+        att: baseBossScale,
+        def: baseBossScale,
+        exp: baseBossScale,
+        gold: baseBossScale
+    };
+    if (opts.monsterMult) {
+        bossScalePack.hp *= opts.monsterMult;
+        bossScalePack.att *= opts.monsterMult;
+        bossScalePack.def *= opts.monsterMult;
+        bossScalePack.exp *= opts.monsterMult;
+        bossScalePack.gold *= opts.monsterMult;
+    }
+    if (opts.monsterHpMul) bossScalePack.hp *= opts.monsterHpMul;
+    if (opts.monsterAttMul) bossScalePack.att *= opts.monsterAttMul;
+    if (opts.monsterDefMul) bossScalePack.def *= opts.monsterDefMul;
+    var bossScaled = scaleMonsterStats(finalBoss, bossScalePack);
+    bossScaled.items = finalBoss.items || ['보물상자'];
+    if (extraItems && extraItems.length) bossScaled.items = bossScaled.items.concat(extraItems);
+    bossScaled = applyMountBalance(bossScaled, player);
+    stageList.push({ type: 'boss', monster: bossScaled });
+
+    return { name: dungeonName, stages: stageList, index: 0, total: stageList.length, zone: zoneName };
+}
+
+function getStageLabel(stageType) {
+    if (stageType === 'trash') return '잡몹';
+    if (stageType === 'named') return '네임드';
+    if (stageType === 'midboss') return '중간보스';
+    return '보스';
+}
+
+function formatDungeonProgress(run) {
+    if (!run || !run.stages || !run.stages.length) return '';
+    var cur = run.stages[run.index];
+    var label = getStageLabel(cur.type);
+    return '진행도: ' + (run.index + 1) + '/' + run.total + ' (' + label + ')';
+}
+
+function isDungeonFinalStage(battle) {
+    if (!battle || !battle.run) return true;
+    return battle.run.index >= battle.run.total - 1;
+}
+
+function advanceDungeonStage(battle, player) {
+    if (!battle || !battle.run) return null;
+    battle.run.index += 1;
+    var next = battle.run.stages[battle.run.index];
+    battle.monster = next.monster;
+    battle.hp = next.monster.hp;
+    battle.playerLevel = player.level;
+    return next;
 }
 
 function getWorldBoss() {
@@ -6790,6 +7300,20 @@ function updateQuestProgress(p, monsterName) {
     }
     if (p.dailyQuest && p.dailyQuest.target === monsterName) p.dailyQuest.progress++;
     if (p.weeklyQuest && p.weeklyQuest.target === monsterName) p.weeklyQuest.progress++;
+}
+
+function updateQuestTalkProgress(p, npcName) {
+    for (var qid in p.quests) {
+        var qstate = p.quests[qid];
+        var q = GameData.QuestDatabase[qid];
+        if (!q || !q.objectives) continue;
+        for (var i = 0; i < q.objectives.length; i++) {
+            var obj = q.objectives[i];
+            if (obj.type === 'talk' && obj.target === npcName) {
+                qstate.progress[obj.target] = (qstate.progress[obj.target] || 0) + 1;
+            }
+        }
+    }
 }
 
 function generateDailyQuest(p) {
@@ -6817,6 +7341,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
     var arg = parts.slice(1).join(' ');
 
     ensureSeason();
+    ensureSeasonDungeon();
 
     // 도움말
     if (cmd === '도움말' || cmd === '명령어') {
@@ -6824,10 +7349,13 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             "[묘냥의 숲 - 점RPG]\n" +
             ".시작 [직업] .캐릭생성 <슬롯> [직업] .캐릭선택 <슬롯> .캐릭목록 .캐릭삭제 <슬롯> 확인\n" +
             ".정보 .지역목록 .지역이동 <이름> .사냥 .공격(.공경) .도망\n" +
+            ".대화 <NPC>\n" +
             ".스킬목록 .스킬 <이름> .휴식 .일일보상 .랭킹\n" +
             ".파티생성 .레이드생성 .파티초대 <유저> .파티수락 <유저> .파티나가기 .파티역할 <탱/힐/딜>\n" +
             ".던전목록 .던전 <이름> [노말/영웅/신화] .인던 <이름> [난이도]\n" +
+            ".초보던전 .중급던전 .정예사냥 .도전모드 <던전> [시간/노데미지] .변이던전 <던전> [난이도]\n" +
             ".결투 <유저> .결투수락 <유저> .전장참가 .전장맵 .전장이벤트 .시즌랭킹 .시즌보상\n" +
+            ".시즌던전 .시즌던전랭킹 .시즌던전보상\n" +
             ".전문기술 .채광 .약초 .연금 <아이템> .대장 <아이템>\n" +
             ".경매목록 .경매등록 <아이템> <가격> [수량] .경매구매 <번호> .경매취소 <번호>\n" +
             ".업적 .칭호목록 .칭호설정 <이름>\n" +
@@ -6835,6 +7363,8 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             ".월드이벤트 .침공 .주간이벤트 .길드레이드\n" +
             ".길드생성 <이름> .길드초대 <유저> .길드수락 <유저> .길드정보 .길드기부 .길드상점 .길드구매 <아이템>\n" +
             ".세트효과 .세트요약\n" +
+            ".룬목록 .룬각인 <부위> <룬> .룬확인\n" +
+            ".튜토리얼 .추천루트\n" +
             ".인던로그 .레이드로그 .로그탭 인던|레이드 보스|난이도 [페이지] .로그상세 인던|레이드 [난이도=] [보스=]\n" +
             ".보상표 전장|레이드 .보상패널 전장|레이드 [짧게]\n" +
             ".집구매 .집정보\n" +
@@ -7218,6 +7748,43 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             buildDurabilityStatus(player) +
             buildNextActionHint('status')
         );
+        return;
+    }
+
+    // 대화
+    if (cmd === '대화') {
+        var zoneNameTalk = player.currentZone || '묘냥의 숲';
+        var zoneTalk = GameData.ZoneData ? GameData.ZoneData[zoneNameTalk] : null;
+        var npcs = (zoneTalk && zoneTalk.npcs) ? zoneTalk.npcs.slice() : [];
+        if (!arg) {
+            if (!npcs.length) { replier.reply('이 지역에는 NPC가 없습니다.'); return; }
+            replier.reply('[NPC 목록 - ' + zoneNameTalk + ']\n' + npcs.join('\n') + buildNextActionHint('quest-progress'));
+            return;
+        }
+        var npcName = arg;
+        var exists = npcs.indexOf(npcName) !== -1;
+        if (!exists && NPCDatabase && NPCDatabase[npcName]) exists = true;
+        if (!exists) { replier.reply('해당 NPC가 없습니다. .대화 로 목록 확인'); return; }
+        updateQuestTalkProgress(player, npcName);
+        saveState();
+        replier.reply(npcName + '와 대화했습니다.' + buildNextActionHint('quest-progress'));
+        return;
+    }
+
+    // 튜토리얼
+    if (cmd === '튜토리얼') {
+        var tstate = getTutorialState(player);
+        if (tstate.completed) {
+            replier.reply('튜토리얼 완료!\n.추천루트 로 다음 목표를 확인하세요.' + buildNextActionHint('tutorial'));
+            return;
+        }
+        replier.reply(formatTutorialProgress(player) + buildNextActionHint('tutorial'));
+        return;
+    }
+
+    // 추천 루트
+    if (cmd === '추천루트') {
+        replier.reply(buildRecommendedRoute(player));
         return;
     }
 
@@ -7670,10 +8237,10 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         var lockKey = '길드레이드:' + player.guildId;
         if (getWeeklyLockout(player, lockKey) === getWeekKey()) { replier.reply('이번 주 길드 레이드는 이미 클리어했습니다.'); return; }
         var boss = getWorldBoss();
-        boss = applyMountBalance(boss, player);
-        state.battles[sender] = { monster: boss, hp: boss.hp, bonus: 2.5, dungeon: lockKey, diff: '주간', playerLevel: player.level };
+        var run = buildDungeonStages('길드레이드', null, '주간', player, { finalBoss: boss, isRaid: true });
+        state.battles[sender] = { monster: run.stages[0].monster, hp: run.stages[0].monster.hp, bonus: 2.5, dungeon: lockKey, diff: '주간', playerLevel: player.level, run: run };
         saveState();
-        replier.reply('길드 레이드 시작! 보스 ' + boss.name + ' 등장');
+        replier.reply('길드 레이드 시작!\n' + formatDungeonProgress(run) + '\n' + run.stages[0].monster.name + ' 등장!' + buildNextActionHint('dungeon-start'));
         return;
     }
 
@@ -7987,6 +8554,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         var targetSlot = player.equipment[resolvedSlot];
         targetSlot.name = itemName;
         targetSlot.enhance = targetSlot.enhance || 0;
+        targetSlot.rune = '';
         if (resolvedSlot === 'weapon') {
             targetSlot.gem = targetSlot.gem || "";
             targetSlot.maxDurability = getItemMaxDurability(itemName, 'weapon');
@@ -8012,7 +8580,9 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             weapon: '무기', armor: '갑옷', shield: '방패', helmet: '투구', gloves: '장갑', boots: '신발',
             ring1: '반지1', ring2: '반지2', necklace: '목걸이', earring: '귀걸이', belt: '벨트', cloak: '망토'
         }[resolvedSlot] || resolvedSlot;
-        replier.reply(itemName + ' 장착 완료. (' + slotLabel + ')' + buildNextActionHint('equip-change'));
+        var tEquip = applyTutorialProgress(player, 'equip');
+        saveState();
+        replier.reply(itemName + ' 장착 완료. (' + slotLabel + ')' + buildNextActionHint('equip-change') + tEquip);
         return;
     }
 
@@ -8033,6 +8603,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         else if (slot === '벨트') player.equipment.belt.name = null;
         else if (slot === '망토') player.equipment.cloak.name = null;
         else { replier.reply('슬롯: 무기/갑옷/방패/투구/장갑/신발/반지1/반지2/목걸이/귀걸이/벨트/망토'); return; }
+        saveState();
         replier.reply(slot + ' 해제 완료.' + buildNextActionHint('equip-change'));
         return;
     }
@@ -8075,14 +8646,16 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         var successRate = Math.max(20, 80 - slotObj.enhance * 8 + stoneRate);
         if (Math.random() * 100 < successRate) {
             slotObj.enhance += 1;
-            replier.reply('강화 성공! +' + slotObj.enhance + buildNextActionHint('enhance'));
+            var tEnh = applyTutorialProgress(player, 'enhance');
+            replier.reply('강화 성공! +' + slotObj.enhance + buildNextActionHint('enhance') + tEnh);
         } else {
             var refund = Math.floor(cost * (stone ? 0.5 : 0.3));
             player.gold += refund;
             if (!safeFail && slotObj.enhance > 0 && Math.random() < 0.3) slotObj.enhance -= 1;
             var stoneRefunded = false;
             if (stone && Math.random() < 0.4) { addItem(player, stone, 1); stoneRefunded = true; }
-            replier.reply('강화 실패. 골드 환급 +' + refund + (stoneRefunded ? ', 재료 환급' : '') + buildNextActionHint('enhance-fail'));
+            var tEnhFail = applyTutorialProgress(player, 'enhance');
+            replier.reply('강화 실패. 골드 환급 +' + refund + (stoneRefunded ? ', 재료 환급' : '') + buildNextActionHint('enhance-fail') + tEnhFail);
         }
         saveState();
         return;
@@ -8099,6 +8672,92 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         player.equipment.weapon.gem = gem;
         saveState();
         replier.reply('보석 장착 완료: ' + gem + buildNextActionHint('gem'));
+        return;
+    }
+
+    // 룬 목록
+    if (cmd === '룬목록') {
+        var linesR = ['[룬 목록]'];
+        for (var rn in RuneEffectTable) {
+            var eff = RuneEffectTable[rn];
+            var desc = [];
+            if (eff.attMul) desc.push('공격 x' + eff.attMul);
+            if (eff.defMul) desc.push('방어 x' + eff.defMul);
+            if (eff.hpBonus) desc.push('HP +' + eff.hpBonus);
+            if (eff.critPct) desc.push('치명 +' + Math.floor(eff.critPct * 100) + '%');
+            if (eff.healPct) desc.push('회복 +' + Math.floor(eff.healPct * 100) + '%');
+            if (eff.dropRate) desc.push('드랍 +' + Math.floor(eff.dropRate * 100) + '%');
+            linesR.push('- ' + rn + ' (' + desc.join(', ') + ')');
+        }
+        replier.reply(linesR.join('\n') + buildNextActionHint('rune'));
+        return;
+    }
+
+    // 룬 각인
+    if (cmd === '룬각인') {
+        var argsRune = (arg || '').split(/\s+/).filter(function(s) { return s; });
+        if (argsRune.length < 2) { replier.reply('사용: .룬각인 <부위> <룬>'); return; }
+        var slotNameR = argsRune[0];
+        var runeName = argsRune.slice(1).join(' ');
+        if (!RuneEffectTable[runeName]) { replier.reply('해당 룬이 없습니다. .룬목록'); return; }
+        if (findItemCount(player, '룬각인서') <= 0) { replier.reply('룬각인서가 필요합니다.'); return; }
+        if (findItemCount(player, runeName) <= 0) { replier.reply('룬 아이템이 없습니다.'); return; }
+
+        var slotMap = {
+            '무기': 'weapon',
+            '갑옷': 'armor',
+            '방어구': 'armor',
+            '방패': 'shield',
+            '투구': 'helmet',
+            '장갑': 'gloves',
+            '신발': 'boots',
+            '부츠': 'boots',
+            '반지1': 'ring1',
+            '반지2': 'ring2',
+            '반지': 'ring',
+            '목걸이': 'necklace',
+            '귀걸이': 'earring',
+            '벨트': 'belt',
+            '망토': 'cloak'
+        };
+        var resolvedSlot = slotMap[slotNameR];
+        if (resolvedSlot === 'ring') {
+            resolvedSlot = player.equipment.ring1 && player.equipment.ring1.name ? 'ring1' : 'ring2';
+        }
+        if (!resolvedSlot || !player.equipment[resolvedSlot] || !player.equipment[resolvedSlot].name) {
+            replier.reply('해당 부위에 장착된 아이템이 없습니다.');
+            return;
+        }
+        removeItem(player, '룬각인서', 1);
+        removeItem(player, runeName, 1);
+        player.equipment[resolvedSlot].rune = runeName;
+        saveState();
+        replier.reply('룬 각인 완료: ' + slotNameR + ' → ' + runeName + buildNextActionHint('rune'));
+        return;
+    }
+
+    // 룬 확인
+    if (cmd === '룬확인') {
+        var eqR = player.equipment || {};
+        var partsR = [];
+        function pushRune(label, slot) {
+            var name = (slot && slot.name) ? slot.name : '없음';
+            var rune = (slot && slot.rune) ? slot.rune : '없음';
+            partsR.push(label + ': ' + name + ' / 룬: ' + rune);
+        }
+        pushRune('무기', eqR.weapon);
+        pushRune('갑옷', eqR.armor);
+        pushRune('방패', eqR.shield);
+        pushRune('투구', eqR.helmet);
+        pushRune('장갑', eqR.gloves);
+        pushRune('신발', eqR.boots);
+        pushRune('반지1', eqR.ring1);
+        pushRune('반지2', eqR.ring2);
+        pushRune('목걸이', eqR.necklace);
+        pushRune('귀걸이', eqR.earring);
+        pushRune('벨트', eqR.belt);
+        pushRune('망토', eqR.cloak);
+        replier.reply('[룬 각인 현황]\n' + partsR.join('\n') + buildNextActionHint('rune'));
         return;
     }
 
@@ -8164,6 +8823,16 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         if (!allow) { replier.reply('현재 직업으로 사용할 수 없는 스킬입니다.'); return; }
 
         var battleSkill = state.battles[sender];
+        if (battleSkill && battleSkill.challenge) {
+            var failMsg = checkChallengeTimeout(battleSkill);
+            if (failMsg) {
+                var recordMsg = recordChallengeResult(player, battleSkill, false, '시간 초과');
+                delete state.battles[sender];
+                saveState();
+                replier.reply(failMsg + recordMsg);
+                return;
+            }
+        }
         var sdata = getSkillData(skillName) || {};
         var mpCost = sdata.mpCost || 10;
         var isHealSkill = (skillName === '치유' || skillName === '성역의 빛' || skillName === '응급치료' || sdata.healAmount || sdata.heal);
@@ -8186,8 +8855,11 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
                 if (battleSkill) {
                     var bmRev = battleSkill.monster;
                     var zoneRev = player.currentZone || '묘냥의 숲';
-                    var rDmgRev = Math.max(1, (bmRev.att || 5) - Math.floor(getDefense(player) * 0.4));
+                    var rDmgRev = Math.max(1, (bmRev.att || 5) - Math.floor(getBattleDefense(player, battleSkill) * 0.4));
                     player.hp -= rDmgRev;
+                    if (battleSkill && battleSkill.challenge && battleSkill.challenge.noDamage && rDmgRev > 0) {
+                        battleSkill.challenge.takenDamage = true;
+                    }
                     var durNotesRev = applyDurabilityLoss(player, 0, 1, 1);
                     reviveLog = '[' + zoneRev + '] ' + reviveLog + '\n' + bmRev.name + '의 반격! ' + rDmgRev + ' 데미지\n';
                     if (durNotesRev.length) reviveLog += '🧰 내구도: ' + durNotesRev.join(', ') + '\n';
@@ -8213,7 +8885,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
                     var member = ensurePlayer(memberName);
                     if (!member) continue;
                     var memberMax = getMaxHp(member);
-                    var healBonusPct = getAccessoryEffects(player).healPct || 0;
+                    var healBonusPct = (getAccessoryEffects(player).healPct || 0) + (getRuneEffects(player).healPct || 0);
                     var healAmount = Math.max(1, Math.floor(memberMax * (0.35 + healBonusPct)));
                     var missing = memberMax - member.hp;
                     if (missing > 0) {
@@ -8233,8 +8905,11 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
                 if (battleSkill) {
                     var bmHeal = battleSkill.monster;
                     var zoneHeal = player.currentZone || '묘냥의 숲';
-                    var rDmgHeal = Math.max(1, (bmHeal.att || 5) - Math.floor(getDefense(player) * 0.4));
+                    var rDmgHeal = Math.max(1, (bmHeal.att || 5) - Math.floor(getBattleDefense(player, battleSkill) * 0.4));
                     player.hp -= rDmgHeal;
+                    if (battleSkill && battleSkill.challenge && battleSkill.challenge.noDamage && rDmgHeal > 0) {
+                        battleSkill.challenge.takenDamage = true;
+                    }
                     var durNotesHeal = applyDurabilityLoss(player, 0, 1, 1);
                     hlog = '[' + zoneHeal + '] ' + hlog + bmHeal.name + '의 반격! ' + rDmgHeal + ' 데미지\n';
                     if (durNotesHeal.length) hlog += '🧰 내구도: ' + durNotesHeal.join(', ') + '\n';
@@ -8260,7 +8935,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             if (!healTarget) { replier.reply('대상을 찾을 수 없습니다.'); return; }
             var healMax = getMaxHp(healTarget);
             var baseHeal = sdata.healAmount || sdata.heal || 80;
-            var healBonusPct2 = getAccessoryEffects(player).healPct || 0;
+            var healBonusPct2 = (getAccessoryEffects(player).healPct || 0) + (getRuneEffects(player).healPct || 0);
             baseHeal = Math.floor(baseHeal * (1 + healBonusPct2));
             var missingHeal = healMax - healTarget.hp;
             if (missingHeal <= 0) { replier.reply('이미 최대 HP입니다.'); return; }
@@ -8272,8 +8947,11 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             if (battleSkill) {
                 var bmHealOne = battleSkill.monster;
                 var zoneHealOne = player.currentZone || '묘냥의 숲';
-                var rDmgHealOne = Math.max(1, (bmHealOne.att || 5) - Math.floor(getDefense(player) * 0.4));
+                var rDmgHealOne = Math.max(1, (bmHealOne.att || 5) - Math.floor(getBattleDefense(player, battleSkill) * 0.4));
                 player.hp -= rDmgHealOne;
+                if (battleSkill && battleSkill.challenge && battleSkill.challenge.noDamage && rDmgHealOne > 0) {
+                    battleSkill.challenge.takenDamage = true;
+                }
                 var durNotesHealOne = applyDurabilityLoss(player, 0, 1, 1);
                 singleLog = '[' + zoneHealOne + '] ' + singleLog + '\n' + bmHealOne.name + '의 반격! ' + rDmgHealOne + ' 데미지\n';
                 if (durNotesHealOne.length) singleLog += '🧰 내구도: ' + durNotesHealOne.join(', ') + '\n';
@@ -8294,7 +8972,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         if (!battleSkill) { replier.reply('전투 중이 아닙니다. .사냥'); return; }
         if (player.mp < mpCost) { replier.reply('MP 부족'); return; }
         player.mp -= mpCost;
-        var base = getAttack(player);
+        var base = getBattleAttack(player, battleSkill);
         var dmg = sdata.baseDamage || Math.floor(base * (sdata.damageMultiplier || 1.5));
         var critInfo = applyCritDamage(player, dmg);
         dmg = critInfo.dmg;
@@ -8307,24 +8985,27 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         var durNotes = applyDurabilityLoss(player, 1, 0, 0);
         if (durNotes.length) slog += '🧰 내구도: ' + durNotes.join(', ') + '\n';
         if (battleSkill.hp <= 0) {
-            var exp2 = bm.exp || 10;
-            var gold2 = bm.gold || 5;
+            var noReward = battleSkill && battleSkill.challenge && battleSkill.challenge.noReward;
+            var exp2 = noReward ? 0 : (bm.exp || 10);
+            var gold2 = noReward ? 0 : (bm.gold || 5);
             var bonus2 = battleSkill.bonus || 1;
-            exp2 = calcScaledReward(exp2, player.level, bonus2, false);
-            gold2 = calcScaledReward(gold2, player.level, bonus2, true);
-            exp2 = applyRewardLevelDiff(exp2, player.level, bm.level);
-            gold2 = applyRewardLevelDiff(gold2, player.level, bm.level);
-            var leveled2 = addExp(player, exp2);
+            if (!noReward) {
+                exp2 = calcScaledReward(exp2, player.level, bonus2, false);
+                gold2 = calcScaledReward(gold2, player.level, bonus2, true);
+                exp2 = applyRewardLevelDiff(exp2, player.level, bm.level);
+                gold2 = applyRewardLevelDiff(gold2, player.level, bm.level);
+            }
+            var leveled2 = noReward ? false : addExp(player, exp2);
             player.gold += gold2;
             updateQuestProgress(player, bm.name);
             player.stats.kills = (player.stats.kills || 0) + 1;
             var drops = [];
-            if (bm.items && bm.items.length > 0 && Math.random() < getDropRate(battleSkill, player)) {
+            if (!noReward && bm.items && bm.items.length > 0 && Math.random() < getDropRate(battleSkill, player)) {
                 var drop2 = pickRandom(bm.items);
                 addItem(player, drop2, 1);
                 drops.push(drop2);
             }
-            if (battleSkill.dungeon) {
+            if (!noReward && battleSkill.dungeon && isDungeonFinalStage(battleSkill) && !battleSkill.seasonDungeon) {
                 player.stats.dungeons = (player.stats.dungeons || 0) + 1;
                 setWeeklyLockout(player, battleSkill.dungeon + ':' + (battleSkill.diff || '노말'));
                 addRep(player, '빛의 기사단', 50);
@@ -8334,15 +9015,36 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             if (player.gold >= 10000) addAchievement(player, '부자', '골드 10,000 달성', '전설의 모험가');
             var summary2 = '보상 요약: EXP +' + exp2 + ', 골드 +' + gold2 + ', 드랍 ' + (drops.length || 0);
             var detail2 = '상세: EXP +' + exp2 + ', 골드 +' + gold2 + (drops.length ? ', 드랍: ' + drops.join(', ') : '');
-            slog += summary2 + '\n' + detail2 + buildBattleEndHint(player);
+            var isFinalStage2 = !battleSkill.run || isDungeonFinalStage(battleSkill);
+            var tutorialMsg2 = applyTutorialProgress(player, 'kill');
+            if (battleSkill.dungeon && isFinalStage2) tutorialMsg2 += applyTutorialProgress(player, 'dungeon');
+            var seasonMsg2 = (battleSkill.seasonDungeon && isFinalStage2) ? recordSeasonDungeonScore(player, battleSkill) : '';
+            var challengeMsg2 = '';
+            if (battleSkill.challenge && isFinalStage2) {
+                var reason2 = '';
+                var success2 = true;
+                if (battleSkill.challenge.noDamage && battleSkill.challenge.takenDamage) { success2 = false; reason2 = '노데미지 조건 실패'; }
+                challengeMsg2 = recordChallengeResult(player, battleSkill, success2, reason2);
+            }
+            slog += summary2 + '\n' + detail2 + (isFinalStage2 ? buildBattleEndHint(player) : '') + tutorialMsg2 + seasonMsg2 + challengeMsg2;
             if (leveled2) slog += '\n레벨 업! 현재 레벨: ' + player.level;
+            if (battleSkill.run && !isDungeonFinalStage(battleSkill)) {
+                var nextStage = advanceDungeonStage(battleSkill, player);
+                var prog = formatDungeonProgress(battleSkill.run);
+                saveState();
+                replier.reply(slog + '\n다음 구역: ' + prog + '\n' + nextStage.monster.name + ' 등장!\n' + buildPlayerStatusLine(player) + buildNextActionHint('dungeon-start'));
+                return;
+            }
             delete state.battles[sender];
             saveState();
             replier.reply(slog);
             return;
         }
-        var rDmg = Math.max(1, (bm.att || 5) - Math.floor(getDefense(player) * 0.4));
+        var rDmg = Math.max(1, (bm.att || 5) - Math.floor(getBattleDefense(player, battleSkill) * 0.4));
         player.hp -= rDmg;
+        if (battleSkill && battleSkill.challenge && battleSkill.challenge.noDamage && rDmg > 0) {
+            battleSkill.challenge.takenDamage = true;
+        }
         var durNotes2 = applyDurabilityLoss(player, 0, 1, 1);
         slog += bm.name + '의 반격! ' + rDmg + ' 데미지\n';
         if (durNotes2.length) slog += '🧰 내구도: ' + durNotes2.join(', ') + '\n';
@@ -8362,8 +9064,18 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
     if (cmd === '공격' || cmd === '공경') {
         var battle = state.battles[sender];
         if (!battle) { replier.reply('전투 중이 아닙니다. .사냥'); return; }
+        if (battle.challenge) {
+            var failMsg2 = checkChallengeTimeout(battle);
+            if (failMsg2) {
+                var recordMsg2 = recordChallengeResult(player, battle, false, '시간 초과');
+                delete state.battles[sender];
+                saveState();
+                replier.reply(failMsg2 + recordMsg2);
+                return;
+            }
+        }
         var m = battle.monster;
-        var dmg = Math.max(1, getAttack(player) - Math.floor(m.def * 0.5));
+        var dmg = Math.max(1, getBattleAttack(player, battle) - Math.floor(m.def * 0.5));
         var critInfo2 = applyCritDamage(player, dmg);
         dmg = critInfo2.dmg;
         battle.hp -= dmg;
@@ -8374,26 +9086,29 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         var dnotes = applyDurabilityLoss(player, 1, 0, 0);
         if (dnotes.length) log += '🧰 내구도: ' + dnotes.join(', ') + '\n';
         if (battle.hp <= 0) {
-            var exp = m.exp || 10;
-            var gold = m.gold || 5;
+            var noReward = battle.challenge && battle.challenge.noReward;
+            var exp = noReward ? 0 : (m.exp || 10);
+            var gold = noReward ? 0 : (m.gold || 5);
             var bonus = battle.bonus || 1;
-            exp = calcScaledReward(exp, player.level, bonus, false);
-            gold = calcScaledReward(gold, player.level, bonus, true);
-            exp = applyRewardLevelDiff(exp, player.level, m.level);
-            gold = applyRewardLevelDiff(gold, player.level, m.level);
-            var leveled = addExp(player, exp);
+            if (!noReward) {
+                exp = calcScaledReward(exp, player.level, bonus, false);
+                gold = calcScaledReward(gold, player.level, bonus, true);
+                exp = applyRewardLevelDiff(exp, player.level, m.level);
+                gold = applyRewardLevelDiff(gold, player.level, m.level);
+            }
+            var leveled = noReward ? false : addExp(player, exp);
             player.gold += gold;
             updateQuestProgress(player, m.name);
             player.stats.kills = (player.stats.kills || 0) + 1;
 
             // 드랍
             var drops2 = [];
-            if (m.items && m.items.length > 0 && Math.random() < getDropRate(battle, player)) {
+            if (!noReward && m.items && m.items.length > 0 && Math.random() < getDropRate(battle, player)) {
                 var drop = pickRandom(m.items);
                 addItem(player, drop, 1);
                 drops2.push(drop);
             }
-            if (battle.dungeon) {
+            if (!noReward && battle.dungeon && isDungeonFinalStage(battle) && !battle.seasonDungeon) {
                 player.stats.dungeons = (player.stats.dungeons || 0) + 1;
                 setWeeklyLockout(player, battle.dungeon + ':' + (battle.diff || '노말'));
                 addRep(player, '빛의 기사단', 50);
@@ -8419,8 +9134,26 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             if (player.gold >= 10000) addAchievement(player, '부자', '골드 10,000 달성', '전설의 모험가');
             var summary = '보상 요약: EXP +' + exp + ', 골드 +' + gold + ', 드랍 ' + (drops2.length || 0);
             var detail = '상세: EXP +' + exp + ', 골드 +' + gold + (drops2.length ? ', 드랍: ' + drops2.join(', ') : '');
-            log += summary + '\n' + detail + buildBattleEndHint(player);
+            var isFinalStage = !battle.run || isDungeonFinalStage(battle);
+            var tutorialMsg = applyTutorialProgress(player, 'kill');
+            if (battle.dungeon && isFinalStage) tutorialMsg += applyTutorialProgress(player, 'dungeon');
+            var seasonMsg = (battle.seasonDungeon && isFinalStage) ? recordSeasonDungeonScore(player, battle) : '';
+            var challengeMsg = '';
+            if (battle.challenge && isFinalStage) {
+                var reason = '';
+                var success = true;
+                if (battle.challenge.noDamage && battle.challenge.takenDamage) { success = false; reason = '노데미지 조건 실패'; }
+                challengeMsg = recordChallengeResult(player, battle, success, reason);
+            }
+            log += summary + '\n' + detail + (isFinalStage ? buildBattleEndHint(player) : '') + tutorialMsg + seasonMsg + challengeMsg;
             if (leveled) log += '\n레벨 업! 현재 레벨: ' + player.level;
+            if (battle.run && !isDungeonFinalStage(battle)) {
+                var nextStage2 = advanceDungeonStage(battle, player);
+                var prog2 = formatDungeonProgress(battle.run);
+                saveState();
+                replier.reply(log + '\n다음 구역: ' + prog2 + '\n' + nextStage2.monster.name + ' 등장!\n' + buildPlayerStatusLine(player) + buildNextActionHint('dungeon-start'));
+                return;
+            }
             delete state.battles[sender];
             saveState();
             replier.reply(log);
@@ -8428,8 +9161,11 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         }
 
         // 몬스터 반격
-        var mdmg = Math.max(1, (m.att || 5) - Math.floor(getDefense(player) * 0.4));
+        var mdmg = Math.max(1, (m.att || 5) - Math.floor(getBattleDefense(player, battle) * 0.4));
         player.hp -= mdmg;
+        if (battle.challenge && battle.challenge.noDamage && mdmg > 0) {
+            battle.challenge.takenDamage = true;
+        }
         var dnotes2 = applyDurabilityLoss(player, 0, 1, 1);
         log += m.name + '의 반격! ' + mdmg + ' 데미지\n';
         if (dnotes2.length) log += '🧰 내구도: ' + dnotes2.join(', ') + '\n';
@@ -8450,6 +9186,198 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
     if (cmd === '도망') {
         if (state.battles[sender]) { delete state.battles[sender]; saveState(); }
         replier.reply('도망쳤습니다.' + buildNextActionHint('escape'));
+        return;
+    }
+
+    // 초보자 던전
+    if (cmd === '초보던전') {
+        var beginnerName = '초보자 수련동굴';
+        var dmapB = getDungeonMap();
+        var dungeonB = dmapB[beginnerName];
+        if (!dungeonB) { replier.reply('초보 던전 데이터가 없습니다.'); return; }
+        if (player.level > Config.BEGINNER_DUNGEON_MAX_LEVEL) {
+            replier.reply('초보 던전은 레벨 ' + Config.BEGINNER_DUNGEON_MAX_LEVEL + '까지 입장 가능합니다.');
+            return;
+        }
+        var runB = buildDungeonStages(beginnerName, dungeonB, '노말', player, { stageCount: 2, monsterMult: 0.9 });
+        state.battles[sender] = { monster: runB.stages[0].monster, hp: runB.stages[0].monster.hp, bonus: Config.DUNGEON_BONUS_MULT * 1.2, dungeon: beginnerName, diff: '노말', playerLevel: player.level, run: runB };
+        saveState();
+        replier.reply('초보 던전 입장: ' + beginnerName + '\n' + formatDungeonProgress(runB) + '\n' + runB.stages[0].monster.name + ' 등장!' + buildNextActionHint('dungeon-start'));
+        return;
+    }
+
+    // 중급 던전
+    if (cmd === '중급던전') {
+        var midName = '정예 훈련장';
+        var dmapM2 = getDungeonMap();
+        var dungeonM2 = dmapM2[midName];
+        if (!dungeonM2) { replier.reply('중급 던전 데이터가 없습니다.'); return; }
+        if (player.level < Config.MID_DUNGEON_MIN_LEVEL || player.level > Config.MID_DUNGEON_MAX_LEVEL) {
+            replier.reply('중급 던전은 레벨 ' + Config.MID_DUNGEON_MIN_LEVEL + '~' + Config.MID_DUNGEON_MAX_LEVEL + '만 입장 가능합니다.');
+            return;
+        }
+        var runM2 = buildDungeonStages(midName, dungeonM2, '노말', player, { stageCount: 3, monsterMult: 1.1 });
+        state.battles[sender] = { monster: runM2.stages[0].monster, hp: runM2.stages[0].monster.hp, bonus: Config.DUNGEON_BONUS_MULT * 1.3, dungeon: midName, diff: '노말', playerLevel: player.level, run: runM2 };
+        saveState();
+        replier.reply('중급 던전 입장: ' + midName + '\n' + formatDungeonProgress(runM2) + '\n' + runM2.stages[0].monster.name + ' 등장!' + buildNextActionHint('dungeon-start'));
+        return;
+    }
+
+    // 정예 사냥
+    if (cmd === '정예사냥') {
+        var zoneElite = player.currentZone || '묘냥의 숲';
+        var baseMon = pickMonsterForZone(zoneElite, player.level);
+        var eliteMon = scaleMonsterStats(baseMon, 1.25);
+        eliteMon.name = '정예 ' + eliteMon.name;
+        eliteMon.items = (eliteMon.items || []).concat(['강화석']);
+        state.battles[sender] = { monster: eliteMon, hp: eliteMon.hp, bonus: 1.3, playerLevel: player.level, elite: true };
+        saveState();
+        replier.reply('[' + zoneElite + '] ' + eliteMon.name + ' 등장! 💚 HP ' + eliteMon.hp + '\n다음 행동: .공격 / .스킬 / .사용');
+        return;
+    }
+
+    // 도전 모드
+    if (cmd === '도전모드') {
+        if (!arg) { replier.reply('사용: .도전모드 <던전> [시간] [노데미지]'); return; }
+        var argsC = arg.split(/\s+/);
+        var options = { timeLimitSec: Config.CHALLENGE_TIME_LIMIT_SEC, noDamage: false, noReward: true };
+        var optionTokens = ['시간', '노데미지'];
+        var nameTokens = [];
+        for (var ci = 0; ci < argsC.length; ci++) {
+            if (optionTokens.indexOf(argsC[ci]) !== -1) {
+                if (argsC[ci] === '노데미지') options.noDamage = true;
+            } else {
+                nameTokens.push(argsC[ci]);
+            }
+        }
+        var dName = nameTokens.join(' ').trim();
+        if (!dName) { replier.reply('사용: .도전모드 <던전> [시간] [노데미지]'); return; }
+        var dmapC = getDungeonMap();
+        var resolvedC = resolveDungeonName(dName, dmapC);
+        if (!resolvedC.name) { replier.reply('던전이 없습니다. .던전목록'); return; }
+        var dungeonC = dmapC[resolvedC.name];
+        if (dungeonC.minLevel && player.level < dungeonC.minLevel) { replier.reply('레벨이 낮습니다.'); return; }
+        var runC = buildDungeonStages(resolvedC.name, dungeonC, '영웅', player, { monsterMult: 1.6 });
+        state.battles[sender] = {
+            monster: runC.stages[0].monster,
+            hp: runC.stages[0].monster.hp,
+            bonus: Config.DUNGEON_BONUS_MULT * 1.6,
+            dungeon: resolvedC.name,
+            diff: '도전',
+            playerLevel: player.level,
+            run: runC,
+            challenge: {
+                timeLimitSec: options.timeLimitSec,
+                noDamage: options.noDamage,
+                noReward: true,
+                startedAt: Date.now(),
+                takenDamage: false,
+                key: resolvedC.name
+            }
+        };
+        saveState();
+        replier.reply('도전 모드 시작: ' + resolvedC.name + '\n제한 ' + options.timeLimitSec + '초 / 노데미지 ' + (options.noDamage ? 'ON' : 'OFF') + '\n' + formatDungeonProgress(runC) + '\n' + runC.stages[0].monster.name + ' 등장!' + buildNextActionHint('mutation'));
+        return;
+    }
+
+    // 변이 던전
+    if (cmd === '변이던전') {
+        if (!arg) { replier.reply('사용: .변이던전 <던전> [노말/영웅/신화]'); return; }
+        var argsM = arg.split(/\s+/);
+        var diffTokenM = argsM[argsM.length - 1];
+        var diffM = (diffTokenM === '노말' || diffTokenM === '영웅' || diffTokenM === '신화') ? diffTokenM : '노말';
+        var dNameM = (diffTokenM === '노말' || diffTokenM === '영웅' || diffTokenM === '신화') ? argsM.slice(0, -1).join(' ') : arg;
+        var dmapM = getDungeonMap();
+        var resolvedM = resolveDungeonName(dNameM, dmapM);
+        if (!resolvedM.name) { replier.reply('던전이 없습니다. .던전목록'); return; }
+        var dungeonM = dmapM[resolvedM.name];
+        if (dungeonM.minLevel && player.level < dungeonM.minLevel) { replier.reply('레벨이 낮습니다.'); return; }
+        var mutation = buildMutationData();
+        var runM = buildDungeonStages(resolvedM.name, dungeonM, diffM, player, {
+            monsterHpMul: mutation.monsterHpMul,
+            monsterAttMul: mutation.monsterAttMul,
+            monsterDefMul: mutation.monsterDefMul,
+            extraItems: ['룬석', '맹공 룬', '수호 룬', '생명 룬', '치명 룬', '회복 룬', '풍요 룬']
+        });
+        state.battles[sender] = {
+            monster: runM.stages[0].monster,
+            hp: runM.stages[0].monster.hp,
+            bonus: Config.DUNGEON_BONUS_MULT * Config.MUTATION_REWARD_MULT,
+            dungeon: resolvedM.name,
+            diff: diffM,
+            playerLevel: player.level,
+            run: runM,
+            mutation: mutation,
+            playerAttMul: mutation.playerAttMul,
+            playerDefMul: mutation.playerDefMul
+        };
+        saveState();
+        replier.reply('변이 던전 시작: ' + resolvedM.name + ' (' + diffM + ')\n[규칙]\n' + formatMutationRules(mutation) + '\n' + formatDungeonProgress(runM) + '\n' + runM.stages[0].monster.name + ' 등장!' + buildNextActionHint('mutation'));
+        return;
+    }
+
+    // 시즌 던전
+    if (cmd === '시즌던전') {
+        if (player.level < Config.SEASON_DUNGEON_MIN_LEVEL) { replier.reply('레벨 ' + Config.SEASON_DUNGEON_MIN_LEVEL + ' 이상부터 입장 가능합니다.'); return; }
+        var runS = buildDungeonStages(SeasonDungeonData.name, SeasonDungeonData, '영웅', player, { monsterMult: 1.25, extraItems: SeasonDungeonData.dropItems || [] });
+        state.battles[sender] = {
+            monster: runS.stages[0].monster,
+            hp: runS.stages[0].monster.hp,
+            bonus: Config.DUNGEON_BONUS_MULT * 1.4,
+            dungeon: SeasonDungeonData.name,
+            diff: '시즌',
+            playerLevel: player.level,
+            run: runS,
+            seasonDungeon: { startedAt: Date.now() }
+        };
+        saveState();
+        replier.reply('시즌 던전 입장: ' + SeasonDungeonData.name + '\n' + formatDungeonProgress(runS) + '\n' + runS.stages[0].monster.name + ' 등장!' + buildNextActionHint('season-dungeon'));
+        return;
+    }
+
+    // 시즌 던전 랭킹
+    if (cmd === '시즌던전랭킹') {
+        ensureSeasonDungeon();
+        var sid = state.seasonDungeon.id;
+        var ranks = state.seasonDungeonRank[sid] || {};
+        var listRankS = [];
+        for (var nameS in ranks) listRankS.push({ name: nameS, score: ranks[nameS].score, time: ranks[nameS].timeSec });
+        listRankS.sort(function(a, b) { return b.score - a.score; });
+        var outRS = '[시즌 던전 랭킹]\n';
+        for (var iS = 0; iS < listRankS.length && iS < 10; iS++) {
+            outRS += (iS + 1) + '. ' + listRankS[iS].name + ' - ' + listRankS[iS].score + '점 (' + listRankS[iS].time + '초)\n';
+        }
+        replier.reply(outRS.trim() + buildNextActionHint('season-dungeon'));
+        return;
+    }
+
+    // 시즌 던전 보상
+    if (cmd === '시즌던전보상') {
+        ensureSeasonDungeon();
+        var sid2 = state.seasonDungeon.id;
+        var keyS = sid2 + ':' + sender;
+        if (state.seasonDungeonRewards[keyS]) { replier.reply('이번 시즌 보상을 이미 받았습니다.'); return; }
+        var rankData = state.seasonDungeonRank[sid2] || {};
+        if (!rankData[sender]) { replier.reply('시즌 던전 기록이 없습니다.'); return; }
+        var listS2 = [];
+        for (var nameS2 in rankData) listS2.push({ name: nameS2, score: rankData[nameS2].score });
+        listS2.sort(function(a, b) { return b.score - a.score; });
+        var rank = 1;
+        for (var iR = 0; iR < listS2.length; iR++) {
+            if (listS2[iR].name === sender) { rank = iR + 1; break; }
+        }
+        var rewardGold = Config.SEASON_DUNGEON_REWARD_GOLD;
+        if (rank === 1) {
+            rewardGold += 3000;
+            addItem(player, '룬각인서', 2);
+            if (player.titles.indexOf('시즌 정복자') === -1) player.titles.push('시즌 정복자');
+        }
+        else if (rank <= 3) { rewardGold += 1500; addItem(player, '룬각인서', 1); }
+        else if (rank <= 10) { rewardGold += 500; addItem(player, '룬석', 1); }
+        player.gold += rewardGold;
+        state.seasonDungeonRewards[keyS] = true;
+        saveState();
+        replier.reply('시즌 던전 보상 수령 완료! (랭킹 ' + rank + '위, 골드 +' + rewardGold + ')' + buildNextActionHint('season-dungeon'));
         return;
     }
 
@@ -8482,6 +9410,10 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         dungeonName = resolved.name;
         var dungeon = dungeons[dungeonName];
         if (dungeon.minLevel && player.level < dungeon.minLevel) { replier.reply('레벨이 낮습니다.'); return; }
+        if (dungeon.type === 'beginner' && player.level > Config.BEGINNER_DUNGEON_MAX_LEVEL) {
+            replier.reply('초보 던전은 레벨 ' + Config.BEGINNER_DUNGEON_MAX_LEVEL + '까지 입장 가능합니다.');
+            return;
+        }
 
         var diffKey = diff;
         var lockKey = dungeonName + ':' + diffKey;
@@ -8490,24 +9422,17 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             return;
         }
 
-        var boss = getDungeonBoss(dungeon);
-        if (!boss) { replier.reply('던전 보스 정보가 없습니다.'); return; }
         var mult = diffKey === '영웅' ? 1.5 : (diffKey === '신화' ? 2.2 : 1.0);
-        boss = {
-            name: boss.name,
-            hp: Math.floor(boss.hp * mult),
-            att: Math.floor((boss.att || 20) * mult),
-            def: Math.floor((boss.def || 10) * mult),
-            exp: Math.floor((boss.exp || 100) * mult),
-            gold: Math.floor((boss.gold || 80) * mult),
-            level: boss.level || dungeon.minLevel || player.level,
-            items: boss.items || ['보물상자']
-        };
-
-        boss = applyMountBalance(boss, player);
-        state.battles[sender] = { monster: boss, hp: boss.hp, bonus: Config.DUNGEON_BONUS_MULT * mult, dungeon: dungeonName, diff: diffKey, playerLevel: player.level };
+        var opts = { isRaid: dungeon.type === 'raid' || dungeon.type === 'mythic' };
+        if (dungeon.type === 'beginner') {
+            opts.stageCount = 2;
+            opts.monsterMult = 0.9;
+            mult *= 1.2;
+        }
+        var run = buildDungeonStages(dungeonName, dungeon, diffKey, player, opts);
+        state.battles[sender] = { monster: run.stages[0].monster, hp: run.stages[0].monster.hp, bonus: Config.DUNGEON_BONUS_MULT * mult, dungeon: dungeonName, diff: diffKey, playerLevel: player.level, run: run };
         saveState();
-        replier.reply('던전 입장: ' + dungeonName + ' (' + diffKey + ')\n보스 ' + boss.name + ' 등장!' + buildNextActionHint('dungeon-start'));
+        replier.reply('던전 입장: ' + dungeonName + ' (' + diffKey + ')\n' + formatDungeonProgress(run) + '\n' + run.stages[0].monster.name + ' 등장!' + buildNextActionHint('dungeon-start'));
         return;
     }
 
@@ -8533,10 +9458,10 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         }
         if (getWeeklyLockout(player, '월드보스:주간') === wk2) { replier.reply('이번 주 보상은 이미 받았습니다.'); return; }
         var wb = state.worldEvent.boss;
-        wb = applyMountBalance(wb, player);
-        state.battles[sender] = { monster: wb, hp: wb.hp, bonus: 2.0, dungeon: '월드보스', diff: '주간', playerLevel: player.level };
+        var run = buildDungeonStages('월드보스', null, '주간', player, { finalBoss: wb, isRaid: true });
+        state.battles[sender] = { monster: run.stages[0].monster, hp: run.stages[0].monster.hp, bonus: 2.0, dungeon: '월드보스', diff: '주간', playerLevel: player.level, run: run };
         saveState();
-        replier.reply('침공 시작! ' + wb.name + ' 등장!' + buildNextActionHint('dungeon-start'));
+        replier.reply('침공 시작!\n' + formatDungeonProgress(run) + '\n' + run.stages[0].monster.name + ' 등장!' + buildNextActionHint('dungeon-start'));
         return;
     }
 
@@ -8634,13 +9559,24 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         if (qd.objectives) {
             for (var i = 0; i < qd.objectives.length; i++) {
                 var obj = qd.objectives[i];
-                if (obj.type === 'kill') {
+                if (obj.type === 'kill' || obj.type === 'talk') {
                     var cur = qs.progress[obj.target] || 0;
                     if (cur < obj.count) ok = false;
+                } else if (obj.type === 'collect') {
+                    var have = findItemCount(player, obj.target);
+                    if (have < obj.count) ok = false;
                 }
             }
         }
         if (!ok) { replier.reply('목표를 달성하지 못했습니다.'); return; }
+        if (qd.objectives) {
+            for (var i2 = 0; i2 < qd.objectives.length; i2++) {
+                var obj2 = qd.objectives[i2];
+                if (obj2.type === 'collect') {
+                    removeItem(player, obj2.target, obj2.count);
+                }
+            }
+        }
         if (qd.rewards) {
             player.gold += qd.rewards.gold || 0;
             addExp(player, qd.rewards.exp || 0);
