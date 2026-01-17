@@ -2055,8 +2055,75 @@ var CollectibleDatabase = {
         { name: '정령소환석', type: 'special', subtype: 'summon', effect: 'summonElemental', uses: 1, price: 3500, description: '정령을 소환한다' }
     ];
 
+    var housingItems = [
+        { name: '소박한 벽지', type: 'housing', slot: 'wall', comfort: 2, price: 300, description: '은은한 무늬가 있는 벽지' },
+        { name: '숲의 벽지', type: 'housing', slot: 'wall', comfort: 3, price: 600, description: '초록빛 잎사귀 패턴 벽지' },
+        { name: '성광 벽지', type: 'housing', slot: 'wall', comfort: 4, price: 900, description: '빛이 스며든 장식 벽지' },
+        { name: '고급 벽지', type: 'housing', slot: 'wall', comfort: 5, price: 1200, description: '결이 고운 고급 벽지' },
+        { name: '황혼 벽지', type: 'housing', slot: 'wall', comfort: 7, price: 2600, description: '황혼빛이 감도는 벽지' },
+        { name: '별빛 벽지', type: 'housing', slot: 'wall', comfort: 8, price: 3200, description: '밤하늘을 담은 벽지' },
+        { name: '사막 태피스트리 벽지', type: 'housing', slot: 'wall', comfort: 7, price: 2800, description: '사막 무늬의 태피스트리 벽지' },
+        { name: '북방 설원 벽지', type: 'housing', slot: 'wall', comfort: 7, price: 2800, description: '눈꽃 패턴이 새겨진 벽지' },
+        { name: '천공 운무 벽지', type: 'housing', slot: 'wall', comfort: 8, price: 3400, description: '구름 결이 흐르는 벽지' },
+        { name: '폐허 고대 벽지', type: 'housing', slot: 'wall', comfort: 8, price: 3400, description: '고대 문양이 새겨진 벽지' },
+        { name: '나무 바닥재', type: 'housing', slot: 'floor', comfort: 2, price: 350, description: '따뜻한 나무 결의 바닥' },
+        { name: '돌 바닥재', type: 'housing', slot: 'floor', comfort: 3, price: 700, description: '튼튼한 돌 바닥' },
+        { name: '사막 타일 바닥', type: 'housing', slot: 'floor', comfort: 4, price: 1100, description: '사막 모래를 닮은 타일' },
+        { name: '대리석 바닥재', type: 'housing', slot: 'floor', comfort: 6, price: 1800, description: '차분한 광택의 대리석 바닥' },
+        { name: '흑요석 바닥재', type: 'housing', slot: 'floor', comfort: 8, price: 3400, description: '짙은 윤기가 도는 흑요석 바닥' },
+        { name: '별빛 카펫', type: 'housing', slot: 'floor', comfort: 7, price: 2800, description: '별무늬 카펫이 깔린 바닥' },
+        { name: '사막 모래카펫', type: 'housing', slot: 'floor', comfort: 6, price: 2200, description: '부드러운 사막 모래빛 카펫' },
+        { name: '북방 설빙 바닥', type: 'housing', slot: 'floor', comfort: 6, price: 2200, description: '서늘한 설빙 질감의 바닥' },
+        { name: '천공 구름 바닥', type: 'housing', slot: 'floor', comfort: 7, price: 2800, description: '구름 결이 부드러운 바닥' },
+        { name: '폐허 석판 바닥', type: 'housing', slot: 'floor', comfort: 7, price: 2800, description: '고대 석판으로 만든 바닥' },
+        { name: '작은 촛대', type: 'housing', slot: 'light', comfort: 1, price: 200, description: '아늑한 빛을 내는 촛대' },
+        { name: '유리 램프', type: 'housing', slot: 'light', comfort: 3, price: 700, description: '은은한 빛의 유리 램프' },
+        { name: '마력 조명등', type: 'housing', slot: 'light', comfort: 5, price: 1400, description: '마법빛이 흐르는 조명' },
+        { name: '황동 샹들리에', type: 'housing', slot: 'light', comfort: 6, price: 2200, description: '우아한 황동 샹들리에' },
+        { name: '천공 샹들리에', type: 'housing', slot: 'light', comfort: 8, price: 3600, description: '푸른 빛이 감도는 샹들리에' },
+        { name: '사막 유리등', type: 'housing', slot: 'light', comfort: 6, price: 2000, description: '사막 유리로 만든 조명등' },
+        { name: '북방 서리등', type: 'housing', slot: 'light', comfort: 6, price: 2000, description: '서리빛이 감도는 조명' },
+        { name: '폐허 유적등', type: 'housing', slot: 'light', comfort: 7, price: 2600, description: '유적에서 발굴된 조명' },
+        { name: '낡은 침대', type: 'housing', slot: 'bed', comfort: 2, price: 400, description: '오래되었지만 포근한 침대' },
+        { name: '모험가 침대', type: 'housing', slot: 'bed', comfort: 4, price: 900, description: '튼튼한 모험가용 침대' },
+        { name: '포근한 침대', type: 'housing', slot: 'bed', comfort: 7, price: 2600, description: '숙면에 도움을 주는 침대' },
+        { name: '천상 침대', type: 'housing', slot: 'bed', comfort: 9, price: 4200, description: '구름처럼 포근한 침대' },
+        { name: '사막 행군 침대', type: 'housing', slot: 'bed', comfort: 6, price: 2100, description: '사막 모험가용 침대' },
+        { name: '북방 설원 침대', type: 'housing', slot: 'bed', comfort: 6, price: 2100, description: '보온력이 뛰어난 침대' },
+        { name: '폐허 고대 침대', type: 'housing', slot: 'bed', comfort: 7, price: 2900, description: '고대 양식의 침대' },
+        { name: '소박한 책상', type: 'housing', slot: 'table', comfort: 2, price: 450, description: '작업하기 좋은 작은 책상' },
+        { name: '전투 회의탁', type: 'housing', slot: 'table', comfort: 4, price: 1000, description: '전략을 짜기 좋은 탁자' },
+        { name: '우아한 식탁', type: 'housing', slot: 'table', comfort: 6, price: 2400, description: '식사가 즐거워지는 식탁' },
+        { name: '왕실 연회탁', type: 'housing', slot: 'table', comfort: 8, price: 3800, description: '호화로운 연회용 탁자' },
+        { name: '사막 지도 탁자', type: 'housing', slot: 'table', comfort: 6, price: 2100, description: '사막 지도가 펼쳐진 탁자' },
+        { name: '북방 사냥 탁자', type: 'housing', slot: 'table', comfort: 6, price: 2100, description: '사냥 장비를 올린 탁자' },
+        { name: '천공 항해 탁자', type: 'housing', slot: 'table', comfort: 7, price: 2700, description: '하늘 항로가 그려진 탁자' },
+        { name: '폐허 비전 탁자', type: 'housing', slot: 'table', comfort: 7, price: 2700, description: '비전 장치가 놓인 탁자' },
+        { name: '벽걸이 액자', type: 'housing', slot: 'decor', comfort: 2, price: 380, description: '작은 풍경 액자' },
+        { name: '사냥 트로피', type: 'housing', slot: 'decor', comfort: 3, price: 700, description: '사냥의 흔적이 담긴 트로피' },
+        { name: '마법 서가', type: 'housing', slot: 'decor', comfort: 5, price: 1500, description: '마법서가가 빼곡한 장식' },
+        { name: '황금 액자', type: 'housing', slot: 'decor', comfort: 6, price: 2800, description: '눈길을 끄는 황금 액자' },
+        { name: '영웅의 조각상', type: 'housing', slot: 'decor', comfort: 9, price: 4500, description: '영웅을 기리는 조각상' },
+        { name: '사막 석상', type: 'housing', slot: 'decor', comfort: 6, price: 2400, description: '사막 유물의 석상' },
+        { name: '북방 방패 장식', type: 'housing', slot: 'decor', comfort: 6, price: 2400, description: '북방 전사의 방패 장식' },
+        { name: '천공 풍향계', type: 'housing', slot: 'decor', comfort: 7, price: 3000, description: '하늘 바람을 읽는 풍향계' },
+        { name: '폐허 석판', type: 'housing', slot: 'decor', comfort: 7, price: 3000, description: '고대 문자가 새겨진 석판' },
+        { name: '초록 화분', type: 'housing', slot: 'plant', comfort: 2, price: 320, description: '싱그러운 분위기의 화분' },
+        { name: '향기로운 꽃병', type: 'housing', slot: 'plant', comfort: 3, price: 700, description: '향긋한 꽃이 담긴 꽃병' },
+        { name: '생명나무 묘목', type: 'housing', slot: 'plant', comfort: 5, price: 1500, description: '생기 넘치는 묘목' },
+        { name: '희귀 화분', type: 'housing', slot: 'plant', comfort: 6, price: 2600, description: '희귀 식물이 담긴 화분' },
+        { name: '세계수 화분', type: 'housing', slot: 'plant', comfort: 9, price: 4800, description: '세계수의 기운이 깃든 화분' },
+        { name: '사막 선인장 정원', type: 'housing', slot: 'plant', comfort: 6, price: 2200, description: '사막 선인장이 모인 정원' },
+        { name: '북방 설화 정원', type: 'housing', slot: 'plant', comfort: 6, price: 2200, description: '서리꽃이 피는 정원' },
+        { name: '천공 구름 화분', type: 'housing', slot: 'plant', comfort: 7, price: 2800, description: '구름빛을 담은 화분' },
+        { name: '폐허 이끼 정원', type: 'housing', slot: 'plant', comfort: 7, price: 2800, description: '고대 이끼가 자란 정원' }
+    ];
+
     for (var s = 0; s < specialItems.length; s++) {
         addItem(specialItems[s].name, specialItems[s]);
+    }
+    for (var h = 0; h < housingItems.length; h++) {
+        addItem(housingItems[h].name, housingItems[h]);
     }
 })();
 
@@ -3994,6 +4061,27 @@ var ShopDatabase = {
             { item: '빈병', stock: -1 }
         ]
     },
+    '시작마을가구점': {
+        id: 'starter_furniture',
+        name: '루나의 가구점',
+        location: '시작마을',
+        type: 'housing',
+        items: [
+            { item: '소박한 벽지', stock: -1 },
+            { item: '숲의 벽지', stock: -1 },
+            { item: '나무 바닥재', stock: -1 },
+            { item: '돌 바닥재', stock: -1 },
+            { item: '작은 촛대', stock: -1 },
+            { item: '유리 램프', stock: -1 },
+            { item: '낡은 침대', stock: -1 },
+            { item: '모험가 침대', stock: -1 },
+            { item: '소박한 책상', stock: -1 },
+            { item: '전투 회의탁', stock: -1 },
+            { item: '벽걸이 액자', stock: -1 },
+            { item: '사냥 트로피', stock: -1 },
+            { item: '초록 화분', stock: -1 }
+        ]
+    },
     '시작마을약국': {
         id: 'starter_potion',
         name: '리나의 약국',
@@ -4083,6 +4171,32 @@ var ShopDatabase = {
             { item: '강철방패', stock: -1 },
             { item: '미스릴방패', stock: -1 },
             { item: '태양석방패', stock: -1 }
+        ]
+    },
+    '에테르니아가구점': {
+        id: 'capital_furniture',
+        name: '에테르니아 인테리어',
+        location: '에테르니아수도',
+        type: 'housing',
+        items: [
+            { item: '고급 벽지', stock: -1 },
+            { item: '황혼 벽지', stock: -1 },
+            { item: '별빛 벽지', stock: -1 },
+            { item: '대리석 바닥재', stock: -1 },
+            { item: '흑요석 바닥재', stock: -1 },
+            { item: '별빛 카펫', stock: -1 },
+            { item: '황동 샹들리에', stock: -1 },
+            { item: '마력 조명등', stock: -1 },
+            { item: '천공 샹들리에', stock: -1 },
+            { item: '포근한 침대', stock: -1 },
+            { item: '천상 침대', stock: -1 },
+            { item: '우아한 식탁', stock: -1 },
+            { item: '왕실 연회탁', stock: -1 },
+            { item: '황금 액자', stock: -1 },
+            { item: '마법 서가', stock: -1 },
+            { item: '영웅의 조각상', stock: -1 },
+            { item: '생명나무 묘목', stock: -1 },
+            { item: '희귀 화분', stock: -1 }
         ]
     },
     '사막평판상점': {
@@ -6495,6 +6609,8 @@ var Config = {
     PVP_LOSE_RATING: 10,
     GUILD_CREATE_COST: 1000,
     HOUSE_COST: 5000,
+    HOUSE_MAX_LEVEL: 5,
+    HOUSE_UPGRADE_BASE: 6000,
     BEGINNER_DUNGEON_MAX_LEVEL: 15,
     MID_DUNGEON_MIN_LEVEL: 16,
     MID_DUNGEON_MAX_LEVEL: 35,
@@ -6932,6 +7048,72 @@ var ExtraDungeons = {
         dropItems: ['룬석', '맹공 룬', '수호 룬', '생명 룬', '치명 룬', '회복 룬', '풍요 룬', '어비스의 숨결', '드래곤의 심장']
     }
 };
+
+(function() {
+    function addRaidDungeon(name, data) {
+        if (!ExtraDungeons[name]) ExtraDungeons[name] = data;
+    }
+
+    var raidBases = [
+        { tier: 1, name: '화염의 관문', zone: '불타는 사막' },
+        { tier: 2, name: '서리의 장벽', zone: '얼어붙은 북방' },
+        { tier: 3, name: '황혼의 균열', zone: '황혼의 습지' },
+        { tier: 4, name: '천공의 공방', zone: '천공의 산맥' },
+        { tier: 5, name: '고대의 금고', zone: '고대의 폐허' },
+        { tier: 6, name: '심연의 침식', zone: '심연의 균열' },
+        { tier: 7, name: '별빛 회랑', zone: '별빛 초원' },
+        { tier: 8, name: '폭풍의 첨탑', zone: '폭풍의 고원' },
+        { tier: 9, name: '황혼의 성채', zone: '황혼의 성채' },
+        { tier: 10, name: '공허의 심판', zone: '심연의 균열' }
+    ];
+
+    var raidModes = [
+        { key: 'normal', label: '일반', mult: 1.0, gold: 1.0, exp: 1.0 },
+        { key: 'season', label: '시즌', mult: 1.2, gold: 1.1, exp: 1.1 },
+        { key: 'hard', label: '하드', mult: 1.5, gold: 1.3, exp: 1.3 }
+    ];
+
+    var raidMonsters = ['오크', '트롤', '화염정령', '얼음정령', '암흑기사', '그림자전사', '데스나이트', '리치', '드래곤새끼'];
+    var raidBosses = [
+        { name: '대지의 골렘', hp: 12000, att: 260, def: 120, exp: 1500, gold: 1200 },
+        { name: '폭풍의 거인', hp: 18000, att: 320, def: 160, exp: 2000, gold: 1600 },
+        { name: '심연의 파수꾼', hp: 26000, att: 380, def: 200, exp: 2600, gold: 2000 },
+        { name: '별빛 수호자', hp: 34000, att: 450, def: 230, exp: 3200, gold: 2600 },
+        { name: '공허의 군주 잔영', hp: 45000, att: 520, def: 260, exp: 3800, gold: 3200 }
+    ];
+
+    for (var i = 0; i < raidBases.length; i++) {
+        var base = raidBases[i];
+        var minLv = 10 + (base.tier - 1) * 7;
+        var maxLv = minLv + 12;
+        for (var m = 0; m < raidModes.length; m++) {
+            var mode = raidModes[m];
+            var name = base.name + ' T' + base.tier + ' - ' + mode.label;
+            var bossBase = raidBosses[Math.min(raidBosses.length - 1, Math.floor((base.tier - 1) / 2))];
+            var boss = {
+                name: bossBase.name,
+                hp: Math.floor(bossBase.hp * (1 + base.tier * 0.12) * mode.mult),
+                att: Math.floor(bossBase.att * (1 + base.tier * 0.1) * mode.mult),
+                def: Math.floor(bossBase.def * (1 + base.tier * 0.08) * mode.mult),
+                exp: Math.floor(bossBase.exp * (1 + base.tier * 0.1) * mode.exp),
+                gold: Math.floor(bossBase.gold * (1 + base.tier * 0.1) * mode.gold),
+                level: minLv + 5,
+                items: ['보물상자']
+            };
+            addRaidDungeon(name, {
+                minLevel: minLv,
+                maxLevel: maxLv,
+                zone: base.zone,
+                type: 'raid',
+                raidMode: mode.key,
+                description: base.name + ' ' + base.tier + '단계 ' + mode.label + ' 레이드',
+                monsters: raidMonsters,
+                bosses: [boss],
+                dropItems: ['전설의 보물상자', '룬석', '강화 코어']
+            });
+        }
+    }
+})();
 
 var SeasonDungeonData = {
     name: '시즌 랭크 던전',
@@ -7531,7 +7713,10 @@ function normalizePlayer(p) {
     if (p.talentPoints === undefined) p.talentPoints = 0;
     if (!p.talents) p.talents = { att: 0, def: 0, hp: 0 };
     if (!p.discoveredZones) p.discoveredZones = [];
-    if (!p.house) p.house = { owned: false, level: 0 };
+    if (!p.house) p.house = { owned: false, level: 0, rooms: [], decor: {}, theme: '소박한' };
+    if (!p.house.rooms) p.house.rooms = [];
+    if (!p.house.decor) p.house.decor = {};
+    if (!p.house.theme) p.house.theme = '소박한';
     if (!p.guildId) p.guildId = "";
     if (!p.dailyQuest) p.dailyQuest = null;
     if (!p.weeklyQuest) p.weeklyQuest = null;
@@ -7705,6 +7890,123 @@ function getSkillEmoji(skillName) {
     return '✨';
 }
 
+function getSkillAscii(skillName) {
+    var name = skillName || '';
+    var seed = Math.abs(hashString(name));
+    var heads = ['*', '+', 'x', 'o', '#', '@', '%', '&', '~'];
+    var cores = ['>===>', '--->', '~>~>', '=>=>', '##>>', '::>>', '==>>', '>>--*', '>>***'];
+    var tails = ['', '*', '~', '!', '~~', '..', '^^', '++'];
+    var head = heads[seed % heads.length];
+    var core = cores[seed % cores.length];
+    var tail = tails[seed % tails.length];
+    var tag = '';
+    if (name.indexOf('불') !== -1 || name.indexOf('화염') !== -1) tag = '[FIRE] ';
+    else if (name.indexOf('얼음') !== -1 || name.indexOf('빙결') !== -1) tag = '[ICE] ';
+    else if (name.indexOf('번개') !== -1 || name.indexOf('뇌') !== -1) tag = '[SHOCK] ';
+    else if (name.indexOf('독') !== -1) tag = '[POISON] ';
+    else if (name.indexOf('빛') !== -1 || name.indexOf('신성') !== -1) tag = '[HOLY] ';
+    else if (name.indexOf('어둠') !== -1 || name.indexOf('그림자') !== -1) tag = '[DARK] ';
+    else if (name.indexOf('치유') !== -1 || name.indexOf('회복') !== -1) tag = '[HEAL] ';
+    return tag + head + core + tail;
+}
+
+function applySkillEffect(log, skillName) {
+    var fx = getSkillAscii(skillName);
+    return fx ? (fx + '\n' + log) : log;
+}
+
+function getActionAscii(actionKey) {
+    var key = actionKey || '';
+    var map = {
+        hunt: '[HUNT] >===>',
+        mining: '[MINE] >-[]->',
+        herbal: '[HERB] ~~*~~',
+        fishing: '[FISH] ><((((',
+        'fishing-sell': '[SELL] $$$',
+        explore: '[EXPLORE] .oO',
+        rest: '[REST] zZz',
+        daily: '[REWARD] $$$',
+        use: '[USE] =>',
+        dungeon: '[DUNGEON] >>==>',
+        travel: '[MOVE] -->',
+        alchemy: '[ALCH] (o)',
+        smith: '[SMITH] [==]~',
+        cook: '[COOK] ~~~',
+        pet: '[PET] (._.)',
+        'pet-train': '[TRAIN] ^_^',
+        'pet-explore': '[PET] ~~>',
+        'pet-evolve': '[EVOLVE] <*>',
+        reward: '[GET] ++'
+    };
+    if (map[key]) return map[key];
+    var seed = Math.abs(hashString(key));
+    var heads = ['*', '+', 'x', 'o', '#', '@', '%', '&', '~'];
+    var cores = ['>==>', '-->', '~>~', '=>=>', '##>>', '::>>', '==>>', '>>--*'];
+    var tails = ['', '*', '~', '!', '~~', '..', '^^', '++'];
+    return heads[seed % heads.length] + cores[seed % cores.length] + tails[seed % tails.length];
+}
+
+function applyActionEffect(log, actionKey) {
+    var fx = getActionAscii(actionKey);
+    return fx ? (fx + '\n' + log) : log;
+}
+
+var MonsterTypeEmoji = {
+    slime: '🟢',
+    beast: '🐾',
+    undead: '💀',
+    demon: '😈',
+    dragon: '🐉',
+    elemental: '🌪️',
+    giant: '🗿',
+    goblin: '👺',
+    golem: '🪨',
+    orc: '🪓',
+    troll: '🪵',
+    celestial: '✨',
+    void: '🕳️',
+    special: '🧿'
+};
+
+var MonsterEmojiOverrides = {
+    '고블린왕': '👑',
+    '고블린왕 카일': '👑',
+    '고블린 두목 그릭스': '👑',
+    '공허의 군주 말라카이': '👑',
+    '말라카이': '👑',
+    '고대용': '🐉',
+    '어비스드래곤': '🐉',
+    '서리 군주 킬라한': '👑',
+    '빙룡 프로스트바인': '🐉',
+    '사막의 군주 스콜피온 킹': '👑',
+    '파라오 카무세스': '👑',
+    '황금슬라임': '💰',
+    '보물고블린': '💰',
+    '메탈슬라임': '🪙'
+};
+
+function getMonsterEmoji(monster, stageType) {
+    if (stageType === 'boss') return '👑';
+    if (stageType === 'midboss') return '☠️';
+    if (!monster) return '👾';
+    var name = monster.name || '';
+    var baseName = name.replace(/^정예\s+/, '');
+    if (MonsterEmojiOverrides[name]) return MonsterEmojiOverrides[name];
+    if (MonsterEmojiOverrides[baseName]) return MonsterEmojiOverrides[baseName];
+    if (name.indexOf('정예 ') === 0) return '🔥';
+    if (monster.boss) return '👑';
+    if (monster.elite) return '🔥';
+    if (monster.rare) return '⭐';
+    var type = monster.type || '';
+    return MonsterTypeEmoji[type] || '👾';
+}
+
+function getMonsterDisplayName(monster, stageType) {
+    if (!monster || !monster.name) return '몬스터';
+    var emoji = getMonsterEmoji(monster, stageType);
+    return (emoji ? emoji + ' ' : '') + monster.name;
+}
+
 function buildSkillBar(p) {
     var skills = getJobSkillList(p) || [];
     if (!skills.length) return '';
@@ -7715,6 +8017,167 @@ function buildSkillBar(p) {
     }
     var more = skills.length > maxShow ? ' +' + (skills.length - maxShow) : '';
     return '\n[스킬] ' + shown.join(' | ') + more + '\n사용: .스킬 <이름>';
+}
+
+function buildAvatarStatus(p) {
+    var eq = p.equipment || {};
+    var lines = [];
+    lines.push('[아바타]');
+    lines.push('🗡️ 무기: ' + ((eq.weapon && eq.weapon.name) ? eq.weapon.name : '없음'));
+    lines.push('👕 갑옷: ' + ((eq.armor && eq.armor.name) ? eq.armor.name : '없음'));
+    lines.push('🛡️ 방패: ' + ((eq.shield && eq.shield.name) ? eq.shield.name : '없음'));
+    lines.push('👑 투구: ' + ((eq.helm && eq.helm.name) ? eq.helm.name : '없음'));
+    lines.push('🧤 장갑: ' + ((eq.gloves && eq.gloves.name) ? eq.gloves.name : '없음'));
+    lines.push('👢 신발: ' + ((eq.boots && eq.boots.name) ? eq.boots.name : '없음'));
+    lines.push('💍 반지1: ' + ((eq.ring1 && eq.ring1.name) ? eq.ring1.name : '없음'));
+    lines.push('💍 반지2: ' + ((eq.ring2 && eq.ring2.name) ? eq.ring2.name : '없음'));
+    lines.push('📿 목걸이: ' + ((eq.necklace && eq.necklace.name) ? eq.necklace.name : '없음'));
+    lines.push('👂 귀걸이: ' + ((eq.earring && eq.earring.name) ? eq.earring.name : '없음'));
+    lines.push('🎗️ 벨트: ' + ((eq.belt && eq.belt.name) ? eq.belt.name : '없음'));
+    lines.push('🧣 망토: ' + ((eq.cloak && eq.cloak.name) ? eq.cloak.name : '없음'));
+    return '\n' + lines.join('\n');
+}
+
+var HouseLevelData = [
+    { level: 1, name: '아늑한 오두막', rooms: ['현관', '거실', '침실'], upgradeCost: 0 },
+    { level: 2, name: '작은 전원주택', rooms: ['주방'], upgradeCost: 6000 },
+    { level: 3, name: '모험가의 주택', rooms: ['서재'], upgradeCost: 12000 },
+    { level: 4, name: '장인의 저택', rooms: ['정원'], upgradeCost: 22000 },
+    { level: 5, name: '영웅의 저택', rooms: ['연회장'], upgradeCost: 40000 }
+];
+
+function getHouseLevelData(level) {
+    for (var i = 0; i < HouseLevelData.length; i++) {
+        if (HouseLevelData[i].level === level) return HouseLevelData[i];
+    }
+    return null;
+}
+
+function buildHouseRooms(level) {
+    var rooms = [];
+    for (var i = 0; i < HouseLevelData.length; i++) {
+        if (HouseLevelData[i].level <= level) rooms = rooms.concat(HouseLevelData[i].rooms || []);
+    }
+    return rooms;
+}
+
+function getHouseUpgradeCost(nextLevel) {
+    var data = getHouseLevelData(nextLevel);
+    if (data && data.upgradeCost !== undefined) return data.upgradeCost;
+    return Config.HOUSE_UPGRADE_BASE * nextLevel;
+}
+
+function getHouseDecorSlots() {
+    return [
+        { key: 'wall', label: '벽', icon: '🧱' },
+        { key: 'floor', label: '바닥', icon: '🪵' },
+        { key: 'light', label: '조명', icon: '💡' },
+        { key: 'bed', label: '침대', icon: '🛏️' },
+        { key: 'table', label: '탁자', icon: '🪑' },
+        { key: 'decor', label: '장식', icon: '🖼️' },
+        { key: 'plant', label: '식물', icon: '🪴' }
+    ];
+}
+
+function getHouseSlotLabel(key) {
+    var slots = getHouseDecorSlots();
+    for (var i = 0; i < slots.length; i++) {
+        if (slots[i].key === key) return slots[i].label;
+    }
+    return key;
+}
+
+function resolveHouseSlot(input) {
+    var key = (input || '').trim();
+    if (!key) return '';
+    var map = {
+        '벽': 'wall',
+        '벽지': 'wall',
+        '바닥': 'floor',
+        '바닥재': 'floor',
+        '조명': 'light',
+        '등': 'light',
+        '침대': 'bed',
+        '침실': 'bed',
+        '탁자': 'table',
+        '테이블': 'table',
+        '장식': 'decor',
+        '액자': 'decor',
+        '식물': 'plant',
+        '화분': 'plant'
+    };
+    return map[key] || '';
+}
+
+function getHousingItemData(name) {
+    if (!name) return null;
+    var item = GameData.ItemDatabase ? GameData.ItemDatabase[name] : null;
+    if (!item || item.type !== 'housing') return null;
+    return item;
+}
+
+function getHouseComfort(p) {
+    if (!p || !p.house || !p.house.owned) return 0;
+    var total = 0;
+    var decor = p.house.decor || {};
+    for (var key in decor) {
+        var itemName = decor[key];
+        if (!itemName) continue;
+        var data = getHousingItemData(itemName);
+        if (data && data.comfort) total += data.comfort;
+    }
+    return total;
+}
+
+function getHouseHpBonus(p) {
+    if (!p || !p.house || !p.house.owned) return 0;
+    var levelBonus = 20 + (p.house.level || 0) * 10;
+    var comfort = getHouseComfort(p);
+    return levelBonus + Math.floor(comfort / 2);
+}
+
+function getHouseRestCooldownMs(p) {
+    if (!p || !p.house || !p.house.owned) return Config.REST_COOLDOWN_MS;
+    var comfort = getHouseComfort(p);
+    var reduction = Math.min(0.3, comfort * 0.01);
+    return Math.max(10000, Math.floor(Config.REST_COOLDOWN_MS * (1 - reduction)));
+}
+
+function getHouseDailyBonus(p) {
+    if (!p || !p.house || !p.house.owned) return { gold: 0, exp: 0 };
+    var comfort = getHouseComfort(p);
+    return {
+        gold: Math.floor(comfort * 5),
+        exp: Math.floor(comfort * 3)
+    };
+}
+
+function formatHouseInfo(p) {
+    if (!p || !p.house || !p.house.owned) return '집이 없습니다.';
+    var level = p.house.level || 1;
+    var levelData = getHouseLevelData(level);
+    var label = levelData ? levelData.name : ('Lv.' + level);
+    var rooms = p.house.rooms && p.house.rooms.length ? p.house.rooms : buildHouseRooms(level);
+    var comfort = getHouseComfort(p);
+    var hpBonus = getHouseHpBonus(p);
+    var restCd = getHouseRestCooldownMs(p);
+    var restReducePct = Math.max(0, Math.round(100 - (restCd / Config.REST_COOLDOWN_MS) * 100));
+    var dailyBonus = getHouseDailyBonus(p);
+    var lines = [];
+    lines.push('[집 정보]');
+    lines.push('등급: ' + label + ' (Lv.' + level + ')');
+    lines.push('분위기: ' + comfort + ' | 보너스: 최대 HP +' + hpBonus + ', 휴식 쿨타임 -' + restReducePct + '%');
+    if (dailyBonus.gold || dailyBonus.exp) lines.push('일일보상 보너스: 골드 +' + dailyBonus.gold + ', EXP +' + dailyBonus.exp);
+    lines.push('방: ' + (rooms.length ? rooms.join(', ') : '없음'));
+    lines.push('[꾸미기 슬롯]');
+    var slots = getHouseDecorSlots();
+    for (var i = 0; i < slots.length; i++) {
+        var slot = slots[i];
+        var cur = (p.house.decor && p.house.decor[slot.key]) ? p.house.decor[slot.key] : '비어있음';
+        lines.push(slot.icon + ' ' + slot.label + ': ' + cur);
+    }
+    lines.push('사용: .집꾸미기 <아이템> <슬롯> / .집정리 <슬롯> / .집확장');
+    return lines.join('\n');
 }
 
 function buildDurabilityStatus(p) {
@@ -7758,7 +8221,7 @@ function buildNextActionHint(context) {
     if (context === 'shop-list') return '\n다음 행동: .상점 <상점명> [페이지] / .인벤 / .정보';
     if (context === 'shop-view') return '\n다음 행동: .구매 <아이템> / .판매 <아이템> / .인벤';
     if (context === 'inventory') return '\n다음 행동: .장착 <부위> <아이템> / .사용 <아이템> / .장비';
-    if (context === 'equipment') return '\n다음 행동: .장착 <부위> <아이템> / .해제 <부위> / .강화 <부위>'; 
+    if (context === 'equipment') return '\n다음 행동: .장착 <부위> <아이템> / .해제 <부위> / .강화 <부위>';
     if (context === 'status') return '\n다음 행동: .사냥 / .상점 / .인벤';
     if (context === 'trade') return '\n다음 행동: .상점 / .인벤';
     if (context === 'party') return '\n다음 행동: .파티역할 <탱/힐/딜> / .파티나가기';
@@ -7781,7 +8244,7 @@ function buildNextActionHint(context) {
     if (context === 'fishing') return '\n다음 행동: .낚시판매 / .인벤';
     if (context === 'fishing-info') return '\n다음 행동: .낚시 / .낚시판매';
     if (context === 'pet') return '\n다음 행동: .펫먹이 / .펫훈련 / .펫탐험';
-    if (context === 'mount') return '\n다음 행동: .탈것목록 / .탈것타기 <이름>'; 
+    if (context === 'mount') return '\n다음 행동: .탈것목록 / .탈것타기 <이름>';
     if (context === 'zone') return '\n다음 행동: .지역이동 <이름> / .사냥';
     if (context === 'explore') return '\n다음 행동: .탐험 / .사냥 / .보물상자';
     if (context === 'treasure') return '\n다음 행동: .보물상자 <이름> / .인벤';
@@ -8202,7 +8665,7 @@ function getMaxHp(p) {
     base += (p.talents ? (p.talents.hp || 0) * 20 : 0);
     base += (p.petCollection ? p.petCollection.length * 2 : 0);
     base += (p.mounts ? p.mounts.length * 2 : 0);
-    if (p.house && p.house.owned) base += 20 + (p.house.level || 0) * 10;
+    base += getHouseHpBonus(p);
     var eq = p.equipment || {};
     var slotsHp = ['weapon', 'armor', 'shield', 'helmet', 'gloves', 'boots', 'ring1', 'ring2', 'necklace', 'earring', 'belt', 'cloak'];
     for (var i = 0; i < slotsHp.length; i++) {
@@ -8881,6 +9344,131 @@ function getDungeonMap() {
     return mergeMaps(base, ExtraDungeons || {});
 }
 
+function getDungeonTypeLabel(dungeon) {
+    if (!dungeon || !dungeon.type) return '던전';
+    switch (dungeon.type) {
+        case 'solo': return '솔로';
+        case 'season': return '시즌';
+        case 'raid':
+            if (dungeon.raidMode === 'season') return '시즌 레이드';
+            if (dungeon.raidMode === 'hard') return '하드 레이드';
+            return '일반 레이드';
+        case 'mythic': return '신화 레이드';
+        case 'heroic': return '영웅 인던';
+        case 'normal': return '인던';
+        case 'beginner': return '초보';
+        case 'endgame': return '엔드';
+        default: return '던전';
+    }
+}
+
+function getDungeonLevelRange(dungeon) {
+    var min = null;
+    var max = null;
+    if (dungeon && dungeon.level) {
+        if (dungeon.level.min !== undefined) min = dungeon.level.min;
+        if (dungeon.level.max !== undefined) max = dungeon.level.max;
+    } else if (dungeon) {
+        if (dungeon.minLevel !== undefined) min = dungeon.minLevel;
+        if (dungeon.maxLevel !== undefined) max = dungeon.maxLevel;
+    }
+    if (min === null && max === null) return 'Lv.?';
+    if (min !== null && max !== null) return 'Lv.' + min + '-' + max;
+    if (min !== null) return 'Lv.' + min + '+';
+    return 'Lv.?' + max;
+}
+
+function getDungeonPlayerRange(dungeon) {
+    if (!dungeon) return '';
+    var minP = null;
+    var maxP = null;
+    if (dungeon.players) {
+        if (dungeon.players.min !== undefined) minP = dungeon.players.min;
+        if (dungeon.players.max !== undefined) maxP = dungeon.players.max;
+    }
+    if (minP === null && maxP === null) {
+        if (dungeon.minPlayers !== undefined) minP = dungeon.minPlayers;
+        if (dungeon.maxPlayers !== undefined) maxP = dungeon.maxPlayers;
+    }
+    if (minP === null && maxP === null) return '';
+    if (minP !== null && maxP !== null) return minP + '-' + maxP + '인';
+    if (minP !== null) return minP + '+인';
+    return maxP + '인';
+}
+
+function formatDungeonListLine(name, dungeon) {
+    var typeLabel = getDungeonTypeLabel(dungeon);
+    var levelLabel = getDungeonLevelRange(dungeon);
+    var playerLabel = getDungeonPlayerRange(dungeon);
+    var desc = (dungeon && dungeon.description) ? dungeon.description : '';
+    if (!desc && dungeon && dungeon.zone) desc = dungeon.zone + ' 지역 던전';
+    if (desc && desc.length > 28) desc = desc.substring(0, 28) + '…';
+    var tail = desc ? ' - ' + desc : '';
+    var meta = levelLabel + (playerLabel ? ' / ' + playerLabel : '');
+    return '[' + typeLabel + '] ' + name + ' (' + meta + ')' + tail;
+}
+
+function getDungeonCategoryFilterToken(token) {
+    if (!token) return '';
+    var t = token.trim();
+    if (!t) return '';
+    if (t === '솔로' || t === '솔로던전') return 'solo';
+    if (t === '인던') return 'instance';
+    if (t === '영웅' || t === '영웅인던') return 'heroic';
+    if (t === '초보' || t === '초보던전') return 'beginner';
+    if (t === '엔드' || t === '엔드던전') return 'endgame';
+    if (t === '레이드') return 'raid';
+    if (t === '하드' || t === '하드레이드') return 'raid-hard';
+    if (t === '시즌' || t === '시즌던전') return 'season';
+    if (t === '시즌레이드') return 'raid-season';
+    if (t === '신화' || t === '신화레이드') return 'mythic';
+    return '';
+}
+
+function matchesDungeonCategory(dungeon, key) {
+    if (!key) return true;
+    if (!dungeon) return false;
+    if (key === 'solo') return dungeon.type === 'solo';
+    if (key === 'instance') return dungeon.type === 'normal' || dungeon.type === 'heroic' || dungeon.type === 'beginner' || dungeon.type === 'endgame';
+    if (key === 'heroic') return dungeon.type === 'heroic';
+    if (key === 'beginner') return dungeon.type === 'beginner';
+    if (key === 'endgame') return dungeon.type === 'endgame';
+    if (key === 'raid') return dungeon.type === 'raid' || dungeon.type === 'mythic';
+    if (key === 'raid-hard') return dungeon.type === 'raid' && dungeon.raidMode === 'hard';
+    if (key === 'raid-season') return dungeon.type === 'raid' && dungeon.raidMode === 'season';
+    if (key === 'season') return dungeon.type === 'season';
+    if (key === 'mythic') return dungeon.type === 'mythic';
+    return false;
+}
+
+function formatDungeonInfo(name, dungeon) {
+    if (!dungeon) return '던전 정보가 없습니다.';
+    var lines = [];
+    lines.push('[던전 소개] ' + name);
+    lines.push('종류: ' + getDungeonTypeLabel(dungeon));
+    lines.push('권장 레벨: ' + getDungeonLevelRange(dungeon));
+    if (dungeon.zone) lines.push('지역: ' + dungeon.zone);
+    if (dungeon.description) lines.push('설명: ' + dungeon.description);
+    if (dungeon.players && (dungeon.players.min || dungeon.players.max)) {
+        var minP = dungeon.players.min || 1;
+        var maxP = dungeon.players.max || minP;
+        lines.push('권장 인원: ' + minP + '-' + maxP + '명');
+    }
+    if (dungeon.bosses && dungeon.bosses.length) {
+        var bossNames = [];
+        for (var i = 0; i < dungeon.bosses.length && i < 4; i++) {
+            var b = dungeon.bosses[i];
+            if (typeof b === 'string') bossNames.push(b);
+            else if (b && b.name) bossNames.push(b.name);
+        }
+        if (bossNames.length) lines.push('보스: ' + bossNames.join(', ') + (dungeon.bosses.length > 4 ? '…' : ''));
+    }
+    if (dungeon.dropItems && dungeon.dropItems.length) {
+        lines.push('주요 보상: ' + dungeon.dropItems.slice(0, 5).join(', ') + (dungeon.dropItems.length > 5 ? '…' : ''));
+    }
+    return lines.join('\n');
+}
+
 function recordSoloWeeklyClear(p, dungeonName) {
     var wk = getWeekKey();
     if (!state.soloWeekly[p.name] || state.soloWeekly[p.name].week !== wk) {
@@ -9389,7 +9977,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             ".대화 <NPC>\n" +
             ".스킬목록 .스킬 <이름> .휴식 .일일보상 .랭킹\n" +
             ".파티생성 .레이드생성 .파티초대 <유저> .파티수락 <유저> .파티나가기 .파티역할 <탱/힐/딜>\n" +
-            ".던전목록 .던전 <이름> [노말/영웅/신화] .인던 <이름> [난이도]\n" +
+            ".던전목록 [카테고리] [페이지] .던전소개 <이름> .던전 <이름> [노말/영웅/신화] .인던 <이름> [난이도]\n" +
             ".초보던전 .중급던전 .정예사냥 .도전모드 <던전> [시간/노데미지] .변이던전 <던전> [난이도]\n" +
             ".결투 <유저> .결투수락 <유저> .전장참가 .전장맵 .전장이벤트 .시즌랭킹 .시즌보상\n" +
             ".시즌던전 .시즌던전랭킹 .시즌던전보상\n" +
@@ -9404,7 +9992,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             ".튜토리얼 .추천루트\n" +
             ".인던로그 .레이드로그 .로그탭 인던|레이드 보스|난이도 [페이지] .로그상세 인던|레이드 [난이도=] [보스=]\n" +
             ".보상표 전장|레이드 .보상패널 전장|레이드 [짧게]\n" +
-            ".집구매 .집정보\n" +
+            ".집구매 .집정보 .집확장 .집꾸미기 <아이템> <슬롯> .집정리 <슬롯> .집방문 <유저>\n" +
             ".특성 .특성찍기 <공격/방어/HP>\n" +
             ".탈것획득 .탈것목록 .탈것타기 <이름> .도감\n" +
             ".지역목록 .지역이동 <이름> .탐험\n" +
@@ -9602,14 +10190,14 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         if (party3.leader === sender) {
             for (var m = 0; m < party3.members.length; m++) delete state.partyOf[party3.members[m]];
             delete state.parties[pid];
-            replier.reply('파티를 해산했습니다.');
+            replier.reply(applyActionEffect('파티를 해산했습니다.', 'party'));
         } else {
             for (var i = 0; i < party3.members.length; i++) {
                 if (party3.members[i] === sender) party3.members.splice(i, 1);
             }
             delete party3.roles[sender];
             delete state.partyOf[sender];
-            replier.reply('파티에서 나갔습니다.');
+            replier.reply(applyActionEffect('파티에서 나갔습니다.', 'party'));
         }
         saveState();
         return;
@@ -9623,7 +10211,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         if (!party4) { replier.reply('파티에 속해있지 않습니다.'); return; }
         party4.roles[sender] = role;
         saveState();
-        replier.reply('역할 설정: ' + role);
+        replier.reply(applyActionEffect('역할 설정: ' + role, 'party'));
         return;
     }
 
@@ -9638,7 +10226,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             var roleIcon = (role2 === '탱') ? '🛡️ 탱' : (role2 === '힐') ? '💚 힐' : (role2 === '딜') ? '⚔️ 딜' : '—';
             msg += '- ' + mem + ' (' + roleIcon + ')\n';
         }
-        replier.reply(msg.trim() + buildNextActionHint('party'));
+        replier.reply(applyActionEffect(msg.trim() + buildNextActionHint('party'), 'party'));
         return;
     }
 
@@ -9647,7 +10235,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         var targetDuel = arg;
         if (!targetDuel) { replier.reply('사용: .결투 <유저>'); return; }
         state.duelRequests[targetDuel] = sender;
-        replier.reply(targetDuel + ' 님에게 결투 신청.');
+        replier.reply(applyActionEffect(targetDuel + ' 님에게 결투 신청.', 'duel'));
         return;
     }
 
@@ -9684,7 +10272,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         if (winner.stats.pvpWins >= 3) addAchievement(winner, '전장의 지배자', 'PVP 3승 달성', '전장의 지배자');
         delete state.duelRequests[sender];
         saveState();
-        replier.reply('결투 결과: ' + winName + ' 승리!');
+        replier.reply(applyActionEffect('결투 결과: ' + winName + ' 승리!', 'duel'));
         return;
     }
 
@@ -9692,7 +10280,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
     if (cmd === '전장맵') {
         var outM = '[전장 맵]\n';
         for (var mi = 0; mi < BattlegroundMaps.length; mi++) outM += '- ' + BattlegroundMaps[mi].name + ' (' + BattlegroundMaps[mi].desc + ')\n';
-        replier.reply(outM.trim());
+        replier.reply(applyActionEffect(outM.trim(), 'battleground'));
         return;
     }
 
@@ -9704,7 +10292,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             state.bgEvent = { name: ev.name, bonus: ev.bonus, date: today };
             saveState();
         }
-        replier.reply('[전장 이벤트]\n' + state.bgEvent.name + ' - ' + (state.bgEvent.bonus.reward ? '보상 보너스' : '전투 보너스'));
+        replier.reply(applyActionEffect('[전장 이벤트]\n' + state.bgEvent.name + ' - ' + (state.bgEvent.bonus.reward ? '보상 보너스' : '전투 보너스'), 'battleground'));
         return;
     }
 
@@ -9736,11 +10324,11 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             var bgRewards = rollRewardTable(BattlegroundRewards);
             for (var br = 0; br < bgRewards.length; br++) addItem(win, bgRewards[br].item, bgRewards[br].qty);
             saveState();
-            replier.reply('전장 맵: ' + map.name + '\n전장 결과: ' + win.name + ' 승리!');
+            replier.reply(applyActionEffect('전장 맵: ' + map.name + '\n전장 결과: ' + win.name + ' 승리!', 'battleground'));
             return;
         }
         saveState();
-        replier.reply('전장 대기열에 참가했습니다.');
+        replier.reply(applyActionEffect('전장 대기열에 참가했습니다.', 'battleground'));
         return;
     }
 
@@ -9751,7 +10339,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         listS.sort(function(a, b) { return b.rating - a.rating; });
         var outS = '[시즌 랭킹]\n';
         for (var r2 = 0; r2 < listS.length && r2 < 10; r2++) outS += (r2 + 1) + '. ' + listS[r2].name + ' (' + listS[r2].rating + ')\n';
-        replier.reply(outS.trim());
+        replier.reply(applyActionEffect(outS.trim(), 'battleground'));
         return;
     }
 
@@ -9766,13 +10354,13 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         player.gold += 2000;
         if (player.titles.indexOf('전장의 지배자') === -1) player.titles.push('전장의 지배자');
         saveState();
-        replier.reply('시즌 보상 수령 완료!');
+        replier.reply(applyActionEffect('시즌 보상 수령 완료!', 'battleground'));
         return;
     }
 
     // 정보
     if (cmd === '정보') {
-        replier.reply(
+        replier.reply(applyActionEffect(
             "[" + player.name + "]\n" +
             "직업: " + player.job + "\n" +
             "레벨: " + player.level + " (" + player.exp + "/" + player.maxExp + ")\n" +
@@ -9783,9 +10371,11 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             "낚시: Lv." + player.fishingLevel + " (" + player.fishingExp + "/" + player.maxFishingExp + ")\n" +
             "지역: " + (player.currentZone || '묘냥의 숲') + "\n" +
             "칭호: " + (player.activeTitle || '없음') + "\n" +
+            buildAvatarStatus(player) +
             buildDurabilityStatus(player) +
-            buildNextActionHint('status')
-        );
+            buildNextActionHint('status'),
+            'status'
+        ));
         return;
     }
 
@@ -9796,7 +10386,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         var npcs = (zoneTalk && zoneTalk.npcs) ? zoneTalk.npcs.slice() : [];
         if (!arg) {
             if (!npcs.length) { replier.reply('이 지역에는 NPC가 없습니다.'); return; }
-            replier.reply('[NPC 목록 - ' + zoneNameTalk + ']\n' + npcs.join('\n') + buildNextActionHint('quest-progress'));
+            replier.reply(applyActionEffect('[NPC 목록 - ' + zoneNameTalk + ']\n' + npcs.join('\n') + buildNextActionHint('quest-progress'), 'talk'));
             return;
         }
         var npcName = arg;
@@ -9805,7 +10395,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         if (!exists) { replier.reply('해당 NPC가 없습니다. .대화 로 목록 확인'); return; }
         updateQuestTalkProgress(player, npcName);
         saveState();
-        replier.reply(npcName + '와 대화했습니다.' + buildNextActionHint('quest-progress'));
+        replier.reply(applyActionEffect(npcName + '와 대화했습니다.' + buildNextActionHint('quest-progress'), 'talk'));
         return;
     }
 
@@ -9813,16 +10403,16 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
     if (cmd === '튜토리얼') {
         var tstate = getTutorialState(player);
         if (tstate.completed) {
-            replier.reply('튜토리얼 완료!\n.추천루트 로 다음 목표를 확인하세요.' + buildNextActionHint('tutorial'));
+            replier.reply(applyActionEffect('튜토리얼 완료!\n.추천루트 로 다음 목표를 확인하세요.' + buildNextActionHint('tutorial'), 'tutorial'));
             return;
         }
-        replier.reply(formatTutorialProgress(player) + buildNextActionHint('tutorial'));
+        replier.reply(applyActionEffect(formatTutorialProgress(player) + buildNextActionHint('tutorial'), 'tutorial'));
         return;
     }
 
     // 추천 루트
     if (cmd === '추천루트') {
-        replier.reply(buildRecommendedRoute(player));
+        replier.reply(applyActionEffect(buildRecommendedRoute(player), 'route'));
         return;
     }
 
@@ -9904,7 +10494,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         if (Math.random() < 0.1) addItem(player, rollRareMaterial(), 1);
         player.professions.mining += 1;
         saveState();
-        replier.reply('채광 성공: ' + mReward + ' 획득!' + buildNextActionHint('gather'));
+        replier.reply(applyActionEffect('채광 성공: ' + mReward + ' 획득!' + buildNextActionHint('gather'), 'mining'));
         return;
     }
 
@@ -9915,7 +10505,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         if (Math.random() < 0.1) addItem(player, rollRareMaterial(), 1);
         player.professions.herbal += 1;
         saveState();
-        replier.reply('채집 성공: ' + hReward + ' 획득!' + buildNextActionHint('gather'));
+        replier.reply(applyActionEffect('채집 성공: ' + hReward + ' 획득!' + buildNextActionHint('gather'), 'herbal'));
         return;
     }
 
@@ -9930,7 +10520,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         addItem(player, alchemyItem, 1);
         player.professions.alchemy += 1;
         saveState();
-        replier.reply('연금 제작 완료: ' + alchemyItem);
+        replier.reply(applyActionEffect('연금 제작 완료: ' + alchemyItem, 'alchemy'));
         return;
     }
 
@@ -9946,7 +10536,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         addItem(player, smithItem, 1);
         player.professions.blacksmith += 1;
         saveState();
-        replier.reply('대장 제작 완료: ' + smithItem);
+        replier.reply(applyActionEffect('대장 제작 완료: ' + smithItem, 'smith'));
         return;
     }
 
@@ -9962,12 +10552,14 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         if (player.stats.kills > 0) { activityBonusGold += 100; activityBonusExp += 50; }
         if (player.stats.fishing > 0) { activityBonusGold += 80; activityBonusExp += 40; }
         if (player.stats.dungeons > 0) { activityBonusGold += 200; activityBonusExp += 120; }
-        var totalGold = Config.DAILY_GOLD + bonusGold + activityBonusGold;
-        var totalExp = Config.DAILY_EXP + bonusExp + activityBonusExp;
+        var houseDaily = getHouseDailyBonus(player);
+        var totalGold = Config.DAILY_GOLD + bonusGold + activityBonusGold + houseDaily.gold;
+        var totalExp = Config.DAILY_EXP + bonusExp + activityBonusExp + houseDaily.exp;
         player.gold += totalGold;
         addExp(player, totalExp);
         saveState();
-        replier.reply('일일보상 지급! 골드 +' + totalGold + ', EXP +' + totalExp);
+        var extraNote = (houseDaily.gold || houseDaily.exp) ? '\n집 보너스: 골드 +' + houseDaily.gold + ', EXP +' + houseDaily.exp : '';
+        replier.reply(applyActionEffect('일일보상 지급! 골드 +' + totalGold + ', EXP +' + totalExp + extraNote, 'daily'));
         return;
     }
 
@@ -9975,8 +10567,9 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
     if (cmd === '휴식') {
         var lastRest = state.lastRest[sender] || 0;
         var now = Date.now();
-        if (now - lastRest < Config.REST_COOLDOWN_MS) {
-            var sec = Math.ceil((Config.REST_COOLDOWN_MS - (now - lastRest)) / 1000);
+        var restCooldown = getHouseRestCooldownMs(player);
+        if (now - lastRest < restCooldown) {
+            var sec = Math.ceil((restCooldown - (now - lastRest)) / 1000);
             replier.reply('휴식 대기: ' + sec + '초');
             return;
         }
@@ -9984,7 +10577,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         player.hp = getMaxHp(player);
         player.mp = getMaxMp(player);
         saveState();
-        replier.reply('휴식 완료! HP/MP가 회복되었습니다.');
+        replier.reply(applyActionEffect('휴식 완료! HP/MP가 회복되었습니다.', 'rest'));
         return;
     }
 
@@ -10169,7 +10762,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         if (ach.length === 0) { replier.reply('획득한 업적이 없습니다.'); return; }
         var outAch = '[업적]\n';
         for (var a = 0; a < ach.length && a < 10; a++) outAch += '- ' + ach[a].title + '\n';
-        replier.reply(outAch.trim());
+        replier.reply(applyActionEffect(outAch.trim(), 'achievement'));
         return;
     }
 
@@ -10177,7 +10770,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
     if (cmd === '칭호목록') {
         var titles = player.titles || [];
         if (titles.length === 0) { replier.reply('보유한 칭호가 없습니다.'); return; }
-        replier.reply('[칭호]\n' + titles.join('\n'));
+        replier.reply(applyActionEffect('[칭호]\n' + titles.join('\n'), 'title'));
         return;
     }
 
@@ -10187,7 +10780,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         if (!player.titles || player.titles.indexOf(arg) === -1) { replier.reply('보유한 칭호가 아닙니다.'); return; }
         player.activeTitle = arg;
         saveState();
-        replier.reply('칭호 설정: ' + arg);
+        replier.reply(applyActionEffect('칭호 설정: ' + arg, 'title'));
         return;
     }
 
@@ -10196,7 +10789,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         var faction = arg;
         if (!faction) { replier.reply('사용: .평판 <진영>'); return; }
         var rep = player.rep[faction] || 0;
-        replier.reply(faction + ' 평판: ' + rep);
+        replier.reply(applyActionEffect(faction + ' 평판: ' + rep, 'rep'));
         return;
     }
 
@@ -10209,7 +10802,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         state.repWork[key] = getDateKey();
         addRep(player, fac, 200);
         saveState();
-        replier.reply(fac + ' 평판 +200');
+        replier.reply(applyActionEffect(fac + ' 평판 +200', 'rep'));
         return;
     }
 
@@ -10221,7 +10814,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         if (shopR.length === 0) { replier.reply('상점이 없습니다.'); return; }
         var outR = '[' + fac2 + ' 상점]\n';
         for (var si2 = 0; si2 < shopR.length; si2++) outR += '- ' + shopR[si2].item + ' (골드 ' + shopR[si2].cost + ', 평판 ' + shopR[si2].rep + ')\n';
-        replier.reply(outR.trim());
+        replier.reply(applyActionEffect(outR.trim(), 'rep'));
         return;
     }
 
@@ -10240,7 +10833,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         player.gold -= entry.cost;
         addItem(player, entry.item, 1);
         saveState();
-        replier.reply('구매 완료: ' + entry.item);
+        replier.reply(applyActionEffect('구매 완료: ' + entry.item, 'rep'));
         return;
     }
 
@@ -10255,7 +10848,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         state.guilds[gname] = { name: gname, leader: sender, members: [sender], level: 1, exp: 0 };
         player.guildId = gname;
         saveState();
-        replier.reply('길드 생성 완료: ' + gname);
+        replier.reply(applyActionEffect('길드 생성 완료: ' + gname, 'guild'));
         return;
     }
 
@@ -10267,7 +10860,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         var guild = state.guilds[player.guildId];
         if (!guild || guild.leader !== sender) { replier.reply('길드장만 초대할 수 있습니다.'); return; }
         state.guildInvites[gtarget] = player.guildId;
-        replier.reply(gtarget + ' 님에게 길드 초대 보냄.');
+        replier.reply(applyActionEffect(gtarget + ' 님에게 길드 초대 보냄.', 'guild'));
         return;
     }
 
@@ -10283,7 +10876,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         player.guildId = gfrom;
         delete state.guildInvites[sender];
         saveState();
-        replier.reply('길드 가입 완료: ' + gfrom);
+        replier.reply(applyActionEffect('길드 가입 완료: ' + gfrom, 'guild'));
         return;
     }
 
@@ -10292,7 +10885,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         if (!player.guildId) { replier.reply('길드가 없습니다.'); return; }
         var g2 = state.guilds[player.guildId];
         if (!g2) { replier.reply('길드가 없습니다.'); return; }
-        replier.reply('[길드]\n이름: ' + g2.name + '\n레벨: ' + g2.level + '\n인원: ' + g2.members.length);
+        replier.reply(applyActionEffect('[길드]\n이름: ' + g2.name + '\n레벨: ' + g2.level + '\n인원: ' + g2.members.length, 'guild'));
         return;
     }
 
@@ -10307,7 +10900,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         g3.exp += amount;
         while (g3.exp >= g3.level * 1000) { g3.exp -= g3.level * 1000; g3.level += 1; }
         saveState();
-        replier.reply('길드 기부 완료. 길드 레벨: ' + g3.level);
+        replier.reply(applyActionEffect('길드 기부 완료. 길드 레벨: ' + g3.level, 'guild'));
         return;
     }
 
@@ -10321,7 +10914,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         var run = buildDungeonStages('길드레이드', null, '주간', player, { finalBoss: boss, isRaid: true });
         state.battles[sender] = { monster: run.stages[0].monster, hp: run.stages[0].monster.hp, bonus: 2.5, dungeon: lockKey, diff: '주간', playerLevel: player.level, run: run };
         saveState();
-        replier.reply('길드 레이드 시작!\n' + formatDungeonProgress(run) + '\n' + run.stages[0].monster.name + ' 등장!' + buildNextActionHint('dungeon-start'));
+        replier.reply(applyActionEffect('길드 레이드 시작!\n' + formatDungeonProgress(run) + '\n' + getMonsterDisplayName(run.stages[0].monster, run.stages[0].type) + ' 등장!' + buildNextActionHint('dungeon-start'), 'guild'));
         return;
     }
 
@@ -10335,7 +10928,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             var it = GuildShopItems[gi];
             outG += '- ' + it.item + ' (골드 ' + it.cost + ', 길드Lv ' + it.level + ')\n';
         }
-        replier.reply(outG.trim());
+        replier.reply(applyActionEffect(outG.trim(), 'guild'));
         return;
     }
 
@@ -10353,7 +10946,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         player.gold -= found.cost;
         addItem(player, found.item, 1);
         saveState();
-        replier.reply('구매 완료: ' + found.item);
+        replier.reply(applyActionEffect('구매 완료: ' + found.item, 'guild'));
         return;
     }
 
@@ -10364,21 +10957,89 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         player.gold -= Config.HOUSE_COST;
         player.house.owned = true;
         player.house.level = 1;
+        player.house.rooms = buildHouseRooms(1);
+        player.house.decor = {};
+        player.house.theme = '소박한';
         saveState();
-        replier.reply('집 구매 완료!');
+        replier.reply(applyActionEffect('집 구매 완료!\n' + formatHouseInfo(player), 'housing'));
+        return;
+    }
+
+    // 집 확장
+    if (cmd === '집확장') {
+        if (!player.house.owned) { replier.reply('집이 없습니다.'); return; }
+        var curLv = player.house.level || 1;
+        if (curLv >= Config.HOUSE_MAX_LEVEL) { replier.reply('이미 최대 레벨입니다.'); return; }
+        var nextLv = curLv + 1;
+        var cost = getHouseUpgradeCost(nextLv);
+        if (player.gold < cost) { replier.reply('골드 부족 (필요: ' + cost + ')'); return; }
+        player.gold -= cost;
+        player.house.level = nextLv;
+        player.house.rooms = buildHouseRooms(nextLv);
+        saveState();
+        var data = getHouseLevelData(nextLv);
+        var label = data ? data.name : ('Lv.' + nextLv);
+        replier.reply(applyActionEffect('집 확장 완료! → ' + label + ' (Lv.' + nextLv + ')\n' + formatHouseInfo(player), 'housing'));
+        return;
+    }
+
+    // 집 꾸미기
+    if (cmd === '집꾸미기') {
+        if (!player.house.owned) { replier.reply('집이 없습니다.'); return; }
+        if (!arg) { replier.reply('사용: .집꾸미기 <아이템> <슬롯>\n슬롯: 벽/바닥/조명/침대/탁자/장식/식물'); return; }
+        var tokensH = arg.split(/\s+/);
+        var slotKey = resolveHouseSlot(tokensH[tokensH.length - 1]);
+        if (!slotKey) { replier.reply('슬롯: 벽/바닥/조명/침대/탁자/장식/식물'); return; }
+        var itemRaw = tokensH.slice(0, -1).join(' ');
+        if (!itemRaw) { replier.reply('사용: .집꾸미기 <아이템> <슬롯>'); return; }
+        var itemName = resolveUseItemName(player, itemRaw);
+        if (findItemCount(player, itemName) <= 0) { replier.reply('아이템이 없습니다.'); return; }
+        var itemData = getHousingItemData(itemName);
+        if (!itemData) { replier.reply('가구 아이템이 아닙니다.'); return; }
+        if (itemData.slot !== slotKey) { replier.reply('해당 슬롯 전용 아이템입니다: ' + getHouseSlotLabel(itemData.slot)); return; }
+        var prevItem = player.house.decor[slotKey];
+        if (prevItem) addItem(player, prevItem, 1);
+        removeItem(player, itemName, 1);
+        player.house.decor[slotKey] = itemName;
+        saveState();
+        replier.reply(applyActionEffect('꾸미기 완료: ' + itemName + ' → ' + getHouseSlotLabel(slotKey), 'housing'));
+        return;
+    }
+
+    // 집 정리
+    if (cmd === '집정리') {
+        if (!player.house.owned) { replier.reply('집이 없습니다.'); return; }
+        if (!arg) { replier.reply('사용: .집정리 <슬롯>'); return; }
+        var slotKey2 = resolveHouseSlot(arg);
+        if (!slotKey2) { replier.reply('슬롯: 벽/바닥/조명/침대/탁자/장식/식물'); return; }
+        var curItem = player.house.decor[slotKey2];
+        if (!curItem) { replier.reply('해당 슬롯이 비어있습니다.'); return; }
+        addItem(player, curItem, 1);
+        delete player.house.decor[slotKey2];
+        saveState();
+        replier.reply(applyActionEffect('정리 완료: ' + getHouseSlotLabel(slotKey2) + '에서 ' + curItem + ' 회수', 'housing'));
+        return;
+    }
+
+    // 집 방문
+    if (cmd === '집방문') {
+        if (!arg) { replier.reply('사용: .집방문 <유저>'); return; }
+        var target = ensurePlayer(arg);
+        if (!target || !target.house || !target.house.owned) { replier.reply('해당 유저의 집이 없습니다.'); return; }
+        replier.reply(applyActionEffect('[집 방문 - ' + target.name + ']\n' + formatHouseInfo(target), 'housing'));
         return;
     }
 
     // 집 정보
     if (cmd === '집정보') {
         if (!player.house.owned) { replier.reply('집이 없습니다.'); return; }
-        replier.reply('집 레벨: ' + player.house.level + '\n최대 HP 보너스 적용 중');
+        replier.reply(applyActionEffect(formatHouseInfo(player), 'housing'));
         return;
     }
 
     // 특성 확인
     if (cmd === '특성') {
-        replier.reply('[특성]\n공격: ' + (player.talents.att || 0) + '\n방어: ' + (player.talents.def || 0) + '\nHP: ' + (player.talents.hp || 0) + '\n포인트: ' + (player.talentPoints || 0));
+        replier.reply(applyActionEffect('[특성]\n공격: ' + (player.talents.att || 0) + '\n방어: ' + (player.talents.def || 0) + '\nHP: ' + (player.talents.hp || 0) + '\n포인트: ' + (player.talentPoints || 0), 'trait'));
         return;
     }
 
@@ -10392,7 +11053,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         else { replier.reply('공격/방어/HP 중 선택'); return; }
         player.talentPoints -= 1;
         saveState();
-        replier.reply('특성 포인트 사용 완료.');
+        replier.reply(applyActionEffect('특성 포인트 사용 완료.', 'trait'));
         return;
     }
 
@@ -10403,7 +11064,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         for (var i = 0; i < player.inventory.length; i++) {
             out += '- ' + player.inventory[i].name + ' x' + player.inventory[i].count + '\n';
         }
-        replier.reply(out.trim());
+        replier.reply(applyActionEffect(out.trim(), 'inventory'));
         return;
     }
 
@@ -10430,7 +11091,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             var accLine = '💍 ' + (eq.ring1.name || '없음') + ' / 💍 ' + (eq.ring2.name || '없음') +
                 ' / 📿 ' + (eq.necklace.name || '없음') + ' / 👂 ' + (eq.earring.name || '없음') +
                 ' / 🎗️ ' + (eq.belt.name || '없음') + ' / 🧣 ' + (eq.cloak.name || '없음');
-            replier.reply(
+            replier.reply(applyActionEffect(
                 "[장비 요약]\n" +
                 "👑 투구: " + (eq.helmet.name || '없음') + "\n" +
                 "🗡️ 무기: " + (eq.weapon.name || '없음') + "\n" +
@@ -10441,11 +11102,12 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
                 "[액세서리]\n" + accLine + "\n" +
                 buildDurabilityStatus(player) + "\n" +
                 "상세: .장비 상세" +
-                buildNextActionHint('equipment')
-            );
+                buildNextActionHint('equipment'),
+                'equipment'
+            ));
             return;
         }
-        replier.reply(
+        replier.reply(applyActionEffect(
             "[장비]\n" +
             "        [👑 투구]\n" +
             "            │\n" +
@@ -10468,8 +11130,9 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             fmtEquip(eq.earring, '👂 귀걸이', false) + "\n" +
             fmtEquip(eq.belt, '🎗️ 벨트', false) + "\n" +
             fmtEquip(eq.cloak, '🧣 망토', false) +
-            buildNextActionHint('equipment')
-        );
+            buildNextActionHint('equipment'),
+            'equipment'
+        ));
         return;
     }
 
@@ -10499,7 +11162,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             removeItem(player, '수리도구', 1);
             for (var r = 0; r < slots.length; r++) slots[r].obj.durability = slots[r].obj.maxDurability;
             saveState();
-            replier.reply('수리도구 사용 완료: ' + slots.map(function(s) { return s.slot; }).join(', ') + buildNextActionHint('repair'));
+            replier.reply(applyActionEffect('수리도구 사용 완료: ' + slots.map(function(s) { return s.slot; }).join(', ') + buildNextActionHint('repair'), 'repair'));
             return;
         }
 
@@ -10518,7 +11181,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         player.gold -= cost;
         for (var r2 = 0; r2 < slots.length; r2++) slots[r2].obj.durability = slots[r2].obj.maxDurability;
         saveState();
-        replier.reply('수리 완료. 소모 골드: ' + cost + 'G' + buildNextActionHint('repair'));
+        replier.reply(applyActionEffect('수리 완료. 소모 골드: ' + cost + 'G' + buildNextActionHint('repair'), 'repair'));
         return;
     }
 
@@ -10547,7 +11210,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
                 }
             }
         }
-        replier.reply(any ? outSet.trim() : '활성화된 세트 효과가 없습니다.');
+        replier.reply(applyActionEffect(any ? outSet.trim() : '활성화된 세트 효과가 없습니다.', 'set'));
         return;
     }
 
@@ -10558,7 +11221,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         summary += '공격 배율: x' + bonus.attMul + '\n';
         summary += '방어 배율: x' + bonus.defMul + '\n';
         summary += '추가 HP: +' + bonus.hpBonus;
-        replier.reply(summary);
+        replier.reply(applyActionEffect(summary, 'set'));
         return;
     }
 
@@ -10663,7 +11326,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         }[resolvedSlot] || resolvedSlot;
         var tEquip = applyTutorialProgress(player, 'equip');
         saveState();
-        replier.reply(itemName + ' 장착 완료. (' + slotLabel + ')' + buildNextActionHint('equip-change') + tEquip);
+        replier.reply(applyActionEffect(itemName + ' 장착 완료. (' + slotLabel + ')' + buildNextActionHint('equip-change') + tEquip, 'equip'));
         return;
     }
 
@@ -10685,7 +11348,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         else if (slot === '망토') player.equipment.cloak.name = null;
         else { replier.reply('슬롯: 무기/갑옷/방패/투구/장갑/신발/반지1/반지2/목걸이/귀걸이/벨트/망토'); return; }
         saveState();
-        replier.reply(slot + ' 해제 완료.' + buildNextActionHint('equip-change'));
+        replier.reply(applyActionEffect(slot + ' 해제 완료.' + buildNextActionHint('equip-change'), 'equip'));
         return;
     }
 
@@ -10728,7 +11391,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         if (Math.random() * 100 < successRate) {
             slotObj.enhance += 1;
             var tEnh = applyTutorialProgress(player, 'enhance');
-            replier.reply('강화 성공! +' + slotObj.enhance + buildNextActionHint('enhance') + tEnh);
+            replier.reply(applyActionEffect('강화 성공! +' + slotObj.enhance + buildNextActionHint('enhance') + tEnh, 'enhance'));
         } else {
             var refund = Math.floor(cost * (stone ? 0.5 : 0.3));
             player.gold += refund;
@@ -10736,7 +11399,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             var stoneRefunded = false;
             if (stone && Math.random() < 0.4) { addItem(player, stone, 1); stoneRefunded = true; }
             var tEnhFail = applyTutorialProgress(player, 'enhance');
-            replier.reply('강화 실패. 골드 환급 +' + refund + (stoneRefunded ? ', 재료 환급' : '') + buildNextActionHint('enhance-fail') + tEnhFail);
+            replier.reply(applyActionEffect('강화 실패. 골드 환급 +' + refund + (stoneRefunded ? ', 재료 환급' : '') + buildNextActionHint('enhance-fail') + tEnhFail, 'enhance'));
         }
         saveState();
         return;
@@ -10752,7 +11415,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         removeItem(player, gem, 1);
         player.equipment.weapon.gem = gem;
         saveState();
-        replier.reply('보석 장착 완료: ' + gem + buildNextActionHint('gem'));
+        replier.reply(applyActionEffect('보석 장착 완료: ' + gem + buildNextActionHint('gem'), 'gem'));
         return;
     }
 
@@ -10770,7 +11433,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             if (eff.dropRate) desc.push('드랍 +' + Math.floor(eff.dropRate * 100) + '%');
             linesR.push('- ' + rn + ' (' + desc.join(', ') + ')');
         }
-        replier.reply(linesR.join('\n') + buildNextActionHint('rune'));
+        replier.reply(applyActionEffect(linesR.join('\n') + buildNextActionHint('rune'), 'rune'));
         return;
     }
 
@@ -10813,7 +11476,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         removeItem(player, runeName, 1);
         player.equipment[resolvedSlot].rune = runeName;
         saveState();
-        replier.reply('룬 각인 완료: ' + slotNameR + ' → ' + runeName + buildNextActionHint('rune'));
+        replier.reply(applyActionEffect('룬 각인 완료: ' + slotNameR + ' → ' + runeName + buildNextActionHint('rune'), 'rune'));
         return;
     }
 
@@ -10838,7 +11501,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         pushRune('귀걸이', eqR.earring);
         pushRune('벨트', eqR.belt);
         pushRune('망토', eqR.cloak);
-        replier.reply('[룬 각인 현황]\n' + partsR.join('\n') + buildNextActionHint('rune'));
+        replier.reply(applyActionEffect('[룬 각인 현황]\n' + partsR.join('\n') + buildNextActionHint('rune'), 'rune'));
         return;
     }
 
@@ -10852,7 +11515,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         removeItem(player, useItem, 1);
         var result = effect(player);
         saveState();
-        replier.reply(useItem + ' 사용: ' + result + buildNextActionHint('use-item'));
+        replier.reply(applyActionEffect(useItem + ' 사용: ' + result + buildNextActionHint('use-item'), 'use'));
         return;
     }
 
@@ -10863,7 +11526,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         monster = applyMountBalance(monster, player);
         state.battles[sender] = { monster: monster, hp: monster.hp, bonus: 1, playerLevel: player.level };
         saveState();
-        replier.reply('[' + zoneName + '] 야생의 ' + monster.name + ' 발견! 💚 HP ' + monster.hp + '\n다음 행동: .공격 / .스킬 / .사용');
+        replier.reply(applyActionEffect('[' + zoneName + '] 야생의 ' + getMonsterDisplayName(monster) + ' 발견! 💚 HP ' + monster.hp + '\n다음 행동: .공격 / .스킬 / .사용', 'hunt'));
         return;
     }
 
@@ -10948,13 +11611,13 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
                         player.hp = 1;
                         delete state.battles[sender];
                         saveState();
-                        replier.reply(reviveLog + '기절... HP 1로 회복');
+                        replier.reply(applySkillEffect(reviveLog + '기절... HP 1로 회복', skillName));
                         return;
                     }
                     reviveLog += '💚 ' + bmRev.name + ' HP: ' + battleSkill.hp + '/' + bmRev.hp + '\n' + buildPlayerStatusLine(player) + buildNextActionLine();
                 }
                 saveState();
-                replier.reply(reviveLog);
+                replier.reply(applySkillEffect(reviveLog, skillName));
                 return;
             }
 
@@ -10998,13 +11661,13 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
                         player.hp = 1;
                         delete state.battles[sender];
                         saveState();
-                        replier.reply(hlog + '기절... HP 1로 회복');
+                        replier.reply(applySkillEffect(hlog + '기절... HP 1로 회복', skillName));
                         return;
                     }
                     hlog += '💚 ' + bmHeal.name + ' HP: ' + battleSkill.hp + '/' + bmHeal.hp + '\n' + buildPlayerStatusLine(player) + buildNextActionLine();
                 }
                 saveState();
-                replier.reply(hlog.trim());
+                replier.reply(applySkillEffect(hlog.trim(), skillName));
                 return;
             }
 
@@ -11040,13 +11703,13 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
                     player.hp = 1;
                     delete state.battles[sender];
                     saveState();
-                    replier.reply(singleLog + '기절... HP 1로 회복');
+                    replier.reply(applySkillEffect(singleLog + '기절... HP 1로 회복', skillName));
                     return;
                 }
                 singleLog += '💚 ' + bmHealOne.name + ' HP: ' + battleSkill.hp + '/' + bmHealOne.hp + '\n' + buildPlayerStatusLine(player) + buildNextActionLine();
             }
             saveState();
-            replier.reply(singleLog);
+            replier.reply(applySkillEffect(singleLog, skillName));
             return;
         }
 
@@ -11117,12 +11780,12 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
                 var nextStage = advanceDungeonStage(battleSkill, player);
                 var prog = formatDungeonProgress(battleSkill.run);
                 saveState();
-                replier.reply(slog + '\n다음 구역: ' + prog + '\n' + nextStage.monster.name + ' 등장!\n' + buildPlayerStatusLine(player) + buildNextActionHint('dungeon-start'));
+                replier.reply(applySkillEffect(slog + '\n다음 구역: ' + prog + '\n' + getMonsterDisplayName(nextStage.monster, nextStage.type) + ' 등장!\n' + buildPlayerStatusLine(player) + buildNextActionHint('dungeon-start'), skillName));
                 return;
             }
             delete state.battles[sender];
             saveState();
-            replier.reply(slog);
+            replier.reply(applySkillEffect(slog, skillName));
             return;
         }
         var rDmg = Math.max(1, (bm.att || 5) - Math.floor(getBattleDefense(player, battleSkill) * 0.4));
@@ -11137,11 +11800,11 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             player.hp = 1;
             delete state.battles[sender];
             saveState();
-            replier.reply(slog + '기절... HP 1로 회복');
+            replier.reply(applySkillEffect(slog + '기절... HP 1로 회복', skillName));
             return;
         }
         saveState();
-        replier.reply(slog + '💚 ' + bm.name + ' HP: ' + battleSkill.hp + '/' + bm.hp + '\n' + buildPlayerStatusLine(player) + buildNextActionLine());
+        replier.reply(applySkillEffect(slog + '💚 ' + bm.name + ' HP: ' + battleSkill.hp + '/' + bm.hp + '\n' + buildPlayerStatusLine(player) + buildNextActionLine(), skillName));
         return;
     }
 
@@ -11240,7 +11903,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
                 var nextStage2 = advanceDungeonStage(battle, player);
                 var prog2 = formatDungeonProgress(battle.run);
                 saveState();
-                replier.reply(log + '\n다음 구역: ' + prog2 + '\n' + nextStage2.monster.name + ' 등장!\n' + buildPlayerStatusLine(player) + buildNextActionHint('dungeon-start'));
+                replier.reply(log + '\n다음 구역: ' + prog2 + '\n' + getMonsterDisplayName(nextStage2.monster, nextStage2.type) + ' 등장!\n' + buildPlayerStatusLine(player) + buildNextActionHint('dungeon-start'));
                 return;
             }
             delete state.battles[sender];
@@ -11291,7 +11954,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         var runB = buildDungeonStages(beginnerName, dungeonB, '노말', player, { stageCount: 2, monsterMult: 0.9 });
         state.battles[sender] = { monster: runB.stages[0].monster, hp: runB.stages[0].monster.hp, bonus: Config.DUNGEON_BONUS_MULT * 1.2, dungeon: beginnerName, diff: '노말', playerLevel: player.level, run: runB };
         saveState();
-        replier.reply('초보 던전 입장: ' + beginnerName + '\n' + formatDungeonProgress(runB) + '\n' + runB.stages[0].monster.name + ' 등장!' + buildNextActionHint('dungeon-start'));
+        replier.reply('초보 던전 입장: ' + beginnerName + '\n' + formatDungeonProgress(runB) + '\n' + getMonsterDisplayName(runB.stages[0].monster, runB.stages[0].type) + ' 등장!' + buildNextActionHint('dungeon-start'));
         return;
     }
 
@@ -11308,7 +11971,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         var runM2 = buildDungeonStages(midName, dungeonM2, '노말', player, { stageCount: 3, monsterMult: 1.1 });
         state.battles[sender] = { monster: runM2.stages[0].monster, hp: runM2.stages[0].monster.hp, bonus: Config.DUNGEON_BONUS_MULT * 1.3, dungeon: midName, diff: '노말', playerLevel: player.level, run: runM2 };
         saveState();
-        replier.reply('중급 던전 입장: ' + midName + '\n' + formatDungeonProgress(runM2) + '\n' + runM2.stages[0].monster.name + ' 등장!' + buildNextActionHint('dungeon-start'));
+        replier.reply('중급 던전 입장: ' + midName + '\n' + formatDungeonProgress(runM2) + '\n' + getMonsterDisplayName(runM2.stages[0].monster, runM2.stages[0].type) + ' 등장!' + buildNextActionHint('dungeon-start'));
         return;
     }
 
@@ -11321,7 +11984,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         eliteMon.items = (eliteMon.items || []).concat(['강화석']);
         state.battles[sender] = { monster: eliteMon, hp: eliteMon.hp, bonus: 1.3, playerLevel: player.level, elite: true };
         saveState();
-        replier.reply('[' + zoneElite + '] ' + eliteMon.name + ' 등장! 💚 HP ' + eliteMon.hp + '\n다음 행동: .공격 / .스킬 / .사용');
+        replier.reply('[' + zoneElite + '] ' + getMonsterDisplayName(eliteMon) + ' 등장! 💚 HP ' + eliteMon.hp + '\n다음 행동: .공격 / .스킬 / .사용');
         return;
     }
 
@@ -11365,7 +12028,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             }
         };
         saveState();
-        replier.reply('도전 모드 시작: ' + resolvedC.name + '\n제한 ' + options.timeLimitSec + '초 / 노데미지 ' + (options.noDamage ? 'ON' : 'OFF') + '\n' + formatDungeonProgress(runC) + '\n' + runC.stages[0].monster.name + ' 등장!' + buildNextActionHint('mutation'));
+        replier.reply('도전 모드 시작: ' + resolvedC.name + '\n제한 ' + options.timeLimitSec + '초 / 노데미지 ' + (options.noDamage ? 'ON' : 'OFF') + '\n' + formatDungeonProgress(runC) + '\n' + getMonsterDisplayName(runC.stages[0].monster, runC.stages[0].type) + ' 등장!' + buildNextActionHint('mutation'));
         return;
     }
 
@@ -11401,7 +12064,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             playerDefMul: mutation.playerDefMul
         };
         saveState();
-        replier.reply('변이 던전 시작: ' + resolvedM.name + ' (' + diffM + ')\n[규칙]\n' + formatMutationRules(mutation) + '\n' + formatDungeonProgress(runM) + '\n' + runM.stages[0].monster.name + ' 등장!' + buildNextActionHint('mutation'));
+        replier.reply('변이 던전 시작: ' + resolvedM.name + ' (' + diffM + ')\n[규칙]\n' + formatMutationRules(mutation) + '\n' + formatDungeonProgress(runM) + '\n' + getMonsterDisplayName(runM.stages[0].monster, runM.stages[0].type) + ' 등장!' + buildNextActionHint('mutation'));
         return;
     }
 
@@ -11420,7 +12083,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             seasonDungeon: { startedAt: Date.now() }
         };
         saveState();
-        replier.reply('시즌 던전 입장: ' + SeasonDungeonData.name + '\n' + formatDungeonProgress(runS) + '\n' + runS.stages[0].monster.name + ' 등장!' + buildNextActionHint('season-dungeon'));
+        replier.reply('시즌 던전 입장: ' + SeasonDungeonData.name + '\n' + formatDungeonProgress(runS) + '\n' + getMonsterDisplayName(runS.stages[0].monster, runS.stages[0].type) + ' 등장!' + buildNextActionHint('season-dungeon'));
         return;
     }
 
@@ -11476,8 +12139,79 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         var dlist = [];
         for (var dn in dmap) dlist.push(dn);
         if (dlist.length === 0) { replier.reply('던전 데이터가 없습니다.'); return; }
-        dlist.sort();
-        replier.reply('[던전 목록]\n' + dlist.slice(0, 10).join('\n') + buildNextActionHint('dungeon-list'));
+
+        var tokens = (arg || '').split(/\s+/).filter(function(t) { return t; });
+        var page = 1;
+        var filterKey = '';
+        if (tokens.length > 0) {
+            if (/^\d+$/.test(tokens[tokens.length - 1])) {
+                page = parseInt(tokens.pop(), 10);
+            }
+            if (tokens.length > 0) filterKey = getDungeonCategoryFilterToken(tokens[0]);
+        }
+        if (page < 1) page = 1;
+
+        var filtered = [];
+        if (filterKey) {
+            for (var fi = 0; fi < dlist.length; fi++) {
+                var nameF = dlist[fi];
+                if (matchesDungeonCategory(dmap[nameF], filterKey)) filtered.push(nameF);
+            }
+        } else {
+            filtered = dlist.slice();
+        }
+        filtered.sort();
+
+        var pageSize = 10;
+        var totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
+        if (page > totalPages) page = totalPages;
+        var start = (page - 1) * pageSize;
+        var slice = filtered.slice(start, start + pageSize);
+
+        var title = '[던전 목록]';
+        if (filterKey) {
+            var labelMap = {
+                solo: '솔로',
+                instance: '인던',
+                heroic: '영웅 인던',
+                beginner: '초보',
+                endgame: '엔드',
+                raid: '레이드',
+                'raid-hard': '하드 레이드',
+                'raid-season': '시즌 레이드',
+                season: '시즌',
+                mythic: '신화 레이드'
+            };
+            title = '[던전 목록 - ' + (labelMap[filterKey] || '필터') + ']';
+        }
+
+        var out = title + ' (페이지 ' + page + '/' + totalPages + ')\n';
+        for (var i = 0; i < slice.length; i++) {
+            var name = slice[i];
+            out += formatDungeonListLine(name, dmap[name]) + '\n';
+        }
+        if (!slice.length) {
+            out += '표시할 던전이 없습니다.';
+        }
+        if (!filterKey && SeasonDungeonData && SeasonDungeonData.name) {
+            out += '\n[시즌] ' + SeasonDungeonData.name + ' (' + getDungeonLevelRange(SeasonDungeonData) + ') - .시즌던전';
+        }
+        replier.reply(out.trim() + buildNextActionHint('dungeon-list'));
+        return;
+    }
+
+    // 던전 소개
+    if (cmd === '던전소개') {
+        if (!arg) { replier.reply('사용: .던전소개 <이름>'); return; }
+        var dmapInfo = getDungeonMap();
+        var resolvedInfo = resolveDungeonName(arg, dmapInfo);
+        if (!resolvedInfo.name) {
+            var hintInfo = resolvedInfo.suggestion ? '\n혹시 이건가요? ' + resolvedInfo.suggestion : '';
+            replier.reply('던전이 없습니다. .던전목록' + hintInfo);
+            return;
+        }
+        var dInfo = dmapInfo[resolvedInfo.name];
+        replier.reply(formatDungeonInfo(resolvedInfo.name, dInfo));
         return;
     }
 
@@ -11532,7 +12266,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         var run = buildDungeonStages(dungeonName, dungeon, diffKey, player, opts);
         state.battles[sender] = { monster: run.stages[0].monster, hp: run.stages[0].monster.hp, bonus: Config.DUNGEON_BONUS_MULT * mult, dungeon: dungeonName, diff: diffKey, playerLevel: player.level, run: run };
         saveState();
-        replier.reply('던전 입장: ' + dungeonName + ' (' + diffKey + ')\n' + formatDungeonProgress(run) + '\n' + run.stages[0].monster.name + ' 등장!' + buildNextActionHint('dungeon-start'));
+        replier.reply(applyActionEffect('던전 입장: ' + dungeonName + ' (' + diffKey + ')\n' + formatDungeonProgress(run) + '\n' + getMonsterDisplayName(run.stages[0].monster, run.stages[0].type) + ' 등장!' + buildNextActionHint('dungeon-start'), 'dungeon'));
         return;
     }
 
@@ -11545,14 +12279,14 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             saveState();
         }
         var b = state.worldEvent.boss;
-        replier.reply('[월드 이벤트]\n이번 주 보스: ' + b.name + '\n.침공 으로 전투' + buildNextActionHint('world-event'));
+        replier.reply(applyActionEffect('[월드 이벤트]\n이번 주 보스: ' + b.name + '\n.침공 으로 전투' + buildNextActionHint('world-event'), 'boss'));
         return;
     }
 
     // 월드보스 (일일)
     if (cmd === '월드보스') {
         var entryDaily = ensureDailyWorldBoss();
-        replier.reply(formatWorldBossStatus(entryDaily, player.name) + buildNextActionHint('world-boss'));
+        replier.reply(applyActionEffect(formatWorldBossStatus(entryDaily, player.name) + buildNextActionHint('world-boss'), 'boss'));
         return;
     }
 
@@ -11611,7 +12345,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         addItem(player, box, 1);
         entryReward.rewards[player.name] = true;
         saveState();
-        replier.reply('월드보스 보상 지급! 골드 +' + rewardGold + ', EXP +' + rewardExp + ', 보물상자: ' + box + buildNextActionHint('world-boss'));
+        replier.reply(applyActionEffect('월드보스 보상 지급! 골드 +' + rewardGold + ', EXP +' + rewardExp + ', 보물상자: ' + box + buildNextActionHint('world-boss'), 'boss'));
         return;
     }
 
@@ -11627,7 +12361,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         var run = buildDungeonStages('월드보스', null, '주간', player, { finalBoss: wb, isRaid: true });
         state.battles[sender] = { monster: run.stages[0].monster, hp: run.stages[0].monster.hp, bonus: 2.0, dungeon: '월드보스', diff: '주간', playerLevel: player.level, run: run };
         saveState();
-        replier.reply('침공 시작!\n' + formatDungeonProgress(run) + '\n' + run.stages[0].monster.name + ' 등장!' + buildNextActionHint('dungeon-start'));
+        replier.reply(applyActionEffect('침공 시작!\n' + formatDungeonProgress(run) + '\n' + getMonsterDisplayName(run.stages[0].monster, run.stages[0].type) + ' 등장!' + buildNextActionHint('dungeon-start'), 'boss'));
         return;
     }
 
@@ -11639,7 +12373,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             if ((q.levelReq || 1) <= player.level) list.push(id + ' - ' + q.title);
             if (list.length >= 10) break;
         }
-        replier.reply('[퀘스트 목록]\n' + (list.length ? list.join('\n') : '없음') + buildNextActionHint('quest-list'));
+        replier.reply(applyActionEffect('[퀘스트 목록]\n' + (list.length ? list.join('\n') : '없음') + buildNextActionHint('quest-list'), 'quest'));
         return;
     }
 
@@ -11647,7 +12381,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
     if (cmd === '일일퀘스트') {
         if (!player.dailyQuest || player.dailyQuest.date !== getDateKey()) player.dailyQuest = generateDailyQuest(player);
         var dq = player.dailyQuest;
-        replier.reply('[일일퀘스트]\n' + dq.target + ' ' + dq.progress + '/' + dq.count + buildNextActionHint('daily-quest'));
+        replier.reply(applyActionEffect('[일일퀘스트]\n' + dq.target + ' ' + dq.progress + '/' + dq.count + buildNextActionHint('daily-quest'), 'quest'));
         return;
     }
 
@@ -11655,7 +12389,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
     if (cmd === '주간퀘스트') {
         if (!player.weeklyQuest || player.weeklyQuest.week !== getWeekKey()) player.weeklyQuest = generateWeeklyQuest(player);
         var wq = player.weeklyQuest;
-        replier.reply('[주간퀘스트]\n' + wq.target + ' ' + wq.progress + '/' + wq.count + buildNextActionHint('weekly-quest'));
+        replier.reply(applyActionEffect('[주간퀘스트]\n' + wq.target + ' ' + wq.progress + '/' + wq.count + buildNextActionHint('weekly-quest'), 'quest'));
         return;
     }
 
@@ -11670,7 +12404,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         addExp(player, dailyExp);
         player.dailyQuest = null;
         saveState();
-        replier.reply('일일 퀘스트 완료! 골드 +' + dailyGold + ', EXP +' + dailyExp + buildNextActionHint('quest-reward'));
+        replier.reply(applyActionEffect('일일 퀘스트 완료! 골드 +' + dailyGold + ', EXP +' + dailyExp + buildNextActionHint('quest-reward'), 'quest'));
         return;
     }
 
@@ -11685,7 +12419,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         addExp(player, weeklyExp);
         player.weeklyQuest = null;
         saveState();
-        replier.reply('주간 퀘스트 완료! 골드 +' + weeklyGold + ', EXP +' + weeklyExp + buildNextActionHint('quest-reward'));
+        replier.reply(applyActionEffect('주간 퀘스트 완료! 골드 +' + weeklyGold + ', EXP +' + weeklyExp + buildNextActionHint('quest-reward'), 'quest'));
         return;
     }
 
@@ -11697,7 +12431,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         if (player.quests[qid]) { replier.reply('이미 수락한 퀘스트입니다.'); return; }
         player.quests[qid] = { progress: {} };
         saveState();
-        replier.reply('퀘스트 수락: ' + qdata.title + buildNextActionHint('quest-progress'));
+        replier.reply(applyActionEffect('퀘스트 수락: ' + qdata.title + buildNextActionHint('quest-progress'), 'quest'));
         return;
     }
 
@@ -11711,7 +12445,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             has = true;
             outQ += q + ' - ' + qinfo.title + '\n';
         }
-        replier.reply((has ? outQ.trim() : '진행중인 퀘스트가 없습니다.') + buildNextActionHint('quest-progress'));
+        replier.reply(applyActionEffect((has ? outQ.trim() : '진행중인 퀘스트가 없습니다.') + buildNextActionHint('quest-progress'), 'quest'));
         return;
     }
 
@@ -11752,7 +12486,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         }
         delete player.quests[qc];
         saveState();
-        replier.reply('퀘스트 완료! 보상 지급.' + buildNextActionHint('quest-reward'));
+        replier.reply(applyActionEffect('퀘스트 완료! 보상 지급.' + buildNextActionHint('quest-reward'), 'quest'));
         return;
     }
 
@@ -11771,7 +12505,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         player.gold -= r.cost || 0;
         addItem(player, r.result.name, r.result.count || 1);
         saveState();
-        replier.reply('제작 완료: ' + r.result.name + buildNextActionHint('craft'));
+        replier.reply(applyActionEffect('제작 완료: ' + r.result.name + buildNextActionHint('craft'), 'craft'));
         return;
     }
 
@@ -11796,7 +12530,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         addItem(player, cr.result.name, cr.result.count || 1);
         if (player.professions) player.professions.cooking += 1;
         saveState();
-        replier.reply('요리 완료: ' + cr.result.name + buildNextActionHint('cook'));
+        replier.reply(applyActionEffect('요리 완료: ' + cr.result.name + buildNextActionHint('cook'), 'cook'));
         return;
     }
 
@@ -11815,13 +12549,13 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         player.stats.fishing = (player.stats.fishing || 0) + 1;
         if (player.stats.fishing >= 10) addAchievement(player, '낚시왕', '물고기 10마리 낚기', '낚시왕');
         saveState();
-        replier.reply('낚시 성공! ' + f.name + ' (' + rarity + ', 크기 ' + size + 'm)\n' + (leveledFish ? '낚시 레벨 업! Lv.' + player.fishingLevel : '') + buildNextActionHint('fishing'));
+        replier.reply(applyActionEffect('낚시 성공! ' + f.name + ' (' + rarity + ', 크기 ' + size + 'm)\n' + (leveledFish ? '낚시 레벨 업! Lv.' + player.fishingLevel : '') + buildNextActionHint('fishing'), 'fishing'));
         return;
     }
 
     // 낚시정보
     if (cmd === '낚시정보') {
-        replier.reply('낚시 Lv.' + player.fishingLevel + ' (' + player.fishingExp + '/' + player.maxFishingExp + ')' + buildNextActionHint('fishing-info'));
+        replier.reply(applyActionEffect('낚시 Lv.' + player.fishingLevel + ' (' + player.fishingExp + '/' + player.maxFishingExp + ')' + buildNextActionHint('fishing-info'), 'fishing'));
         return;
     }
 
@@ -11830,7 +12564,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         var sold = sellAllFish(player);
         player.gold += sold;
         saveState();
-        replier.reply('물고기 판매 완료. 골드 +' + sold + buildNextActionHint('fishing'));
+        replier.reply(applyActionEffect('물고기 판매 완료. 골드 +' + sold + buildNextActionHint('fishing'), 'fishing-sell'));
         return;
     }
 
@@ -11847,7 +12581,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         player.pet = { type: petName, level: 1, exp: 0 };
         if (player.petCollection.indexOf(petName) === -1) player.petCollection.push(petName);
         saveState();
-        replier.reply('펫 획득: ' + petName);
+        replier.reply(applyActionEffect('펫 획득: ' + petName, 'pet'));
         return;
     }
 
@@ -11868,7 +12602,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         if (player.pet.exp >= Config.PET_LEVEL_EXP) { player.pet.exp = 0; player.pet.level += 1; }
         if (player.pet.level >= 5) addAchievement(player, '펫 친구', '펫 레벨 5 달성', '전설의 모험가');
         saveState();
-        replier.reply('펫 먹이 사용. 펫 레벨: ' + player.pet.level + buildNextActionHint('pet'));
+        replier.reply(applyActionEffect('펫 먹이 사용. 펫 레벨: ' + player.pet.level + buildNextActionHint('pet'), 'pet'));
         return;
     }
 
@@ -11881,7 +12615,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         if (player.pet.exp >= Config.PET_LEVEL_EXP) { player.pet.exp = 0; player.pet.level += 1; }
         if (player.pet.level >= 5) addAchievement(player, '펫 친구', '펫 레벨 5 달성', '전설의 모험가');
         saveState();
-        replier.reply('펫 훈련 완료! 펫 레벨: ' + player.pet.level + buildNextActionHint('pet'));
+        replier.reply(applyActionEffect('펫 훈련 완료! 펫 레벨: ' + player.pet.level + buildNextActionHint('pet'), 'pet-train'));
         return;
     }
 
@@ -11891,7 +12625,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         if (!arg) { replier.reply('사용: .펫이름 <이름>'); return; }
         player.pet.nickname = arg;
         saveState();
-        replier.reply('펫 이름 설정: ' + arg);
+        replier.reply(applyActionEffect('펫 이름 설정: ' + arg, 'pet'));
         return;
     }
 
@@ -11900,7 +12634,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         if (!player.pet || !player.pet.type) { replier.reply('펫이 없습니다.'); return; }
         player.pet = null;
         saveState();
-        replier.reply('펫을 방생했습니다.');
+        replier.reply(applyActionEffect('펫을 방생했습니다.', 'pet'));
         return;
     }
 
@@ -11921,7 +12655,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         if (player.pet.level >= 5) addAchievement(player, '펫 친구', '펫 레벨 5 달성', '전설의 모험가');
         if (Math.random() < 0.3) addItem(player, '펫 먹이', 1);
         saveState();
-        replier.reply('펫 탐험 완료! 골드 +' + rewardGold + (Math.random() < 0.3 ? '\n펫 먹이 획득!' : '') + buildNextActionHint('pet'));
+        replier.reply(applyActionEffect('펫 탐험 완료! 골드 +' + rewardGold + (Math.random() < 0.3 ? '\n펫 먹이 획득!' : '') + buildNextActionHint('pet'), 'pet-explore'));
         return;
     }
 
@@ -11934,14 +12668,14 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         var pick = pickRandom(mlist);
         if (player.mounts.indexOf(pick) === -1) player.mounts.push(pick);
         saveState();
-        replier.reply('탈것 획득: ' + pick);
+        replier.reply(applyActionEffect('탈것 획득: ' + pick, 'reward'));
         return;
     }
 
     // 탈것 목록
     if (cmd === '탈것목록') {
         if (!player.mounts || player.mounts.length === 0) { replier.reply('보유한 탈것이 없습니다.'); return; }
-        replier.reply('[탈것]\n' + player.mounts.join('\n') + buildNextActionHint('mount'));
+        replier.reply(applyActionEffect('[탈것]\n' + player.mounts.join('\n') + buildNextActionHint('mount'), 'mount'));
         return;
     }
 
@@ -11951,7 +12685,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         if (player.mounts.indexOf(arg) === -1) { replier.reply('보유한 탈것이 아닙니다.'); return; }
         player.activeMount = arg;
         saveState();
-        replier.reply('탈것 탑승: ' + arg + buildNextActionHint('mount'));
+        replier.reply(applyActionEffect('탈것 탑승: ' + arg + buildNextActionHint('mount'), 'mount'));
         return;
     }
 
@@ -11959,7 +12693,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
     if (cmd === '도감') {
         var petCount = player.petCollection ? player.petCollection.length : 0;
         var mountCount = player.mounts ? player.mounts.length : 0;
-        replier.reply('[도감]\n펫: ' + petCount + '종\n탈것: ' + mountCount + '종');
+        replier.reply(applyActionEffect('[도감]\n펫: ' + petCount + '종\n탈것: ' + mountCount + '종', 'codex'));
         return;
     }
 
@@ -11969,7 +12703,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         var zlist = [];
         for (var zn in zones) zlist.push(zn);
         if (zlist.length === 0) { replier.reply('지역 데이터가 없습니다.'); return; }
-        replier.reply('[지역 목록]\n' + zlist.slice(0, 10).join('\n') + buildNextActionHint('zone'));
+        replier.reply(applyActionEffect('[지역 목록]\n' + zlist.slice(0, 10).join('\n') + buildNextActionHint('zone'), 'zone'));
         return;
     }
 
@@ -11989,7 +12723,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         player.currentZone = zname;
         if (player.discoveredZones.indexOf(zname) === -1) player.discoveredZones.push(zname);
         saveState();
-        replier.reply('지역 이동: ' + zname + buildNextActionHint('zone'));
+        replier.reply(applyActionEffect('지역 이동: ' + zname + buildNextActionHint('zone'), 'travel'));
         return;
     }
 
@@ -12004,7 +12738,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         var treasure = Math.random() < 0.2;
         if (treasure) addItem(player, '낡은 보물상자', 1);
         saveState();
-        replier.reply('탐험 성공: ' + found + (treasure ? '\n보물상자 발견!' : '') + buildNextActionHint('explore'));
+        replier.reply(applyActionEffect('탐험 성공: ' + found + (treasure ? '\n보물상자 발견!' : '') + buildNextActionHint('explore'), 'explore'));
         return;
     }
 
@@ -12018,7 +12752,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         removeItem(player, evol.requiredItem, 1);
         player.pet.type = evol.evolvesTo;
         saveState();
-        replier.reply('펫 진화 완료: ' + player.pet.type);
+        replier.reply(applyActionEffect('펫 진화 완료: ' + player.pet.type, 'pet-evolve'));
         return;
     }
 
@@ -12031,7 +12765,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
                 var resolvedName = resolveTreasureBoxName(it.name);
                 if (TreasureBoxData[resolvedName]) owned.push(it.name + ' x' + it.count);
             }
-            replier.reply('사용: .보물상자 <이름>\n보유 상자: ' + (owned.length ? '\n' + owned.join('\n') : '없음') + buildNextActionHint('treasure'));
+            replier.reply(applyActionEffect('사용: .보물상자 <이름>\n보유 상자: ' + (owned.length ? '\n' + owned.join('\n') : '없음') + buildNextActionHint('treasure'), 'treasure'));
             return;
         }
 
@@ -12057,7 +12791,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         var result = rollTreasureBoxReward(boxTable);
         addItem(player, result.item, result.count || 1);
         saveState();
-        replier.reply('보물상자 결과: ' + result.item + ' x' + (result.count || 1) + buildNextActionHint('treasure'));
+        replier.reply(applyActionEffect('보물상자 결과: ' + result.item + ' x' + (result.count || 1) + buildNextActionHint('treasure'), 'treasure'));
         return;
     }
 
@@ -12095,7 +12829,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         for (var k = 0; k < mountList.length; k++) combined.push('[탈것] ' + mountList[k]);
         var slice = combined.slice(start, start + perPage);
         var title = '[상점 비판매 목록' + (filter ? ' - ' + filter : '') + ']';
-        replier.reply(title + ' (' + page + '/' + totalPages + ')\n' + slice.join('\n') + buildNextActionHint('shop-list'));
+        replier.reply(applyActionEffect(title + ' (' + page + '/' + totalPages + ')\n' + slice.join('\n') + buildNextActionHint('shop-list'), 'shop'));
         return;
     }
 
@@ -12121,7 +12855,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             listPage = Math.max(1, Math.min(totalPages, listPage));
             var start = (listPage - 1) * perPage;
             var slice = shopKeys.slice(start, start + perPage);
-            replier.reply('[상점 목록] (' + listPage + '/' + totalPages + ')\n' + slice.join('\n') + '\n사용: .상점 <상점명> [페이지]' + buildNextActionHint('shop-list'));
+            replier.reply(applyActionEffect('[상점 목록] (' + listPage + '/' + totalPages + ')\n' + slice.join('\n') + '\n사용: .상점 <상점명> [페이지]' + buildNextActionHint('shop-list'), 'shop'));
             return;
         }
 
@@ -12157,7 +12891,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             outShop += '- ' + itemName + (price ? ' (' + price + 'G)' : '') + '\n';
         }
         outShop += '구매: .구매 <아이템>';
-        replier.reply(outShop.trim() + buildNextActionHint('shop-view'));
+        replier.reply(applyActionEffect(outShop.trim() + buildNextActionHint('shop-view'), 'shop'));
         return;
     }
 
@@ -12196,7 +12930,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         addItem(player, buy, 1);
         if (limit > 0) player.shopPurchases[key] = (player.shopPurchases[key] || 0) + 1;
         saveState();
-        replier.reply('구매 완료: ' + buy + buildNextActionHint('trade'));
+        replier.reply(applyActionEffect('구매 완료: ' + buy + buildNextActionHint('trade'), 'trade'));
         return;
     }
 
@@ -12209,7 +12943,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         removeItem(player, sell, 1);
         player.gold += value;
         saveState();
-        replier.reply('판매 완료: ' + sell + ' (+ ' + value + 'G)' + buildNextActionHint('trade'));
+        replier.reply(applyActionEffect('판매 완료: ' + sell + ' (+ ' + value + 'G)' + buildNextActionHint('trade'), 'trade'));
         return;
     }
 
@@ -12222,7 +12956,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             var it = listA[li];
             outA += (li + 1) + '. ' + it.item + ' x' + it.qty + ' - ' + it.price + 'G (판매자 ' + it.seller + ')\n';
         }
-        replier.reply(outA.trim());
+        replier.reply(applyActionEffect(outA.trim(), 'auction'));
         return;
     }
 
@@ -12240,7 +12974,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         player.gold -= fee;
         state.market.listings.push({ seller: sender, item: itemA, price: priceA, qty: qtyA });
         saveState();
-        replier.reply('경매 등록 완료: ' + itemA + ' x' + qtyA + ' (' + priceA + 'G)');
+        replier.reply(applyActionEffect('경매 등록 완료: ' + itemA + ' x' + qtyA + ' (' + priceA + 'G)', 'auction'));
         return;
     }
 
@@ -12261,7 +12995,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         }
         listB.splice(idx, 1);
         saveState();
-        replier.reply('경매 구매 완료: ' + listing.item + ' x' + listing.qty);
+        replier.reply(applyActionEffect('경매 구매 완료: ' + listing.item + ' x' + listing.qty, 'auction'));
         return;
     }
 
@@ -12278,7 +13012,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         addItem(player, l.item, l.qty);
         listC.splice(idxC, 1);
         saveState();
-        replier.reply('경매 취소 완료: ' + l.item + ' x' + l.qty);
+        replier.reply(applyActionEffect('경매 취소 완료: ' + l.item + ' x' + l.qty, 'auction'));
         return;
     }
 }
