@@ -277,10 +277,6 @@ var WorldLore = {
         quests: ['심연의 봉인', '공허의 파편', '감시자의 서약']
     };
 })();
-
-// ---------- gameData/zones.js ----------
-/* (중간 생략: 위와 동일한 원본 내용 전체가 포함됩니다) */
-
 /**
  * 묘냥의 숲 - 지역(Zone) 데이터
  * 각 지역의 정보, 몬스터, 던전, NPC 등
@@ -1127,6 +1123,10 @@ var ItemDatabase = {
     '불꽃검': { name: '불꽃검', type: 'weapon', subtype: 'sword', att: 55, price: 3500, level: 20, description: '불꽃이 깃든 검', special: '화염 데미지 +15' },
     '서리검': { name: '서리검', type: 'weapon', subtype: 'sword', att: 55, price: 3500, level: 20, description: '서리가 깃든 검', special: '빙결 데미지 +15' },
     '번개검': { name: '번개검', type: 'weapon', subtype: 'sword', att: 55, price: 3500, level: 20, description: '번개가 깃든 검', special: '전격 데미지 +15' },
+    '사막곡검': { name: '사막곡검', type: 'weapon', subtype: 'sword', att: 48, price: 2600, level: 20, description: '사막 전사들이 쓰는 곡선형 검' },
+    '드워프강철검': { name: '드워프강철검', type: 'weapon', subtype: 'sword', att: 95, price: 9000, level: 38, description: '드워프 강철로 벼린 검' },
+    '시간의검': { name: '시간의검', type: 'weapon', subtype: 'sword', att: 130, price: 20000, level: 55, description: '시간의 잔향을 품은 검' },
+    '성광의검': { name: '성광의검', type: 'weapon', subtype: 'sword', att: 160, price: 35000, level: 62, description: '성스러운 빛이 흐르는 검' },
     
     // --- 양손검 (Two-Handed Swords) ---
     '그레이트소드': { name: '그레이트소드', type: 'weapon', subtype: 'greatsword', att: 40, price: 1500, level: 10, description: '거대한 양손검' },
@@ -1142,6 +1142,7 @@ var ItemDatabase = {
     '대거': { name: '대거', type: 'weapon', subtype: 'dagger', att: 8, price: 80, level: 2, description: '일반 단검' },
     '스틸레토': { name: '스틸레토', type: 'weapon', subtype: 'dagger', att: 15, price: 250, level: 6, description: '찌르기용 단검' },
     '암살단검': { name: '암살단검', type: 'weapon', subtype: 'dagger', att: 25, price: 800, level: 12, description: '암살자의 단검', special: '치명타 확률 +10%' },
+    '늪지의단검': { name: '늪지의단검', type: 'weapon', subtype: 'dagger', att: 32, price: 1800, level: 22, description: '늪지의 독기가 스민 단검' },
     '독단검': { name: '독단검', type: 'weapon', subtype: 'dagger', att: 30, price: 1200, level: 15, description: '독이 묻은 단검', special: '독 데미지 +20' },
     '카타르': { name: '카타르', type: 'weapon', subtype: 'dagger', att: 35, price: 1500, level: 18, description: '인도식 단검' },
     '미스릴대거': { name: '미스릴대거', type: 'weapon', subtype: 'dagger', att: 50, price: 3000, level: 25, description: '미스릴 단검' },
@@ -1153,6 +1154,7 @@ var ItemDatabase = {
     '전투도끼': { name: '전투도끼', type: 'weapon', subtype: 'axe', att: 22, price: 400, level: 7, description: '전투용 도끼' },
     '배틀액스': { name: '배틀액스', type: 'weapon', subtype: 'axe', att: 35, price: 1000, level: 12, description: '양날 전투도끼' },
     '워액스': { name: '워액스', type: 'weapon', subtype: 'axe', att: 50, price: 2000, level: 18, description: '전쟁용 대형 도끼' },
+    '서리거인의망치': { name: '서리거인의망치', type: 'weapon', subtype: 'axe', att: 78, price: 4200, level: 26, description: '서리거인의 기운이 깃든 망치' },
     '피의도끼': { name: '피의도끼', type: 'weapon', subtype: 'axe', att: 70, price: 5000, level: 28, description: '피에 물든 도끼', special: '생명력 흡수 5%' },
     '버서커액스': { name: '버서커액스', type: 'weapon', subtype: 'axe', att: 100, price: 15000, level: 40, description: '광전사의 도끼', special: '체력이 낮을수록 공격력 증가' },
     '타이탄의도끼': { name: '타이탄의도끼', type: 'weapon', subtype: 'axe', att: 160, price: 50000, level: 55, legendary: true, description: '거인의 전설적인 도끼' },
@@ -1163,6 +1165,8 @@ var ItemDatabase = {
     '파이크': { name: '파이크', type: 'weapon', subtype: 'polearm', att: 25, price: 500, level: 10, description: '긴 창' },
     '할버드': { name: '할버드', type: 'weapon', subtype: 'polearm', att: 45, price: 1800, level: 18, description: '도끼창' },
     '글레이브': { name: '글레이브', type: 'weapon', subtype: 'polearm', att: 60, price: 3500, level: 25, description: '월도' },
+    '폭풍창': { name: '폭풍창', type: 'weapon', subtype: 'polearm', att: 85, price: 5200, level: 32, description: '폭풍의 기운을 품은 창' },
+    '공허의창': { name: '공허의창', type: 'weapon', subtype: 'polearm', att: 140, price: 26000, level: 58, description: '공허의 기운이 응축된 창' },
     '드래곤랜스': { name: '드래곤랜스', type: 'weapon', subtype: 'polearm', att: 100, price: 18000, level: 42, description: '용을 찌르는 창' },
     '천공창': { name: '천공창', type: 'weapon', subtype: 'polearm', att: 150, price: 55000, level: 58, legendary: true, description: '하늘을 찌르는 창' },
     '신의창롱기누스': { name: '신의창롱기누스', type: 'weapon', subtype: 'polearm', att: 230, price: 200000, level: 75, legendary: true, description: '신을 찌른 전설의 창' },
@@ -1174,6 +1178,7 @@ var ItemDatabase = {
     '컴파운드보우': { name: '컴파운드보우', type: 'weapon', subtype: 'bow', att: 35, price: 1000, level: 15, description: '복합궁' },
     '리커브보우': { name: '리커브보우', type: 'weapon', subtype: 'bow', att: 28, price: 700, level: 12, description: '반곡궁' },
     '엘프활': { name: '엘프활', type: 'weapon', subtype: 'bow', att: 55, price: 3000, level: 25, description: '엘프제 정밀활' },
+    '실버문활': { name: '실버문활', type: 'weapon', subtype: 'bow', att: 75, price: 8500, level: 35, description: '실버문에서 제작된 정교한 활' },
     '윈드슈터': { name: '윈드슈터', type: 'weapon', subtype: 'bow', att: 80, price: 10000, level: 38, description: '바람을 담은 활' },
     '아폴로의활': { name: '아폴로의활', type: 'weapon', subtype: 'bow', att: 140, price: 50000, level: 55, legendary: true, description: '태양신의 활' },
     '별이내리는밤': { name: '별이내리는밤', type: 'weapon', subtype: 'bow', att: 200, price: 120000, level: 70, legendary: true, description: '별을 쏘는 전설의 활' },
@@ -1187,6 +1192,8 @@ var ItemDatabase = {
     '빙결의지팡이': { name: '빙결의지팡이', type: 'weapon', subtype: 'staff', att: 15, magic: 60, price: 3000, level: 28, description: '빙결 마법 강화 지팡이' },
     '번개의지팡이': { name: '번개의지팡이', type: 'weapon', subtype: 'staff', att: 15, magic: 60, price: 3000, level: 28, description: '번개 마법 강화 지팡이' },
     '대마법사의지팡이': { name: '대마법사의지팡이', type: 'weapon', subtype: 'staff', att: 25, magic: 100, price: 15000, level: 45, description: '대마법사의 지팡이' },
+    '고대마법지팡이': { name: '고대마법지팡이', type: 'weapon', subtype: 'staff', att: 30, magic: 130, price: 24000, level: 55, description: '고대 마법이 깃든 지팡이' },
+    '성광지팡이': { name: '성광지팡이', type: 'weapon', subtype: 'staff', att: 35, magic: 160, price: 35000, level: 62, description: '성스러운 빛의 마법 지팡이' },
     '아케인스태프': { name: '아케인스태프', type: 'weapon', subtype: 'staff', att: 35, magic: 150, price: 40000, level: 58, description: '비전 마법 지팡이' },
     '세계수지팡이': { name: '세계수지팡이', type: 'weapon', subtype: 'staff', att: 50, magic: 220, price: 120000, level: 70, legendary: true, description: '세계수의 가지로 만든 지팡이' },
     '시간의지팡이': { name: '시간의지팡이', type: 'weapon', subtype: 'staff', att: 60, magic: 280, price: 200000, level: 80, legendary: true, description: '시간을 조작하는 지팡이' },
@@ -1212,6 +1219,13 @@ var ItemDatabase = {
     '체인메일': { name: '체인메일', type: 'armor', subtype: 'body', def: 15, price: 350, level: 8, description: '사슬 갑옷' },
     '철갑옷': { name: '철갑옷', type: 'armor', subtype: 'body', def: 25, price: 800, level: 15, description: '철제 갑옷' },
     '강철갑옷': { name: '강철갑옷', type: 'armor', subtype: 'body', def: 40, price: 2000, level: 25, description: '강철 갑옷' },
+    '빙설갑옷': { name: '빙설갑옷', type: 'armor', subtype: 'body', def: 46, price: 4200, level: 28, description: '빙설의 기운을 담은 갑옷' },
+    '부패가죽갑옷': { name: '부패가죽갑옷', type: 'armor', subtype: 'body', def: 34, price: 2500, level: 22, description: '늪지의 기운이 스민 가죽갑옷' },
+    '천공갑옷': { name: '천공갑옷', type: 'armor', subtype: 'body', def: 60, price: 8000, level: 40, description: '천공의 기운이 담긴 갑옷' },
+    '드워프강철갑옷': { name: '드워프강철갑옷', type: 'armor', subtype: 'body', def: 70, price: 14000, level: 45, description: '드워프 강철로 제작된 갑옷' },
+    '차원방어구': { name: '차원방어구', type: 'armor', subtype: 'body', def: 90, price: 26000, level: 55, description: '차원의 힘으로 강화된 방어구' },
+    '용암갑옷': { name: '용암갑옷', type: 'armor', subtype: 'body', def: 95, price: 28000, level: 58, description: '용암의 열기를 견디는 갑옷' },
+    '성역갑옷': { name: '성역갑옷', type: 'armor', subtype: 'body', def: 110, price: 36000, level: 62, description: '신성한 힘이 깃든 갑옷' },
     '플레이트아머': { name: '플레이트아머', type: 'armor', subtype: 'body', def: 55, price: 4000, level: 35, description: '판금 갑옷' },
     '미스릴갑옷': { name: '미스릴갑옷', type: 'armor', subtype: 'body', def: 75, price: 10000, level: 45, description: '미스릴 갑옷' },
     '용린갑옷': { name: '용린갑옷', type: 'armor', subtype: 'body', def: 100, price: 30000, level: 55, description: '용 비늘 갑옷' },
@@ -1222,6 +1236,11 @@ var ItemDatabase = {
     '수련생로브': { name: '수련생로브', type: 'armor', subtype: 'robe', def: 2, magic: 5, price: 50, level: 1, description: '수련생 로브' },
     '마법사로브': { name: '마법사로브', type: 'armor', subtype: 'robe', def: 5, magic: 15, price: 200, level: 8, description: '마법사 로브' },
     '위자드로브': { name: '위자드로브', type: 'armor', subtype: 'robe', def: 10, magic: 30, price: 600, level: 18, description: '위자드 로브' },
+    '오아시스로브': { name: '오아시스로브', type: 'armor', subtype: 'robe', def: 12, magic: 28, price: 2200, level: 22, description: '오아시스의 생명력이 깃든 로브' },
+    '실버문로브': { name: '실버문로브', type: 'armor', subtype: 'robe', def: 16, magic: 45, price: 5200, level: 30, description: '실버문의 달빛이 스민 로브' },
+    '심연로브': { name: '심연로브', type: 'armor', subtype: 'robe', def: 25, magic: 80, price: 22000, level: 55, description: '심연의 어둠이 스며든 로브' },
+    '성광로브': { name: '성광로브', type: 'armor', subtype: 'robe', def: 28, magic: 95, price: 30000, level: 60, description: '성스러운 빛으로 강화된 로브' },
+    '용암로브': { name: '용암로브', type: 'armor', subtype: 'robe', def: 24, magic: 90, price: 28000, level: 58, description: '용암의 열기를 머금은 로브' },
     '대마법사로브': { name: '대마법사로브', type: 'armor', subtype: 'robe', def: 18, magic: 55, price: 2500, level: 32, description: '대마법사 로브' },
     '아케인로브': { name: '아케인로브', type: 'armor', subtype: 'robe', def: 30, magic: 90, price: 10000, level: 50, description: '비전 로브' },
     '천상의로브': { name: '천상의로브', type: 'armor', subtype: 'robe', def: 45, magic: 140, price: 35000, level: 65, legendary: true, description: '천상의 기운이 담긴 로브' },
@@ -1248,8 +1267,15 @@ var ItemDatabase = {
     // --- 방패 (Shields) ---
     '나무방패': { name: '나무방패', type: 'armor', subtype: 'shield', def: 5, price: 60, level: 2, description: '나무 방패' },
     '철방패': { name: '철방패', type: 'armor', subtype: 'shield', def: 15, price: 250, level: 8, description: '철 방패' },
+    '태양석방패': { name: '태양석방패', type: 'armor', subtype: 'shield', def: 28, price: 2600, level: 22, description: '태양석으로 강화된 방패' },
     '타워실드': { name: '타워실드', type: 'armor', subtype: 'shield', def: 30, price: 800, level: 18, description: '대형 방패' },
     '강철방패': { name: '강철방패', type: 'armor', subtype: 'shield', def: 40, price: 1800, level: 28, description: '강철 방패' },
+    '서리수호방패': { name: '서리수호방패', type: 'armor', subtype: 'shield', def: 38, price: 3600, level: 30, description: '서리의 수호가 깃든 방패' },
+    '용광로방패': { name: '용광로방패', type: 'armor', subtype: 'shield', def: 65, price: 12000, level: 42, description: '용광로의 열기를 담은 방패' },
+    '차원방패': { name: '차원방패', type: 'armor', subtype: 'shield', def: 85, price: 24000, level: 55, description: '차원의 수호가 깃든 방패' },
+    '암흑방패': { name: '암흑방패', type: 'armor', subtype: 'shield', def: 95, price: 26000, level: 58, description: '암흑의 정수가 스민 방패' },
+    '성역방패': { name: '성역방패', type: 'armor', subtype: 'shield', def: 105, price: 34000, level: 62, description: '성역의 빛으로 강화된 방패' },
+    '용암방패': { name: '용암방패', type: 'armor', subtype: 'shield', def: 100, price: 30000, level: 60, description: '용암의 열기를 견디는 방패' },
     '미스릴방패': { name: '미스릴방패', type: 'armor', subtype: 'shield', def: 60, price: 5000, level: 40, description: '미스릴 방패' },
     '드래곤실드': { name: '드래곤실드', type: 'armor', subtype: 'shield', def: 90, price: 20000, level: 55, description: '용 비늘 방패' },
     '이지스': { name: '이지스', type: 'armor', subtype: 'shield', def: 150, price: 100000, level: 75, legendary: true, description: '신의 방패 이지스' },
@@ -1266,6 +1292,11 @@ var ItemDatabase = {
     '사파이어반지': { name: '사파이어반지', type: 'accessory', subtype: 'ring', magic: 15, price: 1500, level: 25, description: '사파이어가 박힌 반지' },
     '에메랄드반지': { name: '에메랄드반지', type: 'accessory', subtype: 'ring', hp: 50, price: 1500, level: 25, description: '에메랄드가 박힌 반지' },
     '다이아몬드반지': { name: '다이아몬드반지', type: 'accessory', subtype: 'ring', att: 15, def: 10, price: 5000, level: 40, description: '다이아몬드가 박힌 반지' },
+    '하늘반지': { name: '하늘반지', type: 'accessory', subtype: 'ring', magic: 20, def: 12, price: 5200, level: 34, description: '하늘의 기운이 깃든 반지' },
+    '지하수정반지': { name: '지하수정반지', type: 'accessory', subtype: 'ring', def: 18, magic: 10, price: 9500, level: 40, description: '지하수정이 박힌 반지' },
+    '차원반지': { name: '차원반지', type: 'accessory', subtype: 'ring', att: 18, magic: 18, price: 18000, level: 52, description: '차원의 힘이 깃든 반지' },
+    '타락의반지': { name: '타락의반지', type: 'accessory', subtype: 'ring', att: 22, def: 12, price: 20000, level: 56, description: '타락한 힘이 스민 반지' },
+    '성역의반지': { name: '성역의반지', type: 'accessory', subtype: 'ring', att: 20, hp: 120, price: 26000, level: 60, description: '성역의 축복이 깃든 반지' },
     '생명의반지': { name: '생명의반지', type: 'accessory', subtype: 'ring', hp: 200, price: 10000, level: 50, description: '생명력을 높이는 반지' },
     '힘의반지': { name: '힘의반지', type: 'accessory', subtype: 'ring', att: 30, price: 12000, level: 55, description: '공격력을 높이는 반지' },
     '마력의반지': { name: '마력의반지', type: 'accessory', subtype: 'ring', magic: 40, price: 12000, level: 55, description: '마력을 높이는 반지' },
@@ -1277,6 +1308,11 @@ var ItemDatabase = {
     '금목걸이': { name: '금목걸이', type: 'accessory', subtype: 'necklace', def: 10, price: 700, level: 18, description: '금 목걸이' },
     '호신부': { name: '호신부', type: 'accessory', subtype: 'necklace', def: 20, price: 2000, level: 30, description: '몸을 지키는 부적 목걸이' },
     '마력의목걸이': { name: '마력의목걸이', type: 'accessory', subtype: 'necklace', magic: 30, price: 3500, level: 38, description: '마력을 높이는 목걸이' },
+    '달빛펜던트': { name: '달빛펜던트', type: 'accessory', subtype: 'necklace', magic: 28, hp: 60, price: 4800, level: 30, description: '달빛이 응축된 펜던트' },
+    '드워프부적': { name: '드워프부적', type: 'accessory', subtype: 'necklace', def: 20, hp: 50, price: 9000, level: 40, description: '드워프의 수호가 깃든 부적' },
+    '차원부적': { name: '차원부적', type: 'accessory', subtype: 'necklace', magic: 35, hp: 80, price: 18000, level: 52, description: '차원 에너지가 흐르는 부적' },
+    '성광펜던트': { name: '성광펜던트', type: 'accessory', subtype: 'necklace', magic: 40, hp: 100, price: 26000, level: 60, description: '성광의 힘이 응축된 펜던트' },
+    '불꽃펜던트': { name: '불꽃펜던트', type: 'accessory', subtype: 'necklace', att: 25, magic: 20, price: 24000, level: 58, description: '불꽃의 열기가 담긴 펜던트' },
     '불사조의깃털': { name: '불사조의깃털', type: 'accessory', subtype: 'necklace', hp: 150, price: 8000, level: 45, description: '불사조 깃털 목걸이' },
     '드래곤펜던트': { name: '드래곤펜던트', type: 'accessory', subtype: 'necklace', att: 25, def: 15, price: 15000, level: 55, description: '용의 펜던트' },
     '영혼의목걸이': { name: '영혼의목걸이', type: 'accessory', subtype: 'necklace', att: 40, magic: 40, price: 40000, level: 65, legendary: true, description: '영혼의 힘이 깃든 목걸이' },
@@ -1303,7 +1339,26 @@ var ItemDatabase = {
     '은신의망토': { name: '은신의망토', type: 'accessory', subtype: 'cloak', def: 20, price: 3000, level: 35, description: '은신 효과가 있는 망토' },
     '영웅의망토': { name: '영웅의망토', type: 'accessory', subtype: 'cloak', def: 35, att: 15, price: 8000, level: 48, description: '영웅의 망토' },
     '드래곤망토': { name: '드래곤망토', type: 'accessory', subtype: 'cloak', def: 50, att: 25, price: 25000, level: 60, description: '용 가죽 망토' },
-    '불사조의날개망토': { name: '불사조의날개망토', type: 'accessory', subtype: 'cloak', def: 70, att: 40, hp: 150, price: 80000, level: 75, legendary: true, description: '불사조 날개로 만든 망토' }
+    '불사조의날개망토': { name: '불사조의날개망토', type: 'accessory', subtype: 'cloak', def: 70, att: 40, hp: 150, price: 80000, level: 75, legendary: true, description: '불사조 날개로 만든 망토' },
+
+    // --- 지역 특산 장신구 ---
+    '오아시스목걸이': { name: '오아시스목걸이', type: 'accessory', subtype: 'necklace', hp: 80, magic: 10, price: 3200, level: 22, description: '오아시스의 생명력이 깃든 목걸이' },
+    '모래바람망토': { name: '모래바람망토', type: 'accessory', subtype: 'cloak', def: 18, hp: 40, price: 3000, level: 24, description: '사막의 모래바람을 막아주는 망토' },
+    '서리늑대반지': { name: '서리늑대반지', type: 'accessory', subtype: 'ring', def: 12, hp: 40, price: 3200, level: 24, description: '서리늑대의 기운이 깃든 반지' },
+    '설원벨트': { name: '설원벨트', type: 'accessory', subtype: 'belt', def: 14, hp: 30, price: 3500, level: 26, description: '차가운 설원에서 단련된 벨트' },
+    '늪지부적': { name: '늪지부적', type: 'accessory', subtype: 'necklace', def: 16, price: 2800, level: 24, description: '습지의 저주를 막아주는 부적' },
+    '안개귀걸이': { name: '안개귀걸이', type: 'accessory', subtype: 'earring', magic: 18, price: 3200, level: 26, description: '안개 속 마력을 담은 귀걸이' },
+    '천공부적': { name: '천공부적', type: 'accessory', subtype: 'necklace', magic: 35, att: 15, price: 12000, level: 45, description: '하늘의 기운이 흐르는 부적' },
+    '뇌운귀걸이': { name: '뇌운귀걸이', type: 'accessory', subtype: 'earring', magic: 25, def: 12, price: 9000, level: 40, description: '뇌운의 기운이 깃든 귀걸이' },
+    '달빛반지': { name: '달빛반지', type: 'accessory', subtype: 'ring', magic: 25, price: 9000, level: 38, description: '달빛의 마력이 흐르는 반지' },
+    '엘프의망토': { name: '엘프의망토', type: 'accessory', subtype: 'cloak', def: 22, magic: 18, price: 6500, level: 35, description: '엘프들이 만든 섬세한 망토' },
+
+    // --- 지역 평판 코스튬 ---
+    '사막 비단망토': { name: '사막 비단망토', type: 'accessory', subtype: 'cloak', def: 12, hp: 30, price: 4000, level: 24, description: '사막의 비단으로 만든 코스튬 망토' },
+    '빙설 수호망토': { name: '빙설 수호망토', type: 'accessory', subtype: 'cloak', def: 16, hp: 40, price: 7000, level: 34, description: '빙설의 기운이 깃든 코스튬 망토' },
+    '늪지 안개망토': { name: '늪지 안개망토', type: 'accessory', subtype: 'cloak', def: 14, hp: 35, price: 9000, level: 42, description: '안개가 감도는 코스튬 망토' },
+    '천공 비행망토': { name: '천공 비행망토', type: 'accessory', subtype: 'cloak', def: 18, hp: 50, price: 15000, level: 52, description: '하늘을 닮은 코스튬 망토' },
+    '고대 서고망토': { name: '고대 서고망토', type: 'accessory', subtype: 'cloak', def: 22, hp: 70, price: 22000, level: 62, description: '고대의 문양이 새겨진 코스튬 망토' }
 };
 
 // ========================================
@@ -1524,6 +1579,36 @@ var ConsumableDatabase = {
     '다이아몬드원석': { name: '다이아몬드원석', type: 'material', subtype: 'gem', price: 1000, level: 40, description: '투명한 원석' },
     '오팔': { name: '오팔', type: 'material', subtype: 'gem', price: 500, level: 35, description: '무지개빛 보석' },
     '별의파편': { name: '별의파편', type: 'material', subtype: 'gem', price: 5000, level: 60, description: '별에서 떨어진 파편' },
+
+    // --- 지역 특산 재료 ---
+    '사막향신료': { name: '사막향신료', type: 'material', subtype: 'spice', price: 120, level: 18, description: '사막의 향이 진한 향신료' },
+    '태양석파편': { name: '태양석파편', type: 'material', subtype: 'mineral', price: 220, level: 20, description: '태양의 열기를 머금은 파편' },
+    '빙설결정': { name: '빙설결정', type: 'material', subtype: 'mineral', price: 260, level: 22, description: '차가운 기운이 맺힌 결정' },
+    '서리꽃': { name: '서리꽃', type: 'material', subtype: 'herb', price: 180, level: 22, description: '얼음 속에서 피어난 꽃' },
+    '늪지이끼덩이': { name: '늪지이끼덩이', type: 'material', subtype: 'herb', price: 140, level: 20, description: '습지에서 채취한 이끼 덩이' },
+    '유령의정수': { name: '유령의정수', type: 'material', subtype: 'essence', price: 260, level: 28, description: '유령의 기운이 응축된 정수' },
+    '폭풍결정': { name: '폭풍결정', type: 'material', subtype: 'mineral', price: 650, level: 35, description: '폭풍의 기운이 담긴 결정' },
+    '천둥돌': { name: '천둥돌', type: 'material', subtype: 'mineral', price: 720, level: 35, description: '천둥의 기운을 품은 돌' },
+    '하늘수정': { name: '하늘수정', type: 'material', subtype: 'gem', price: 950, level: 40, description: '하늘의 빛이 스며든 수정' },
+    '달빛꽃정수': { name: '달빛꽃정수', type: 'material', subtype: 'herb', price: 420, level: 32, description: '달빛꽃에서 추출한 정수' },
+    '아다만타이트': { name: '아다만타이트', type: 'material', subtype: 'ore', price: 600, level: 32, description: '드워프들이 쓰는 고급 광석' },
+    '드워프강철': { name: '드워프강철', type: 'material', subtype: 'metal', price: 900, level: 38, description: '드워프가 단련한 강철' },
+    '용광로의 불꽃': { name: '용광로의 불꽃', type: 'material', subtype: 'essence', price: 1200, level: 40, description: '용광로의 열기가 응축된 불꽃' },
+    '지하수정': { name: '지하수정', type: 'material', subtype: 'gem', price: 1500, level: 40, description: '지하 깊은 곳에서 채굴한 수정' },
+    '시간의 모래': { name: '시간의 모래', type: 'material', subtype: 'essence', price: 2200, level: 50, description: '시간의 흐름이 담긴 모래' },
+    '고대 마법석': { name: '고대 마법석', type: 'material', subtype: 'gem', price: 2600, level: 52, description: '고대 문명의 마법이 응축된 돌' },
+    '차원의 파편': { name: '차원의 파편', type: 'material', subtype: 'essence', price: 2800, level: 55, description: '차원의 틈에서 나온 파편' },
+    '공허의 핵': { name: '공허의 핵', type: 'material', subtype: 'essence', price: 3500, level: 58, description: '공허의 중심에서 나온 핵' },
+    '타락한 영혼': { name: '타락한 영혼', type: 'material', subtype: 'essence', price: 3000, level: 56, description: '타락한 존재의 영혼' },
+    '심연의 수정': { name: '심연의 수정', type: 'material', subtype: 'gem', price: 3200, level: 58, description: '심연의 기운이 스민 수정' },
+    '암흑의 정수': { name: '암흑의 정수', type: 'material', subtype: 'essence', price: 3000, level: 56, description: '암흑의 힘이 응축된 정수' },
+    '신성한 빛': { name: '신성한 빛', type: 'material', subtype: 'essence', price: 3600, level: 60, description: '신성한 빛의 파편' },
+    '생명의 물': { name: '생명의 물', type: 'material', subtype: 'essence', price: 3800, level: 60, description: '생명의 기운이 담긴 물' },
+    '축복의 정수': { name: '축복의 정수', type: 'material', subtype: 'essence', price: 4000, level: 62, description: '축복이 응축된 정수' },
+    '영원한 불꽃': { name: '영원한 불꽃', type: 'material', subtype: 'essence', price: 3600, level: 60, description: '꺼지지 않는 불꽃' },
+    '용암의 핵': { name: '용암의 핵', type: 'material', subtype: 'essence', price: 3800, level: 60, description: '용암의 중심에서 나온 핵' },
+    '불의 정수': { name: '불의 정수', type: 'material', subtype: 'essence', price: 3500, level: 58, description: '불의 힘이 응축된 정수' },
+    '태양의 파편': { name: '태양의 파편', type: 'material', subtype: 'gem', price: 4200, level: 62, description: '태양의 열기를 담은 파편' },
     
     // --- 몬스터 드랍 재료 ---
     '슬라임젤리': { name: '슬라임젤리', type: 'material', subtype: 'monster', price: 10, level: 1, description: '슬라임에서 얻은 젤리' },
@@ -1865,6 +1950,16 @@ var CollectibleDatabase = {
     '상인소환서': { name: '상인소환서', type: 'special', subtype: 'summon', effect: 'summonMerchant', uses: 1, price: 500, description: '상인을 소환한다' },
     '대장장이소환서': { name: '대장장이소환서', type: 'special', subtype: 'summon', effect: 'summonBlacksmith', uses: 1, price: 500, description: '대장장이를 소환한다' },
     '수리도구': { name: '수리도구', type: 'special', subtype: 'repair', effect: 'repairAll', uses: 3, price: 800, description: '장비 수리 (3회)' },
+    '던전 재도전권': { name: '던전 재도전권', type: 'special', subtype: 'retry', effect: 'retryDungeon', uses: 1, price: 2000, description: '주간 던전 재도전 1회' },
+    '심연의 열쇠': { name: '심연의 열쇠', type: 'special', subtype: 'key', effect: 'dungeonKey', uses: 1, price: 5000, description: '심연의 던전 입장에 사용' },
+    '시즌 던전 입장권': { name: '시즌 던전 입장권', type: 'special', subtype: 'key', effect: 'seasonKey', uses: 1, price: 3000, description: '시즌 던전 입장에 사용' },
+
+    // --- 평판 상점 전용 설계도/코스튬 ---
+    '사막 장인의 설계도': { name: '사막 장인의 설계도', type: 'special', subtype: 'recipe', price: 3500, description: '사막 비단망토 제작에 사용' },
+    '북방 제련 설계도': { name: '북방 제련 설계도', type: 'special', subtype: 'recipe', price: 4500, description: '빙설 수호망토 제작에 사용' },
+    '습지 비전 설계도': { name: '습지 비전 설계도', type: 'special', subtype: 'recipe', price: 5500, description: '늪지 안개망토 제작에 사용' },
+    '천공 공학 설계도': { name: '천공 공학 설계도', type: 'special', subtype: 'recipe', price: 7000, description: '천공 비행망토 제작에 사용' },
+    '폐허 고대 설계도': { name: '폐허 고대 설계도', type: 'special', subtype: 'recipe', price: 9000, description: '고대 서고망토 제작에 사용' },
     
     // --- 강화/제작 아이템 ---
     '강화석': { name: '강화석', type: 'special', subtype: 'upgrade', effect: 'upgrade', successRate: 70, price: 1000, description: '장비 강화에 사용 (성공률 70%)' },
@@ -3083,6 +3178,94 @@ var CraftingRecipes = {
         skillLevel: 15,
         time: 120
     },
+    '사막곡검': {
+        result: '사막곡검',
+        resultCount: 1,
+        materials: [{ item: '강철주괴', count: 4 }, { item: '태양석파편', count: 3 }, { item: '참나무목재', count: 2 }],
+        skill: '대장장이',
+        skillLevel: 12,
+        time: 90
+    },
+    '서리거인의망치': {
+        result: '서리거인의망치',
+        resultCount: 1,
+        materials: [{ item: '강철주괴', count: 6 }, { item: '빙설결정', count: 4 }, { item: '참나무목재', count: 2 }],
+        skill: '대장장이',
+        skillLevel: 16,
+        time: 110
+    },
+    '늪지의단검': {
+        result: '늪지의단검',
+        resultCount: 1,
+        materials: [{ item: '강철주괴', count: 3 }, { item: '늪지이끼덩이', count: 3 }, { item: '가죽조각', count: 2 }],
+        skill: '대장장이',
+        skillLevel: 10,
+        time: 70
+    },
+    '폭풍창': {
+        result: '폭풍창',
+        resultCount: 1,
+        materials: [{ item: '강철주괴', count: 5 }, { item: '폭풍결정', count: 2 }, { item: '천둥돌', count: 2 }],
+        skill: '대장장이',
+        skillLevel: 18,
+        time: 120
+    },
+    '실버문활': {
+        result: '실버문활',
+        resultCount: 1,
+        materials: [{ item: '단풍나무목재', count: 4 }, { item: '하늘수정', count: 1 }, { item: '달빛꽃정수', count: 2 }],
+        skill: '대장장이',
+        skillLevel: 16,
+        time: 95
+    },
+    '드워프강철검': {
+        result: '드워프강철검',
+        resultCount: 1,
+        materials: [{ item: '드워프강철', count: 5 }, { item: '아다만타이트', count: 2 }, { item: '용광로의 불꽃', count: 1 }],
+        skill: '대장장이',
+        skillLevel: 20,
+        time: 140
+    },
+    '시간의검': {
+        result: '시간의검',
+        resultCount: 1,
+        materials: [{ item: '미스릴주괴', count: 6 }, { item: '시간의 모래', count: 3 }, { item: '고대 마법석', count: 2 }],
+        skill: '대장장이',
+        skillLevel: 26,
+        time: 180
+    },
+    '공허의창': {
+        result: '공허의창',
+        resultCount: 1,
+        materials: [{ item: '아다만틴주괴', count: 6 }, { item: '공허의 핵', count: 2 }, { item: '암흑의 정수', count: 2 }],
+        skill: '대장장이',
+        skillLevel: 28,
+        time: 200
+    },
+    '성광의검': {
+        result: '성광의검',
+        resultCount: 1,
+        materials: [{ item: '아다만틴주괴', count: 6 }, { item: '신성한 빛', count: 2 }, { item: '축복의 정수', count: 2 }],
+        skill: '대장장이',
+        skillLevel: 30,
+        time: 220
+    },
+    '고대마법지팡이': {
+        result: '고대마법지팡이',
+        resultCount: 1,
+        materials: [{ item: '고대 마법석', count: 3 }, { item: '차원의 파편', count: 2 }, { item: '단풍나무목재', count: 3 }],
+        skill: '대장장이',
+        skillLevel: 26,
+        time: 170
+    },
+    '성광지팡이': {
+        result: '성광지팡이',
+        resultCount: 1,
+        materials: [{ item: '신성한 빛', count: 3 }, { item: '생명의 물', count: 2 }, { item: '세계수나뭇가지', count: 1 }],
+        skill: '대장장이',
+        skillLevel: 30,
+        time: 200
+    },
     '드래곤슬레이어': {
         result: '드래곤슬레이어',
         resultCount: 1,
@@ -3108,6 +3291,158 @@ var CraftingRecipes = {
         skill: '대장장이',
         skillLevel: 8,
         time: 90
+    },
+    '빙설갑옷': {
+        result: '빙설갑옷',
+        resultCount: 1,
+        materials: [{ item: '강철주괴', count: 6 }, { item: '빙설결정', count: 3 }, { item: '고급가죽', count: 3 }],
+        skill: '대장장이',
+        skillLevel: 14,
+        time: 110
+    },
+    '오아시스로브': {
+        result: '오아시스로브',
+        resultCount: 1,
+        materials: [{ item: '천조각', count: 4 }, { item: '사막향신료', count: 2 }, { item: '마력의천', count: 1 }],
+        skill: '재봉',
+        skillLevel: 10,
+        time: 70
+    },
+    '부패가죽갑옷': {
+        result: '부패가죽갑옷',
+        resultCount: 1,
+        materials: [{ item: '가죽조각', count: 6 }, { item: '늪지이끼덩이', count: 3 }, { item: '유령의정수', count: 1 }],
+        skill: '재봉',
+        skillLevel: 12,
+        time: 85
+    },
+    '천공갑옷': {
+        result: '천공갑옷',
+        resultCount: 1,
+        materials: [{ item: '미스릴주괴', count: 6 }, { item: '천둥돌', count: 2 }, { item: '하늘수정', count: 2 }],
+        skill: '대장장이',
+        skillLevel: 20,
+        time: 140
+    },
+    '드워프강철갑옷': {
+        result: '드워프강철갑옷',
+        resultCount: 1,
+        materials: [{ item: '드워프강철', count: 6 }, { item: '아다만타이트', count: 3 }, { item: '용광로의 불꽃', count: 1 }],
+        skill: '대장장이',
+        skillLevel: 22,
+        time: 160
+    },
+    '차원방어구': {
+        result: '차원방어구',
+        resultCount: 1,
+        materials: [{ item: '아다만틴주괴', count: 6 }, { item: '차원의 파편', count: 2 }, { item: '고대 마법석', count: 2 }],
+        skill: '대장장이',
+        skillLevel: 26,
+        time: 190
+    },
+    '용암갑옷': {
+        result: '용암갑옷',
+        resultCount: 1,
+        materials: [{ item: '아다만틴주괴', count: 6 }, { item: '용암의 핵', count: 2 }, { item: '영원한 불꽃', count: 2 }],
+        skill: '대장장이',
+        skillLevel: 28,
+        time: 200
+    },
+    '성역갑옷': {
+        result: '성역갑옷',
+        resultCount: 1,
+        materials: [{ item: '아다만틴주괴', count: 6 }, { item: '신성한 빛', count: 2 }, { item: '축복의 정수', count: 2 }],
+        skill: '대장장이',
+        skillLevel: 30,
+        time: 210
+    },
+    '실버문로브': {
+        result: '실버문로브',
+        resultCount: 1,
+        materials: [{ item: '천조각', count: 5 }, { item: '달빛꽃정수', count: 3 }, { item: '엘프 허브', count: 1 }],
+        skill: '재봉',
+        skillLevel: 15,
+        time: 100
+    },
+    '심연로브': {
+        result: '심연로브',
+        resultCount: 1,
+        materials: [{ item: '마력의천', count: 3 }, { item: '심연의 수정', count: 2 }, { item: '암흑의 정수', count: 2 }],
+        skill: '재봉',
+        skillLevel: 26,
+        time: 170
+    },
+    '성광로브': {
+        result: '성광로브',
+        resultCount: 1,
+        materials: [{ item: '마력의천', count: 3 }, { item: '신성한 빛', count: 2 }, { item: '생명의 물', count: 2 }],
+        skill: '재봉',
+        skillLevel: 28,
+        time: 180
+    },
+    '용암로브': {
+        result: '용암로브',
+        resultCount: 1,
+        materials: [{ item: '마력의천', count: 3 }, { item: '영원한 불꽃', count: 2 }, { item: '불의 정수', count: 2 }],
+        skill: '재봉',
+        skillLevel: 28,
+        time: 180
+    },
+    '용광로방패': {
+        result: '용광로방패',
+        resultCount: 1,
+        materials: [{ item: '드워프강철', count: 4 }, { item: '용광로의 불꽃', count: 1 }, { item: '지하수정', count: 1 }],
+        skill: '대장장이',
+        skillLevel: 20,
+        time: 130
+    },
+    '차원방패': {
+        result: '차원방패',
+        resultCount: 1,
+        materials: [{ item: '아다만틴주괴', count: 4 }, { item: '차원의 파편', count: 2 }, { item: '고대 마법석', count: 1 }],
+        skill: '대장장이',
+        skillLevel: 26,
+        time: 170
+    },
+    '암흑방패': {
+        result: '암흑방패',
+        resultCount: 1,
+        materials: [{ item: '아다만틴주괴', count: 4 }, { item: '암흑의 정수', count: 2 }, { item: '심연의 수정', count: 1 }],
+        skill: '대장장이',
+        skillLevel: 27,
+        time: 180
+    },
+    '성역방패': {
+        result: '성역방패',
+        resultCount: 1,
+        materials: [{ item: '아다만틴주괴', count: 4 }, { item: '신성한 빛', count: 2 }, { item: '축복의 정수', count: 1 }],
+        skill: '대장장이',
+        skillLevel: 30,
+        time: 190
+    },
+    '용암방패': {
+        result: '용암방패',
+        resultCount: 1,
+        materials: [{ item: '아다만틴주괴', count: 4 }, { item: '용암의 핵', count: 2 }, { item: '영원한 불꽃', count: 1 }],
+        skill: '대장장이',
+        skillLevel: 28,
+        time: 185
+    },
+    '태양석방패': {
+        result: '태양석방패',
+        resultCount: 1,
+        materials: [{ item: '강철주괴', count: 4 }, { item: '태양석파편', count: 2 }, { item: '가죽조각', count: 2 }],
+        skill: '대장장이',
+        skillLevel: 12,
+        time: 80
+    },
+    '서리수호방패': {
+        result: '서리수호방패',
+        resultCount: 1,
+        materials: [{ item: '강철주괴', count: 4 }, { item: '빙설결정', count: 2 }, { item: '서리꽃', count: 2 }],
+        skill: '대장장이',
+        skillLevel: 14,
+        time: 85
     },
     '미스릴갑옷': {
         result: '미스릴갑옷',
@@ -3619,9 +3954,12 @@ var ShopDatabase = {
             { item: '숏소드', stock: -1 },
             { item: '롱소드', stock: -1 },
             { item: '대거', stock: -1 },
+            { item: '브로드소드', stock: -1 },
+            { item: '마법사지팡이', stock: -1 },
             { item: '나무활', stock: -1 },
             { item: '숏보우', stock: -1 },
-            { item: '나무지팡이', stock: -1 }
+            { item: '나무지팡이', stock: -1 },
+            { item: '오크스태프', stock: -1 }
         ]
     },
     '시작마을방어구점': {
@@ -3635,7 +3973,12 @@ var ShopDatabase = {
             { item: '가죽장갑', stock: -1 },
             { item: '가죽부츠', stock: -1 },
             { item: '나무방패', stock: -1 },
-            { item: '천옷', stock: -1 }
+            { item: '천옷', stock: -1 },
+            { item: '천모자', stock: -1 },
+            { item: '천장갑', stock: -1 },
+            { item: '천신발', stock: -1 },
+            { item: '수련생로브', stock: -1 },
+            { item: '철방패', stock: -1 }
         ]
     },
     '시작마을잡화점': {
@@ -3664,17 +4007,780 @@ var ShopDatabase = {
             { item: '해독포션', stock: -1 }
         ]
     },
+    '시작마을장신구점': {
+        id: 'starter_accessory',
+        name: '초보 장신구 상점',
+        location: '시작마을',
+        type: 'accessory',
+        items: [
+            { item: '철반지', stock: -1 },
+            { item: '가죽목걸이', stock: -1 },
+            { item: '은귀걸이', stock: -1 },
+            { item: '가죽벨트', stock: -1 },
+            { item: '천망토', stock: -1 }
+        ]
+    },
+    '시작마을식당': {
+        id: 'starter_food',
+        name: '포근한 식당',
+        location: '시작마을',
+        type: 'food',
+        items: [
+            { item: '빵', stock: -1 },
+            { item: '치즈', stock: -1 },
+            { item: '사과', stock: -1 },
+            { item: '고기구이', stock: -1 },
+            { item: '생선구이', stock: -1 },
+            { item: '샐러드', stock: -1 },
+            { item: '꿀바른빵', stock: -1 }
+        ]
+    },
     '수도고급무기점': {
         id: 'capital_weapon',
         name: '왕립 대장간',
         location: '에테르니아수도',
         type: 'weapon',
         items: [
+            { item: '브로드소드', stock: -1 },
+            { item: '바스타드소드', stock: -1 },
+            { item: '전투도끼', stock: -1 },
             { item: '미스릴검', stock: -1 },
             { item: '아다만틴검', stock: -1 },
             { item: '미스릴대거', stock: -1 },
             { item: '컴파운드보우', stock: -1 },
-            { item: '대마법사의지팡이', stock: -1 }
+            { item: '대마법사의지팡이', stock: -1 },
+            { item: '화염의지팡이', stock: -1 },
+            { item: '빙결의지팡이', stock: -1 },
+            { item: '번개의지팡이', stock: -1 }
+        ]
+    },
+    '에테르니아방어구점': {
+        id: 'capital_armor',
+        name: '왕립 방어구점',
+        location: '에테르니아수도',
+        type: 'armor',
+        items: [
+            { item: '강철투구', stock: -1 },
+            { item: '기사투구', stock: -1 },
+            { item: '강철갑옷', stock: -1 },
+            { item: '플레이트아머', stock: -1 },
+            { item: '미스릴갑옷', stock: -1 },
+            { item: '강철건틀릿', stock: -1 },
+            { item: '강철부츠', stock: -1 },
+            { item: '미스릴건틀릿', stock: -1 },
+            { item: '미스릴부츠', stock: -1 },
+            { item: '대마법사로브', stock: -1 }
+        ]
+    },
+    '에테르니아방패점': {
+        id: 'capital_shield',
+        name: '수도 방패 상인',
+        location: '에테르니아수도',
+        type: 'armor',
+        items: [
+            { item: '철방패', stock: -1 },
+            { item: '타워실드', stock: -1 },
+            { item: '강철방패', stock: -1 },
+            { item: '미스릴방패', stock: -1 },
+            { item: '태양석방패', stock: -1 }
+        ]
+    },
+    '사막평판상점': {
+        id: 'rep_desert',
+        name: '사막 명예 상점',
+        location: '불타는 사막',
+        type: 'special',
+        rotation: false,
+        repFaction: '불타는 사막',
+        items: [
+            { item: '사막 장인의 설계도', stock: -1, repRequired: 1200 },
+            { item: '사막 비단망토', stock: -1, repRequired: 2000 }
+        ]
+    },
+    '북방평판상점': {
+        id: 'rep_frozen',
+        name: '북방 명예 상점',
+        location: '얼어붙은 북방',
+        type: 'special',
+        rotation: false,
+        repFaction: '얼어붙은 북방',
+        items: [
+            { item: '북방 제련 설계도', stock: -1, repRequired: 1500 },
+            { item: '빙설 수호망토', stock: -1, repRequired: 2600 }
+        ]
+    },
+    '습지평판상점': {
+        id: 'rep_swamp',
+        name: '습지 명예 상점',
+        location: '황혼의 습지',
+        type: 'special',
+        rotation: false,
+        repFaction: '황혼의 습지',
+        items: [
+            { item: '습지 비전 설계도', stock: -1, repRequired: 1800 },
+            { item: '늪지 안개망토', stock: -1, repRequired: 3000 }
+        ]
+    },
+    '천공평판상점': {
+        id: 'rep_sky',
+        name: '천공 명예 상점',
+        location: '천공의 산맥',
+        type: 'special',
+        rotation: false,
+        repFaction: '천공의 산맥',
+        items: [
+            { item: '천공 공학 설계도', stock: -1, repRequired: 2200 },
+            { item: '천공 비행망토', stock: -1, repRequired: 3600 }
+        ]
+    },
+    '폐허평판상점': {
+        id: 'rep_ruins',
+        name: '폐허 명예 상점',
+        location: '고대의 폐허',
+        type: 'special',
+        rotation: false,
+        repFaction: '고대의 폐허',
+        items: [
+            { item: '폐허 고대 설계도', stock: -1, repRequired: 2600 },
+            { item: '고대 서고망토', stock: -1, repRequired: 4200 }
+        ]
+    },
+    '초원무기점': {
+        id: 'plains_weapon',
+        name: '초원 대장간',
+        location: '초원 평야',
+        type: 'weapon',
+        items: [
+            { item: '브로드소드', stock: -1 },
+            { item: '바스타드소드', stock: -1 },
+            { item: '전투도끼', stock: -1 },
+            { item: '배틀액스', stock: -1 },
+            { item: '파이크', stock: -1 },
+            { item: '롱소드', stock: -1 },
+            { item: '리커브보우', stock: -1 },
+            { item: '오크스태프', stock: -1 },
+            { item: '수정지팡이', stock: -1 },
+            { item: '마법사지팡이', stock: -1 }
+        ]
+    },
+    '초원방어구점': {
+        id: 'plains_armor',
+        name: '초원 장비점',
+        location: '초원 평야',
+        type: 'armor',
+        items: [
+            { item: '철투구', stock: -1 },
+            { item: '체인메일', stock: -1 },
+            { item: '철갑옷', stock: -1 },
+            { item: '철건틀릿', stock: -1 },
+            { item: '철부츠', stock: -1 },
+            { item: '철방패', stock: -1 },
+            { item: '강철투구', stock: -1 },
+            { item: '강철갑옷', stock: -1 },
+            { item: '강철건틀릿', stock: -1 },
+            { item: '강철부츠', stock: -1 },
+            { item: '강철방패', stock: -1 },
+            { item: '타워실드', stock: -1 },
+            { item: '플레이트아머', stock: -1 }
+        ]
+    },
+    '초원재료상': {
+        id: 'plains_material',
+        name: '초원 재료 상점',
+        location: '초원 평야',
+        type: 'material',
+        items: [
+            { item: '나뭇가지', stock: -1 },
+            { item: '참나무목재', stock: -1 },
+            { item: '철광석', stock: -1 },
+            { item: '은광석', stock: -1 },
+            { item: '약초', stock: -1 },
+            { item: '마나허브', stock: -1 },
+            { item: '치유허브', stock: -1 }
+        ]
+    },
+    '에테르니아약국': {
+        id: 'capital_potion',
+        name: '에테르니아 약국',
+        location: '에테르니아수도',
+        type: 'potion',
+        items: [
+            { item: '하급체력포션', stock: -1 },
+            { item: '체력포션', stock: -1 },
+            { item: '중급체력포션', stock: -1 },
+            { item: '상급체력포션', stock: -1 },
+            { item: '하급마나포션', stock: -1 },
+            { item: '마나포션', stock: -1 },
+            { item: '중급마나포션', stock: -1 },
+            { item: '상급마나포션', stock: -1 },
+            { item: '해독포션', stock: -1 }
+        ]
+    },
+    '에테르니아잡화점': {
+        id: 'capital_general',
+        name: '수도 잡화점',
+        location: '에테르니아수도',
+        type: 'general',
+        items: [
+            { item: '빵', stock: -1 },
+            { item: '치즈', stock: -1 },
+            { item: '사과', stock: -1 },
+            { item: '귀환의돌', stock: -1 },
+            { item: '빈병', stock: -1 },
+            { item: '강화석', stock: -1 }
+        ]
+    },
+    '에테르니아장신구점': {
+        id: 'capital_accessory',
+        name: '에테르니아 장신구점',
+        location: '에테르니아수도',
+        type: 'accessory',
+        items: [
+            { item: '은반지', stock: -1 },
+            { item: '금반지', stock: -1 },
+            { item: '은목걸이', stock: -1 },
+            { item: '금목걸이', stock: -1 },
+            { item: '금귀걸이', stock: -1 },
+            { item: '철벨트', stock: -1 },
+            { item: '가죽망토', stock: -1 }
+        ]
+    },
+    '에테르니아연금상': {
+        id: 'capital_alchemy',
+        name: '연금 재료상',
+        location: '에테르니아수도',
+        type: 'potion',
+        items: [
+            { item: '체력포션', stock: -1 },
+            { item: '중급체력포션', stock: -1 },
+            { item: '상급체력포션', stock: -1 },
+            { item: '마나포션', stock: -1 },
+            { item: '중급마나포션', stock: -1 },
+            { item: '상급마나포션', stock: -1 },
+            { item: '회복포션', stock: -1 },
+            { item: '해독포션', stock: -1 },
+            { item: '해동포션', stock: -1 }
+        ]
+    },
+    '에테르니아요리점': {
+        id: 'capital_food',
+        name: '왕도 요리점',
+        location: '에테르니아수도',
+        type: 'food',
+        items: [
+            { item: '고기구이', stock: -1 },
+            { item: '생선구이', stock: -1 },
+            { item: '샐러드', stock: -1 },
+            { item: '스테이크', stock: -1 },
+            { item: '꿀바른빵', stock: -1 },
+            { item: '빵', stock: -1 },
+            { item: '치즈', stock: -1 }
+        ]
+    },
+    '보석상점': {
+        id: 'gem_shop',
+        name: '보석 상회',
+        location: '에테르니아수도',
+        type: 'material',
+        items: [
+            { item: '자수정', stock: -1 },
+            { item: '토파즈', stock: -1 },
+            { item: '루비원석', stock: -1 },
+            { item: '사파이어원석', stock: -1 },
+            { item: '에메랄드원석', stock: -1 },
+            { item: '오팔', stock: -1 },
+            { item: '다이아몬드원석', stock: -1 },
+            { item: '별의파편', stock: -1 }
+        ]
+    },
+    '사막상회': {
+        id: 'desert_trade',
+        name: '오아시스 상회',
+        location: '불타는 사막',
+        type: 'general',
+        items: [
+            { item: '사막향신료', stock: -1 },
+            { item: '태양석파편', stock: -1 },
+            { item: '오아시스목걸이', stock: -1 },
+            { item: '모래바람망토', stock: -1 },
+            { item: '루비반지', stock: -1 },
+            { item: '귀환의돌', stock: -1 },
+            { item: '빈병', stock: -1 }
+        ]
+    },
+    '북방보급소': {
+        id: 'frozen_supply',
+        name: '북방 보급소',
+        location: '얼어붙은 북방',
+        type: 'general',
+        items: [
+            { item: '빙설결정', stock: -1 },
+            { item: '서리꽃', stock: -1 },
+            { item: '서리늑대반지', stock: -1 },
+            { item: '설원벨트', stock: -1 },
+            { item: '상급체력포션', stock: -1 },
+            { item: '상급마나포션', stock: -1 },
+            { item: '귀환의돌', stock: -1 }
+        ]
+    },
+    '습지주술상점': {
+        id: 'swamp_mystic',
+        name: '늪지 주술상',
+        location: '황혼의 습지',
+        type: 'general',
+        items: [
+            { item: '늪지이끼덩이', stock: -1 },
+            { item: '유령의정수', stock: -1 },
+            { item: '늪지부적', stock: -1 },
+            { item: '안개귀걸이', stock: -1 },
+            { item: '해독포션', stock: -1 },
+            { item: '귀환의돌', stock: -1 }
+        ]
+    },
+    '천공장비점': {
+        id: 'sky_gear',
+        name: '천공 장비점',
+        location: '천공의 산맥',
+        type: 'general',
+        items: [
+            { item: '폭풍결정', stock: -1 },
+            { item: '천둥돌', stock: -1 },
+            { item: '하늘수정', stock: -1 },
+            { item: '하늘반지', stock: -1 },
+            { item: '천공부적', stock: -1 },
+            { item: '뇌운귀걸이', stock: -1 },
+            { item: '귀환의돌', stock: -1 }
+        ]
+    },
+    '실버문상점': {
+        id: 'silvermoon_shop',
+        name: '실버문 상점',
+        location: '엘프의 숲 - 실버문',
+        type: 'general',
+        items: [
+            { item: '달빛꽃정수', stock: -1 },
+            { item: '달빛반지', stock: -1 },
+            { item: '달빛펜던트', stock: -1 },
+            { item: '엘프의망토', stock: -1 },
+            { item: '귀환의돌', stock: -1 }
+        ]
+    },
+    '드워프상회': {
+        id: 'dwarf_trade',
+        name: '철망치 상회',
+        location: '드워프 왕국 - 철망치',
+        type: 'general',
+        items: [
+            { item: '아다만타이트', stock: -1 },
+            { item: '드워프강철', stock: -1 },
+            { item: '용광로의 불꽃', stock: -1 },
+            { item: '지하수정', stock: -1 },
+            { item: '지하수정반지', stock: -1 },
+            { item: '드워프부적', stock: -1 }
+        ]
+    },
+    '고대유물상점': {
+        id: 'ancient_relics',
+        name: '고대 유물 상점',
+        location: '고대의 폐허',
+        type: 'general',
+        items: [
+            { item: '시간의 모래', stock: -1 },
+            { item: '고대 마법석', stock: -1 },
+            { item: '차원의 파편', stock: -1 },
+            { item: '차원반지', stock: -1 },
+            { item: '차원부적', stock: -1 }
+        ]
+    },
+    '심연거래소': {
+        id: 'abyss_market',
+        name: '심연 거래소',
+        location: '심연의 균열',
+        type: 'general',
+        items: [
+            { item: '공허의 핵', stock: -1 },
+            { item: '타락한 영혼', stock: -1 },
+            { item: '심연의 수정', stock: -1 },
+            { item: '암흑의 정수', stock: -1 },
+            { item: '타락의반지', stock: -1 }
+        ]
+    },
+    '천상성소상점': {
+        id: 'celestial_shop',
+        name: '성소의 상점',
+        location: '천상계 - 빛의 성소',
+        type: 'general',
+        items: [
+            { item: '신성한 빛', stock: -1 },
+            { item: '생명의 물', stock: -1 },
+            { item: '축복의 정수', stock: -1 },
+            { item: '성역의반지', stock: -1 },
+            { item: '성광펜던트', stock: -1 }
+        ]
+    },
+    '불꽃제단상점': {
+        id: 'flame_altar',
+        name: '불꽃 제단 상점',
+        location: '원소계 - 불꽃의 제단',
+        type: 'general',
+        items: [
+            { item: '영원한 불꽃', stock: -1 },
+            { item: '용암의 핵', stock: -1 },
+            { item: '불의 정수', stock: -1 },
+            { item: '태양의 파편', stock: -1 },
+            { item: '불꽃펜던트', stock: -1 }
+        ]
+    },
+    // 지역별 전문 상점 (재료/장신구/요리)
+    '사막재료상': {
+        id: 'desert_material',
+        name: '사막 재료 상점',
+        location: '불타는 사막',
+        type: 'material',
+        items: [
+            { item: '사막향신료', stock: -1 },
+            { item: '태양석파편', stock: -1 },
+            { item: '금광석', stock: -1 }
+        ]
+    },
+    '사막장신구점': {
+        id: 'desert_accessory',
+        name: '사막 장신구점',
+        location: '불타는 사막',
+        type: 'accessory',
+        items: [
+            { item: '오아시스목걸이', stock: -1 },
+            { item: '모래바람망토', stock: -1 },
+            { item: '루비반지', stock: -1 },
+            { item: '금귀걸이', stock: -1 },
+            { item: '전사의벨트', stock: -1 }
+        ]
+    },
+    '사막요리점': {
+        id: 'desert_food',
+        name: '오아시스 요리점',
+        location: '불타는 사막',
+        type: 'food',
+        items: [
+            { item: '빵', stock: -1 },
+            { item: '치즈', stock: -1 },
+            { item: '사과', stock: -1 },
+            { item: '고기구이', stock: -1 },
+            { item: '생선구이', stock: -1 },
+            { item: '샐러드', stock: -1 },
+            { item: '스테이크', stock: -1 },
+            { item: '꿀바른빵', stock: -1 }
+        ]
+    },
+    '북방재료상': {
+        id: 'frozen_material',
+        name: '북방 재료 상점',
+        location: '얼어붙은 북방',
+        type: 'material',
+        items: [
+            { item: '빙설결정', stock: -1 },
+            { item: '서리꽃', stock: -1 },
+            { item: '미스릴광석', stock: -1 }
+        ]
+    },
+    '북방장신구점': {
+        id: 'frozen_accessory',
+        name: '북방 장신구점',
+        location: '얼어붙은 북방',
+        type: 'accessory',
+        items: [
+            { item: '서리늑대반지', stock: -1 },
+            { item: '설원벨트', stock: -1 },
+            { item: '은목걸이', stock: -1 },
+            { item: '은귀걸이', stock: -1 },
+            { item: '가죽망토', stock: -1 }
+        ]
+    },
+    '북방요리점': {
+        id: 'frozen_food',
+        name: '북방 식당',
+        location: '얼어붙은 북방',
+        type: 'food',
+        items: [
+            { item: '빵', stock: -1 },
+            { item: '치즈', stock: -1 },
+            { item: '고기구이', stock: -1 },
+            { item: '생선구이', stock: -1 },
+            { item: '스테이크', stock: -1 },
+            { item: '꿀바른빵', stock: -1 }
+        ]
+    },
+    '습지재료상': {
+        id: 'swamp_material',
+        name: '습지 재료 상점',
+        location: '황혼의 습지',
+        type: 'material',
+        items: [
+            { item: '늪지이끼덩이', stock: -1 },
+            { item: '유령의정수', stock: -1 },
+            { item: '약초', stock: -1 },
+            { item: '치유허브', stock: -1 }
+        ]
+    },
+    '습지장신구점': {
+        id: 'swamp_accessory',
+        name: '습지 장신구점',
+        location: '황혼의 습지',
+        type: 'accessory',
+        items: [
+            { item: '늪지부적', stock: -1 },
+            { item: '안개귀걸이', stock: -1 },
+            { item: '마법망토', stock: -1 },
+            { item: '철벨트', stock: -1 }
+        ]
+    },
+    '습지요리점': {
+        id: 'swamp_food',
+        name: '늪지 식당',
+        location: '황혼의 습지',
+        type: 'food',
+        items: [
+            { item: '빵', stock: -1 },
+            { item: '치즈', stock: -1 },
+            { item: '사과', stock: -1 },
+            { item: '샐러드', stock: -1 },
+            { item: '생선구이', stock: -1 }
+        ]
+    },
+    '천공재료상': {
+        id: 'sky_material',
+        name: '천공 재료 상점',
+        location: '천공의 산맥',
+        type: 'material',
+        items: [
+            { item: '폭풍결정', stock: -1 },
+            { item: '천둥돌', stock: -1 },
+            { item: '하늘수정', stock: -1 }
+        ]
+    },
+    '천공장신구점': {
+        id: 'sky_accessory',
+        name: '천공 장신구점',
+        location: '천공의 산맥',
+        type: 'accessory',
+        items: [
+            { item: '하늘반지', stock: -1 },
+            { item: '천공부적', stock: -1 },
+            { item: '뇌운귀걸이', stock: -1 }
+        ]
+    },
+    '천공요리점': {
+        id: 'sky_food',
+        name: '천공 산장식당',
+        location: '천공의 산맥',
+        type: 'food',
+        items: [
+            { item: '빵', stock: -1 },
+            { item: '치즈', stock: -1 },
+            { item: '고기구이', stock: -1 },
+            { item: '스테이크', stock: -1 }
+        ]
+    },
+    '실버문재료상': {
+        id: 'silvermoon_material',
+        name: '실버문 재료 상점',
+        location: '엘프의 숲 - 실버문',
+        type: 'material',
+        items: [
+            { item: '달빛꽃정수', stock: -1 },
+            { item: '하늘수정', stock: -1 },
+            { item: '자수정', stock: -1 }
+        ]
+    },
+    '실버문장신구점': {
+        id: 'silvermoon_accessory',
+        name: '실버문 장신구점',
+        location: '엘프의 숲 - 실버문',
+        type: 'accessory',
+        items: [
+            { item: '달빛반지', stock: -1 },
+            { item: '달빛펜던트', stock: -1 },
+            { item: '엘프의망토', stock: -1 }
+        ]
+    },
+    '실버문요리점': {
+        id: 'silvermoon_food',
+        name: '실버문 식당',
+        location: '엘프의 숲 - 실버문',
+        type: 'food',
+        items: [
+            { item: '빵', stock: -1 },
+            { item: '치즈', stock: -1 },
+            { item: '샐러드', stock: -1 },
+            { item: '스테이크', stock: -1 },
+            { item: '꿀바른빵', stock: -1 }
+        ]
+    },
+    '드워프재료상': {
+        id: 'dwarf_material',
+        name: '드워프 재료 상점',
+        location: '드워프 왕국 - 철망치',
+        type: 'material',
+        items: [
+            { item: '아다만타이트', stock: -1 },
+            { item: '드워프강철', stock: -1 },
+            { item: '용광로의 불꽃', stock: -1 },
+            { item: '지하수정', stock: -1 }
+        ]
+    },
+    '드워프장신구점': {
+        id: 'dwarf_accessory',
+        name: '드워프 장신구점',
+        location: '드워프 왕국 - 철망치',
+        type: 'accessory',
+        items: [
+            { item: '지하수정반지', stock: -1 },
+            { item: '드워프부적', stock: -1 },
+            { item: '전사의벨트', stock: -1 }
+        ]
+    },
+    '드워프요리점': {
+        id: 'dwarf_food',
+        name: '드워프 식당',
+        location: '드워프 왕국 - 철망치',
+        type: 'food',
+        items: [
+            { item: '빵', stock: -1 },
+            { item: '치즈', stock: -1 },
+            { item: '고기구이', stock: -1 },
+            { item: '스테이크', stock: -1 }
+        ]
+    },
+    '고대재료상': {
+        id: 'ancient_material',
+        name: '고대 재료 상점',
+        location: '고대의 폐허',
+        type: 'material',
+        items: [
+            { item: '시간의 모래', stock: -1 },
+            { item: '고대 마법석', stock: -1 },
+            { item: '차원의 파편', stock: -1 }
+        ]
+    },
+    '고대장신구점': {
+        id: 'ancient_accessory',
+        name: '고대 장신구점',
+        location: '고대의 폐허',
+        type: 'accessory',
+        items: [
+            { item: '차원반지', stock: -1 },
+            { item: '차원부적', stock: -1 }
+        ]
+    },
+    '고대요리점': {
+        id: 'ancient_food',
+        name: '고대 식당',
+        location: '고대의 폐허',
+        type: 'food',
+        items: [
+            { item: '빵', stock: -1 },
+            { item: '치즈', stock: -1 },
+            { item: '고기구이', stock: -1 },
+            { item: '스테이크', stock: -1 }
+        ]
+    },
+    '심연재료상': {
+        id: 'abyss_material',
+        name: '심연 재료 상점',
+        location: '심연의 균열',
+        type: 'material',
+        items: [
+            { item: '공허의 핵', stock: -1 },
+            { item: '타락한 영혼', stock: -1 },
+            { item: '심연의 수정', stock: -1 },
+            { item: '암흑의 정수', stock: -1 }
+        ]
+    },
+    '심연장신구점': {
+        id: 'abyss_accessory',
+        name: '심연 장신구점',
+        location: '심연의 균열',
+        type: 'accessory',
+        items: [
+            { item: '타락의반지', stock: -1 }
+        ]
+    },
+    '심연요리점': {
+        id: 'abyss_food',
+        name: '심연 식당',
+        location: '심연의 균열',
+        type: 'food',
+        items: [
+            { item: '빵', stock: -1 },
+            { item: '치즈', stock: -1 },
+            { item: '고기구이', stock: -1 },
+            { item: '스테이크', stock: -1 }
+        ]
+    },
+    '성소재료상': {
+        id: 'celestial_material',
+        name: '성소 재료 상점',
+        location: '천상계 - 빛의 성소',
+        type: 'material',
+        items: [
+            { item: '신성한 빛', stock: -1 },
+            { item: '생명의 물', stock: -1 },
+            { item: '축복의 정수', stock: -1 }
+        ]
+    },
+    '성소장신구점': {
+        id: 'celestial_accessory',
+        name: '성소 장신구점',
+        location: '천상계 - 빛의 성소',
+        type: 'accessory',
+        items: [
+            { item: '성역의반지', stock: -1 },
+            { item: '성광펜던트', stock: -1 }
+        ]
+    },
+    '성소요리점': {
+        id: 'celestial_food',
+        name: '성소 식당',
+        location: '천상계 - 빛의 성소',
+        type: 'food',
+        items: [
+            { item: '빵', stock: -1 },
+            { item: '치즈', stock: -1 },
+            { item: '샐러드', stock: -1 },
+            { item: '스테이크', stock: -1 }
+        ]
+    },
+    '불꽃재료상': {
+        id: 'flame_material',
+        name: '불꽃 재료 상점',
+        location: '원소계 - 불꽃의 제단',
+        type: 'material',
+        items: [
+            { item: '영원한 불꽃', stock: -1 },
+            { item: '용암의 핵', stock: -1 },
+            { item: '불의 정수', stock: -1 },
+            { item: '태양의 파편', stock: -1 }
+        ]
+    },
+    '불꽃장신구점': {
+        id: 'flame_accessory',
+        name: '불꽃 장신구점',
+        location: '원소계 - 불꽃의 제단',
+        type: 'accessory',
+        items: [
+            { item: '불꽃펜던트', stock: -1 }
+        ]
+    },
+    '불꽃요리점': {
+        id: 'flame_food',
+        name: '불꽃 식당',
+        location: '원소계 - 불꽃의 제단',
+        type: 'food',
+        items: [
+            { item: '빵', stock: -1 },
+            { item: '치즈', stock: -1 },
+            { item: '고기구이', stock: -1 },
+            { item: '스테이크', stock: -1 }
         ]
     }
 };
@@ -5543,10 +6649,284 @@ var ExtraDungeons = {
         bosses: [{ name: '정예 교관 크로넌', hp: 900, att: 70, def: 25, exp: 260, gold: 220, level: 25, items: ['화려한 보물상자', '강화석'] }],
         dropItems: ['화려한 보물상자', '강화석', '룬석']
     },
+    '묘냥이의 옷장': {
+        minLevel: 1,
+        maxLevel: 10,
+        zone: '묘냥의 숲',
+        type: 'solo',
+        weeklyLockout: false,
+        monsters: ['슬라임', '고블린', '박쥐', '쥐'],
+        bosses: [
+            { name: '상자 도깨비', hp: 170, att: 12, def: 4, exp: 45, gold: 30, level: 4, items: ['낡은 보물상자'] },
+            { name: '옷장 유령', hp: 260, att: 16, def: 6, exp: 70, gold: 45, level: 6, items: ['낡은 보물상자', '강화석'], final: true }
+        ],
+        dropItems: ['낡은 보물상자', '강화석', '천조각']
+    },
+    '버섯 저장고': {
+        minLevel: 1,
+        maxLevel: 10,
+        zone: '묘냥의 숲',
+        type: 'solo',
+        weeklyLockout: false,
+        monsters: ['버섯괴물', '슬라임', '쥐', '박쥐'],
+        bosses: [
+            { name: '광포한 버섯괴물', hp: 190, att: 13, def: 5, exp: 55, gold: 35, level: 5, items: ['낡은 보물상자'] },
+            { name: '균사 군주', hp: 280, att: 18, def: 7, exp: 80, gold: 50, level: 7, items: ['낡은 보물상자', '강화석'], final: true }
+        ],
+        dropItems: ['낡은 보물상자', '천조각']
+    },
+    '숲길 연습장': {
+        minLevel: 1,
+        maxLevel: 10,
+        zone: '묘냥의 숲',
+        type: 'solo',
+        weeklyLockout: false,
+        monsters: ['슬라임', '고블린', '늑대', '멧돼지'],
+        bosses: [
+            { name: '숲길 감시자', hp: 200, att: 14, def: 5, exp: 60, gold: 40, level: 5, items: ['낡은 보물상자'] },
+            { name: '숲의 수문장', hp: 300, att: 19, def: 7, exp: 90, gold: 55, level: 8, items: ['낡은 보물상자', '강화석'], final: true }
+        ],
+        dropItems: ['낡은 보물상자', '가죽 조각']
+    },
+    '초원의 마굿간': {
+        minLevel: 11,
+        maxLevel: 20,
+        zone: '초원 평야',
+        type: 'solo',
+        weeklyLockout: false,
+        monsters: ['들소', '도적', '초원늑대', '하피'],
+        bosses: [
+            { name: '마굿간 난동자', hp: 420, att: 26, def: 10, exp: 130, gold: 90, level: 13, items: ['화려한 보물상자'] },
+            { name: '마굿간 지배자', hp: 580, att: 36, def: 14, exp: 190, gold: 130, level: 16, items: ['화려한 보물상자', '강화석'], final: true }
+        ],
+        dropItems: ['화려한 보물상자', '강화석', '가죽 조각']
+    },
+    '바람마루 초소': {
+        minLevel: 11,
+        maxLevel: 20,
+        zone: '초원 평야',
+        type: 'solo',
+        weeklyLockout: false,
+        monsters: ['코요테', '독수리', '하피', '도적'],
+        bosses: [
+            { name: '초소 감시자', hp: 460, att: 28, def: 11, exp: 140, gold: 95, level: 14, items: ['화려한 보물상자'] },
+            { name: '바람마루 사령관', hp: 640, att: 40, def: 16, exp: 210, gold: 140, level: 18, items: ['화려한 보물상자', '강화석'], final: true }
+        ],
+        dropItems: ['화려한 보물상자', '강화석']
+    },
+    '도적 보급창': {
+        minLevel: 11,
+        maxLevel: 20,
+        zone: '초원 평야',
+        type: 'solo',
+        weeklyLockout: false,
+        monsters: ['도적', '도적궁수', '도적두목', '초원늑대'],
+        bosses: [
+            { name: '보급창 경비장', hp: 480, att: 30, def: 12, exp: 150, gold: 100, level: 15, items: ['화려한 보물상자'] },
+            { name: '보급창 지배자', hp: 680, att: 42, def: 17, exp: 230, gold: 150, level: 19, items: ['화려한 보물상자', '강화석'], final: true }
+        ],
+        dropItems: ['화려한 보물상자', '강화석']
+    },
+    '사막의 유물창고': {
+        minLevel: 21,
+        maxLevel: 30,
+        zone: '불타는 사막',
+        type: 'solo',
+        weeklyLockout: false,
+        monsters: ['사막전갈', '모래뱀', '미라', '사막도적'],
+        bosses: [
+            { name: '유물 감시병', hp: 780, att: 48, def: 18, exp: 280, gold: 200, level: 24, items: ['화려한 보물상자'] },
+            { name: '유물 수호자 안푸', hp: 980, att: 60, def: 22, exp: 350, gold: 240, level: 26, items: ['화려한 보물상자', '룬석'], final: true }
+        ],
+        dropItems: ['화려한 보물상자', '룬석', '고대 유물조각']
+    },
+    '모래바람 금고': {
+        minLevel: 21,
+        maxLevel: 30,
+        zone: '불타는 사막',
+        type: 'solo',
+        weeklyLockout: false,
+        monsters: ['사막전갈', '사막도적', '모래골렘', '모래뱀'],
+        bosses: [
+            { name: '모래바람 추적자', hp: 820, att: 52, def: 19, exp: 300, gold: 210, level: 25, items: ['화려한 보물상자'] },
+            { name: '모래바람 금고지기', hp: 1050, att: 64, def: 24, exp: 370, gold: 250, level: 27, items: ['화려한 보물상자', '룬석'], final: true }
+        ],
+        dropItems: ['화려한 보물상자', '룬석', '사막향신료']
+    },
+    '오아시스 방공호': {
+        minLevel: 21,
+        maxLevel: 30,
+        zone: '불타는 사막',
+        type: 'solo',
+        weeklyLockout: false,
+        monsters: ['오아시스님프', '사막도적', '미라', '모래뱀'],
+        bosses: [
+            { name: '오아시스 파수꾼', hp: 860, att: 54, def: 20, exp: 310, gold: 220, level: 25, items: ['화려한 보물상자'] },
+            { name: '오아시스 수호자', hp: 1100, att: 66, def: 25, exp: 380, gold: 260, level: 28, items: ['화려한 보물상자', '룬석'], final: true }
+        ],
+        dropItems: ['화려한 보물상자', '룬석', '태양석파편']
+    },
+    '빙결 창고': {
+        minLevel: 31,
+        maxLevel: 40,
+        zone: '얼어붙은 북방',
+        type: 'solo',
+        weeklyLockout: false,
+        monsters: ['눈늑대', '서리거인', '얼음정령', '설인'],
+        bosses: [
+            { name: '빙결 감시자', hp: 1300, att: 72, def: 26, exp: 460, gold: 330, level: 34, items: ['전설의 보물상자'] },
+            { name: '빙결 수호자', hp: 1650, att: 88, def: 30, exp: 560, gold: 380, level: 36, items: ['전설의 보물상자', '룬석'], final: true }
+        ],
+        dropItems: ['전설의 보물상자', '룬석', '영원의 얼음']
+    },
+    '서리 창고': {
+        minLevel: 31,
+        maxLevel: 40,
+        zone: '얼어붙은 북방',
+        type: 'solo',
+        weeklyLockout: false,
+        monsters: ['서리거인', '얼음정령', '설인', '눈표범'],
+        bosses: [
+            { name: '서리 파수꾼', hp: 1350, att: 74, def: 27, exp: 470, gold: 340, level: 34, items: ['전설의 보물상자'] },
+            { name: '서리 군장', hp: 1750, att: 92, def: 32, exp: 600, gold: 400, level: 37, items: ['전설의 보물상자', '룬석'], final: true }
+        ],
+        dropItems: ['전설의 보물상자', '룬석', '빙설결정']
+    },
+    '빙하 감시소': {
+        minLevel: 31,
+        maxLevel: 40,
+        zone: '얼어붙은 북방',
+        type: 'solo',
+        weeklyLockout: false,
+        monsters: ['빙하골렘', '프로스트위치', '냉기마법사', '설인'],
+        bosses: [
+            { name: '빙하 감시자', hp: 1400, att: 76, def: 28, exp: 480, gold: 350, level: 35, items: ['전설의 보물상자'] },
+            { name: '빙하 관리자', hp: 1800, att: 96, def: 33, exp: 620, gold: 420, level: 38, items: ['전설의 보물상자', '룬석'], final: true }
+        ],
+        dropItems: ['전설의 보물상자', '룬석', '서리꽃']
+    },
+    '안개의 창고': {
+        minLevel: 41,
+        maxLevel: 50,
+        zone: '황혼의 습지',
+        type: 'solo',
+        weeklyLockout: false,
+        monsters: ['습지좀비', '독늪괴물', '안개유령', '습지트롤'],
+        bosses: [
+            { name: '안개 파수꾼', hp: 2000, att: 100, def: 37, exp: 700, gold: 480, level: 44, items: ['전설의 보물상자'] },
+            { name: '안개 감시자 말디온', hp: 2350, att: 118, def: 42, exp: 820, gold: 560, level: 46, items: ['전설의 보물상자', '룬석'], final: true }
+        ],
+        dropItems: ['전설의 보물상자', '룬석', '유령의 정수']
+    },
+    '부패의 제단': {
+        minLevel: 41,
+        maxLevel: 50,
+        zone: '황혼의 습지',
+        type: 'solo',
+        weeklyLockout: false,
+        monsters: ['부패골렘', '습지좀비', '안개유령', '독늪괴물'],
+        bosses: [
+            { name: '부패의 집행자', hp: 2050, att: 104, def: 38, exp: 720, gold: 490, level: 44, items: ['전설의 보물상자'] },
+            { name: '부패의 대사제', hp: 2450, att: 122, def: 44, exp: 850, gold: 580, level: 47, items: ['전설의 보물상자', '룬석'], final: true }
+        ],
+        dropItems: ['전설의 보물상자', '룬석', '늪지이끼덩이']
+    },
+    '늪지 관측소': {
+        minLevel: 41,
+        maxLevel: 50,
+        zone: '황혼의 습지',
+        type: 'solo',
+        weeklyLockout: false,
+        monsters: ['습지트롤', '독안개정령', '거대두꺼비', '안개유령'],
+        bosses: [
+            { name: '관측소 수문장', hp: 2100, att: 106, def: 39, exp: 730, gold: 500, level: 45, items: ['전설의 보물상자'] },
+            { name: '관측소 관리자', hp: 2550, att: 126, def: 46, exp: 880, gold: 600, level: 48, items: ['전설의 보물상자', '룬석'], final: true }
+        ],
+        dropItems: ['전설의 보물상자', '룬석', '유령의 정수']
+    },
+    '천공의 공방': {
+        minLevel: 51,
+        maxLevel: 60,
+        zone: '천공의 산맥',
+        type: 'solo',
+        weeklyLockout: false,
+        monsters: ['폭풍정령', '번개골렘', '폭풍독수리', '전격야수'],
+        bosses: [
+            { name: '공방 감독관', hp: 2950, att: 130, def: 52, exp: 920, gold: 700, level: 54, items: ['찬란한 보물상자'] },
+            { name: '폭풍의 수호기계', hp: 3350, att: 148, def: 58, exp: 1080, gold: 780, level: 56, items: ['찬란한 보물상자', '룬석'], final: true }
+        ],
+        dropItems: ['찬란한 보물상자', '룬석', '폭풍석']
+    },
+    '구름 작업장': {
+        minLevel: 51,
+        maxLevel: 60,
+        zone: '천공의 산맥',
+        type: 'solo',
+        weeklyLockout: false,
+        monsters: ['폭풍독수리', '번개골렘', '폭풍정령', '전격야수'],
+        bosses: [
+            { name: '구름 작업장 반장', hp: 3000, att: 132, def: 53, exp: 940, gold: 710, level: 54, items: ['찬란한 보물상자'] },
+            { name: '구름 작업장 관리관', hp: 3450, att: 150, def: 60, exp: 1100, gold: 800, level: 57, items: ['찬란한 보물상자', '룬석'], final: true }
+        ],
+        dropItems: ['찬란한 보물상자', '룬석', '천둥돌']
+    },
+    '번개의 저장소': {
+        minLevel: 51,
+        maxLevel: 60,
+        zone: '천공의 산맥',
+        type: 'solo',
+        weeklyLockout: false,
+        monsters: ['번개골렘', '폭풍정령', '전격야수', '폭풍독수리'],
+        bosses: [
+            { name: '번개의 감시자', hp: 3050, att: 134, def: 54, exp: 950, gold: 720, level: 55, items: ['찬란한 보물상자'] },
+            { name: '번개의 저장소 관리자', hp: 3500, att: 152, def: 61, exp: 1120, gold: 820, level: 58, items: ['찬란한 보물상자', '룬석'], final: true }
+        ],
+        dropItems: ['찬란한 보물상자', '룬석', '폭풍결정']
+    },
+    '고대의 서고': {
+        minLevel: 61,
+        maxLevel: 70,
+        zone: '고대의 폐허',
+        type: 'solo',
+        weeklyLockout: false,
+        monsters: ['데스나이트', '리치', '그림자전사', '레이스'],
+        bosses: [
+            { name: '서고 파수꾼', hp: 4900, att: 178, def: 75, exp: 1400, gold: 1000, level: 64, items: ['찬란한 보물상자'] },
+            { name: '봉인된 사서', hp: 5400, att: 200, def: 85, exp: 1600, gold: 1200, level: 66, items: ['찬란한 보물상자', '룬각인서'], final: true }
+        ],
+        dropItems: ['찬란한 보물상자', '룬각인서', '고대 마법석']
+    },
+    '잊힌 금고': {
+        minLevel: 61,
+        maxLevel: 70,
+        zone: '고대의 폐허',
+        type: 'solo',
+        weeklyLockout: false,
+        monsters: ['데스나이트', '그림자전사', '레이스', '리치'],
+        bosses: [
+            { name: '금고 경비장', hp: 5000, att: 182, def: 76, exp: 1420, gold: 1020, level: 64, items: ['찬란한 보물상자'] },
+            { name: '금고의 파수자', hp: 5500, att: 204, def: 86, exp: 1620, gold: 1220, level: 67, items: ['찬란한 보물상자', '룬각인서'], final: true }
+        ],
+        dropItems: ['찬란한 보물상자', '룬각인서', '차원의 파편']
+    },
+    '비전 격납고': {
+        minLevel: 61,
+        maxLevel: 70,
+        zone: '고대의 폐허',
+        type: 'solo',
+        weeklyLockout: false,
+        monsters: ['리치', '레이스', '그림자전사', '데스나이트'],
+        bosses: [
+            { name: '비전 감시자', hp: 5050, att: 184, def: 77, exp: 1440, gold: 1040, level: 65, items: ['찬란한 보물상자'] },
+            { name: '비전 격납관', hp: 5600, att: 208, def: 88, exp: 1650, gold: 1240, level: 68, items: ['찬란한 보물상자', '룬각인서'], final: true }
+        ],
+        dropItems: ['찬란한 보물상자', '룬각인서', '고대 마법석']
+    },
     '룬의 심연': {
         minLevel: 50,
         zone: '심연의 균열',
         type: 'endgame',
+        keyItem: '심연의 열쇠',
         monsters: ['데스나이트', '리치', '그림자전사'],
         bosses: [{ name: '심연의 감시자', hp: 2800, att: 160, def: 60, exp: 900, gold: 700, level: 60, items: ['룬각인서', '룬석'] }],
         dropItems: ['룬석', '맹공 룬', '수호 룬', '생명 룬', '치명 룬', '회복 룬', '풍요 룬', '어비스의 숨결', '드래곤의 심장']
@@ -5558,10 +6938,21 @@ var SeasonDungeonData = {
     minLevel: 30,
     zone: '황혼의 습지',
     type: 'season',
+    keyItem: '시즌 던전 입장권',
     monsters: ['습지좀비', '안개유령', '저주받은사제', '부패골렘'],
     bosses: [{ name: '시즌의 심판자', hp: 1800, att: 120, def: 45, exp: 600, gold: 450, level: 45, items: ['룬각인서'] }],
     dropItems: ['룬각인서', '룬석']
 };
+
+var SoloDungeonRewardTable = [
+    { label: 'Lv.1~10', min: 1, max: 10, rewards: ['낡은 보물상자', '강화석', '천조각'] },
+    { label: 'Lv.11~20', min: 11, max: 20, rewards: ['화려한 보물상자', '강화석', '가죽 조각'] },
+    { label: 'Lv.21~30', min: 21, max: 30, rewards: ['화려한 보물상자', '룬석', '태양석파편'] },
+    { label: 'Lv.31~40', min: 31, max: 40, rewards: ['전설의 보물상자', '룬석', '빙설결정'] },
+    { label: 'Lv.41~50', min: 41, max: 50, rewards: ['전설의 보물상자', '룬석', '유령의 정수'] },
+    { label: 'Lv.51~60', min: 51, max: 60, rewards: ['찬란한 보물상자', '룬석', '폭풍결정'] },
+    { label: 'Lv.61~70', min: 61, max: 70, rewards: ['찬란한 보물상자', '룬각인서', '고대 마법석'] }
+];
 
 var BattlegroundMaps = [
     { name: '고대 전장', rewardMult: 1.0, desc: '균형 잡힌 전장' },
@@ -5588,7 +6979,12 @@ var ExtraRecipes = {
         '치유의 링': { cost: 500, materials: [{ name: '보석', count: 1 }, { name: '약초', count: 5 }], result: { name: '치유의 링', count: 1 } },
         '전사의 벨트': { cost: 400, materials: [{ name: '가죽 조각', count: 6 }, { name: '철조각', count: 2 }], result: { name: '전사의 벨트', count: 1 } },
         '미스릴 검': { cost: 1500, materials: [{ name: '미스릴 광석', count: 4 }], result: { name: '미스릴검', count: 1 }, levelReq: 10 },
-        '룬 방패': { cost: 2500, materials: [{ name: '룬석', count: 2 }, { name: '강철조각', count: 4 }], result: { name: '룬 방패', count: 1 }, levelReq: 15 }
+        '룬 방패': { cost: 2500, materials: [{ name: '룬석', count: 2 }, { name: '강철조각', count: 4 }], result: { name: '룬 방패', count: 1 }, levelReq: 15 },
+        '사막 비단망토': { cost: 1200, materials: [{ name: '사막 장인의 설계도', count: 1 }, { name: '사막향신료', count: 3 }, { name: '태양석파편', count: 2 }, { name: '천조각', count: 6 }], result: { name: '사막 비단망토', count: 1 }, levelReq: 6 },
+        '빙설 수호망토': { cost: 2000, materials: [{ name: '북방 제련 설계도', count: 1 }, { name: '빙설결정', count: 3 }, { name: '서리꽃', count: 2 }, { name: '고급천', count: 4 }], result: { name: '빙설 수호망토', count: 1 }, levelReq: 12 },
+        '늪지 안개망토': { cost: 3000, materials: [{ name: '습지 비전 설계도', count: 1 }, { name: '늪지이끼덩이', count: 4 }, { name: '유령의 정수', count: 2 }, { name: '고급천', count: 4 }], result: { name: '늪지 안개망토', count: 1 }, levelReq: 18 },
+        '천공 비행망토': { cost: 4500, materials: [{ name: '천공 공학 설계도', count: 1 }, { name: '폭풍결정', count: 3 }, { name: '천둥돌', count: 2 }, { name: '마력의천', count: 2 }], result: { name: '천공 비행망토', count: 1 }, levelReq: 24 },
+        '고대 서고망토': { cost: 6500, materials: [{ name: '폐허 고대 설계도', count: 1 }, { name: '고대 마법석', count: 2 }, { name: '차원의 파편', count: 2 }, { name: '마력의천', count: 3 }], result: { name: '고대 서고망토', count: 1 }, levelReq: 30 }
     },
     cooking: {
         '연어스테이크': { cost: 150, fish: { name: '연어', count: 1 }, result: { name: '연어스테이크', count: 1 } },
@@ -5739,7 +7135,10 @@ var state = loadJson(dataFilePath, {
     market: { listings: [] },
     guilds: {},
     guildInvites: {},
-    worldEvent: {}
+    worldEvent: {},
+    worldBossDaily: {},
+    soloWeekly: {},
+    shopBuyThrottle: {}
 });
 
 if (!state.lastRest) state.lastRest = {};
@@ -5767,7 +7166,10 @@ if (!state.market.listings) state.market.listings = [];
 if (!state.guilds) state.guilds = {};
 if (!state.guildInvites) state.guildInvites = {};
 if (!state.worldEvent) state.worldEvent = {};
+if (!state.worldBossDaily) state.worldBossDaily = {};
 if (!state.playerSlots) state.playerSlots = {};
+if (!state.soloWeekly) state.soloWeekly = {};
+if (!state.shopBuyThrottle) state.shopBuyThrottle = {};
 
 // 기존 단일 캐릭터 -> 슬롯 마이그레이션
 for (var legacyName in state.players) {
@@ -6138,6 +7540,7 @@ function normalizePlayer(p) {
     if (!p.shopPurchases) p.shopPurchases = {};
     if (!p.tutorial) p.tutorial = { step: 0, progress: {}, completed: false };
     if (!p.challengeRecords) p.challengeRecords = {};
+    if (!p.equipPresets) p.equipPresets = {};
 }
 
 function getTitleBonus(p) {
@@ -6368,6 +7771,7 @@ function buildNextActionHint(context) {
     if (context === 'dungeon-list') return '\n다음 행동: .던전 <이름> [난이도] / .사냥';
     if (context === 'dungeon-start') return '\n다음 행동: .공격 / .스킬 / .사용';
     if (context === 'world-event') return '\n다음 행동: .침공 / .정보';
+    if (context === 'world-boss') return '\n다음 행동: .월드보스공격 / .월드보스보상 / .정보';
     if (context === 'quest-list') return '\n다음 행동: .퀘스트수락 <ID> / .퀘스트현황';
     if (context === 'daily-quest') return '\n다음 행동: .사냥 / .낚시 / .일일완료';
     if (context === 'weekly-quest') return '\n다음 행동: .던전 / .전장참가 / .주간완료';
@@ -6969,6 +8373,28 @@ function findItemCount(p, name) {
     return 0;
 }
 
+function resolveUseItemName(p, rawName) {
+    var input = (rawName || '').trim();
+    if (!input) return '';
+    var candidates = [input];
+    var noSpace = input.replace(/\s+/g, '');
+    if (noSpace !== input) candidates.push(noSpace);
+    if (input.indexOf('포션') !== -1 && input.indexOf(' ') === -1) {
+        candidates.push(input.replace('포션', ' 포션'));
+    }
+    if (input.indexOf(' 포션') !== -1) {
+        candidates.push(input.replace(' 포션', '포션'));
+    }
+    var uniq = {};
+    for (var i = 0; i < candidates.length; i++) {
+        var name = candidates[i];
+        if (!name || uniq[name]) continue;
+        uniq[name] = true;
+        if (findItemCount(p, name) > 0) return name;
+    }
+    return input;
+}
+
 function addExp(p, amount) {
     p.exp += amount;
     var leveled = false;
@@ -7012,7 +8438,37 @@ function getConsumableEffect(itemName) {
         '대왕문어숙회': function(p) { p.hp = getMaxHp(p); p.mp = getMaxMp(p); return 'HP/MP 완전 회복'; },
         '용왕의 만찬': function(p) { p.hp = getMaxHp(p); p.mp = getMaxMp(p); return 'HP/MP 완전 회복'; }
     };
-    return effects[itemName] || null;
+    if (effects[itemName]) return effects[itemName];
+    var item = GameData && GameData.ItemDatabase ? GameData.ItemDatabase[itemName] : null;
+    if (!item) return null;
+    if (item.type !== 'consumable' && item.type !== 'food') return null;
+    return function(p) {
+        var eff = item.effect;
+        if (eff === 'hp') {
+            var v1 = item.value || 0;
+            p.hp = Math.min(getMaxHp(p), p.hp + v1);
+            return 'HP +' + v1;
+        }
+        if (eff === 'mp') {
+            var v2 = item.value || 0;
+            p.mp = Math.min(getMaxMp(p), p.mp + v2);
+            return 'MP +' + v2;
+        }
+        if (eff === 'hpmp') {
+            var h = item.hpValue || item.value || 0;
+            var m = item.mpValue || item.value || 0;
+            p.hp = Math.min(getMaxHp(p), p.hp + h);
+            p.mp = Math.min(getMaxMp(p), p.mp + m);
+            return 'HP +' + h + ', MP +' + m;
+        }
+        if (eff === 'fullhp') { p.hp = getMaxHp(p); return 'HP 완전 회복'; }
+        if (eff === 'fullmp') { p.mp = getMaxMp(p); return 'MP 완전 회복'; }
+        if (eff === 'fullhpmp') { p.hp = getMaxHp(p); p.mp = getMaxMp(p); return 'HP/MP 완전 회복'; }
+        if (eff === 'poison' || eff === 'freeze' || eff === 'allDebuff') return item.description || '상태이상 해제';
+        if (eff === 'revive') return item.description || '부활 효과 발동';
+        if (eff === 'buff' || item.subtype === 'buff') return item.description || '버프 효과 적용';
+        return item.description || '사용됨';
+    };
 }
 
 function pickMonsterForLevel(level) {
@@ -7064,6 +8520,135 @@ function getTreasureBoxKey(boxName) {
         '찬란한 보물상자': '봉인의인장'
     };
     return map[boxName] || '';
+}
+
+function hashString(str) {
+    var hash = 0;
+    if (!str) return hash;
+    for (var i = 0; i < str.length; i++) {
+        hash = ((hash << 5) - hash) + str.charCodeAt(i);
+        hash |= 0;
+    }
+    return hash;
+}
+
+function parseWeekIndex(key) {
+    var parts = String(key || '').split('W');
+    if (parts.length < 2) return 0;
+    return parseInt(parts[1], 10) || 0;
+}
+
+function parseSeasonIndex(key) {
+    var parts = String(key || '').split('-');
+    if (parts.length < 2) return 0;
+    return parseInt(parts[1], 10) || 0;
+}
+
+function getShopRotationConfig(shop) {
+    if (shop && shop.rotation === false) return null;
+    var rot = shop && shop.rotation ? shop.rotation : null;
+    if (typeof rot === 'string') rot = { type: rot };
+    if (!rot) {
+        if (!shop || !shop.location || shop.location === '시작마을') return null;
+        rot = { type: 'weekly', groups: 3 };
+    }
+    var type = rot.type || 'weekly';
+    var groups = rot.groups || rot.groupCount || 3;
+    var indexSource = type === 'season' ? parseSeasonIndex(getSeasonKey()) : parseWeekIndex(getWeekKey());
+    var idx = indexSource - 1;
+    if (idx < 0) idx = 0;
+    if (groups > 0) idx = idx % groups;
+    return { type: type, groups: groups, index: idx, key: type === 'season' ? getSeasonKey() : getWeekKey() };
+}
+
+function isEssentialShopItem(itemName) {
+    var essentials = {
+        '하급체력포션': true,
+        '체력포션': true,
+        '하급마나포션': true,
+        '마나포션': true,
+        '빵': true,
+        '치즈': true,
+        '사과': true,
+        '고기구이': true,
+        '생선구이': true,
+        '샐러드': true,
+        '꿀바른빵': true,
+        '귀환의돌': true,
+        '빈병': true
+    };
+    return !!essentials[itemName];
+}
+
+function isShopItemInRotation(shopName, entry, shop) {
+    var itemName = entry.item || entry;
+    if (entry && entry.always) return true;
+    if (isEssentialShopItem(itemName)) return true;
+    var rot = getShopRotationConfig(shop);
+    if (!rot || rot.groups <= 1) return true;
+    if (entry && entry.rotateGroup !== undefined && entry.rotateGroup !== null) {
+        return (entry.rotateGroup % rot.groups) === rot.index;
+    }
+    var hash = Math.abs(hashString(String(shopName) + ':' + String(itemName)));
+    return (hash % rot.groups) === rot.index;
+}
+
+function getShopRepFaction(shop, entry) {
+    if (entry && entry.repFaction !== undefined) return entry.repFaction;
+    if (shop && shop.repFaction !== undefined) return shop.repFaction;
+    if (shop && shop.location && GameData.ZoneData && GameData.ZoneData[shop.location]) return shop.location;
+    return null;
+}
+
+function getShopRepRequirement(shop, itemName, entry) {
+    if (entry && entry.repRequired !== undefined && entry.repRequired !== null) return entry.repRequired;
+    if (shop && shop.repRequired !== undefined && shop.repRequired !== null) return shop.repRequired;
+    var rep = 0;
+    var itemData = GameData.ItemDatabase && GameData.ItemDatabase[itemName];
+    if (itemData && itemData.level) rep = Math.max(0, (itemData.level - 5) * 60);
+    if (shop && shop.location && GameData.ZoneData && GameData.ZoneData[shop.location] && GameData.ZoneData[shop.location].level) {
+        var zone = GameData.ZoneData[shop.location];
+        if (zone.level && zone.level.min) rep = Math.max(rep, Math.max(0, (zone.level.min - 5) * 50));
+    }
+    if (rep < 200) rep = 0;
+    if (rep > 3000) rep = 3000;
+    return rep;
+}
+
+function getShopItemAccess(player, shopName, entry, shop) {
+    var itemName = entry.item || entry;
+    var rotationOk = isShopItemInRotation(shopName, entry, shop);
+    var faction = getShopRepFaction(shop, entry);
+    var repRequired = 0;
+    var repOk = true;
+    if (faction) {
+        repRequired = getShopRepRequirement(shop, itemName, entry);
+        if (repRequired > 0) {
+            var curRep = (player.rep && player.rep[faction]) ? player.rep[faction] : 0;
+            repOk = curRep >= repRequired;
+        }
+    }
+    return { ok: rotationOk && repOk, rotationOk: rotationOk, repOk: repOk, repFaction: faction, repRequired: repRequired };
+}
+
+function getFilteredShopItems(player, shopName, shop) {
+    var items = shop.items || [];
+    var available = [];
+    var lockedRotation = 0;
+    var lockedRep = 0;
+    var repFaction = null;
+    var rotation = getShopRotationConfig(shop);
+    for (var i = 0; i < items.length; i++) {
+        var entry = items[i];
+        var access = getShopItemAccess(player, shopName, entry, shop);
+        if (access.ok) available.push(entry);
+        else {
+            if (!access.rotationOk) lockedRotation++;
+            if (!access.repOk) lockedRep++;
+        }
+        if (!repFaction && access.repFaction) repFaction = access.repFaction;
+    }
+    return { items: available, lockedRotation: lockedRotation, lockedRep: lockedRep, rotation: rotation, repFaction: repFaction };
 }
 
 function getShopEntry(itemName) {
@@ -7247,6 +8832,26 @@ function getFactionShop(faction) {
         '그림자 연합': [
             { item: '그림자 단검', cost: 3000, rep: 3000 },
             { item: '암살자의 망토', cost: 6000, rep: 9000 }
+        ],
+        '불타는 사막': [
+            { item: '사막 장인의 설계도', cost: 2500, rep: 1200 },
+            { item: '사막 비단망토', cost: 4800, rep: 2000 }
+        ],
+        '얼어붙은 북방': [
+            { item: '북방 제련 설계도', cost: 3000, rep: 1500 },
+            { item: '빙설 수호망토', cost: 5200, rep: 2600 }
+        ],
+        '황혼의 습지': [
+            { item: '습지 비전 설계도', cost: 3500, rep: 1800 },
+            { item: '늪지 안개망토', cost: 5600, rep: 3000 }
+        ],
+        '천공의 산맥': [
+            { item: '천공 공학 설계도', cost: 4200, rep: 2200 },
+            { item: '천공 비행망토', cost: 6200, rep: 3600 }
+        ],
+        '고대의 폐허': [
+            { item: '폐허 고대 설계도', cost: 5200, rep: 2600 },
+            { item: '고대 서고망토', cost: 7200, rep: 4200 }
         ]
     };
     return shops[faction] || [];
@@ -7274,6 +8879,120 @@ function getDungeonMap() {
     if (GameData.DungeonData && Object.keys(GameData.DungeonData).length > 0) base = GameData.DungeonData;
     else if (GameData.DungeonSystemData && GameData.DungeonSystemData.dungeons) base = GameData.DungeonSystemData.dungeons;
     return mergeMaps(base, ExtraDungeons || {});
+}
+
+function recordSoloWeeklyClear(p, dungeonName) {
+    var wk = getWeekKey();
+    if (!state.soloWeekly[p.name] || state.soloWeekly[p.name].week !== wk) {
+        state.soloWeekly[p.name] = { week: wk, clears: {}, total: 0 };
+    }
+    var entry = state.soloWeekly[p.name];
+    entry.clears[dungeonName] = (entry.clears[dungeonName] || 0) + 1;
+    entry.total = (entry.total || 0) + 1;
+}
+
+function formatSoloWeeklyRecord(p) {
+    var wk = getWeekKey();
+    var entry = state.soloWeekly[p.name];
+    if (!entry || entry.week !== wk) return '이번 주 솔로 던전 기록이 없습니다.';
+    var lines = ['[솔로 던전 주간 기록] ' + wk];
+    lines.push('총 클리어: ' + (entry.total || 0));
+    var list = [];
+    for (var dn in entry.clears) list.push({ name: dn, count: entry.clears[dn] });
+    list.sort(function(a, b) { return b.count - a.count; });
+    for (var i = 0; i < list.length && i < 20; i++) {
+        lines.push('- ' + list[i].name + ' x' + list[i].count);
+    }
+    return lines.join('\n');
+}
+
+function formatSoloRewardTable() {
+    var lines = ['[솔로 던전 보상표]'];
+    for (var i = 0; i < SoloDungeonRewardTable.length; i++) {
+        var r = SoloDungeonRewardTable[i];
+        lines.push(r.label + ': ' + r.rewards.join(', '));
+    }
+    return lines.join('\n');
+}
+
+function getShopRotationGroupIndex(shopName, entry, shop, groups) {
+    if (!groups || groups <= 1) return 0;
+    if (entry && entry.rotateGroup !== undefined && entry.rotateGroup !== null) {
+        return (entry.rotateGroup % groups + groups) % groups;
+    }
+    var itemName = entry.item || entry;
+    var hash = Math.abs(hashString(String(shopName) + ':' + String(itemName)));
+    return hash % groups;
+}
+
+function buildShopRotationPreview(player, shopName, shop) {
+    var rot = getShopRotationConfig(shop);
+    if (!rot || rot.groups <= 1) return '로테이션이 적용되지 않은 상점입니다.';
+    var items = shop.items || [];
+    var groups = [];
+    for (var g = 0; g < rot.groups; g++) groups.push([]);
+    var always = [];
+    for (var i = 0; i < items.length; i++) {
+        var entry = items[i];
+        var name = entry.item || entry;
+        if (entry && entry.always) { always.push(name); continue; }
+        if (isEssentialShopItem(name)) { always.push(name); continue; }
+        var idx = getShopRotationGroupIndex(shopName, entry, shop, rot.groups);
+        groups[idx].push(name);
+    }
+    var curIdx = rot.index;
+    var nextIdx = (curIdx + 1) % rot.groups;
+    var lines = ['[상점 로테이션] ' + shopName + ' (' + (rot.type === 'season' ? '시즌' : '주간') + ' ' + (curIdx + 1) + '/' + rot.groups + ')'];
+    if (always.length) lines.push('항상 판매: ' + always.slice(0, 12).join(', ') + (always.length > 12 ? ' ...' : ''));
+    lines.push('현재: ' + (groups[curIdx].length ? groups[curIdx].slice(0, 12).join(', ') : '없음') + (groups[curIdx].length > 12 ? ' ...' : ''));
+    lines.push('다음: ' + (groups[nextIdx].length ? groups[nextIdx].slice(0, 12).join(', ') : '없음') + (groups[nextIdx].length > 12 ? ' ...' : ''));
+    return lines.join('\n');
+}
+
+function snapshotEquipment(p) {
+    var eq = p.equipment || {};
+    var slots = ['weapon', 'armor', 'shield', 'helmet', 'gloves', 'boots', 'ring1', 'ring2', 'necklace', 'earring', 'belt', 'cloak'];
+    var out = {};
+    for (var i = 0; i < slots.length; i++) {
+        var key = slots[i];
+        var slot = eq[key] || { name: null };
+        out[key] = {
+            name: slot.name || null,
+            enhance: slot.enhance || 0,
+            rune: slot.rune || '',
+            gem: slot.gem || '',
+            durability: slot.durability,
+            maxDurability: slot.maxDurability
+        };
+    }
+    return out;
+}
+
+function applyEquipmentPreset(p, preset) {
+    if (!preset) return { ok: false, applied: 0, skipped: 0 };
+    var slots = ['weapon', 'armor', 'shield', 'helmet', 'gloves', 'boots', 'ring1', 'ring2', 'necklace', 'earring', 'belt', 'cloak'];
+    var applied = 0;
+    var skipped = 0;
+    for (var i = 0; i < slots.length; i++) {
+        var key = slots[i];
+        var data = preset[key];
+        if (!data || !data.name) { skipped++; continue; }
+        if (findItemCount(p, data.name) <= 0) { skipped++; continue; }
+        if (!p.equipment[key]) p.equipment[key] = { name: null };
+        p.equipment[key].name = data.name;
+        p.equipment[key].enhance = data.enhance || 0;
+        p.equipment[key].rune = data.rune || '';
+        if (key === 'weapon') p.equipment[key].gem = data.gem || '';
+        if (data.maxDurability) p.equipment[key].maxDurability = data.maxDurability;
+        if (data.durability !== undefined && data.durability !== null) p.equipment[key].durability = data.durability;
+        if (p.equipment[key].name) {
+            if (key === 'weapon' || key === 'armor' || key === 'shield' || key === 'helmet' || key === 'gloves' || key === 'boots') {
+                ensureSlotDurability(p.equipment[key], p.equipment[key].name, key);
+            }
+        }
+        applied++;
+    }
+    return { ok: true, applied: applied, skipped: skipped };
 }
 
 function normalizeName(name) {
@@ -7324,6 +9043,25 @@ function resolveDungeonName(input, dungeons) {
 
 function getDungeonBoss(dungeon) {
     if (!dungeon || !dungeon.bosses || dungeon.bosses.length === 0) return null;
+    for (var bi = 0; bi < dungeon.bosses.length; bi++) {
+        var entry = dungeon.bosses[bi];
+        if (entry && typeof entry === 'object' && entry.final) {
+            var fixedName = entry.name || entry.id || entry;
+            if (typeof fixedName !== 'string') fixedName = String(fixedName);
+            var fixedBoss = GameData.MonsterDatabase[fixedName];
+            if (fixedBoss) return fixedBoss;
+            return {
+                name: fixedName,
+                hp: entry.hp || (300 + rand(0, 200)),
+                att: entry.att || (35 + rand(0, 15)),
+                def: entry.def || (10 + rand(0, 5)),
+                exp: entry.exp || 120,
+                gold: entry.gold || 80,
+                level: entry.level || dungeon.minLevel || 10,
+                items: entry.items || ['보물상자']
+            };
+        }
+    }
     var bossEntry = pickRandom(dungeon.bosses);
     var bossName = bossEntry;
     if (bossEntry && typeof bossEntry === 'object') {
@@ -7521,6 +9259,70 @@ function getWorldBoss() {
     return { name: name, hp: 5000, att: 150, def: 60, exp: 800, gold: 500, level: 40, items: ['전설의 보물상자'] };
 }
 
+function getDailyWorldBoss() {
+    var candidates = ['어비스 드래곤', '늑대왕펜리르', '데스나이트', '리치', '서리 군주 킬라한', '사막의 군주 스콜피온 킹', '폭풍의 용 스톰레이지', '공허의 장군 보이드로드'];
+    var name = pickRandom(candidates);
+    var boss = GameData.MonsterDatabase[name];
+    if (boss) return boss;
+    return { name: name, hp: 8000, att: 220, def: 80, exp: 1500, gold: 900, level: 50, items: ['화려한 보물상자'] };
+}
+
+function ensureDailyWorldBoss() {
+    if (!state.worldBossDaily) state.worldBossDaily = {};
+    var today = getDateKey();
+    if (!state.worldBossDaily.date || state.worldBossDaily.date !== today) {
+        var boss = getDailyWorldBoss();
+        var baseHp = Math.max(12000, Math.floor((boss.hp || 8000) * 25));
+        state.worldBossDaily = {
+            date: today,
+            boss: boss,
+            maxHp: baseHp,
+            hp: baseHp,
+            contributions: {},
+            attacked: {},
+            defeated: false,
+            rewards: {}
+        };
+    }
+    return state.worldBossDaily;
+}
+
+function getWorldBossRanking(contrib) {
+    var list = [];
+    for (var name in contrib) list.push({ name: name, dmg: contrib[name] });
+    list.sort(function(a, b) { return b.dmg - a.dmg; });
+    return list;
+}
+
+function formatWorldBossStatus(entry, viewerName) {
+    if (!entry || !entry.boss) return '월드보스 정보가 없습니다.';
+    var boss = entry.boss;
+    var lines = [];
+    lines.push('[오늘의 월드보스] ' + boss.name);
+    lines.push('HP: ' + entry.hp + ' / ' + entry.maxHp + (entry.defeated ? ' (격파됨)' : ''));
+    var total = 0;
+    for (var c in entry.contributions) total += entry.contributions[c];
+    lines.push('총 기여도: ' + total);
+    var ranking = getWorldBossRanking(entry.contributions);
+    if (ranking.length) {
+        var top = ranking.slice(0, 5).map(function(r, i) { return (i + 1) + '. ' + r.name + ' (' + r.dmg + ')'; });
+        lines.push('TOP 5: ' + top.join(' | '));
+    } else {
+        lines.push('TOP 5: 아직 없음');
+    }
+    var mine = entry.contributions[viewerName] || 0;
+    lines.push('내 기여도: ' + mine);
+    return lines.join('\n');
+}
+
+function calcWorldBossDamage(player, boss) {
+    var att = getAttack(player);
+    var randMul = 0.8 + Math.random() * 0.4;
+    var raw = att * randMul + Math.floor(player.level * 3);
+    var mitigated = raw - ((boss.def || 0) * 0.5);
+    return Math.max(1, Math.floor(mitigated));
+}
+
 function updateQuestProgress(p, monsterName) {
     for (var qid in p.quests) {
         var qstate = p.quests[qid];
@@ -7595,7 +9397,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             ".경매목록 .경매등록 <아이템> <가격> [수량] .경매구매 <번호> .경매취소 <번호>\n" +
             ".업적 .칭호목록 .칭호설정 <이름>\n" +
             ".평판 <진영> .평판작업 <진영> .평판상점 <진영> .평판구매 <진영> <아이템>\n" +
-            ".월드이벤트 .침공 .주간이벤트 .길드레이드\n" +
+            ".월드이벤트 .침공 .주간이벤트 .월드보스 .월드보스공격 .월드보스보상 .길드레이드\n" +
             ".길드생성 <이름> .길드초대 <유저> .길드수락 <유저> .길드정보 .길드기부 .길드상점 .길드구매 <아이템>\n" +
             ".세트효과 .세트요약\n" +
             ".룬목록 .룬각인 <부위> <룬> .룬확인\n" +
@@ -9042,7 +10844,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 
     // 사용
     if (cmd === '사용') {
-        var useItem = arg;
+        var useItem = resolveUseItemName(player, arg);
         if (!useItem) { replier.reply('사용: .사용 <아이템>'); return; }
         if (findItemCount(player, useItem) <= 0) { replier.reply('아이템이 없습니다.'); return; }
         var effect = getConsumableEffect(useItem);
@@ -9286,7 +11088,11 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             }
             if (!noReward && battleSkill.dungeon && isDungeonFinalStage(battleSkill) && !battleSkill.seasonDungeon) {
                 player.stats.dungeons = (player.stats.dungeons || 0) + 1;
-                setWeeklyLockout(player, battleSkill.dungeon + ':' + (battleSkill.diff || '노말'));
+                var dmapSkill = getDungeonMap();
+                var ddataSkill = dmapSkill[battleSkill.dungeon];
+                if (!ddataSkill || ddataSkill.weeklyLockout !== false) {
+                    setWeeklyLockout(player, battleSkill.dungeon + ':' + (battleSkill.diff || '노말'));
+                }
                 addRep(player, '빛의 기사단', 50);
             }
             if (player.level >= 10) addAchievement(player, '성장 시작', '레벨 10 달성', '전설의 모험가');
@@ -9389,7 +11195,11 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             }
             if (!noReward && battle.dungeon && isDungeonFinalStage(battle) && !battle.seasonDungeon) {
                 player.stats.dungeons = (player.stats.dungeons || 0) + 1;
-                setWeeklyLockout(player, battle.dungeon + ':' + (battle.diff || '노말'));
+                var dmapBattle = getDungeonMap();
+                var ddataBattle = dmapBattle[battle.dungeon];
+                if (!ddataBattle || ddataBattle.weeklyLockout !== false) {
+                    setWeeklyLockout(player, battle.dungeon + ':' + (battle.diff || '노말'));
+                }
                 addRep(player, '빛의 기사단', 50);
                 if (battle.diff === '신화' || battle.diff === '영웅' || battle.diff === '노말') {
                     addLog('dungeon', player.name, battle.dungeon + ' ' + battle.diff + ' - ' + m.name + ' 클리어');
@@ -9689,6 +11499,10 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         dungeonName = resolved.name;
         var dungeon = dungeons[dungeonName];
         if (dungeon.minLevel && player.level < dungeon.minLevel) { replier.reply('레벨이 낮습니다.'); return; }
+        if (dungeon.type === 'solo' && dungeon.maxLevel && player.level > dungeon.maxLevel) {
+            replier.reply('이 던전은 레벨 ' + dungeon.maxLevel + '까지 권장됩니다.');
+            return;
+        }
         if (dungeon.type === 'beginner' && player.level > Config.BEGINNER_DUNGEON_MAX_LEVEL) {
             replier.reply('초보 던전은 레벨 ' + Config.BEGINNER_DUNGEON_MAX_LEVEL + '까지 입장 가능합니다.');
             return;
@@ -9696,9 +11510,11 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 
         var diffKey = diff;
         var lockKey = dungeonName + ':' + diffKey;
-        if (getWeeklyLockout(player, lockKey) === getWeekKey()) {
-            replier.reply('이번 주에는 이미 클리어했습니다.');
-            return;
+        if (dungeon.weeklyLockout !== false) {
+            if (getWeeklyLockout(player, lockKey) === getWeekKey()) {
+                replier.reply('이번 주에는 이미 클리어했습니다.');
+                return;
+            }
         }
 
         var mult = diffKey === '영웅' ? 1.5 : (diffKey === '신화' ? 2.2 : 1.0);
@@ -9706,6 +11522,11 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         if (dungeon.type === 'beginner') {
             opts.stageCount = 2;
             opts.monsterMult = 0.9;
+            mult *= 1.2;
+        }
+        if (dungeon.type === 'solo') {
+            opts.stageCount = 4;
+            opts.monsterMult = 0.92;
             mult *= 1.2;
         }
         var run = buildDungeonStages(dungeonName, dungeon, diffKey, player, opts);
@@ -9725,6 +11546,72 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         }
         var b = state.worldEvent.boss;
         replier.reply('[월드 이벤트]\n이번 주 보스: ' + b.name + '\n.침공 으로 전투' + buildNextActionHint('world-event'));
+        return;
+    }
+
+    // 월드보스 (일일)
+    if (cmd === '월드보스') {
+        var entryDaily = ensureDailyWorldBoss();
+        replier.reply(formatWorldBossStatus(entryDaily, player.name) + buildNextActionHint('world-boss'));
+        return;
+    }
+
+    if (cmd === '월드보스공격') {
+        var entryAttack = ensureDailyWorldBoss();
+        if (entryAttack.defeated) {
+            replier.reply('오늘의 월드보스는 이미 격파되었습니다.\n.월드보스보상 으로 보상을 확인하세요.' + buildNextActionHint('world-boss'));
+            return;
+        }
+        if (entryAttack.attacked[player.name]) {
+            replier.reply('오늘은 이미 기여했습니다.\n' + formatWorldBossStatus(entryAttack, player.name) + buildNextActionHint('world-boss'));
+            return;
+        }
+        var dmg = calcWorldBossDamage(player, entryAttack.boss);
+        if (dmg > entryAttack.hp) dmg = entryAttack.hp;
+        entryAttack.hp -= dmg;
+        entryAttack.contributions[player.name] = (entryAttack.contributions[player.name] || 0) + dmg;
+        entryAttack.attacked[player.name] = true;
+        var defeatedMsg = '';
+        if (entryAttack.hp <= 0) {
+            entryAttack.hp = 0;
+            entryAttack.defeated = true;
+            defeatedMsg = '\n월드보스를 격파했습니다! .월드보스보상 으로 기여도 보상을 받으세요.';
+        }
+        saveState();
+        replier.reply('월드보스에 피해 ' + dmg + ' 기여!' + defeatedMsg + '\n' + formatWorldBossStatus(entryAttack, player.name) + buildNextActionHint('world-boss'));
+        return;
+    }
+
+    if (cmd === '월드보스보상') {
+        var entryReward = ensureDailyWorldBoss();
+        if (!entryReward.defeated) {
+            replier.reply('월드보스가 아직 격파되지 않았습니다.' + buildNextActionHint('world-boss'));
+            return;
+        }
+        var myDmg = entryReward.contributions[player.name] || 0;
+        if (myDmg <= 0) {
+            replier.reply('기여도가 없습니다.\n.월드보스공격 으로 기여하세요.' + buildNextActionHint('world-boss'));
+            return;
+        }
+        if (entryReward.rewards[player.name]) {
+            replier.reply('이미 보상을 받았습니다.' + buildNextActionHint('world-boss'));
+            return;
+        }
+        var totalDmg = 0;
+        for (var nm in entryReward.contributions) totalDmg += entryReward.contributions[nm];
+        var ratio = totalDmg > 0 ? (myDmg / totalDmg) : 0;
+        var baseGold = 400 + Math.floor((entryReward.boss.level || 1) * 15);
+        var baseExp = 300 + Math.floor((entryReward.boss.level || 1) * 12);
+        var mult = 0.5 + (ratio * 1.5);
+        var rewardGold = Math.floor(baseGold * mult);
+        var rewardExp = Math.floor(baseExp * mult);
+        player.gold += rewardGold;
+        addExp(player, rewardExp);
+        var box = ratio >= 0.2 ? '전설의 보물상자' : (ratio >= 0.08 ? '화려한 보물상자' : '낡은 보물상자');
+        addItem(player, box, 1);
+        entryReward.rewards[player.name] = true;
+        saveState();
+        replier.reply('월드보스 보상 지급! 골드 +' + rewardGold + ', EXP +' + rewardExp + ', 보물상자: ' + box + buildNextActionHint('world-boss'));
         return;
     }
 
@@ -10239,8 +12126,20 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         }
 
         var shop = shopDb[shopName];
-        var items = shop.items || [];
-        if (items.length === 0) { replier.reply('상점 아이템이 없습니다.'); return; }
+        var filterResult = getFilteredShopItems(player, shopName, shop);
+        var items = filterResult.items || [];
+        var metaParts = [];
+        if (filterResult.rotation && filterResult.rotation.groups > 1) {
+            metaParts.push('로테이션: ' + (filterResult.rotation.type === 'season' ? '시즌' : '주간') + ' ' + (filterResult.rotation.index + 1) + '/' + filterResult.rotation.groups);
+        }
+        if (filterResult.lockedRotation) metaParts.push('잠김(로테이션) ' + filterResult.lockedRotation + '개');
+        if (filterResult.lockedRep) metaParts.push('잠김(평판) ' + filterResult.lockedRep + '개');
+        if (filterResult.repFaction) metaParts.push('평판 연동: ' + filterResult.repFaction);
+        var metaLine = metaParts.length ? metaParts.join(' | ') : '';
+        if (items.length === 0) {
+            replier.reply('현재 판매 중인 아이템이 없습니다.' + (metaLine ? '\n' + metaLine : ''));
+            return;
+        }
 
         var page = parseInt(pageArg, 10) || 1;
         var perPageItems = 10;
@@ -10248,6 +12147,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         page = Math.max(1, Math.min(totalItemPages, page));
 
         var outShop = '[' + shopName + '] (' + page + '/' + totalItemPages + ')\n';
+        if (metaLine) outShop += metaLine + '\n';
         var startItem = (page - 1) * perPageItems;
         for (var si = startItem; si < items.length && si < startItem + perPageItems; si++) {
             var entry = items[si];
@@ -10268,6 +12168,13 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         if (!GameData || !GameData.ShopDatabase || Object.keys(GameData.ShopDatabase).length === 0) loadGameData();
         var shopEntry = getShopEntry(buy);
         if (!shopEntry) { replier.reply('상점에서 판매하지 않는 아이템입니다.'); return; }
+        var access = getShopItemAccess(player, shopEntry.shopName, shopEntry.entry, shopEntry.shop);
+        if (!access.rotationOk) { replier.reply('이번 주 로테이션 품목이 아닙니다.'); return; }
+        if (!access.repOk) {
+            var curRep = (player.rep && access.repFaction) ? (player.rep[access.repFaction] || 0) : 0;
+            replier.reply('평판 부족: ' + access.repFaction + ' ' + curRep + '/' + access.repRequired);
+            return;
+        }
         var itemData = GameData.ItemDatabase[buy];
         if (!itemData) { replier.reply('아이템 데이터가 없습니다.'); return; }
         var price = itemData.price || 0;
