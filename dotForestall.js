@@ -4053,12 +4053,20 @@ var ShopDatabase = {
         name: '마르코의 잡화점',
         location: '시작마을',
         type: 'general',
+        description: '시작마을의 잡화점입니다. 모험에 필요한 기본 물품을 판매합니다.',
         items: [
             { item: '빵', stock: -1 },
             { item: '치즈', stock: -1 },
             { item: '사과', stock: -1 },
             { item: '귀환의돌', stock: -1 },
-            { item: '빈병', stock: -1 }
+            { item: '빈병', stock: -1 },
+            { item: '횃불', stock: -1 },
+            { item: '밧줄', stock: -1 },
+            { item: '나침반', stock: -1 },
+            { item: '지도조각', stock: -1 },
+            { item: '여행자의배낭', stock: -1 },
+            { item: '모험가수첩', stock: -1 },
+            { item: '낚시미끼', stock: -1 }
         ]
     },
     '시작마을가구점': {
@@ -4087,12 +4095,20 @@ var ShopDatabase = {
         name: '리나의 약국',
         location: '시작마을',
         type: 'potion',
+        description: '리나가 운영하는 약국입니다. 다양한 포션과 치료약을 구매할 수 있습니다.',
         items: [
             { item: '하급체력포션', stock: -1 },
             { item: '체력포션', stock: -1 },
+            { item: '중급체력포션', stock: -1 },
             { item: '하급마나포션', stock: -1 },
             { item: '마나포션', stock: -1 },
-            { item: '해독포션', stock: -1 }
+            { item: '중급마나포션', stock: -1 },
+            { item: '해독포션', stock: -1 },
+            { item: '해동포션', stock: -1 },
+            { item: '회복포션', stock: -1 },
+            { item: '약초', stock: -1 },
+            { item: '치유초', stock: -1 },
+            { item: '힘의포션', stock: -1 }
         ]
     },
     '시작마을장신구점': {
@@ -4100,12 +4116,20 @@ var ShopDatabase = {
         name: '초보 장신구 상점',
         location: '시작마을',
         type: 'accessory',
+        description: '초보 모험가를 위한 장신구 상점입니다. 저렴하고 실용적인 액세서리를 판매합니다.',
         items: [
             { item: '철반지', stock: -1 },
             { item: '가죽목걸이', stock: -1 },
             { item: '은귀걸이', stock: -1 },
             { item: '가죽벨트', stock: -1 },
-            { item: '천망토', stock: -1 }
+            { item: '천망토', stock: -1 },
+            { item: '은반지', stock: -1 },
+            { item: '은목걸이', stock: -1 },
+            { item: '금귀걸이', stock: -1 },
+            { item: '철벨트', stock: -1 },
+            { item: '가죽망토', stock: -1 },
+            { item: '호신부', stock: -1 },
+            { item: '행운의동전', stock: -1 }
         ]
     },
     '시작마을식당': {
@@ -4113,6 +4137,7 @@ var ShopDatabase = {
         name: '포근한 식당',
         location: '시작마을',
         type: 'food',
+        description: '따뜻한 음식을 제공하는 식당입니다. 모험 전 든든한 식사를 챙겨보세요!',
         items: [
             { item: '빵', stock: -1 },
             { item: '치즈', stock: -1 },
@@ -4120,7 +4145,12 @@ var ShopDatabase = {
             { item: '고기구이', stock: -1 },
             { item: '생선구이', stock: -1 },
             { item: '샐러드', stock: -1 },
-            { item: '꿀바른빵', stock: -1 }
+            { item: '꿀바른빵', stock: -1 },
+            { item: '야채수프', stock: -1 },
+            { item: '버섯볶음', stock: -1 },
+            { item: '과일주스', stock: -1 },
+            { item: '우유', stock: -1 },
+            { item: '모험가도시락', stock: -1 }
         ]
     },
     '수도고급무기점': {
@@ -4165,12 +4195,20 @@ var ShopDatabase = {
         name: '수도 방패 상인',
         location: '에테르니아수도',
         type: 'armor',
+        description: '에테르니아 수도의 방패 전문점입니다. 기사들이 즐겨 찾는 명소입니다.',
         items: [
+            { item: '나무방패', stock: -1 },
             { item: '철방패', stock: -1 },
             { item: '타워실드', stock: -1 },
             { item: '강철방패', stock: -1 },
             { item: '미스릴방패', stock: -1 },
-            { item: '태양석방패', stock: -1 }
+            { item: '태양석방패', stock: -1 },
+            { item: '서리수호방패', stock: -1 },
+            { item: '드래곤실드', stock: -1 },
+            { item: '용광로방패', stock: -1 },
+            { item: '차원방패', stock: -1 },
+            { item: '성역방패', stock: -1 },
+            { item: '용암방패', stock: -1 }
         ]
     },
     '에테르니아가구점': {
@@ -4318,16 +4356,22 @@ var ShopDatabase = {
         name: '에테르니아 약국',
         location: '에테르니아수도',
         type: 'potion',
+        description: '수도의 대형 약국입니다. 최상급 포션과 희귀한 치료약을 판매합니다.',
         items: [
             { item: '하급체력포션', stock: -1 },
             { item: '체력포션', stock: -1 },
             { item: '중급체력포션', stock: -1 },
             { item: '상급체력포션', stock: -1 },
+            { item: '최상급체력포션', stock: -1 },
             { item: '하급마나포션', stock: -1 },
             { item: '마나포션', stock: -1 },
             { item: '중급마나포션', stock: -1 },
             { item: '상급마나포션', stock: -1 },
-            { item: '해독포션', stock: -1 }
+            { item: '최상급마나포션', stock: -1 },
+            { item: '해독포션', stock: -1 },
+            { item: '해동포션', stock: -1 },
+            { item: '회복포션', stock: -1 },
+            { item: '만병통치약', stock: -1 }
         ]
     },
     '에테르니아잡화점': {
@@ -4335,13 +4379,20 @@ var ShopDatabase = {
         name: '수도 잡화점',
         location: '에테르니아수도',
         type: 'general',
+        description: '수도의 종합 잡화점입니다. 강화석과 다양한 소모품을 구매할 수 있습니다.',
         items: [
             { item: '빵', stock: -1 },
             { item: '치즈', stock: -1 },
             { item: '사과', stock: -1 },
             { item: '귀환의돌', stock: -1 },
             { item: '빈병', stock: -1 },
-            { item: '강화석', stock: -1 }
+            { item: '강화석', stock: -1 },
+            { item: '축복의강화석', stock: -1 },
+            { item: '안전한강화석', stock: -1 },
+            { item: '횃불', stock: -1 },
+            { item: '밧줄', stock: -1 },
+            { item: '고급지도', stock: -1 },
+            { item: '마력측정기', stock: -1 }
         ]
     },
     '에테르니아장신구점': {
@@ -4349,14 +4400,22 @@ var ShopDatabase = {
         name: '에테르니아 장신구점',
         location: '에테르니아수도',
         type: 'accessory',
+        description: '고급 장신구 전문점입니다. 귀족들도 즐겨 찾는 명품 액세서리를 판매합니다.',
         items: [
             { item: '은반지', stock: -1 },
             { item: '금반지', stock: -1 },
+            { item: '루비반지', stock: -1 },
+            { item: '사파이어반지', stock: -1 },
+            { item: '에메랄드반지', stock: -1 },
             { item: '은목걸이', stock: -1 },
             { item: '금목걸이', stock: -1 },
+            { item: '호신부', stock: -1 },
             { item: '금귀걸이', stock: -1 },
+            { item: '진주귀걸이', stock: -1 },
             { item: '철벨트', stock: -1 },
-            { item: '가죽망토', stock: -1 }
+            { item: '전사의벨트', stock: -1 },
+            { item: '가죽망토', stock: -1 },
+            { item: '마법망토', stock: -1 }
         ]
     },
     '에테르니아연금상': {
@@ -4364,6 +4423,7 @@ var ShopDatabase = {
         name: '연금 재료상',
         location: '에테르니아수도',
         type: 'potion',
+        description: '연금술에 필요한 재료와 포션을 판매합니다. 연금술사의 필수 방문지!',
         items: [
             { item: '체력포션', stock: -1 },
             { item: '중급체력포션', stock: -1 },
@@ -4373,7 +4433,12 @@ var ShopDatabase = {
             { item: '상급마나포션', stock: -1 },
             { item: '회복포션', stock: -1 },
             { item: '해독포션', stock: -1 },
-            { item: '해동포션', stock: -1 }
+            { item: '해동포션', stock: -1 },
+            { item: '약초', stock: -1 },
+            { item: '치유초', stock: -1 },
+            { item: '마나허브', stock: -1 },
+            { item: '독버섯', stock: -1 },
+            { item: '불의정수', stock: -1 }
         ]
     },
     '에테르니아요리점': {
@@ -4381,6 +4446,7 @@ var ShopDatabase = {
         name: '왕도 요리점',
         location: '에테르니아수도',
         type: 'food',
+        description: '수도 최고의 요리점입니다. 왕실 납품 경력의 셰프가 만드는 요리를 맛보세요!',
         items: [
             { item: '고기구이', stock: -1 },
             { item: '생선구이', stock: -1 },
@@ -4388,7 +4454,12 @@ var ShopDatabase = {
             { item: '스테이크', stock: -1 },
             { item: '꿀바른빵', stock: -1 },
             { item: '빵', stock: -1 },
-            { item: '치즈', stock: -1 }
+            { item: '치즈', stock: -1 },
+            { item: '왕실스프', stock: -1 },
+            { item: '해산물파스타', stock: -1 },
+            { item: '구운야채플레이트', stock: -1 },
+            { item: '왕실디저트', stock: -1 },
+            { item: '전투식량', stock: -1 }
         ]
     },
     '보석상점': {
@@ -4396,6 +4467,7 @@ var ShopDatabase = {
         name: '보석 상회',
         location: '에테르니아수도',
         type: 'material',
+        description: '각종 보석과 원석을 취급하는 전문 상점입니다. 장비 강화에 필수인 보석을 구매하세요!',
         items: [
             { item: '자수정', stock: -1 },
             { item: '토파즈', stock: -1 },
@@ -4404,7 +4476,11 @@ var ShopDatabase = {
             { item: '에메랄드원석', stock: -1 },
             { item: '오팔', stock: -1 },
             { item: '다이아몬드원석', stock: -1 },
-            { item: '별의파편', stock: -1 }
+            { item: '별의파편', stock: -1 },
+            { item: '달빛수정', stock: -1 },
+            { item: '태양석', stock: -1 },
+            { item: '무지개원석', stock: -1 },
+            { item: '정제된마나석', stock: -1 }
         ]
     },
     '사막상회': {
@@ -4412,6 +4488,7 @@ var ShopDatabase = {
         name: '오아시스 상회',
         location: '불타는 사막',
         type: 'general',
+        description: '사막 한복판 오아시스의 상회입니다. 사막 여행에 필요한 물품을 판매합니다.',
         items: [
             { item: '사막향신료', stock: -1 },
             { item: '태양석파편', stock: -1 },
@@ -4419,7 +4496,12 @@ var ShopDatabase = {
             { item: '모래바람망토', stock: -1 },
             { item: '루비반지', stock: -1 },
             { item: '귀환의돌', stock: -1 },
-            { item: '빈병', stock: -1 }
+            { item: '빈병', stock: -1 },
+            { item: '사막물통', stock: -1 },
+            { item: '자외선차단망토', stock: -1 },
+            { item: '모래바람고글', stock: -1 },
+            { item: '낙타소환권', stock: -1 },
+            { item: '사막지도', stock: -1 }
         ]
     },
     '북방보급소': {
@@ -4427,6 +4509,7 @@ var ShopDatabase = {
         name: '북방 보급소',
         location: '얼어붙은 북방',
         type: 'general',
+        description: '얼어붙은 북방의 보급소입니다. 혹한에 대비한 물품을 구매하세요!',
         items: [
             { item: '빙설결정', stock: -1 },
             { item: '서리꽃', stock: -1 },
@@ -4434,7 +4517,12 @@ var ShopDatabase = {
             { item: '설원벨트', stock: -1 },
             { item: '상급체력포션', stock: -1 },
             { item: '상급마나포션', stock: -1 },
-            { item: '귀환의돌', stock: -1 }
+            { item: '귀환의돌', stock: -1 },
+            { item: '방한복', stock: -1 },
+            { item: '눈신발', stock: -1 },
+            { item: '온열장갑', stock: -1 },
+            { item: '해동포션', stock: -1 },
+            { item: '눈보라망토', stock: -1 }
         ]
     },
     '습지주술상점': {
@@ -4442,13 +4530,20 @@ var ShopDatabase = {
         name: '늪지 주술상',
         location: '황혼의 습지',
         type: 'general',
+        description: '신비로운 주술 용품을 판매하는 상점입니다. 저주와 해독에 관한 물품이 가득합니다.',
         items: [
             { item: '늪지이끼덩이', stock: -1 },
             { item: '유령의정수', stock: -1 },
             { item: '늪지부적', stock: -1 },
             { item: '안개귀걸이', stock: -1 },
             { item: '해독포션', stock: -1 },
-            { item: '귀환의돌', stock: -1 }
+            { item: '귀환의돌', stock: -1 },
+            { item: '저주해제부적', stock: -1 },
+            { item: '독저항물약', stock: -1 },
+            { item: '늪지등불', stock: -1 },
+            { item: '안개차단안경', stock: -1 },
+            { item: '방수장화', stock: -1 },
+            { item: '습지약초묶음', stock: -1 }
         ]
     },
     '천공장비점': {
@@ -4456,6 +4551,7 @@ var ShopDatabase = {
         name: '천공 장비점',
         location: '천공의 산맥',
         type: 'general',
+        description: '구름 위 천공의 산맥에 위치한 장비점입니다. 하늘의 기운이 깃든 물품을 판매합니다.',
         items: [
             { item: '폭풍결정', stock: -1 },
             { item: '천둥돌', stock: -1 },
@@ -4463,7 +4559,12 @@ var ShopDatabase = {
             { item: '하늘반지', stock: -1 },
             { item: '천공부적', stock: -1 },
             { item: '뇌운귀걸이', stock: -1 },
-            { item: '귀환의돌', stock: -1 }
+            { item: '귀환의돌', stock: -1 },
+            { item: '바람의깃털', stock: -1 },
+            { item: '낙하산', stock: -1 },
+            { item: '고산적응물약', stock: -1 },
+            { item: '구름밟기신발', stock: -1 },
+            { item: '천공지도', stock: -1 }
         ]
     },
     '실버문상점': {
@@ -4471,12 +4572,20 @@ var ShopDatabase = {
         name: '실버문 상점',
         location: '엘프의 숲 - 실버문',
         type: 'general',
+        description: '엘프 마을 실버문의 상점입니다. 엘프 특유의 섬세한 물품을 판매합니다.',
         items: [
             { item: '달빛꽃정수', stock: -1 },
             { item: '달빛반지', stock: -1 },
             { item: '달빛펜던트', stock: -1 },
             { item: '엘프의망토', stock: -1 },
-            { item: '귀환의돌', stock: -1 }
+            { item: '귀환의돌', stock: -1 },
+            { item: '세계수잎차', stock: -1 },
+            { item: '엘프빵', stock: -1 },
+            { item: '치유의이슬', stock: -1 },
+            { item: '엘프활', stock: -1 },
+            { item: '엘프허브', stock: -1 },
+            { item: '숲의향수', stock: -1 },
+            { item: '달빛램프', stock: -1 }
         ]
     },
     '드워프상회': {
@@ -4484,13 +4593,20 @@ var ShopDatabase = {
         name: '철망치 상회',
         location: '드워프 왕국 - 철망치',
         type: 'general',
+        description: '드워프 왕국의 상회입니다. 최상급 광물과 드워프 장인의 작품을 만나보세요!',
         items: [
             { item: '아다만타이트', stock: -1 },
             { item: '드워프강철', stock: -1 },
             { item: '용광로의 불꽃', stock: -1 },
             { item: '지하수정', stock: -1 },
             { item: '지하수정반지', stock: -1 },
-            { item: '드워프부적', stock: -1 }
+            { item: '드워프부적', stock: -1 },
+            { item: '드워프맥주', stock: -1 },
+            { item: '드워프빵', stock: -1 },
+            { item: '광부용곡괭이', stock: -1 },
+            { item: '채굴장갑', stock: -1 },
+            { item: '광산등불', stock: -1 },
+            { item: '드워프연장세트', stock: -1 }
         ]
     },
     '고대유물상점': {
@@ -4498,12 +4614,20 @@ var ShopDatabase = {
         name: '고대 유물 상점',
         location: '고대의 폐허',
         type: 'general',
+        description: '고대 문명의 유물을 거래하는 상점입니다. 시간을 초월한 신비한 물품이 가득합니다.',
         items: [
             { item: '시간의 모래', stock: -1 },
             { item: '고대 마법석', stock: -1 },
             { item: '차원의 파편', stock: -1 },
             { item: '차원반지', stock: -1 },
-            { item: '차원부적', stock: -1 }
+            { item: '차원부적', stock: -1 },
+            { item: '고대두루마리', stock: -1 },
+            { item: '시간의시계', stock: -1 },
+            { item: '고대인의램프', stock: -1 },
+            { item: '폐허지도', stock: -1 },
+            { item: '고대어사전', stock: -1 },
+            { item: '시공의나침반', stock: -1 },
+            { item: '고대마력물약', stock: -1 }
         ]
     },
     '심연거래소': {
@@ -4511,12 +4635,20 @@ var ShopDatabase = {
         name: '심연 거래소',
         location: '심연의 균열',
         type: 'general',
+        description: '심연의 균열에서 운영되는 거래소입니다. 공허의 기운이 담긴 위험한 물품을 거래합니다.',
         items: [
             { item: '공허의 핵', stock: -1 },
             { item: '타락한 영혼', stock: -1 },
             { item: '심연의 수정', stock: -1 },
             { item: '암흑의 정수', stock: -1 },
-            { item: '타락의반지', stock: -1 }
+            { item: '타락의반지', stock: -1 },
+            { item: '심연의열쇠', stock: -1 },
+            { item: '공허저항물약', stock: -1 },
+            { item: '어둠시야안경', stock: -1 },
+            { item: '심연지도', stock: -1 },
+            { item: '봉인해제도구', stock: -1 },
+            { item: '정화의성수', stock: -1 },
+            { item: '심연탐사장비', stock: -1 }
         ]
     },
     '천상성소상점': {
@@ -4524,12 +4656,20 @@ var ShopDatabase = {
         name: '성소의 상점',
         location: '천상계 - 빛의 성소',
         type: 'general',
+        description: '천상계 빛의 성소에 있는 신성한 상점입니다. 축복받은 물품을 판매합니다.',
         items: [
             { item: '신성한 빛', stock: -1 },
             { item: '생명의 물', stock: -1 },
             { item: '축복의 정수', stock: -1 },
             { item: '성역의반지', stock: -1 },
-            { item: '성광펜던트', stock: -1 }
+            { item: '성광펜던트', stock: -1 },
+            { item: '천사의깃털', stock: -1 },
+            { item: '축복의빵', stock: -1 },
+            { item: '성수', stock: -1 },
+            { item: '신성한향', stock: -1 },
+            { item: '빛의두루마리', stock: -1 },
+            { item: '정화의구슬', stock: -1 },
+            { item: '천상의악보', stock: -1 }
         ]
     },
     '불꽃제단상점': {
@@ -4537,12 +4677,20 @@ var ShopDatabase = {
         name: '불꽃 제단 상점',
         location: '원소계 - 불꽃의 제단',
         type: 'general',
+        description: '불꽃의 제단에 있는 상점입니다. 화염의 힘이 깃든 물품을 판매합니다.',
         items: [
             { item: '영원한 불꽃', stock: -1 },
             { item: '용암의 핵', stock: -1 },
             { item: '불의 정수', stock: -1 },
             { item: '태양의 파편', stock: -1 },
-            { item: '불꽃펜던트', stock: -1 }
+            { item: '불꽃펜던트', stock: -1 },
+            { item: '화염저항물약', stock: -1 },
+            { item: '냉각제', stock: -1 },
+            { item: '용암돌', stock: -1 },
+            { item: '불꽃두루마리', stock: -1 },
+            { item: '화염의보호구', stock: -1 },
+            { item: '화염마법서', stock: -1 },
+            { item: '용의숨결병', stock: -1 }
         ]
     },
     // 지역별 전문 상점 (재료/장신구/요리)
@@ -4551,10 +4699,18 @@ var ShopDatabase = {
         name: '사막 재료 상점',
         location: '불타는 사막',
         type: 'material',
+        description: '사막에서 채취한 희귀 재료를 판매합니다. 연금술과 제작에 유용합니다.',
         items: [
             { item: '사막향신료', stock: -1 },
             { item: '태양석파편', stock: -1 },
-            { item: '금광석', stock: -1 }
+            { item: '금광석', stock: -1 },
+            { item: '사막장미', stock: -1 },
+            { item: '선인장가시', stock: -1 },
+            { item: '모래정수', stock: -1 },
+            { item: '전갈독', stock: -1 },
+            { item: '미라붕대', stock: -1 },
+            { item: '고대유물조각', stock: -1 },
+            { item: '피닉스깃털', stock: -1 }
         ]
     },
     '사막장신구점': {
@@ -4562,12 +4718,18 @@ var ShopDatabase = {
         name: '사막 장신구점',
         location: '불타는 사막',
         type: 'accessory',
+        description: '이국적인 사막 스타일의 장신구를 판매합니다.',
         items: [
             { item: '오아시스목걸이', stock: -1 },
             { item: '모래바람망토', stock: -1 },
             { item: '루비반지', stock: -1 },
             { item: '금귀걸이', stock: -1 },
-            { item: '전사의벨트', stock: -1 }
+            { item: '전사의벨트', stock: -1 },
+            { item: '사막왕의인장', stock: -1 },
+            { item: '태양의팔찌', stock: -1 },
+            { item: '스핑크스부적', stock: -1 },
+            { item: '사막스카프', stock: -1 },
+            { item: '황금발찌', stock: -1 }
         ]
     },
     '사막요리점': {
@@ -4575,6 +4737,7 @@ var ShopDatabase = {
         name: '오아시스 요리점',
         location: '불타는 사막',
         type: 'food',
+        description: '사막의 열기를 이기는 시원한 요리와 이국적인 음식을 제공합니다.',
         items: [
             { item: '빵', stock: -1 },
             { item: '치즈', stock: -1 },
@@ -4583,7 +4746,11 @@ var ShopDatabase = {
             { item: '생선구이', stock: -1 },
             { item: '샐러드', stock: -1 },
             { item: '스테이크', stock: -1 },
-            { item: '꿀바른빵', stock: -1 }
+            { item: '꿀바른빵', stock: -1 },
+            { item: '대추야자', stock: -1 },
+            { item: '오아시스물', stock: -1 },
+            { item: '향신료케밥', stock: -1 },
+            { item: '사막빙수', stock: -1 }
         ]
     },
     '북방재료상': {
@@ -4591,10 +4758,18 @@ var ShopDatabase = {
         name: '북방 재료 상점',
         location: '얼어붙은 북방',
         type: 'material',
+        description: '얼어붙은 북방에서만 구할 수 있는 희귀 재료를 판매합니다.',
         items: [
             { item: '빙설결정', stock: -1 },
             { item: '서리꽃', stock: -1 },
-            { item: '미스릴광석', stock: -1 }
+            { item: '미스릴광석', stock: -1 },
+            { item: '영원의얼음', stock: -1 },
+            { item: '빙룡비늘', stock: -1 },
+            { item: '설인의털', stock: -1 },
+            { item: '북극곰가죽', stock: -1 },
+            { item: '눈늑대송곳니', stock: -1 },
+            { item: '서리거인의뼈', stock: -1 },
+            { item: '냉기정수', stock: -1 }
         ]
     },
     '북방장신구점': {
@@ -4602,12 +4777,18 @@ var ShopDatabase = {
         name: '북방 장신구점',
         location: '얼어붙은 북방',
         type: 'accessory',
+        description: '북방 전사들이 착용하는 튼튼한 장신구를 판매합니다.',
         items: [
             { item: '서리늑대반지', stock: -1 },
             { item: '설원벨트', stock: -1 },
             { item: '은목걸이', stock: -1 },
             { item: '은귀걸이', stock: -1 },
-            { item: '가죽망토', stock: -1 }
+            { item: '가죽망토', stock: -1 },
+            { item: '빙설의고리', stock: -1 },
+            { item: '바이킹팔찌', stock: -1 },
+            { item: '서리수호부적', stock: -1 },
+            { item: '눈꽃귀걸이', stock: -1 },
+            { item: '겨울왕의인장', stock: -1 }
         ]
     },
     '북방요리점': {
@@ -4615,13 +4796,20 @@ var ShopDatabase = {
         name: '북방 식당',
         location: '얼어붙은 북방',
         type: 'food',
+        description: '추위를 이기는 따뜻하고 든든한 북방 요리를 제공합니다.',
         items: [
             { item: '빵', stock: -1 },
             { item: '치즈', stock: -1 },
             { item: '고기구이', stock: -1 },
             { item: '생선구이', stock: -1 },
             { item: '스테이크', stock: -1 },
-            { item: '꿀바른빵', stock: -1 }
+            { item: '꿀바른빵', stock: -1 },
+            { item: '바이킹스튜', stock: -1 },
+            { item: '순록고기구이', stock: -1 },
+            { item: '뜨거운사과술', stock: -1 },
+            { item: '감자스프', stock: -1 },
+            { item: '훈제연어', stock: -1 },
+            { item: '벌꿀미드', stock: -1 }
         ]
     },
     '습지재료상': {
@@ -4629,11 +4817,18 @@ var ShopDatabase = {
         name: '습지 재료 상점',
         location: '황혼의 습지',
         type: 'material',
+        description: '습지에서만 자라는 희귀한 약초와 마법 재료를 판매합니다.',
         items: [
             { item: '늪지이끼덩이', stock: -1 },
             { item: '유령의정수', stock: -1 },
             { item: '약초', stock: -1 },
-            { item: '치유허브', stock: -1 }
+            { item: '치유허브', stock: -1 },
+            { item: '독버섯', stock: -1 },
+            { item: '저주받은뼈', stock: -1 },
+            { item: '두꺼비점액', stock: -1 },
+            { item: '거머리추출물', stock: -1 },
+            { item: '늪지연꽃', stock: -1 },
+            { item: '안개이슬', stock: -1 }
         ]
     },
     '습지장신구점': {
@@ -4641,11 +4836,18 @@ var ShopDatabase = {
         name: '습지 장신구점',
         location: '황혼의 습지',
         type: 'accessory',
+        description: '저주와 해독에 효과적인 신비로운 장신구를 판매합니다.',
         items: [
             { item: '늪지부적', stock: -1 },
             { item: '안개귀걸이', stock: -1 },
             { item: '마법망토', stock: -1 },
-            { item: '철벨트', stock: -1 }
+            { item: '철벨트', stock: -1 },
+            { item: '해독의팔찌', stock: -1 },
+            { item: '저주방어반지', stock: -1 },
+            { item: '유령소환부적', stock: -1 },
+            { item: '습지수호자의증표', stock: -1 },
+            { item: '안개의눈', stock: -1 },
+            { item: '독저항목걸이', stock: -1 }
         ]
     },
     '습지요리점': {
@@ -4653,12 +4855,20 @@ var ShopDatabase = {
         name: '늪지 식당',
         location: '황혼의 습지',
         type: 'food',
+        description: '습지의 독특한 재료로 만든 특별한 요리를 제공합니다.',
         items: [
             { item: '빵', stock: -1 },
             { item: '치즈', stock: -1 },
             { item: '사과', stock: -1 },
             { item: '샐러드', stock: -1 },
-            { item: '생선구이', stock: -1 }
+            { item: '생선구이', stock: -1 },
+            { item: '개구리다리튀김', stock: -1 },
+            { item: '연꽃차', stock: -1 },
+            { item: '습지버섯수프', stock: -1 },
+            { item: '두꺼비스튜', stock: -1 },
+            { item: '해독허브티', stock: -1 },
+            { item: '안개떡', stock: -1 },
+            { item: '연잎밥', stock: -1 }
         ]
     },
     '천공재료상': {
@@ -4666,10 +4876,18 @@ var ShopDatabase = {
         name: '천공 재료 상점',
         location: '천공의 산맥',
         type: 'material',
+        description: '구름 위에서만 채취할 수 있는 희귀한 재료를 판매합니다.',
         items: [
             { item: '폭풍결정', stock: -1 },
             { item: '천둥돌', stock: -1 },
-            { item: '하늘수정', stock: -1 }
+            { item: '하늘수정', stock: -1 },
+            { item: '구름꽃', stock: -1 },
+            { item: '드래곤의뼈', stock: -1 },
+            { item: '그리폰깃털', stock: -1 },
+            { item: '번개정수', stock: -1 },
+            { item: '산악거인의돌', stock: -1 },
+            { item: '바람의정수', stock: -1 },
+            { item: '천둥새알', stock: -1 }
         ]
     },
     '천공장신구점': {
@@ -4677,10 +4895,18 @@ var ShopDatabase = {
         name: '천공 장신구점',
         location: '천공의 산맥',
         type: 'accessory',
+        description: '하늘의 기운이 담긴 강력한 장신구를 판매합니다.',
         items: [
             { item: '하늘반지', stock: -1 },
             { item: '천공부적', stock: -1 },
-            { item: '뇌운귀걸이', stock: -1 }
+            { item: '뇌운귀걸이', stock: -1 },
+            { item: '폭풍의팔찌', stock: -1 },
+            { item: '구름걸이목걸이', stock: -1 },
+            { item: '천둥의인장', stock: -1 },
+            { item: '독수리발톱부적', stock: -1 },
+            { item: '바람의망토', stock: -1 },
+            { item: '산정상의반지', stock: -1 },
+            { item: '용기사의훈장', stock: -1 }
         ]
     },
     '천공요리점': {
@@ -4688,11 +4914,20 @@ var ShopDatabase = {
         name: '천공 산장식당',
         location: '천공의 산맥',
         type: 'food',
+        description: '산 정상에서 맛보는 특별한 산장 요리를 제공합니다.',
         items: [
             { item: '빵', stock: -1 },
             { item: '치즈', stock: -1 },
             { item: '고기구이', stock: -1 },
-            { item: '스테이크', stock: -1 }
+            { item: '스테이크', stock: -1 },
+            { item: '산양고기구이', stock: -1 },
+            { item: '산나물비빔밥', stock: -1 },
+            { item: '뜨거운산양유', stock: -1 },
+            { item: '독수리알요리', stock: -1 },
+            { item: '고산버섯수프', stock: -1 },
+            { item: '등산가도시락', stock: -1 },
+            { item: '산삼차', stock: -1 },
+            { item: '구름빵', stock: -1 }
         ]
     },
     '실버문재료상': {
@@ -4700,10 +4935,18 @@ var ShopDatabase = {
         name: '실버문 재료 상점',
         location: '엘프의 숲 - 실버문',
         type: 'material',
+        description: '엘프의 숲에서만 자라는 신비로운 재료를 판매합니다.',
         items: [
             { item: '달빛꽃정수', stock: -1 },
             { item: '하늘수정', stock: -1 },
-            { item: '자수정', stock: -1 }
+            { item: '자수정', stock: -1 },
+            { item: '세계수가지', stock: -1 },
+            { item: '엘프허브', stock: -1 },
+            { item: '달빛꽃', stock: -1 },
+            { item: '영혼의나무', stock: -1 },
+            { item: '요정의눈물', stock: -1 },
+            { item: '숲의이슬', stock: -1 },
+            { item: '마법나무껍질', stock: -1 }
         ]
     },
     '실버문장신구점': {
@@ -4711,10 +4954,18 @@ var ShopDatabase = {
         name: '실버문 장신구점',
         location: '엘프의 숲 - 실버문',
         type: 'accessory',
+        description: '엘프 장인이 만든 섬세하고 아름다운 장신구를 판매합니다.',
         items: [
             { item: '달빛반지', stock: -1 },
             { item: '달빛펜던트', stock: -1 },
-            { item: '엘프의망토', stock: -1 }
+            { item: '엘프의망토', stock: -1 },
+            { item: '별빛귀걸이', stock: -1 },
+            { item: '숲의수호자팔찌', stock: -1 },
+            { item: '엘프왕관', stock: -1 },
+            { item: '자연의부적', stock: -1 },
+            { item: '드루이드의인장', stock: -1 },
+            { item: '요정의날개브로치', stock: -1 },
+            { item: '나뭇잎벨트', stock: -1 }
         ]
     },
     '실버문요리점': {
@@ -4722,12 +4973,20 @@ var ShopDatabase = {
         name: '실버문 식당',
         location: '엘프의 숲 - 실버문',
         type: 'food',
+        description: '자연과 조화를 이루는 건강한 엘프 요리를 제공합니다.',
         items: [
             { item: '빵', stock: -1 },
             { item: '치즈', stock: -1 },
             { item: '샐러드', stock: -1 },
             { item: '스테이크', stock: -1 },
-            { item: '꿀바른빵', stock: -1 }
+            { item: '꿀바른빵', stock: -1 },
+            { item: '엘프빵', stock: -1 },
+            { item: '숲의열매파이', stock: -1 },
+            { item: '달빛허브차', stock: -1 },
+            { item: '세계수열매', stock: -1 },
+            { item: '요정의꿀', stock: -1 },
+            { item: '숲버섯리조또', stock: -1 },
+            { item: '달빛와인', stock: -1 }
         ]
     },
     '드워프재료상': {
@@ -4735,11 +4994,18 @@ var ShopDatabase = {
         name: '드워프 재료 상점',
         location: '드워프 왕국 - 철망치',
         type: 'material',
+        description: '드워프 광부들이 채굴한 최상급 광물과 제작 재료를 판매합니다.',
         items: [
             { item: '아다만타이트', stock: -1 },
             { item: '드워프강철', stock: -1 },
             { item: '용광로의 불꽃', stock: -1 },
-            { item: '지하수정', stock: -1 }
+            { item: '지하수정', stock: -1 },
+            { item: '미스릴광석', stock: -1 },
+            { item: '철광석', stock: -1 },
+            { item: '금광석', stock: -1 },
+            { item: '마그마정수', stock: -1 },
+            { item: '지하드래곤비늘', stock: -1 },
+            { item: '고대광물', stock: -1 }
         ]
     },
     '드워프장신구점': {
@@ -4747,10 +5013,18 @@ var ShopDatabase = {
         name: '드워프 장신구점',
         location: '드워프 왕국 - 철망치',
         type: 'accessory',
+        description: '드워프 장인이 만든 튼튼하고 실용적인 장신구를 판매합니다.',
         items: [
             { item: '지하수정반지', stock: -1 },
             { item: '드워프부적', stock: -1 },
-            { item: '전사의벨트', stock: -1 }
+            { item: '전사의벨트', stock: -1 },
+            { item: '대장장이의팔찌', stock: -1 },
+            { item: '광부의목걸이', stock: -1 },
+            { item: '드워프왕의인장', stock: -1 },
+            { item: '용광로의고리', stock: -1 },
+            { item: '철망치귀걸이', stock: -1 },
+            { item: '지하왕국의증표', stock: -1 },
+            { item: '드워프갑옷브로치', stock: -1 }
         ]
     },
     '드워프요리점': {
@@ -4758,11 +5032,20 @@ var ShopDatabase = {
         name: '드워프 식당',
         location: '드워프 왕국 - 철망치',
         type: 'food',
+        description: '드워프들이 즐겨먹는 풍성하고 든든한 요리를 제공합니다.',
         items: [
             { item: '빵', stock: -1 },
             { item: '치즈', stock: -1 },
             { item: '고기구이', stock: -1 },
-            { item: '스테이크', stock: -1 }
+            { item: '스테이크', stock: -1 },
+            { item: '드워프빵', stock: -1 },
+            { item: '드워프맥주', stock: -1 },
+            { item: '광부용도시락', stock: -1 },
+            { item: '훈제멧돼지고기', stock: -1 },
+            { item: '버섯치즈스튜', stock: -1 },
+            { item: '철광산빵', stock: -1 },
+            { item: '대장장이스프', stock: -1 },
+            { item: '드워프소시지', stock: -1 }
         ]
     },
     '고대재료상': {
@@ -4770,10 +5053,18 @@ var ShopDatabase = {
         name: '고대 재료 상점',
         location: '고대의 폐허',
         type: 'material',
+        description: '시간의 흐름을 거스르는 고대의 신비한 재료를 판매합니다.',
         items: [
             { item: '시간의 모래', stock: -1 },
             { item: '고대 마법석', stock: -1 },
-            { item: '차원의 파편', stock: -1 }
+            { item: '차원의 파편', stock: -1 },
+            { item: '시공의결정', stock: -1 },
+            { item: '고대유물조각', stock: -1 },
+            { item: '영원의돌', stock: -1 },
+            { item: '고대기계부품', stock: -1 },
+            { item: '시간정수', stock: -1 },
+            { item: '차원균열파편', stock: -1 },
+            { item: '고대마법잉크', stock: -1 }
         ]
     },
     '고대장신구점': {
@@ -4781,9 +5072,18 @@ var ShopDatabase = {
         name: '고대 장신구점',
         location: '고대의 폐허',
         type: 'accessory',
+        description: '고대 문명에서 발굴된 신비한 장신구를 판매합니다.',
         items: [
             { item: '차원반지', stock: -1 },
-            { item: '차원부적', stock: -1 }
+            { item: '차원부적', stock: -1 },
+            { item: '시간의팔찌', stock: -1 },
+            { item: '고대문명목걸이', stock: -1 },
+            { item: '시공의귀걸이', stock: -1 },
+            { item: '영원의고리', stock: -1 },
+            { item: '고대왕의인장', stock: -1 },
+            { item: '시간여행자브로치', stock: -1 },
+            { item: '차원이동벨트', stock: -1 },
+            { item: '고대마법사망토', stock: -1 }
         ]
     },
     '고대요리점': {
@@ -4791,11 +5091,20 @@ var ShopDatabase = {
         name: '고대 식당',
         location: '고대의 폐허',
         type: 'food',
+        description: '고대 레시피를 복원한 신비로운 요리를 제공합니다.',
         items: [
             { item: '빵', stock: -1 },
             { item: '치즈', stock: -1 },
             { item: '고기구이', stock: -1 },
-            { item: '스테이크', stock: -1 }
+            { item: '스테이크', stock: -1 },
+            { item: '고대빵', stock: -1 },
+            { item: '시간의과일', stock: -1 },
+            { item: '영원의물약', stock: -1 },
+            { item: '고대와인', stock: -1 },
+            { item: '차원여행자식량', stock: -1 },
+            { item: '마법사의만찬', stock: -1 },
+            { item: '고대허브차', stock: -1 },
+            { item: '시간정지케이크', stock: -1 }
         ]
     },
     '심연재료상': {
@@ -4803,11 +5112,18 @@ var ShopDatabase = {
         name: '심연 재료 상점',
         location: '심연의 균열',
         type: 'material',
+        description: '심연에서만 얻을 수 있는 위험하지만 강력한 재료를 판매합니다.',
         items: [
             { item: '공허의 핵', stock: -1 },
             { item: '타락한 영혼', stock: -1 },
             { item: '심연의 수정', stock: -1 },
-            { item: '암흑의 정수', stock: -1 }
+            { item: '암흑의 정수', stock: -1 },
+            { item: '공허의비늘', stock: -1 },
+            { item: '타락한천사의깃털', stock: -1 },
+            { item: '심연의눈', stock: -1 },
+            { item: '공허의피', stock: -1 },
+            { item: '암흑마법가루', stock: -1 },
+            { item: '봉인의파편', stock: -1 }
         ]
     },
     '심연장신구점': {
@@ -4815,8 +5131,18 @@ var ShopDatabase = {
         name: '심연 장신구점',
         location: '심연의 균열',
         type: 'accessory',
+        description: '공허의 힘이 깃든 강력하지만 위험한 장신구를 판매합니다.',
         items: [
-            { item: '타락의반지', stock: -1 }
+            { item: '타락의반지', stock: -1 },
+            { item: '심연의목걸이', stock: -1 },
+            { item: '공허의귀걸이', stock: -1 },
+            { item: '암흑의팔찌', stock: -1 },
+            { item: '타락한천사의날개', stock: -1 },
+            { item: '공허수호부적', stock: -1 },
+            { item: '심연의눈반지', stock: -1 },
+            { item: '봉인해제의고리', stock: -1 },
+            { item: '암흑기사의인장', stock: -1 },
+            { item: '공허왕의망토', stock: -1 }
         ]
     },
     '심연요리점': {
@@ -4824,11 +5150,20 @@ var ShopDatabase = {
         name: '심연 식당',
         location: '심연의 균열',
         type: 'food',
+        description: '심연의 기운을 담은 특별한 음식을 제공합니다. (주의: 부작용 있음)',
         items: [
             { item: '빵', stock: -1 },
             { item: '치즈', stock: -1 },
             { item: '고기구이', stock: -1 },
-            { item: '스테이크', stock: -1 }
+            { item: '스테이크', stock: -1 },
+            { item: '심연의빵', stock: -1 },
+            { item: '공허의과일', stock: -1 },
+            { item: '암흑의물약', stock: -1 },
+            { item: '타락한포도주', stock: -1 },
+            { item: '심연전사식량', stock: -1 },
+            { item: '공허에너지바', stock: -1 },
+            { item: '암흑의스튜', stock: -1 },
+            { item: '봉인해제케이크', stock: -1 }
         ]
     },
     '성소재료상': {
@@ -4836,10 +5171,18 @@ var ShopDatabase = {
         name: '성소 재료 상점',
         location: '천상계 - 빛의 성소',
         type: 'material',
+        description: '천상계의 신성한 재료를 판매합니다. 정화와 축복에 효과적입니다.',
         items: [
             { item: '신성한 빛', stock: -1 },
             { item: '생명의 물', stock: -1 },
-            { item: '축복의 정수', stock: -1 }
+            { item: '축복의 정수', stock: -1 },
+            { item: '천사의깃털', stock: -1 },
+            { item: '신성한가루', stock: -1 },
+            { item: '빛의결정', stock: -1 },
+            { item: '성스러운오일', stock: -1 },
+            { item: '천상의꽃', stock: -1 },
+            { item: '대천사의눈물', stock: -1 },
+            { item: '신의축복파편', stock: -1 }
         ]
     },
     '성소장신구점': {
@@ -4847,9 +5190,18 @@ var ShopDatabase = {
         name: '성소 장신구점',
         location: '천상계 - 빛의 성소',
         type: 'accessory',
+        description: '천상의 축복이 깃든 신성한 장신구를 판매합니다.',
         items: [
             { item: '성역의반지', stock: -1 },
-            { item: '성광펜던트', stock: -1 }
+            { item: '성광펜던트', stock: -1 },
+            { item: '천사의날개브로치', stock: -1 },
+            { item: '신성한팔찌', stock: -1 },
+            { item: '빛의귀걸이', stock: -1 },
+            { item: '축복의고리', stock: -1 },
+            { item: '성기사의인장', stock: -1 },
+            { item: '천상의왕관', stock: -1 },
+            { item: '신의가호벨트', stock: -1 },
+            { item: '정화의망토', stock: -1 }
         ]
     },
     '성소요리점': {
@@ -4857,11 +5209,20 @@ var ShopDatabase = {
         name: '성소 식당',
         location: '천상계 - 빛의 성소',
         type: 'food',
+        description: '천상의 축복을 받은 성스러운 음식을 제공합니다.',
         items: [
             { item: '빵', stock: -1 },
             { item: '치즈', stock: -1 },
             { item: '샐러드', stock: -1 },
-            { item: '스테이크', stock: -1 }
+            { item: '스테이크', stock: -1 },
+            { item: '축복의빵', stock: -1 },
+            { item: '천상의과일', stock: -1 },
+            { item: '성수', stock: -1 },
+            { item: '천사의케이크', stock: -1 },
+            { item: '신성한포도주', stock: -1 },
+            { item: '빛의수프', stock: -1 },
+            { item: '천상의만찬', stock: -1 },
+            { item: '정화의차', stock: -1 }
         ]
     },
     '불꽃재료상': {
@@ -4869,11 +5230,18 @@ var ShopDatabase = {
         name: '불꽃 재료 상점',
         location: '원소계 - 불꽃의 제단',
         type: 'material',
+        description: '불꽃의 제단에서만 구할 수 있는 화염 원소 재료를 판매합니다.',
         items: [
             { item: '영원한 불꽃', stock: -1 },
             { item: '용암의 핵', stock: -1 },
             { item: '불의 정수', stock: -1 },
-            { item: '태양의 파편', stock: -1 }
+            { item: '태양의 파편', stock: -1 },
+            { item: '피닉스재', stock: -1 },
+            { item: '화염드래곤비늘', stock: -1 },
+            { item: '용암결정', stock: -1 },
+            { item: '불꽃의심장', stock: -1 },
+            { item: '화염정령의눈', stock: -1 },
+            { item: '태양의불씨', stock: -1 }
         ]
     },
     '불꽃장신구점': {
@@ -4881,8 +5249,18 @@ var ShopDatabase = {
         name: '불꽃 장신구점',
         location: '원소계 - 불꽃의 제단',
         type: 'accessory',
+        description: '화염의 힘이 깃든 강력한 장신구를 판매합니다.',
         items: [
-            { item: '불꽃펜던트', stock: -1 }
+            { item: '불꽃펜던트', stock: -1 },
+            { item: '화염의반지', stock: -1 },
+            { item: '용암의팔찌', stock: -1 },
+            { item: '피닉스깃털귀걸이', stock: -1 },
+            { item: '태양의고리', stock: -1 },
+            { item: '화염수호부적', stock: -1 },
+            { item: '불의정령브로치', stock: -1 },
+            { item: '용암왕의인장', stock: -1 },
+            { item: '화염기사의망토', stock: -1 },
+            { item: '태양신의벨트', stock: -1 }
         ]
     },
     '불꽃요리점': {
@@ -4890,11 +5268,20 @@ var ShopDatabase = {
         name: '불꽃 식당',
         location: '원소계 - 불꽃의 제단',
         type: 'food',
+        description: '화염으로 조리한 특별한 요리를 제공합니다. 뜨겁고 매운 맛이 특징!',
         items: [
             { item: '빵', stock: -1 },
             { item: '치즈', stock: -1 },
             { item: '고기구이', stock: -1 },
-            { item: '스테이크', stock: -1 }
+            { item: '스테이크', stock: -1 },
+            { item: '화염구이고기', stock: -1 },
+            { item: '용암치즈구이', stock: -1 },
+            { item: '피닉스날개튀김', stock: -1 },
+            { item: '화염매운탕', stock: -1 },
+            { item: '태양빛빵', stock: -1 },
+            { item: '불꽃와인', stock: -1 },
+            { item: '용암케이크', stock: -1 },
+            { item: '화염전사식량', stock: -1 }
         ]
     }
 };
@@ -6305,18 +6692,68 @@ var CraftingRecipeData = {
         '수호의 영약': { cost: 1000, materials: [{ name: '골렘의 핵', count: 1 }, { name: '용의 비늘', count: 2 }, { name: '지옥의 가죽', count: 1 }], result: { name: '수호의 영약', count: 1 } },
         '성장의 영약': { cost: 10000, materials: [{ name: '혼돈의 정수', count: 1 }, { name: '드래곤의 심장', count: 1 }, { name: '찬란한 보물상자', count: 1 }], result: { name: '성장의 영약', count: 1 } }
     },
-    // 요리 레시피
+    // ========================================
+    // 요리 레시피 (Cooking Recipes)
+    // ========================================
+    // 요리는 낚시로 얻은 물고기와 재료를 사용하여 다양한 음식을 만드는 시스템입니다.
+    // 요리 레벨이 오르면 더 고급 요리를 만들 수 있습니다.
+    // 사용법: .요리 <요리이름>
     cooking: {
-        '멸치구이': { cost: 10, fish: { name: '멸치', count: 1 }, result: { name: '멸치구이', count: 1 } },
-        '잉어찜': { cost: 30, fish: { name: '잉어', count: 1 }, result: { name: '잉어찜', count: 1 } },
-        '광어회': { cost: 100, fish: { name: '광어', count: 1 }, result: { name: '광어회', count: 1 } },
-        '장어구이': { cost: 200, fish: { name: '장어', count: 1 }, result: { name: '장어구이', count: 1 } },
-        '고래찜': { cost: 1000, fish: { name: '고래', count: 1 }, result: { name: '고래찜', count: 1 } },
-        '연어스테이크': { cost: 150, fish: { name: '연어', count: 1 }, result: { name: '연어스테이크', count: 1 } },
-        '복어회': { cost: 300, fish: { name: '복어', count: 1 }, result: { name: '복어회', count: 1 } },
-        '참치회': { cost: 400, fish: { name: '참치', count: 1 }, result: { name: '참치회', count: 1 } },
-        '대왕문어숙회': { cost: 800, fish: { name: '대왕문어', count: 1 }, result: { name: '대왕문어숙회', count: 1 } },
-        '용왕의 만찬': { cost: 5000, fish: { name: '해룡', count: 1 }, result: { name: '용왕의 만찬', count: 1 } }
+        // ===== 초급 요리 (요리 레벨 1~10) =====
+        // 간단한 생선 요리. 초보자도 쉽게 만들 수 있습니다.
+        '멸치구이': { cost: 10, fish: { name: '멸치', count: 1 }, result: { name: '멸치구이', count: 1 }, levelReq: 1, description: '바삭하게 구운 멸치. HP +30 회복' },
+        '붕어조림': { cost: 15, fish: { name: '붕어', count: 1 }, result: { name: '붕어조림', count: 1 }, levelReq: 1, description: '달콤짭짤하게 조린 붕어. HP +40 회복' },
+        '잉어찜': { cost: 30, fish: { name: '잉어', count: 1 }, result: { name: '잉어찜', count: 1 }, levelReq: 2, description: '부드럽게 찐 잉어. HP +50 회복' },
+        '미꾸라지탕': { cost: 25, fish: { name: '미꾸라지', count: 2 }, result: { name: '미꾸라지탕', count: 1 }, levelReq: 2, description: '영양 만점 미꾸라지탕. HP +60, 힘 +5' },
+        '송어구이': { cost: 35, fish: { name: '송어', count: 1 }, result: { name: '송어구이', count: 1 }, levelReq: 3, description: '소금 뿌려 구운 송어. HP +55 회복' },
+        '농어탕': { cost: 40, fish: { name: '농어', count: 1 }, result: { name: '농어탕', count: 1 }, levelReq: 3, description: '시원한 농어탕. HP +65 회복' },
+        '메기매운탕': { cost: 45, fish: { name: '메기', count: 1 }, result: { name: '메기매운탕', count: 1 }, levelReq: 4, description: '얼큰한 메기매운탕. HP +70, 방어 +3' },
+        '빙어튀김': { cost: 20, fish: { name: '빙어', count: 3 }, result: { name: '빙어튀김', count: 1 }, levelReq: 4, description: '바삭한 빙어튀김. HP +45 회복' },
+
+        // ===== 중급 요리 (요리 레벨 10~20) =====
+        // 더 복잡한 조리법이 필요한 요리입니다.
+        '광어회': { cost: 100, fish: { name: '광어', count: 1 }, result: { name: '광어회', count: 1 }, levelReq: 10, description: '신선한 광어회. HP +100, 속도 +5' },
+        '연어스테이크': { cost: 150, fish: { name: '연어', count: 1 }, result: { name: '연어스테이크', count: 1 }, levelReq: 12, description: '오메가3 풍부한 연어 스테이크. HP +120, 공격 +8' },
+        '장어구이': { cost: 200, fish: { name: '장어', count: 1 }, result: { name: '장어구이', count: 1 }, levelReq: 14, description: '정력에 좋은 장어구이. HP +150, 힘 +10' },
+        '도미찜': { cost: 180, fish: { name: '도미', count: 1 }, result: { name: '도미찜', count: 1 }, levelReq: 15, description: '담백한 도미찜. HP +130, 방어 +5' },
+        '우럭매운탕': { cost: 160, fish: { name: '우럭', count: 1 }, result: { name: '우럭매운탕', count: 1 }, levelReq: 13, description: '칼칼한 우럭매운탕. HP +140, 마력 +5' },
+        '갈치조림': { cost: 170, fish: { name: '갈치', count: 1 }, result: { name: '갈치조림', count: 1 }, levelReq: 14, description: '매콤달콤 갈치조림. HP +145 회복' },
+        '가자미구이': { cost: 120, fish: { name: '가자미', count: 1 }, result: { name: '가자미구이', count: 1 }, levelReq: 11, description: '담백한 가자미구이. HP +110 회복' },
+        '조기찜': { cost: 140, fish: { name: '조기', count: 1 }, result: { name: '조기찜', count: 1 }, levelReq: 12, description: '고소한 조기찜. HP +125 회복' },
+
+        // ===== 고급 요리 (요리 레벨 20~35) =====
+        // 숙련된 요리사만 만들 수 있는 고급 요리입니다.
+        '복어회': { cost: 300, fish: { name: '복어', count: 1 }, result: { name: '복어회', count: 1 }, levelReq: 20, description: '독을 제거한 복어회. HP +200, 공격 +12' },
+        '참치회': { cost: 400, fish: { name: '참치', count: 1 }, result: { name: '참치회', count: 1 }, levelReq: 22, description: '최고급 참치회. HP +250, 속도 +10' },
+        '방어회': { cost: 350, fish: { name: '방어', count: 1 }, result: { name: '방어회', count: 1 }, levelReq: 21, description: '겨울 방어회. HP +220, 방어 +10' },
+        '대왕문어숙회': { cost: 800, fish: { name: '대왕문어', count: 1 }, result: { name: '대왕문어숙회', count: 1 }, levelReq: 25, description: '쫄깃한 대왕문어숙회. HP +300, 공격 +15' },
+        '킹크랩찜': { cost: 600, fish: { name: '킹크랩', count: 1 }, result: { name: '킹크랩찜', count: 1 }, levelReq: 23, description: '달콤한 킹크랩찜. HP +280, 힘 +12' },
+        '랍스터구이': { cost: 700, fish: { name: '대왕 랍스터', count: 1 }, result: { name: '랍스터구이', count: 1 }, levelReq: 24, description: '버터에 구운 랍스터. HP +290, 마력 +10' },
+        '전복죽': { cost: 550, fish: { name: '황금 전복', count: 1 }, result: { name: '전복죽', count: 1 }, levelReq: 22, description: '영양 만점 전복죽. HP +260, 전체 회복' },
+        '해물파전': { cost: 450, fish: { name: '오징어', count: 2 }, result: { name: '해물파전', count: 1 }, levelReq: 20, description: '바삭한 해물파전. HP +200, 모든 능력 +3' },
+
+        // ===== 특급 요리 (요리 레벨 35~50) =====
+        // 희귀한 재료가 필요한 특별한 요리입니다.
+        '고래찜': { cost: 1000, fish: { name: '고래', count: 1 }, result: { name: '고래찜', count: 1 }, levelReq: 35, description: '거대한 고래찜. HP +400, 힘 +20' },
+        '상어지느러미수프': { cost: 1200, fish: { name: '상어', count: 1 }, result: { name: '상어지느러미수프', count: 1 }, levelReq: 38, description: '진귀한 상어수프. HP +450, 방어 +18' },
+        '다금바리회': { cost: 1500, fish: { name: '황금 다금바리', count: 1 }, result: { name: '다금바리회', count: 1 }, levelReq: 40, description: '환상적인 다금바리회. HP +500, 공격 +25' },
+        '용궁도미찜': { cost: 1300, fish: { name: '용궁의 도미', count: 1 }, result: { name: '용궁도미찜', count: 1 }, levelReq: 42, description: '신비로운 용궁도미. HP +480, 마력 +20' },
+        '청룡어구이': { cost: 1800, fish: { name: '청룡어', count: 1 }, result: { name: '청룡어구이', count: 1 }, levelReq: 45, description: '용의 기운이 담긴 구이. HP +550, 공격 +30' },
+
+        // ===== 전설 요리 (요리 레벨 50+) =====
+        // 신화적 재료로 만드는 전설의 요리입니다.
+        '용왕의 만찬': { cost: 5000, fish: { name: '해룡', count: 1 }, result: { name: '용왕의 만찬', count: 1 }, levelReq: 50, description: '용왕이 즐기는 만찬. HP +1000, 모든 능력 +30' },
+        '인어의 눈물': { cost: 8000, fish: { name: '인어', count: 1 }, result: { name: '인어의 눈물', count: 1 }, levelReq: 55, description: '슬픔을 담은 요리. HP +1200, 마력 +50' },
+        '백룡의 정수': { cost: 7000, fish: { name: '백룡', count: 1 }, result: { name: '백룡의 정수', count: 1 }, levelReq: 52, description: '행운을 가져다주는 요리. HP +900, 행운 +100' },
+        '크라켄 요리': { cost: 6000, fish: { name: '크라켄의 촉수', count: 1 }, result: { name: '크라켄 요리', count: 1 }, levelReq: 53, description: '심해 괴물 요리. HP +800, 공격 +40' },
+        '황금어 정식': { cost: 20000, fish: { name: '황금 물고기', count: 1 }, result: { name: '황금어 정식', count: 1 }, levelReq: 60, description: '소원을 이루는 요리. HP +2000, 모든 능력 +50' },
+
+        // ===== 특수 조합 요리 =====
+        // 여러 재료를 조합하여 만드는 요리입니다.
+        '해물모둠': { cost: 500, fish: { name: '오징어', count: 1 }, materials: [{ name: '새우', count: 2 }], result: { name: '해물모둠', count: 1 }, levelReq: 25, description: '다양한 해산물 모둠. HP +350, 모든 능력 +8' },
+        '황혼의 스튜': { cost: 300, fish: { name: '연어', count: 2 }, result: { name: '황혼의 스튜', count: 1 }, levelReq: 18, description: '따뜻한 연어 스튜. HP +180, 방어 +8' },
+        '바다의 축제': { cost: 2000, fish: { name: '참치', count: 1 }, materials: [{ name: '연어', count: 1 }, { name: '광어', count: 1 }], result: { name: '바다의 축제', count: 1 }, levelReq: 30, description: '최고급 해산물 코스. HP +600, 모든 능력 +15' },
+        '용의 비늘 수프': { cost: 3000, fish: { name: '리바이어던의 비늘', count: 1 }, result: { name: '용의 비늘 수프', count: 1 }, levelReq: 48, description: '전설의 수프. HP +700, 방어 +35' }
     }
 };
 
@@ -9007,21 +9444,45 @@ function parseSeasonIndex(key) {
     return parseInt(parts[1], 10) || 0;
 }
 
+function parseDayIndex(key) {
+    // key format: YYYY-MM-DD, returns day of year
+    var parts = String(key || '').split('-');
+    if (parts.length < 3) return 0;
+    var d = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+    var start = new Date(d.getFullYear(), 0, 0);
+    var diff = d - start;
+    var oneDay = 1000 * 60 * 60 * 24;
+    return Math.floor(diff / oneDay);
+}
+
 function getShopRotationConfig(shop) {
     if (shop && shop.rotation === false) return null;
     var rot = shop && shop.rotation ? shop.rotation : null;
     if (typeof rot === 'string') rot = { type: rot };
+    // 기본 로테이션: 일일 (1일마다 상품 변경)
     if (!rot) {
         if (!shop || !shop.location || shop.location === '시작마을') return null;
-        rot = { type: 'weekly', groups: 3 };
+        rot = { type: 'daily', groups: 3 };
     }
-    var type = rot.type || 'weekly';
+    var type = rot.type || 'daily';
     var groups = rot.groups || rot.groupCount || 3;
-    var indexSource = type === 'season' ? parseSeasonIndex(getSeasonKey()) : parseWeekIndex(getWeekKey());
+    var indexSource;
+    var keyValue;
+    if (type === 'season') {
+        indexSource = parseSeasonIndex(getSeasonKey());
+        keyValue = getSeasonKey();
+    } else if (type === 'weekly') {
+        indexSource = parseWeekIndex(getWeekKey());
+        keyValue = getWeekKey();
+    } else {
+        // daily rotation (기본값)
+        indexSource = parseDayIndex(getDateKey());
+        keyValue = getDateKey();
+    }
     var idx = indexSource - 1;
     if (idx < 0) idx = 0;
     if (groups > 0) idx = idx % groups;
-    return { type: type, groups: groups, index: idx, key: type === 'season' ? getSeasonKey() : getWeekKey() };
+    return { type: type, groups: groups, index: idx, key: keyValue };
 }
 
 function isEssentialShopItem(itemName) {
@@ -10509,18 +10970,140 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         return;
     }
 
-    // 연금
+    // ========================================
+    // 연금술 시스템 (Alchemy System)
+    // ========================================
+    // 연금술로 포션과 영약을 제작할 수 있습니다.
+    // 연금 레벨이 오르면 더 강력한 물약을 만들 수 있습니다.
+    // 사용법: .연금 <아이템이름> 또는 .연금 목록
     if (cmd === '연금') {
         var alchemyItem = arg;
-        if (!alchemyItem) { replier.reply('사용: .연금 <아이템>'); return; }
-        if (alchemyItem !== '포션' && alchemyItem !== '마나 포션' && alchemyItem !== '엘릭서') { replier.reply('연금 가능: 포션/마나 포션/엘릭서'); return; }
-        var need = (alchemyItem === '엘릭서') ? 2 : 1;
-        if (findItemCount(player, '약초') < need && findItemCount(player, '치유초') < need) { replier.reply('재료 부족'); return; }
-        if (findItemCount(player, '약초') >= need) removeItem(player, '약초', need); else removeItem(player, '치유초', need);
-        addItem(player, alchemyItem, 1);
+        var alchemyLevel = player.professions.alchemy || 1;
+
+        // 연금술 레시피 데이터베이스
+        var alchemyRecipes = {
+            // ===== 초급 연금 (레벨 1~10) =====
+            '포션': { levelReq: 1, materials: [{ name: '약초', count: 1 }], altMaterials: [{ name: '치유초', count: 1 }], result: '포션', description: '기본 체력 회복 포션. HP +100 회복' },
+            '마나 포션': { levelReq: 1, materials: [{ name: '마나허브', count: 1 }], altMaterials: [{ name: '약초', count: 1 }], result: '마나 포션', description: '기본 마나 회복 포션. MP +70 회복' },
+            '하급체력포션': { levelReq: 2, materials: [{ name: '약초', count: 2 }], result: '하급체력포션', description: '소량의 체력 회복. HP +50 회복' },
+            '하급마나포션': { levelReq: 2, materials: [{ name: '마나허브', count: 2 }], result: '하급마나포션', description: '소량의 마나 회복. MP +30 회복' },
+            '해독포션': { levelReq: 3, materials: [{ name: '약초', count: 1 }, { name: '독버섯', count: 1 }], result: '해독포션', description: '독 상태를 해제합니다.' },
+            '해동포션': { levelReq: 3, materials: [{ name: '치유초', count: 1 }, { name: '불의정수', count: 1 }], result: '해동포션', description: '빙결 상태를 해제합니다.' },
+
+            // ===== 중급 연금 (레벨 10~25) =====
+            '중급체력포션': { levelReq: 10, materials: [{ name: '약초', count: 3 }, { name: '치유초', count: 1 }], result: '중급체력포션', description: '체력을 250 회복합니다.' },
+            '중급마나포션': { levelReq: 10, materials: [{ name: '마나허브', count: 3 }, { name: '약초', count: 1 }], result: '중급마나포션', description: '마나를 150 회복합니다.' },
+            '회복포션': { levelReq: 12, materials: [{ name: '약초', count: 2 }, { name: '마나허브', count: 2 }], result: '회복포션', description: 'HP 100, MP 50 동시 회복' },
+            '힘의포션': { levelReq: 15, materials: [{ name: '트롤의 피', count: 1 }, { name: '약초', count: 2 }], result: '힘의포션', description: '5분간 공격력 +20' },
+            '방어의포션': { levelReq: 15, materials: [{ name: '골렘의 핵', count: 1 }, { name: '약초', count: 2 }], result: '방어의포션', description: '5분간 방어력 +20' },
+            '속도의포션': { levelReq: 18, materials: [{ name: '바람의정수', count: 1 }, { name: '약초', count: 2 }], result: '속도의포션', description: '5분간 속도 +30' },
+            '만병통치약': { levelReq: 20, materials: [{ name: '약초', count: 3 }, { name: '독버섯', count: 2 }, { name: '불의정수', count: 1 }], result: '만병통치약', description: '모든 상태이상 해제' },
+
+            // ===== 고급 연금 (레벨 25~40) =====
+            '상급체력포션': { levelReq: 25, materials: [{ name: '약초', count: 5 }, { name: '치유초', count: 3 }], result: '상급체력포션', description: '체력을 500 회복합니다.' },
+            '상급마나포션': { levelReq: 25, materials: [{ name: '마나허브', count: 5 }, { name: '마나허브', count: 3 }], result: '상급마나포션', description: '마나를 300 회복합니다.' },
+            '엘릭서': { levelReq: 30, materials: [{ name: '약초', count: 3 }, { name: '치유초', count: 3 }, { name: '마나허브', count: 2 }], result: '엘릭서', description: '체력과 마나를 완전 회복합니다.' },
+            '거인의포션': { levelReq: 35, materials: [{ name: '트롤의 피', count: 3 }, { name: '오우거의 가죽', count: 1 }], result: '거인의포션', description: '3분간 공격력 +50' },
+            '철벽의포션': { levelReq: 35, materials: [{ name: '골렘의 핵', count: 3 }, { name: '용의 비늘', count: 1 }], result: '철벽의포션', description: '3분간 방어력 +50' },
+            '경험치포션': { levelReq: 30, materials: [{ name: '혼돈의 정수', count: 1 }, { name: '약초', count: 5 }], result: '경험치포션', description: '10분간 경험치 +50%' },
+            '황금의포션': { levelReq: 30, materials: [{ name: '금광석', count: 3 }, { name: '약초', count: 5 }], result: '황금의포션', description: '10분간 골드 획득 +50%' },
+
+            // ===== 특급 연금 (레벨 40~60) =====
+            '최상급체력포션': { levelReq: 40, materials: [{ name: '약초', count: 10 }, { name: '치유초', count: 5 }, { name: '드래곤의 심장', count: 1 }], result: '최상급체력포션', description: '체력을 1000 회복합니다.' },
+            '최상급마나포션': { levelReq: 40, materials: [{ name: '마나허브', count: 10 }, { name: '마력의 돌', count: 3 }], result: '최상급마나포션', description: '마나를 600 회복합니다.' },
+            '전사의영약': { levelReq: 45, materials: [{ name: '트롤의 피', count: 5 }, { name: '오우거의 가죽', count: 2 }, { name: '불의 정수', count: 2 }], result: '전사의영약', description: '5분간 공격력/방어력 +30' },
+            '힘의 영약': { levelReq: 50, materials: [{ name: '트롤의 피', count: 3 }, { name: '오우거의 가죽', count: 2 }, { name: '불의 정수', count: 2 }], result: '힘의 영약', description: '영구적으로 힘 +1 증가' },
+            '수호의 영약': { levelReq: 50, materials: [{ name: '골렘의 핵', count: 2 }, { name: '용의 비늘', count: 3 }, { name: '지옥의 가죽', count: 2 }], result: '수호의 영약', description: '영구적으로 방어 +1 증가' },
+            '영웅의영약': { levelReq: 55, materials: [{ name: '트롤의 피', count: 5 }, { name: '드래곤의 심장', count: 1 }, { name: '불의 정수', count: 3 }], result: '영웅의영약', description: '5분간 공격력/방어력 +60' },
+
+            // ===== 전설 연금 (레벨 60+) =====
+            '불사의영약': { levelReq: 60, materials: [{ name: '드래곤의 심장', count: 2 }, { name: '불사조의깃털', count: 1 }, { name: '생명의 물', count: 3 }], result: '불사의영약', description: '체력 완전 회복' },
+            '영혼의물': { levelReq: 60, materials: [{ name: '혼돈의 정수', count: 2 }, { name: '마력의 돌', count: 5 }, { name: '신성한 빛', count: 1 }], result: '영혼의물', description: '마나 완전 회복' },
+            '성장의 영약': { levelReq: 70, materials: [{ name: '혼돈의 정수', count: 2 }, { name: '드래곤의 심장', count: 2 }, { name: '신성한 빛', count: 2 }], result: '성장의 영약', description: '즉시 레벨업' },
+            '부활의영약': { levelReq: 65, materials: [{ name: '불사조의깃털', count: 2 }, { name: '생명의 물', count: 5 }, { name: '축복의 정수', count: 3 }], result: '부활의영약', description: '사망시 자동 부활 (체력 100%)' }
+        };
+
+        // 연금 목록 보기
+        if (!alchemyItem || alchemyItem === '목록') {
+            var availableRecipes = [];
+            for (var recipeName in alchemyRecipes) {
+                var recipe = alchemyRecipes[recipeName];
+                var status = alchemyLevel >= recipe.levelReq ? '✓' : '✗';
+                availableRecipes.push(status + ' ' + recipeName + ' (Lv.' + recipe.levelReq + ')');
+            }
+            replier.reply('[연금술 레시피 목록]\n현재 연금 레벨: ' + alchemyLevel + '\n\n' + availableRecipes.slice(0, 15).join('\n') + '\n\n사용법: .연금 <아이템이름>\n상세정보: .연금 정보 <아이템이름>' + buildNextActionHint('alchemy'));
+            return;
+        }
+
+        // 연금 정보 보기
+        if (alchemyItem.startsWith('정보 ')) {
+            var infoName = alchemyItem.substring(3).trim();
+            var infoRecipe = alchemyRecipes[infoName];
+            if (!infoRecipe) { replier.reply('해당 연금 레시피가 없습니다.'); return; }
+            var matList = infoRecipe.materials.map(function(m) { return m.name + ' x' + m.count; }).join(', ');
+            var altMatList = infoRecipe.altMaterials ? '\n대체 재료: ' + infoRecipe.altMaterials.map(function(m) { return m.name + ' x' + m.count; }).join(', ') : '';
+            replier.reply('[연금 정보] ' + infoName + '\n필요 레벨: ' + infoRecipe.levelReq + '\n재료: ' + matList + altMatList + '\n설명: ' + infoRecipe.description + buildNextActionHint('alchemy'));
+            return;
+        }
+
+        // 연금 제작
+        var recipe = alchemyRecipes[alchemyItem];
+        if (!recipe) {
+            replier.reply('연금 레시피가 없습니다.\n사용법: .연금 목록 으로 레시피를 확인하세요.' + buildNextActionHint('alchemy'));
+            return;
+        }
+
+        if (alchemyLevel < recipe.levelReq) {
+            replier.reply('연금 레벨이 부족합니다. (현재: ' + alchemyLevel + ', 필요: ' + recipe.levelReq + ')');
+            return;
+        }
+
+        // 재료 확인 및 사용
+        var hasMainMaterials = true;
+        var hasAltMaterials = recipe.altMaterials ? true : false;
+
+        for (var i = 0; i < recipe.materials.length; i++) {
+            var mat = recipe.materials[i];
+            if (findItemCount(player, mat.name) < mat.count) {
+                hasMainMaterials = false;
+                break;
+            }
+        }
+
+        if (recipe.altMaterials && !hasMainMaterials) {
+            for (var j = 0; j < recipe.altMaterials.length; j++) {
+                var altMat = recipe.altMaterials[j];
+                if (findItemCount(player, altMat.name) < altMat.count) {
+                    hasAltMaterials = false;
+                    break;
+                }
+            }
+        }
+
+        if (!hasMainMaterials && !hasAltMaterials) {
+            var neededMats = recipe.materials.map(function(m) { return m.name + ' x' + m.count; }).join(', ');
+            replier.reply('재료가 부족합니다.\n필요 재료: ' + neededMats);
+            return;
+        }
+
+        // 재료 소비
+        var usedMaterials = hasMainMaterials ? recipe.materials : recipe.altMaterials;
+        for (var k = 0; k < usedMaterials.length; k++) {
+            var useMat = usedMaterials[k];
+            removeItem(player, useMat.name, useMat.count);
+        }
+
+        // 결과물 생성
+        addItem(player, recipe.result, 1);
         player.professions.alchemy += 1;
         saveState();
-        replier.reply(applyActionEffect('연금 제작 완료: ' + alchemyItem, 'alchemy'));
+
+        var levelUpMsg = '';
+        if (player.professions.alchemy % 10 === 0) {
+            levelUpMsg = '\n🎉 연금술 레벨이 ' + player.professions.alchemy + '로 올랐습니다!';
+        }
+
+        replier.reply(applyActionEffect('✨ 연금 제작 완료: ' + recipe.result + '\n' + recipe.description + levelUpMsg, 'alchemy') + buildNextActionHint('alchemy'));
         return;
     }
 
