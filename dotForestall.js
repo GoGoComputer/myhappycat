@@ -9792,10 +9792,9 @@ function getShopRotationConfig(shop) {
     if (shop && shop.rotation === false) return null;
     var rot = shop && shop.rotation ? shop.rotation : null;
     if (typeof rot === 'string') rot = { type: rot };
-    // 기본 로테이션: 일일 (1일마다 상품 변경)
+    // 로테이션은 명시적으로 설정된 경우에만 적용 (기본값: 비활성화)
     if (!rot) {
-        if (!shop || !shop.location || shop.location === '시작마을') return null;
-        rot = { type: 'daily', groups: 3 };
+        return null;
     }
     var type = rot.type || 'daily';
     var groups = rot.groups || rot.groupCount || 3;
@@ -14479,7 +14478,16 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             var itemName = entry.item || entry;
             var iData = GameData.ItemDatabase[itemName] || {};
             var price = iData.price || 0;
-            outShop += '- ' + itemName + (price ? ' (' + price + 'G)' : '') + '\n';
+            var itemLvReq = iData.level || 0;
+            var lvTag = '';
+            if (itemLvReq > 0) {
+                if (player.level < itemLvReq) {
+                    lvTag = ' [Lv.' + itemLvReq + '부터]';
+                } else {
+                    lvTag = ' (Lv.' + itemLvReq + ')';
+                }
+            }
+            outShop += '- ' + itemName + (price ? ' ' + price + 'G' : '') + lvTag + '\n';
         }
         outShop += '구매: .구매 <아이템>';
         replier.reply(applyActionEffect(outShop.trim() + buildNextActionHint('shop-view'), 'shop'));
