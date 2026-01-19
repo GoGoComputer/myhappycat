@@ -1976,7 +1976,100 @@ var CollectibleDatabase = {
     '일반보물상자': { name: '일반보물상자', type: 'special', subtype: 'box', effect: 'randomItem', rarity: 'common', price: 200, description: '무작위 아이템이 들어있는 상자' },
     '희귀보물상자': { name: '희귀보물상자', type: 'special', subtype: 'box', effect: 'randomItem', rarity: 'rare', price: 1000, description: '희귀 아이템이 들어있는 상자' },
     '전설보물상자': { name: '전설보물상자', type: 'special', subtype: 'box', effect: 'randomItem', rarity: 'legendary', price: 5000, description: '전설 아이템이 들어있을지도?' },
-    '찬란한보물상자': { name: '찬란한보물상자', type: 'special', subtype: 'box', effect: 'randomItem', rarity: 'mythic', price: 20000, description: '최고급 아이템이 들어있는 상자' }
+    '찬란한보물상자': { name: '찬란한보물상자', type: 'special', subtype: 'box', effect: 'randomItem', rarity: 'mythic', price: 20000, description: '최고급 아이템이 들어있는 상자' },
+
+    // --- 잡화점 확장 아이템 ---
+    '횃불': { name: '횃불', type: 'special', subtype: 'utility', effect: 'light', uses: 10, price: 30, level: 1, description: '어둠을 밝히는 횃불' },
+    '밧줄': { name: '밧줄', type: 'special', subtype: 'utility', effect: 'climb', uses: 5, price: 50, level: 1, description: '등반에 유용한 밧줄' },
+    '나침반': { name: '나침반', type: 'special', subtype: 'utility', effect: 'direction', price: 200, level: 1, description: '방향을 알려주는 나침반' },
+    '지도조각': { name: '지도조각', type: 'special', subtype: 'utility', effect: 'mapReveal', price: 150, level: 1, description: '지역 일부를 보여주는 지도' },
+    '여행자의배낭': { name: '여행자의배낭', type: 'special', subtype: 'storage', effect: 'expandInv', slots: 5, price: 500, level: 1, description: '인벤토리 +5칸' },
+    '모험가수첩': { name: '모험가수첩', type: 'special', subtype: 'utility', effect: 'questLog', price: 100, level: 1, description: '퀘스트를 기록하는 수첩' },
+    '낚시미끼': { name: '낚시미끼', type: 'special', subtype: 'fishing', effect: 'bait', uses: 20, price: 50, level: 1, description: '낚시에 사용하는 미끼' },
+    '빈병': { name: '빈병', type: 'material', subtype: 'container', price: 20, level: 1, description: '물약을 담을 수 있는 빈병' },
+    '채광곡괭이': { name: '채광곡괭이', type: 'tool', subtype: 'mining', effect: 'mine', durability: 50, price: 300, level: 1, description: '광석을 캐는 곡괭이' },
+    '채집낫': { name: '채집낫', type: 'tool', subtype: 'gathering', effect: 'harvest', durability: 50, price: 250, level: 1, description: '약초를 채집하는 낫' },
+    '낚싯대': { name: '낚싯대', type: 'tool', subtype: 'fishing', effect: 'fish', durability: 30, price: 200, level: 1, description: '물고기를 잡는 낚싯대' },
+    '벌목도끼': { name: '벌목도끼', type: 'tool', subtype: 'woodcutting', effect: 'chop', durability: 50, price: 280, level: 1, description: '나무를 베는 도끼' },
+    '텐트': { name: '텐트', type: 'special', subtype: 'camping', effect: 'rest', uses: 10, price: 400, level: 1, description: '야외에서 휴식할 수 있는 텐트' },
+    '침낭': { name: '침낭', type: 'special', subtype: 'camping', effect: 'sleep', uses: 20, price: 200, level: 1, description: '포근한 침낭' },
+    '물통': { name: '물통', type: 'special', subtype: 'container', effect: 'water', uses: 10, price: 80, level: 1, description: '물을 담는 물통' },
+    '마법가방': { name: '마법가방', type: 'special', subtype: 'storage', effect: 'expandInv', slots: 10, price: 2000, level: 10, description: '인벤토리 +10칸' },
+    '은제나침반': { name: '은제나침반', type: 'special', subtype: 'utility', effect: 'direction', price: 800, level: 10, description: '정밀한 은제 나침반' },
+    '망원경': { name: '망원경', type: 'special', subtype: 'utility', effect: 'scout', price: 600, level: 5, description: '멀리를 볼 수 있는 망원경' },
+    '탐험가키트': { name: '탐험가키트', type: 'special', subtype: 'utility', effect: 'explore', price: 1000, level: 10, description: '탐험에 필요한 도구 세트' },
+    '응급처치키트': { name: '응급처치키트', type: 'special', subtype: 'heal', effect: 'firstAid', uses: 5, price: 300, level: 1, description: '기본 치료 도구' },
+    '강화된채광곡괭이': { name: '강화된채광곡괭이', type: 'tool', subtype: 'mining', effect: 'mine', durability: 100, price: 1000, level: 15, description: '더 튼튼한 곡괭이' },
+    '강화된채집낫': { name: '강화된채집낫', type: 'tool', subtype: 'gathering', effect: 'harvest', durability: 100, price: 800, level: 15, description: '더 날카로운 낫' },
+    '고급낚싯대': { name: '고급낚싯대', type: 'tool', subtype: 'fishing', effect: 'fish', durability: 60, price: 800, level: 15, description: '더 좋은 낚싯대' },
+    '고급미끼세트': { name: '고급미끼세트', type: 'special', subtype: 'fishing', effect: 'bait', uses: 50, price: 200, level: 10, description: '다양한 미끼 세트' },
+    '야영세트': { name: '야영세트', type: 'special', subtype: 'camping', effect: 'camp', uses: 15, price: 800, level: 10, description: '야영 도구 세트' },
+    '수집가의상자': { name: '수집가의상자', type: 'special', subtype: 'storage', effect: 'collectBox', price: 500, level: 5, description: '수집품 보관 상자' },
+    '감정안경': { name: '감정안경', type: 'special', subtype: 'utility', effect: 'identify', price: 1500, level: 15, description: '아이템을 감정하는 안경' },
+    '모험가깃발': { name: '모험가깃발', type: 'special', subtype: 'utility', effect: 'flag', price: 300, level: 1, description: '모험가 길드의 깃발' },
+    '신호탄': { name: '신호탄', type: 'special', subtype: 'utility', effect: 'signal', uses: 3, price: 150, level: 5, description: '구조 신호를 보내는 탄' },
+
+    // --- 약국 확장 아이템 ---
+    '하급복합포션': { name: '하급복합포션', type: 'consumable', subtype: 'potion', effect: 'hpmp', hpValue: 50, mpValue: 25, price: 80, level: 1, description: '체력 50, 마나 25 회복' },
+    '상급복합포션': { name: '상급복합포션', type: 'consumable', subtype: 'potion', effect: 'hpmp', hpValue: 300, mpValue: 150, price: 700, level: 25, description: '체력 300, 마나 150 회복' },
+    '최상급복합포션': { name: '최상급복합포션', type: 'consumable', subtype: 'potion', effect: 'hpmp', hpValue: 600, mpValue: 300, price: 1500, level: 45, description: '체력 600, 마나 300 회복' },
+    '해화포션': { name: '해화포션', type: 'consumable', subtype: 'cure', effect: 'burn', price: 100, level: 5, description: '화상 상태 해제' },
+    '해마비포션': { name: '해마비포션', type: 'consumable', subtype: 'cure', effect: 'paralyze', price: 120, level: 8, description: '마비 상태 해제' },
+    '기력포션': { name: '기력포션', type: 'consumable', subtype: 'buff', effect: 'staminaBuff', value: 50, duration: 300, price: 400, level: 10, description: '5분간 지구력 +50' },
+    '집중의포션': { name: '집중의포션', type: 'consumable', subtype: 'buff', effect: 'focusBuff', value: 20, duration: 300, price: 450, level: 12, description: '5분간 명중률 +20%' },
+    '회피의포션': { name: '회피의포션', type: 'consumable', subtype: 'buff', effect: 'dodgeBuff', value: 15, duration: 300, price: 500, level: 15, description: '5분간 회피율 +15%' },
+    '재생의포션': { name: '재생의포션', type: 'consumable', subtype: 'regen', effect: 'hpRegen', value: 10, duration: 60, price: 350, level: 10, description: '1분간 초당 체력 10 회복' },
+    '마력재생포션': { name: '마력재생포션', type: 'consumable', subtype: 'regen', effect: 'mpRegen', value: 5, duration: 60, price: 380, level: 10, description: '1분간 초당 마나 5 회복' },
+    '강인함의포션': { name: '강인함의포션', type: 'consumable', subtype: 'buff', effect: 'toughBuff', value: 30, duration: 300, price: 600, level: 18, description: '5분간 저항력 +30' },
+    '민첩의포션': { name: '민첩의포션', type: 'consumable', subtype: 'buff', effect: 'agilityBuff', value: 25, duration: 300, price: 550, level: 15, description: '5분간 민첩 +25' },
+    '행운의포션': { name: '행운의포션', type: 'consumable', subtype: 'buff', effect: 'luckBuff', value: 20, duration: 600, price: 1000, level: 20, description: '10분간 행운 +20' },
+    '보호의영약': { name: '보호의영약', type: 'consumable', subtype: 'buff', effect: 'shield', value: 100, duration: 180, price: 800, level: 20, description: '3분간 보호막 100' },
+    '독내성포션': { name: '독내성포션', type: 'consumable', subtype: 'resist', effect: 'poisonResist', value: 50, duration: 600, price: 300, level: 8, description: '10분간 독 저항 +50%' },
+    '화염내성포션': { name: '화염내성포션', type: 'consumable', subtype: 'resist', effect: 'fireResist', value: 50, duration: 600, price: 350, level: 12, description: '10분간 화염 저항 +50%' },
+    '냉기내성포션': { name: '냉기내성포션', type: 'consumable', subtype: 'resist', effect: 'iceResist', value: 50, duration: 600, price: 350, level: 12, description: '10분간 냉기 저항 +50%' },
+    '번개내성포션': { name: '번개내성포션', type: 'consumable', subtype: 'resist', effect: 'lightningResist', value: 50, duration: 600, price: 350, level: 12, description: '10분간 번개 저항 +50%' },
+
+    // --- 식당 확장 음식 ---
+    '야채수프': { name: '야채수프', type: 'food', effect: 'hp', value: 60, price: 35, level: 2, description: '따뜻한 야채 수프' },
+    '버섯볶음': { name: '버섯볶음', type: 'food', effect: 'hp', value: 55, price: 30, level: 2, description: '향긋한 버섯 볶음' },
+    '과일주스': { name: '과일주스', type: 'food', effect: 'mp', value: 30, price: 25, level: 1, description: '상큼한 과일 주스' },
+    '우유': { name: '우유', type: 'food', effect: 'hpmp', hpValue: 20, mpValue: 20, price: 20, level: 1, description: '신선한 우유' },
+    '모험가도시락': { name: '모험가도시락', type: 'food', effect: 'hp', value: 120, price: 80, level: 5, description: '든든한 모험가 도시락' },
+    '해물파전': { name: '해물파전', type: 'food', effect: 'hp', value: 90, price: 55, level: 4, description: '바삭한 해물파전' },
+    '닭꼬치': { name: '닭꼬치', type: 'food', effect: 'hp', value: 65, price: 40, level: 3, description: '맛있는 닭꼬치' },
+    '계란후라이': { name: '계란후라이', type: 'food', effect: 'hp', value: 45, price: 25, level: 1, description: '간단한 계란후라이' },
+    '토스트': { name: '토스트', type: 'food', effect: 'hp', value: 40, price: 20, level: 1, description: '바삭한 토스트' },
+    '미트파이': { name: '미트파이', type: 'food', effect: 'hp', value: 100, price: 70, level: 5, description: '고기가 가득한 파이' },
+    '과일타르트': { name: '과일타르트', type: 'food', effect: 'hpmp', hpValue: 50, mpValue: 30, price: 60, level: 4, description: '달콤한 과일 타르트' },
+    '핫초코': { name: '핫초코', type: 'food', effect: 'mp', value: 50, price: 35, level: 3, description: '달콤한 핫초코' },
+    '허브차': { name: '허브차', type: 'food', effect: 'mp', value: 40, price: 30, level: 2, description: '향긋한 허브차' },
+    '꿀물': { name: '꿀물', type: 'food', effect: 'hpmp', hpValue: 30, mpValue: 30, price: 40, level: 2, description: '달콤한 꿀물' },
+    '구운감자': { name: '구운감자', type: 'food', effect: 'hp', value: 55, price: 25, level: 2, description: '포슬포슬 구운 감자' },
+    '구운옥수수': { name: '구운옥수수', type: 'food', effect: 'hp', value: 50, price: 25, level: 2, description: '달콤한 구운 옥수수' },
+    '훈제연어': { name: '훈제연어', type: 'food', effect: 'hp', value: 110, price: 85, level: 6, description: '향긋한 훈제 연어' },
+    '비프스튜': { name: '비프스튜', type: 'food', effect: 'hp', value: 130, price: 95, level: 7, description: '진한 비프 스튜' },
+    '치킨커틀릿': { name: '치킨커틀릿', type: 'food', effect: 'hp', value: 95, price: 65, level: 5, description: '바삭한 치킨 커틀릿' },
+    '에너지바': { name: '에너지바', type: 'food', effect: 'buff', buffType: 'stamina', buffValue: 10, duration: 300, price: 50, level: 1, description: '5분간 지구력 +10' },
+
+    // --- 장신구 확장 아이템 ---
+    '구리반지': { name: '구리반지', type: 'accessory', subtype: 'ring', def: 1, price: 50, level: 1, description: '구리 반지' },
+    '나무목걸이': { name: '나무목걸이', type: 'accessory', subtype: 'necklace', hp: 10, price: 40, level: 1, description: '나무 장식 목걸이' },
+    '돌팔찌': { name: '돌팔찌', type: 'accessory', subtype: 'bracelet', def: 2, price: 60, level: 2, description: '돌 구슬 팔찌' },
+    '뼈귀걸이': { name: '뼈귀걸이', type: 'accessory', subtype: 'earring', att: 2, price: 70, level: 3, description: '뼈로 만든 귀걸이' },
+    '조개껍데기목걸이': { name: '조개껍데기목걸이', type: 'accessory', subtype: 'necklace', hp: 15, price: 80, level: 3, description: '조개껍데기 장식 목걸이' },
+    '청동반지': { name: '청동반지', type: 'accessory', subtype: 'ring', def: 3, price: 120, level: 5, description: '청동 반지' },
+    '유리구슬팔찌': { name: '유리구슬팔찌', type: 'accessory', subtype: 'bracelet', magic: 5, price: 150, level: 6, description: '유리 구슬 팔찌' },
+    '깃털귀걸이': { name: '깃털귀걸이', type: 'accessory', subtype: 'earring', def: 4, price: 180, level: 7, description: '깃털 장식 귀걸이' },
+    '가죽팔찌': { name: '가죽팔찌', type: 'accessory', subtype: 'bracelet', att: 3, def: 2, price: 130, level: 5, description: '가죽 팔찌' },
+    '은팔찌': { name: '은팔찌', type: 'accessory', subtype: 'bracelet', def: 6, magic: 3, price: 350, level: 12, description: '은 팔찌' },
+    '수정펜던트': { name: '수정펜던트', type: 'accessory', subtype: 'necklace', magic: 10, price: 400, level: 12, description: '수정 펜던트' },
+    '부적주머니': { name: '부적주머니', type: 'accessory', subtype: 'necklace', hp: 30, def: 5, price: 350, level: 10, description: '부적이 든 주머니' },
+    '모험가의인장': { name: '모험가의인장', type: 'accessory', subtype: 'ring', att: 3, def: 3, price: 300, level: 8, description: '모험가 인장 반지' },
+    '늑대이빨목걸이': { name: '늑대이빨목걸이', type: 'accessory', subtype: 'necklace', att: 8, price: 450, level: 10, description: '늑대 이빨 목걸이' },
+    '호랑이눈팔찌': { name: '호랑이눈팔찌', type: 'accessory', subtype: 'bracelet', att: 6, def: 4, price: 500, level: 12, description: '호랑이눈석 팔찌' },
+    '무지개귀걸이': { name: '무지개귀걸이', type: 'accessory', subtype: 'earring', magic: 8, hp: 20, price: 550, level: 14, description: '무지개빛 귀걸이' },
+    '행운의브로치': { name: '행운의브로치', type: 'accessory', subtype: 'necklace', def: 5, price: 600, level: 8, special: '골드 획득 +5%', description: '행운을 부르는 브로치' },
+    '전투자의벨트': { name: '전투자의벨트', type: 'accessory', subtype: 'belt', att: 5, def: 5, price: 400, level: 10, description: '전투에 적합한 벨트' }
 };
 
 // ========================================
@@ -4016,17 +4109,42 @@ var ShopDatabase = {
         location: '시작마을',
         type: 'weapon',
         items: [
+            // 검류 (10종)
+            { item: '녹슨검', stock: -1 },
             { item: '철검', stock: -1 },
             { item: '강철검', stock: -1 },
             { item: '숏소드', stock: -1 },
             { item: '롱소드', stock: -1 },
             { item: '대거', stock: -1 },
             { item: '브로드소드', stock: -1 },
-            { item: '마법사지팡이', stock: -1 },
+            { item: '바스타드소드', stock: -1 },
+            { item: '스틸레토', stock: -1 },
+            { item: '낡은단검', stock: -1 },
+            // 도끼/창류 (8종)
+            { item: '손도끼', stock: -1 },
+            { item: '전투도끼', stock: -1 },
+            { item: '배틀액스', stock: -1 },
+            { item: '나무창', stock: -1 },
+            { item: '철창', stock: -1 },
+            { item: '파이크', stock: -1 },
+            { item: '그레이트소드', stock: -1 },
+            { item: '클레이모어', stock: -1 },
+            // 활류 (6종)
             { item: '나무활', stock: -1 },
             { item: '숏보우', stock: -1 },
+            { item: '롱보우', stock: -1 },
+            { item: '리커브보우', stock: -1 },
+            { item: '컴파운드보우', stock: -1 },
+            { item: '엘프활', stock: -1 },
+            // 지팡이류 (8종)
             { item: '나무지팡이', stock: -1 },
-            { item: '오크스태프', stock: -1 }
+            { item: '마법사지팡이', stock: -1 },
+            { item: '오크스태프', stock: -1 },
+            { item: '수정지팡이', stock: -1 },
+            { item: '화염의지팡이', stock: -1 },
+            { item: '빙결의지팡이', stock: -1 },
+            { item: '번개의지팡이', stock: -1 },
+            { item: '대마법사의지팡이', stock: -1 }
         ]
     },
     '시작마을방어구점': {
@@ -4035,17 +4153,45 @@ var ShopDatabase = {
         location: '시작마을',
         type: 'armor',
         items: [
-            { item: '가죽갑옷', stock: -1 },
-            { item: '가죽투구', stock: -1 },
-            { item: '가죽장갑', stock: -1 },
-            { item: '가죽부츠', stock: -1 },
-            { item: '나무방패', stock: -1 },
+            // 갑옷류 (10종)
             { item: '천옷', stock: -1 },
-            { item: '천모자', stock: -1 },
-            { item: '천장갑', stock: -1 },
-            { item: '천신발', stock: -1 },
+            { item: '가죽갑옷', stock: -1 },
+            { item: '체인메일', stock: -1 },
+            { item: '철갑옷', stock: -1 },
+            { item: '강철갑옷', stock: -1 },
+            { item: '플레이트아머', stock: -1 },
             { item: '수련생로브', stock: -1 },
-            { item: '철방패', stock: -1 }
+            { item: '마법사로브', stock: -1 },
+            { item: '위자드로브', stock: -1 },
+            { item: '대마법사로브', stock: -1 },
+            // 투구류 (6종)
+            { item: '천모자', stock: -1 },
+            { item: '가죽투구', stock: -1 },
+            { item: '철투구', stock: -1 },
+            { item: '강철투구', stock: -1 },
+            { item: '기사투구', stock: -1 },
+            { item: '미스릴투구', stock: -1 },
+            // 장갑류 (6종)
+            { item: '천장갑', stock: -1 },
+            { item: '가죽장갑', stock: -1 },
+            { item: '철건틀릿', stock: -1 },
+            { item: '강철건틀릿', stock: -1 },
+            { item: '미스릴건틀릿', stock: -1 },
+            { item: '드래곤건틀릿', stock: -1 },
+            // 신발류 (6종)
+            { item: '천신발', stock: -1 },
+            { item: '가죽부츠', stock: -1 },
+            { item: '철부츠', stock: -1 },
+            { item: '강철부츠', stock: -1 },
+            { item: '미스릴부츠', stock: -1 },
+            { item: '신속의부츠', stock: -1 },
+            // 방패류 (6종)
+            { item: '나무방패', stock: -1 },
+            { item: '철방패', stock: -1 },
+            { item: '타워실드', stock: -1 },
+            { item: '강철방패', stock: -1 },
+            { item: '미스릴방패', stock: -1 },
+            { item: '드래곤실드', stock: -1 }
         ]
     },
     '시작마을잡화점': {
@@ -4055,18 +4201,44 @@ var ShopDatabase = {
         type: 'general',
         description: '시작마을의 잡화점입니다. 모험에 필요한 기본 물품을 판매합니다.',
         items: [
+            // 기본 소모품 (8종)
             { item: '빵', stock: -1 },
             { item: '치즈', stock: -1 },
             { item: '사과', stock: -1 },
-            { item: '귀환의돌', stock: -1 },
             { item: '빈병', stock: -1 },
             { item: '횃불', stock: -1 },
             { item: '밧줄', stock: -1 },
+            { item: '물통', stock: -1 },
+            { item: '침낭', stock: -1 },
+            // 이동/귀환 아이템 (4종)
+            { item: '귀환의돌', stock: -1 },
+            { item: '귀환의두루마리', stock: -1 },
+            { item: '순간이동의돌', stock: -1 },
             { item: '나침반', stock: -1 },
+            // 탐험 도구 (6종)
             { item: '지도조각', stock: -1 },
             { item: '여행자의배낭', stock: -1 },
             { item: '모험가수첩', stock: -1 },
-            { item: '낚시미끼', stock: -1 }
+            { item: '망원경', stock: -1 },
+            { item: '탐험가키트', stock: -1 },
+            { item: '응급처치키트', stock: -1 },
+            // 채집 도구 (6종)
+            { item: '채광곡괭이', stock: -1 },
+            { item: '채집낫', stock: -1 },
+            { item: '낚싯대', stock: -1 },
+            { item: '벌목도끼', stock: -1 },
+            { item: '낚시미끼', stock: -1 },
+            { item: '고급미끼세트', stock: -1 },
+            // 야영/저장 아이템 (4종)
+            { item: '텐트', stock: -1 },
+            { item: '야영세트', stock: -1 },
+            { item: '수집가의상자', stock: -1 },
+            { item: '모험가깃발', stock: -1 },
+            // 상자/열쇠 (4종)
+            { item: '일반상자열쇠', stock: -1 },
+            { item: '희귀상자열쇠', stock: -1 },
+            { item: '일반보물상자', stock: -1 },
+            { item: '신호탄', stock: -1 }
         ]
     },
     '시작마을가구점': {
@@ -4075,19 +4247,49 @@ var ShopDatabase = {
         location: '시작마을',
         type: 'housing',
         items: [
+            // 벽지류 (6종)
             { item: '소박한 벽지', stock: -1 },
             { item: '숲의 벽지', stock: -1 },
+            { item: '성광 벽지', stock: -1 },
+            { item: '고급 벽지', stock: -1 },
+            { item: '황혼 벽지', stock: -1 },
+            { item: '별빛 벽지', stock: -1 },
+            // 바닥재류 (6종)
             { item: '나무 바닥재', stock: -1 },
             { item: '돌 바닥재', stock: -1 },
+            { item: '사막 타일 바닥', stock: -1 },
+            { item: '대리석 바닥재', stock: -1 },
+            { item: '별빛 카펫', stock: -1 },
+            { item: '사막 모래카펫', stock: -1 },
+            // 조명류 (5종)
             { item: '작은 촛대', stock: -1 },
             { item: '유리 램프', stock: -1 },
+            { item: '마력 조명등', stock: -1 },
+            { item: '황동 샹들리에', stock: -1 },
+            { item: '사막 유리등', stock: -1 },
+            // 침대류 (5종)
             { item: '낡은 침대', stock: -1 },
             { item: '모험가 침대', stock: -1 },
+            { item: '포근한 침대', stock: -1 },
+            { item: '사막 행군 침대', stock: -1 },
+            { item: '북방 설원 침대', stock: -1 },
+            // 탁자류 (5종)
             { item: '소박한 책상', stock: -1 },
             { item: '전투 회의탁', stock: -1 },
+            { item: '우아한 식탁', stock: -1 },
+            { item: '사막 지도 탁자', stock: -1 },
+            { item: '북방 사냥 탁자', stock: -1 },
+            // 장식류 (5종)
             { item: '벽걸이 액자', stock: -1 },
             { item: '사냥 트로피', stock: -1 },
-            { item: '초록 화분', stock: -1 }
+            { item: '마법 서가', stock: -1 },
+            { item: '황금 액자', stock: -1 },
+            { item: '사막 석상', stock: -1 },
+            // 화분류 (4종)
+            { item: '초록 화분', stock: -1 },
+            { item: '향기로운 꽃병', stock: -1 },
+            { item: '생명나무 묘목', stock: -1 },
+            { item: '희귀 화분', stock: -1 }
         ]
     },
     '시작마을약국': {
@@ -4097,18 +4299,50 @@ var ShopDatabase = {
         type: 'potion',
         description: '리나가 운영하는 약국입니다. 다양한 포션과 치료약을 구매할 수 있습니다.',
         items: [
+            // 체력 포션 (6종)
             { item: '하급체력포션', stock: -1 },
             { item: '체력포션', stock: -1 },
             { item: '중급체력포션', stock: -1 },
+            { item: '상급체력포션', stock: -1 },
+            { item: '최상급체력포션', stock: -1 },
+            { item: '만능체력포션', stock: -1 },
+            // 마나 포션 (6종)
             { item: '하급마나포션', stock: -1 },
             { item: '마나포션', stock: -1 },
             { item: '중급마나포션', stock: -1 },
+            { item: '상급마나포션', stock: -1 },
+            { item: '최상급마나포션', stock: -1 },
+            { item: '대마력포션', stock: -1 },
+            // 복합 포션 (5종)
+            { item: '하급복합포션', stock: -1 },
+            { item: '회복포션', stock: -1 },
+            { item: '상급복합포션', stock: -1 },
+            { item: '최상급복합포션', stock: -1 },
+            { item: '엘릭서', stock: -1 },
+            // 치료 포션 (6종)
             { item: '해독포션', stock: -1 },
             { item: '해동포션', stock: -1 },
-            { item: '회복포션', stock: -1 },
+            { item: '해화포션', stock: -1 },
+            { item: '해마비포션', stock: -1 },
+            { item: '만병통치약', stock: -1 },
+            { item: '부활의깃털', stock: -1 },
+            // 버프 포션 (8종)
+            { item: '힘의포션', stock: -1 },
+            { item: '방어의포션', stock: -1 },
+            { item: '속도의포션', stock: -1 },
+            { item: '기력포션', stock: -1 },
+            { item: '집중의포션', stock: -1 },
+            { item: '회피의포션', stock: -1 },
+            { item: '재생의포션', stock: -1 },
+            { item: '마력재생포션', stock: -1 },
+            // 내성 포션 (4종)
+            { item: '독내성포션', stock: -1 },
+            { item: '화염내성포션', stock: -1 },
+            { item: '냉기내성포션', stock: -1 },
+            { item: '번개내성포션', stock: -1 },
+            // 재료 (2종)
             { item: '약초', stock: -1 },
-            { item: '치유초', stock: -1 },
-            { item: '힘의포션', stock: -1 }
+            { item: '치유초', stock: -1 }
         ]
     },
     '시작마을장신구점': {
@@ -4118,18 +4352,48 @@ var ShopDatabase = {
         type: 'accessory',
         description: '초보 모험가를 위한 장신구 상점입니다. 저렴하고 실용적인 액세서리를 판매합니다.',
         items: [
+            // 반지류 (8종)
+            { item: '구리반지', stock: -1 },
             { item: '철반지', stock: -1 },
-            { item: '가죽목걸이', stock: -1 },
-            { item: '은귀걸이', stock: -1 },
-            { item: '가죽벨트', stock: -1 },
-            { item: '천망토', stock: -1 },
+            { item: '청동반지', stock: -1 },
             { item: '은반지', stock: -1 },
+            { item: '금반지', stock: -1 },
+            { item: '모험가의인장', stock: -1 },
+            { item: '루비반지', stock: -1 },
+            { item: '사파이어반지', stock: -1 },
+            // 목걸이류 (8종)
+            { item: '나무목걸이', stock: -1 },
+            { item: '가죽목걸이', stock: -1 },
+            { item: '조개껍데기목걸이', stock: -1 },
             { item: '은목걸이', stock: -1 },
-            { item: '금귀걸이', stock: -1 },
-            { item: '철벨트', stock: -1 },
-            { item: '가죽망토', stock: -1 },
+            { item: '금목걸이', stock: -1 },
+            { item: '늑대이빨목걸이', stock: -1 },
             { item: '호신부', stock: -1 },
-            { item: '행운의동전', stock: -1 }
+            { item: '수정펜던트', stock: -1 },
+            // 귀걸이류 (6종)
+            { item: '뼈귀걸이', stock: -1 },
+            { item: '은귀걸이', stock: -1 },
+            { item: '금귀걸이', stock: -1 },
+            { item: '깃털귀걸이', stock: -1 },
+            { item: '진주귀걸이', stock: -1 },
+            { item: '무지개귀걸이', stock: -1 },
+            // 팔찌류 (6종)
+            { item: '돌팔찌', stock: -1 },
+            { item: '가죽팔찌', stock: -1 },
+            { item: '유리구슬팔찌', stock: -1 },
+            { item: '은팔찌', stock: -1 },
+            { item: '호랑이눈팔찌', stock: -1 },
+            { item: '부적주머니', stock: -1 },
+            // 벨트류 (4종)
+            { item: '가죽벨트', stock: -1 },
+            { item: '철벨트', stock: -1 },
+            { item: '전투자의벨트', stock: -1 },
+            { item: '전사의벨트', stock: -1 },
+            // 망토류 (4종)
+            { item: '천망토', stock: -1 },
+            { item: '가죽망토', stock: -1 },
+            { item: '마법망토', stock: -1 },
+            { item: '행운의브로치', stock: -1 }
         ]
     },
     '시작마을식당': {
@@ -4139,18 +4403,48 @@ var ShopDatabase = {
         type: 'food',
         description: '따뜻한 음식을 제공하는 식당입니다. 모험 전 든든한 식사를 챙겨보세요!',
         items: [
+            // 기본 음식 (10종)
             { item: '빵', stock: -1 },
             { item: '치즈', stock: -1 },
             { item: '사과', stock: -1 },
-            { item: '고기구이', stock: -1 },
-            { item: '생선구이', stock: -1 },
-            { item: '샐러드', stock: -1 },
+            { item: '계란후라이', stock: -1 },
+            { item: '토스트', stock: -1 },
             { item: '꿀바른빵', stock: -1 },
+            { item: '구운감자', stock: -1 },
+            { item: '구운옥수수', stock: -1 },
+            { item: '샐러드', stock: -1 },
             { item: '야채수프', stock: -1 },
+            // 고기 요리 (8종)
+            { item: '고기구이', stock: -1 },
+            { item: '닭꼬치', stock: -1 },
+            { item: '스테이크', stock: -1 },
+            { item: '미트파이', stock: -1 },
+            { item: '치킨커틀릿', stock: -1 },
+            { item: '비프스튜', stock: -1 },
+            { item: '모험가도시락', stock: -1 },
+            { item: '초보자도시락', stock: -1 },
+            // 해산물/생선 (4종)
+            { item: '생선구이', stock: -1 },
+            { item: '해물파전', stock: -1 },
+            { item: '훈제연어', stock: -1 },
+            { item: '해산물요리', stock: -1 },
+            // 간식/디저트 (4종)
             { item: '버섯볶음', stock: -1 },
+            { item: '과일타르트', stock: -1 },
+            { item: '꿀물', stock: -1 },
+            { item: '숲의과일파이', stock: -1 },
+            // 음료 (6종)
             { item: '과일주스', stock: -1 },
             { item: '우유', stock: -1 },
-            { item: '모험가도시락', stock: -1 }
+            { item: '핫초코', stock: -1 },
+            { item: '허브차', stock: -1 },
+            { item: '드워프맥주', stock: -1 },
+            { item: '에너지바', stock: -1 },
+            // 버프 음식 (4종)
+            { item: '전사의식사', stock: -1 },
+            { item: '마법사의식사', stock: -1 },
+            { item: '기사의만찬', stock: -1 },
+            { item: '왕의만찬', stock: -1 }
         ]
     },
     '수도고급무기점': {
@@ -4160,17 +4454,46 @@ var ShopDatabase = {
         type: 'weapon',
         rotation: false,
         items: [
+            // 검류 (8종)
             { item: '브로드소드', stock: -1 },
             { item: '바스타드소드', stock: -1 },
-            { item: '전투도끼', stock: -1 },
+            { item: '클레이모어', stock: -1 },
+            { item: '쯔바이핸더', stock: -1 },
             { item: '미스릴검', stock: -1 },
             { item: '아다만틴검', stock: -1 },
+            { item: '용의검', stock: -1 },
+            { item: '성검', stock: -1 },
+            // 단검/대거 (4종)
             { item: '미스릴대거', stock: -1 },
+            { item: '암살자의단검', stock: -1 },
+            { item: '독의단검', stock: -1 },
+            { item: '쌍검', stock: -1 },
+            // 도끼류 (5종)
+            { item: '전투도끼', stock: -1 },
+            { item: '배틀액스', stock: -1 },
+            { item: '워액스', stock: -1 },
+            { item: '피의도끼', stock: -1 },
+            { item: '버서커액스', stock: -1 },
+            // 창/폴암류 (5종)
+            { item: '할버드', stock: -1 },
+            { item: '글레이브', stock: -1 },
+            { item: '드래곤랜스', stock: -1 },
+            { item: '파르티잔', stock: -1 },
+            { item: '성창', stock: -1 },
+            // 활류 (4종)
             { item: '컴파운드보우', stock: -1 },
+            { item: '롱보우', stock: -1 },
+            { item: '미스릴보우', stock: -1 },
+            { item: '용의활', stock: -1 },
+            // 지팡이류 (8종)
             { item: '대마법사의지팡이', stock: -1 },
             { item: '화염의지팡이', stock: -1 },
             { item: '빙결의지팡이', stock: -1 },
-            { item: '번개의지팡이', stock: -1 }
+            { item: '번개의지팡이', stock: -1 },
+            { item: '아크메이지스태프', stock: -1 },
+            { item: '정령의지팡이', stock: -1 },
+            { item: '차원의지팡이', stock: -1 },
+            { item: '대현자의지팡이', stock: -1 }
         ]
     },
     '에테르니아방어구점': {
@@ -4180,16 +4503,43 @@ var ShopDatabase = {
         type: 'armor',
         rotation: false,
         items: [
+            // 투구류 (8종)
             { item: '강철투구', stock: -1 },
             { item: '기사투구', stock: -1 },
+            { item: '미스릴투구', stock: -1 },
+            { item: '아다만틴투구', stock: -1 },
+            { item: '성기사투구', stock: -1 },
+            { item: '마법사후드', stock: -1 },
+            { item: '대마법사후드', stock: -1 },
+            { item: '드래곤헬름', stock: -1 },
+            // 갑옷류 (8종)
             { item: '강철갑옷', stock: -1 },
             { item: '플레이트아머', stock: -1 },
             { item: '미스릴갑옷', stock: -1 },
+            { item: '아다만틴갑옷', stock: -1 },
+            { item: '성기사의갑옷', stock: -1 },
+            { item: '대마법사로브', stock: -1 },
+            { item: '현자의로브', stock: -1 },
+            { item: '드래곤아머', stock: -1 },
+            // 장갑류 (6종)
             { item: '강철건틀릿', stock: -1 },
-            { item: '강철부츠', stock: -1 },
             { item: '미스릴건틀릿', stock: -1 },
+            { item: '아다만틴건틀릿', stock: -1 },
+            { item: '성기사건틀릿', stock: -1 },
+            { item: '마법사장갑', stock: -1 },
+            { item: '드래곤건틀릿', stock: -1 },
+            // 신발류 (6종)
+            { item: '강철부츠', stock: -1 },
             { item: '미스릴부츠', stock: -1 },
-            { item: '대마법사로브', stock: -1 }
+            { item: '아다만틴부츠', stock: -1 },
+            { item: '성기사부츠', stock: -1 },
+            { item: '마법사샌들', stock: -1 },
+            { item: '드래곤부츠', stock: -1 },
+            // 로브류 (4종)
+            { item: '마법사로브', stock: -1 },
+            { item: '현자의로브', stock: -1 },
+            { item: '대현자의로브', stock: -1 },
+            { item: '천상의로브', stock: -1 }
         ]
     },
     '에테르니아방패점': {
@@ -4221,24 +4571,51 @@ var ShopDatabase = {
         type: 'housing',
         rotation: false,
         items: [
+            // 고급 벽지류 (7종)
             { item: '고급 벽지', stock: -1 },
             { item: '황혼 벽지', stock: -1 },
             { item: '별빛 벽지', stock: -1 },
+            { item: '사막 태피스트리 벽지', stock: -1 },
+            { item: '북방 설원 벽지', stock: -1 },
+            { item: '천공 운무 벽지', stock: -1 },
+            { item: '폐허 고대 벽지', stock: -1 },
+            // 고급 바닥재류 (7종)
             { item: '대리석 바닥재', stock: -1 },
             { item: '흑요석 바닥재', stock: -1 },
             { item: '별빛 카펫', stock: -1 },
+            { item: '사막 모래카펫', stock: -1 },
+            { item: '북방 설빙 바닥', stock: -1 },
+            { item: '천공 구름 바닥', stock: -1 },
+            { item: '폐허 석판 바닥', stock: -1 },
+            // 고급 조명류 (5종)
             { item: '황동 샹들리에', stock: -1 },
             { item: '마력 조명등', stock: -1 },
             { item: '천공 샹들리에', stock: -1 },
+            { item: '사막 유리등', stock: -1 },
+            { item: '폐허 유적등', stock: -1 },
+            // 고급 침대류 (5종)
             { item: '포근한 침대', stock: -1 },
             { item: '천상 침대', stock: -1 },
+            { item: '사막 행군 침대', stock: -1 },
+            { item: '북방 설원 침대', stock: -1 },
+            { item: '폐허 고대 침대', stock: -1 },
+            // 고급 탁자류 (5종)
             { item: '우아한 식탁', stock: -1 },
             { item: '왕실 연회탁', stock: -1 },
+            { item: '천공 항해 탁자', stock: -1 },
+            { item: '폐허 비전 탁자', stock: -1 },
+            { item: '사막 지도 탁자', stock: -1 },
+            // 고급 장식류 (5종)
             { item: '황금 액자', stock: -1 },
             { item: '마법 서가', stock: -1 },
             { item: '영웅의 조각상', stock: -1 },
+            { item: '천공 풍향계', stock: -1 },
+            { item: '폐허 석판', stock: -1 },
+            // 고급 화분류 (4종)
             { item: '생명나무 묘목', stock: -1 },
-            { item: '희귀 화분', stock: -1 }
+            { item: '희귀 화분', stock: -1 },
+            { item: '세계수 화분', stock: -1 },
+            { item: '천공 구름 화분', stock: -1 }
         ]
     },
     '사막평판상점': {
@@ -4363,20 +4740,48 @@ var ShopDatabase = {
         rotation: false,
         description: '수도의 대형 약국입니다. 최상급 포션과 희귀한 치료약을 판매합니다.',
         items: [
+            // 체력 포션 (7종)
             { item: '하급체력포션', stock: -1 },
             { item: '체력포션', stock: -1 },
             { item: '중급체력포션', stock: -1 },
             { item: '상급체력포션', stock: -1 },
             { item: '최상급체력포션', stock: -1 },
+            { item: '만능체력포션', stock: -1 },
+            { item: '불사의영약', stock: -1 },
+            // 마나 포션 (7종)
             { item: '하급마나포션', stock: -1 },
             { item: '마나포션', stock: -1 },
             { item: '중급마나포션', stock: -1 },
             { item: '상급마나포션', stock: -1 },
             { item: '최상급마나포션', stock: -1 },
+            { item: '대마력포션', stock: -1 },
+            { item: '영혼의물', stock: -1 },
+            // 복합/특수 포션 (6종)
+            { item: '회복포션', stock: -1 },
+            { item: '상급복합포션', stock: -1 },
+            { item: '최상급복합포션', stock: -1 },
+            { item: '엘릭서', stock: -1 },
+            { item: '부활의깃털', stock: -1 },
+            { item: '부활의영약', stock: -1 },
+            // 치료 포션 (5종)
             { item: '해독포션', stock: -1 },
             { item: '해동포션', stock: -1 },
-            { item: '회복포션', stock: -1 },
-            { item: '만병통치약', stock: -1 }
+            { item: '해화포션', stock: -1 },
+            { item: '해마비포션', stock: -1 },
+            { item: '만병통치약', stock: -1 },
+            // 버프 포션 (8종)
+            { item: '힘의포션', stock: -1 },
+            { item: '방어의포션', stock: -1 },
+            { item: '속도의포션', stock: -1 },
+            { item: '거인의포션', stock: -1 },
+            { item: '철벽의포션', stock: -1 },
+            { item: '경험치포션', stock: -1 },
+            { item: '황금의포션', stock: -1 },
+            { item: '드롭율포션', stock: -1 },
+            // 특수 영약 (3종)
+            { item: '전사의영약', stock: -1 },
+            { item: '영웅의영약', stock: -1 },
+            { item: '보호의영약', stock: -1 }
         ]
     },
     '에테르니아잡화점': {
@@ -4387,18 +4792,47 @@ var ShopDatabase = {
         rotation: false,
         description: '수도의 종합 잡화점입니다. 강화석과 다양한 소모품을 구매할 수 있습니다.',
         items: [
+            // 기본 소모품 (6종)
             { item: '빵', stock: -1 },
             { item: '치즈', stock: -1 },
             { item: '사과', stock: -1 },
-            { item: '귀환의돌', stock: -1 },
             { item: '빈병', stock: -1 },
+            { item: '횃불', stock: -1 },
+            { item: '밧줄', stock: -1 },
+            // 이동 아이템 (5종)
+            { item: '귀환의돌', stock: -1 },
+            { item: '귀환의두루마리', stock: -1 },
+            { item: '순간이동의돌', stock: -1 },
+            { item: '차원의열쇠', stock: -1 },
+            { item: '던전 재도전권', stock: -1 },
+            // 강화 아이템 (5종)
             { item: '강화석', stock: -1 },
             { item: '축복의강화석', stock: -1 },
             { item: '안전한강화석', stock: -1 },
-            { item: '횃불', stock: -1 },
-            { item: '밧줄', stock: -1 },
-            { item: '고급지도', stock: -1 },
-            { item: '마력측정기', stock: -1 }
+            { item: '초월석', stock: -1 },
+            { item: '각성석', stock: -1 },
+            // 소환 아이템 (3종)
+            { item: '상인소환서', stock: -1 },
+            { item: '대장장이소환서', stock: -1 },
+            { item: '수리도구', stock: -1 },
+            // 상자/열쇠 (6종)
+            { item: '일반상자열쇠', stock: -1 },
+            { item: '희귀상자열쇠', stock: -1 },
+            { item: '전설상자열쇠', stock: -1 },
+            { item: '일반보물상자', stock: -1 },
+            { item: '희귀보물상자', stock: -1 },
+            { item: '전설보물상자', stock: -1 },
+            // 고급 도구 (6종)
+            { item: '마법가방', stock: -1 },
+            { item: '은제나침반', stock: -1 },
+            { item: '강화된채광곡괭이', stock: -1 },
+            { item: '강화된채집낫', stock: -1 },
+            { item: '고급낚싯대', stock: -1 },
+            { item: '감정안경', stock: -1 },
+            // 던전 입장권 (3종)
+            { item: '심연의 열쇠', stock: -1 },
+            { item: '시즌 던전 입장권', stock: -1 },
+            { item: '탐험가키트', stock: -1 }
         ]
     },
     '에테르니아장신구점': {
@@ -4409,20 +4843,45 @@ var ShopDatabase = {
         rotation: false,
         description: '고급 장신구 전문점입니다. 귀족들도 즐겨 찾는 명품 액세서리를 판매합니다.',
         items: [
+            // 반지류 (9종)
             { item: '은반지', stock: -1 },
             { item: '금반지', stock: -1 },
             { item: '루비반지', stock: -1 },
             { item: '사파이어반지', stock: -1 },
             { item: '에메랄드반지', stock: -1 },
+            { item: '다이아몬드반지', stock: -1 },
+            { item: '하늘반지', stock: -1 },
+            { item: '생명의반지', stock: -1 },
+            { item: '힘의반지', stock: -1 },
+            // 목걸이류 (8종)
             { item: '은목걸이', stock: -1 },
             { item: '금목걸이', stock: -1 },
             { item: '호신부', stock: -1 },
+            { item: '마력의목걸이', stock: -1 },
+            { item: '달빛펜던트', stock: -1 },
+            { item: '불사조의깃털', stock: -1 },
+            { item: '드래곤펜던트', stock: -1 },
+            { item: '불꽃펜던트', stock: -1 },
+            // 귀걸이류 (6종)
             { item: '금귀걸이', stock: -1 },
             { item: '진주귀걸이', stock: -1 },
+            { item: '다이아귀걸이', stock: -1 },
+            { item: '정령의귀걸이', stock: -1 },
+            { item: '뇌운귀걸이', stock: -1 },
+            { item: '안개귀걸이', stock: -1 },
+            // 벨트류 (5종)
             { item: '철벨트', stock: -1 },
             { item: '전사의벨트', stock: -1 },
+            { item: '영웅의벨트', stock: -1 },
+            { item: '설원벨트', stock: -1 },
+            { item: '타이탄벨트', stock: -1 },
+            // 망토류 (6종)
             { item: '가죽망토', stock: -1 },
-            { item: '마법망토', stock: -1 }
+            { item: '마법망토', stock: -1 },
+            { item: '은신의망토', stock: -1 },
+            { item: '영웅의망토', stock: -1 },
+            { item: '드래곤망토', stock: -1 },
+            { item: '엘프의망토', stock: -1 }
         ]
     },
     '에테르니아연금상': {
@@ -4457,18 +4916,46 @@ var ShopDatabase = {
         rotation: false,
         description: '수도 최고의 요리점입니다. 왕실 납품 경력의 셰프가 만드는 요리를 맛보세요!',
         items: [
-            { item: '고기구이', stock: -1 },
-            { item: '생선구이', stock: -1 },
-            { item: '샐러드', stock: -1 },
-            { item: '스테이크', stock: -1 },
-            { item: '꿀바른빵', stock: -1 },
+            // 기본 음식 (6종)
             { item: '빵', stock: -1 },
             { item: '치즈', stock: -1 },
+            { item: '샐러드', stock: -1 },
+            { item: '꿀바른빵', stock: -1 },
+            { item: '야채수프', stock: -1 },
+            { item: '토스트', stock: -1 },
+            // 고급 메인 요리 (10종)
+            { item: '고기구이', stock: -1 },
+            { item: '생선구이', stock: -1 },
+            { item: '스테이크', stock: -1 },
+            { item: '비프스튜', stock: -1 },
+            { item: '훈제연어', stock: -1 },
+            { item: '해산물요리', stock: -1 },
+            { item: '치킨커틀릿', stock: -1 },
+            { item: '미트파이', stock: -1 },
+            { item: '모험가도시락', stock: -1 },
+            { item: '해물파전', stock: -1 },
+            // 왕실 특선 (4종)
             { item: '왕실스프', stock: -1 },
             { item: '해산물파스타', stock: -1 },
             { item: '구운야채플레이트', stock: -1 },
             { item: '왕실디저트', stock: -1 },
-            { item: '전투식량', stock: -1 }
+            // 디저트/간식 (4종)
+            { item: '과일타르트', stock: -1 },
+            { item: '숲의과일파이', stock: -1 },
+            { item: '꿀물', stock: -1 },
+            { item: '에너지바', stock: -1 },
+            // 음료 (4종)
+            { item: '핫초코', stock: -1 },
+            { item: '허브차', stock: -1 },
+            { item: '드워프맥주', stock: -1 },
+            { item: '엘프와인', stock: -1 },
+            // 버프 음식 (6종)
+            { item: '전사의식사', stock: -1 },
+            { item: '마법사의식사', stock: -1 },
+            { item: '기사의만찬', stock: -1 },
+            { item: '왕의만찬', stock: -1 },
+            { item: '용의스테이크', stock: -1 },
+            { item: '신의만찬', stock: -1 }
         ]
     },
     '보석상점': {
@@ -9792,9 +10279,9 @@ function getShopRotationConfig(shop) {
     if (shop && shop.rotation === false) return null;
     var rot = shop && shop.rotation ? shop.rotation : null;
     if (typeof rot === 'string') rot = { type: rot };
-    // 로테이션은 명시적으로 설정된 경우에만 적용 (기본값: 비활성화)
+    // 기본값: 일일 로테이션 활성화 (매일 상품 변경)
     if (!rot) {
-        return null;
+        rot = { type: 'daily', groups: 3 };
     }
     var type = rot.type || 'daily';
     var groups = rot.groups || rot.groupCount || 3;
@@ -9890,21 +10377,46 @@ function getShopItemAccess(player, shopName, entry, shop) {
 function getFilteredShopItems(player, shopName, shop) {
     var items = shop.items || [];
     var available = [];
-    var lockedRotation = 0;
+    var rotationLocked = [];
     var lockedRep = 0;
     var repFaction = null;
     var rotation = getShopRotationConfig(shop);
+    var MIN_ITEMS = 10; // 최소 표시 아이템 수
+
     for (var i = 0; i < items.length; i++) {
         var entry = items[i];
         var access = getShopItemAccess(player, shopName, entry, shop);
-        if (access.ok) available.push(entry);
-        else {
-            if (!access.rotationOk) lockedRotation++;
+        if (access.ok) {
+            available.push(entry);
+        } else {
+            if (!access.rotationOk) rotationLocked.push(entry);
             if (!access.repOk) lockedRep++;
         }
         if (!repFaction && access.repFaction) repFaction = access.repFaction;
     }
-    return { items: available, lockedRotation: lockedRotation, lockedRep: lockedRep, rotation: rotation, repFaction: repFaction };
+
+    // 최소 10개 보장: 로테이션 잠금 아이템에서 랜덤으로 추가
+    if (available.length < MIN_ITEMS && rotationLocked.length > 0) {
+        // 오늘 날짜 기반 시드로 랜덤 셔플
+        var seed = parseDayIndex(getDateKey());
+        var shuffled = rotationLocked.slice();
+        for (var j = shuffled.length - 1; j > 0; j--) {
+            var k = (seed * (j + 1) * 31) % (j + 1);
+            var temp = shuffled[j];
+            shuffled[j] = shuffled[k];
+            shuffled[k] = temp;
+        }
+        // 부족한 만큼 추가
+        var needed = MIN_ITEMS - available.length;
+        for (var n = 0; n < needed && n < shuffled.length; n++) {
+            available.push(shuffled[n]);
+        }
+    }
+
+    var lockedRotation = Math.max(0, rotationLocked.length - (MIN_ITEMS - (available.length - rotationLocked.length)));
+    if (lockedRotation < 0) lockedRotation = 0;
+
+    return { items: available, lockedRotation: rotationLocked.length, lockedRep: lockedRep, rotation: rotation, repFaction: repFaction };
 }
 
 function getShopEntry(itemName) {
