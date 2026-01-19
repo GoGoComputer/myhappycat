@@ -14473,6 +14473,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         var outShop = '[' + shopName + '] (' + page + '/' + totalItemPages + ')\n';
         if (metaLine) outShop += metaLine + '\n';
         var startItem = (page - 1) * perPageItems;
+        var hasLevelRestricted = false;
         for (var si = startItem; si < items.length && si < startItem + perPageItems; si++) {
             var entry = items[si];
             var itemName = entry.item || entry;
@@ -14483,11 +14484,15 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             if (itemLvReq > 0) {
                 if (player.level < itemLvReq) {
                     lvTag = ' [Lv.' + itemLvReq + '부터]';
+                    hasLevelRestricted = true;
                 } else {
                     lvTag = ' (Lv.' + itemLvReq + ')';
                 }
             }
             outShop += '- ' + itemName + (price ? ' ' + price + 'G' : '') + lvTag + '\n';
+        }
+        if (hasLevelRestricted) {
+            outShop += '* 레벨 미달 아이템도 미리 구매 가능!\n';
         }
         outShop += '구매: .구매 <아이템>';
         replier.reply(applyActionEffect(outShop.trim() + buildNextActionHint('shop-view'), 'shop'));
