@@ -4452,7 +4452,6 @@ var ShopDatabase = {
         name: '왕립 대장간',
         location: '에테르니아수도',
         type: 'weapon',
-        rotation: false,
         items: [
             // 검류 (8종)
             { item: '브로드소드', stock: -1 },
@@ -4501,7 +4500,6 @@ var ShopDatabase = {
         name: '왕립 방어구점',
         location: '에테르니아수도',
         type: 'armor',
-        rotation: false,
         items: [
             // 투구류 (8종)
             { item: '강철투구', stock: -1 },
@@ -4547,7 +4545,6 @@ var ShopDatabase = {
         name: '수도 방패 상인',
         location: '에테르니아수도',
         type: 'armor',
-        rotation: false,
         description: '에테르니아 수도의 방패 전문점입니다. 기사들이 즐겨 찾는 명소입니다.',
         items: [
             { item: '나무방패', stock: -1 },
@@ -4569,7 +4566,6 @@ var ShopDatabase = {
         name: '에테르니아 인테리어',
         location: '에테르니아수도',
         type: 'housing',
-        rotation: false,
         items: [
             // 고급 벽지류 (7종)
             { item: '고급 벽지', stock: -1 },
@@ -4737,7 +4733,6 @@ var ShopDatabase = {
         name: '에테르니아 약국',
         location: '에테르니아수도',
         type: 'potion',
-        rotation: false,
         description: '수도의 대형 약국입니다. 최상급 포션과 희귀한 치료약을 판매합니다.',
         items: [
             // 체력 포션 (7종)
@@ -4789,7 +4784,6 @@ var ShopDatabase = {
         name: '수도 잡화점',
         location: '에테르니아수도',
         type: 'general',
-        rotation: false,
         description: '수도의 종합 잡화점입니다. 강화석과 다양한 소모품을 구매할 수 있습니다.',
         items: [
             // 기본 소모품 (6종)
@@ -4840,7 +4834,6 @@ var ShopDatabase = {
         name: '에테르니아 장신구점',
         location: '에테르니아수도',
         type: 'accessory',
-        rotation: false,
         description: '고급 장신구 전문점입니다. 귀족들도 즐겨 찾는 명품 액세서리를 판매합니다.',
         items: [
             // 반지류 (9종)
@@ -4889,7 +4882,6 @@ var ShopDatabase = {
         name: '연금 재료상',
         location: '에테르니아수도',
         type: 'potion',
-        rotation: false,
         description: '연금술에 필요한 재료와 포션을 판매합니다. 연금술사의 필수 방문지!',
         items: [
             { item: '체력포션', stock: -1 },
@@ -4913,7 +4905,6 @@ var ShopDatabase = {
         name: '왕도 요리점',
         location: '에테르니아수도',
         type: 'food',
-        rotation: false,
         description: '수도 최고의 요리점입니다. 왕실 납품 경력의 셰프가 만드는 요리를 맛보세요!',
         items: [
             // 기본 음식 (6종)
@@ -4963,7 +4954,6 @@ var ShopDatabase = {
         name: '보석 상회',
         location: '에테르니아수도',
         type: 'material',
-        rotation: false,
         description: '각종 보석과 원석을 취급하는 전문 상점입니다. 장비 강화에 필수인 보석을 구매하세요!',
         items: [
             { item: '자수정', stock: -1 },
@@ -10279,12 +10269,12 @@ function getShopRotationConfig(shop) {
     if (shop && shop.rotation === false) return null;
     var rot = shop && shop.rotation ? shop.rotation : null;
     if (typeof rot === 'string') rot = { type: rot };
-    // 기본값: 일일 로테이션 활성화 (매일 상품 변경)
+    // 기본값: 일일 로테이션 활성화 (매일 상품 변경) - 7그룹 순환
     if (!rot) {
-        rot = { type: 'daily', groups: 3 };
+        rot = { type: 'daily', groups: 7 };
     }
     var type = rot.type || 'daily';
-    var groups = rot.groups || rot.groupCount || 3;
+    var groups = rot.groups || rot.groupCount || 7;
     var indexSource;
     var keyValue;
     if (type === 'season') {
