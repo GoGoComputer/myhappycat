@@ -6693,67 +6693,198 @@ var CraftingRecipeData = {
         '성장의 영약': { cost: 10000, materials: [{ name: '혼돈의 정수', count: 1 }, { name: '드래곤의 심장', count: 1 }, { name: '찬란한 보물상자', count: 1 }], result: { name: '성장의 영약', count: 1 } }
     },
     // ========================================
-    // 요리 레시피 (Cooking Recipes)
+    // 요리 레시피 (Cooking Recipes) - 대폭 확장판
     // ========================================
     // 요리는 낚시로 얻은 물고기와 재료를 사용하여 다양한 음식을 만드는 시스템입니다.
     // 요리 레벨이 오르면 더 고급 요리를 만들 수 있습니다.
-    // 사용법: .요리 <요리이름>
+    // 사용법: .요리 <요리이름> 또는 .요리 목록 또는 .요리 정보 <요리이름>
     cooking: {
-        // ===== 초급 요리 (요리 레벨 1~10) =====
-        // 간단한 생선 요리. 초보자도 쉽게 만들 수 있습니다.
+        // =========================================================
+        // 초급 요리 (요리 레벨 1~10) - 입문자용 간단 요리
+        // =========================================================
         '멸치구이': { cost: 10, fish: { name: '멸치', count: 1 }, result: { name: '멸치구이', count: 1 }, levelReq: 1, description: '바삭하게 구운 멸치. HP +30 회복' },
+        '멸치볶음': { cost: 12, fish: { name: '멸치', count: 2 }, result: { name: '멸치볶음', count: 1 }, levelReq: 1, description: '고소한 멸치볶음. HP +35, 힘 +2' },
+        '멸치국물': { cost: 8, fish: { name: '멸치', count: 3 }, result: { name: '멸치국물', count: 2 }, levelReq: 1, description: '시원한 육수. HP +20 x2개' },
         '붕어조림': { cost: 15, fish: { name: '붕어', count: 1 }, result: { name: '붕어조림', count: 1 }, levelReq: 1, description: '달콤짭짤하게 조린 붕어. HP +40 회복' },
+        '붕어찜': { cost: 18, fish: { name: '붕어', count: 1 }, result: { name: '붕어찜', count: 1 }, levelReq: 2, description: '부드러운 붕어찜. HP +45, 방어 +1' },
+        '붕어튀김': { cost: 20, fish: { name: '붕어', count: 1 }, result: { name: '붕어튀김', count: 1 }, levelReq: 2, description: '바삭한 붕어튀김. HP +48 회복' },
         '잉어찜': { cost: 30, fish: { name: '잉어', count: 1 }, result: { name: '잉어찜', count: 1 }, levelReq: 2, description: '부드럽게 찐 잉어. HP +50 회복' },
+        '잉어회': { cost: 35, fish: { name: '잉어', count: 1 }, result: { name: '잉어회', count: 1 }, levelReq: 3, description: '신선한 잉어회. HP +55, 속도 +2' },
+        '잉어국': { cost: 28, fish: { name: '잉어', count: 1 }, result: { name: '잉어국', count: 1 }, levelReq: 2, description: '보양 잉어국. HP +52, 힘 +3' },
         '미꾸라지탕': { cost: 25, fish: { name: '미꾸라지', count: 2 }, result: { name: '미꾸라지탕', count: 1 }, levelReq: 2, description: '영양 만점 미꾸라지탕. HP +60, 힘 +5' },
+        '미꾸라지튀김': { cost: 30, fish: { name: '미꾸라지', count: 3 }, result: { name: '미꾸라지튀김', count: 1 }, levelReq: 3, description: '바삭한 미꾸라지튀김. HP +58 회복' },
         '송어구이': { cost: 35, fish: { name: '송어', count: 1 }, result: { name: '송어구이', count: 1 }, levelReq: 3, description: '소금 뿌려 구운 송어. HP +55 회복' },
+        '송어회': { cost: 40, fish: { name: '송어', count: 1 }, result: { name: '송어회', count: 1 }, levelReq: 4, description: '싱싱한 송어회. HP +60, 속도 +3' },
+        '송어조림': { cost: 38, fish: { name: '송어', count: 1 }, result: { name: '송어조림', count: 1 }, levelReq: 3, description: '달콤한 송어조림. HP +57 회복' },
         '농어탕': { cost: 40, fish: { name: '농어', count: 1 }, result: { name: '농어탕', count: 1 }, levelReq: 3, description: '시원한 농어탕. HP +65 회복' },
+        '농어구이': { cost: 45, fish: { name: '농어', count: 1 }, result: { name: '농어구이', count: 1 }, levelReq: 4, description: '담백한 농어구이. HP +68 회복' },
+        '농어찜': { cost: 48, fish: { name: '농어', count: 1 }, result: { name: '농어찜', count: 1 }, levelReq: 4, description: '부드러운 농어찜. HP +70, 마력 +3' },
         '메기매운탕': { cost: 45, fish: { name: '메기', count: 1 }, result: { name: '메기매운탕', count: 1 }, levelReq: 4, description: '얼큰한 메기매운탕. HP +70, 방어 +3' },
+        '메기찜': { cost: 50, fish: { name: '메기', count: 1 }, result: { name: '메기찜', count: 1 }, levelReq: 5, description: '담백한 메기찜. HP +72 회복' },
+        '메기구이': { cost: 48, fish: { name: '메기', count: 1 }, result: { name: '메기구이', count: 1 }, levelReq: 5, description: '노릇하게 구운 메기. HP +68, 힘 +4' },
         '빙어튀김': { cost: 20, fish: { name: '빙어', count: 3 }, result: { name: '빙어튀김', count: 1 }, levelReq: 4, description: '바삭한 빙어튀김. HP +45 회복' },
+        '빙어회': { cost: 25, fish: { name: '빙어', count: 5 }, result: { name: '빙어회', count: 1 }, levelReq: 5, description: '얼음처럼 차가운 회. HP +50, 속도 +3' },
+        '피라미구이': { cost: 15, fish: { name: '피라미', count: 2 }, result: { name: '피라미구이', count: 1 }, levelReq: 1, description: '작지만 맛있는 구이. HP +25 회복' },
+        '피라미조림': { cost: 18, fish: { name: '피라미', count: 3 }, result: { name: '피라미조림', count: 1 }, levelReq: 2, description: '간장에 조린 피라미. HP +28 회복' },
+        '꺽지탕': { cost: 55, fish: { name: '꺽지', count: 1 }, result: { name: '꺽지탕', count: 1 }, levelReq: 5, description: '얼큰한 꺽지탕. HP +75, 방어 +4' },
+        '쏘가리매운탕': { cost: 60, fish: { name: '쏘가리', count: 1 }, result: { name: '쏘가리매운탕', count: 1 }, levelReq: 6, description: '시원한 쏘가리탕. HP +80, 힘 +5' },
+        '쏘가리회': { cost: 65, fish: { name: '쏘가리', count: 1 }, result: { name: '쏘가리회', count: 1 }, levelReq: 7, description: '담백한 쏘가리회. HP +85, 속도 +4' },
+        '은어구이': { cost: 50, fish: { name: '은어', count: 1 }, result: { name: '은어구이', count: 1 }, levelReq: 5, description: '향긋한 은어구이. HP +70 회복' },
+        '은어튀김': { cost: 55, fish: { name: '은어', count: 2 }, result: { name: '은어튀김', count: 1 }, levelReq: 6, description: '바삭한 은어튀김. HP +75 회복' },
+        '황어회': { cost: 70, fish: { name: '황어', count: 1 }, result: { name: '황어회', count: 1 }, levelReq: 7, description: '귀한 황어회. HP +88, 힘 +6' },
+        '무지개송어구이': { cost: 75, fish: { name: '무지개송어', count: 1 }, result: { name: '무지개송어구이', count: 1 }, levelReq: 8, description: '무지개빛 송어구이. HP +90, 모든 능력 +2' },
+        '산천어회': { cost: 60, fish: { name: '산천어', count: 1 }, result: { name: '산천어회', count: 1 }, levelReq: 6, description: '맑은 계곡의 맛. HP +78, 속도 +4' },
+        '열목어구이': { cost: 85, fish: { name: '열목어', count: 1 }, result: { name: '열목어구이', count: 1 }, levelReq: 9, description: '희귀한 열목어구이. HP +95, 힘 +7' },
 
-        // ===== 중급 요리 (요리 레벨 10~20) =====
-        // 더 복잡한 조리법이 필요한 요리입니다.
+        // =========================================================
+        // 중급 요리 (요리 레벨 10~20) - 숙련된 조리법 필요
+        // =========================================================
         '광어회': { cost: 100, fish: { name: '광어', count: 1 }, result: { name: '광어회', count: 1 }, levelReq: 10, description: '신선한 광어회. HP +100, 속도 +5' },
+        '광어조림': { cost: 110, fish: { name: '광어', count: 1 }, result: { name: '광어조림', count: 1 }, levelReq: 10, description: '촉촉한 광어조림. HP +105, 방어 +4' },
+        '광어탕': { cost: 115, fish: { name: '광어', count: 1 }, result: { name: '광어탕', count: 1 }, levelReq: 11, description: '담백한 광어탕. HP +108, 마력 +4' },
         '연어스테이크': { cost: 150, fish: { name: '연어', count: 1 }, result: { name: '연어스테이크', count: 1 }, levelReq: 12, description: '오메가3 풍부한 연어 스테이크. HP +120, 공격 +8' },
+        '연어회': { cost: 140, fish: { name: '연어', count: 1 }, result: { name: '연어회', count: 1 }, levelReq: 11, description: '부드러운 연어회. HP +115, 속도 +6' },
+        '연어초밥': { cost: 160, fish: { name: '연어', count: 1 }, result: { name: '연어초밥', count: 2 }, levelReq: 13, description: '신선한 연어초밥 2개. HP +60 x2' },
+        '연어덮밥': { cost: 170, fish: { name: '연어', count: 2 }, result: { name: '연어덮밥', count: 1 }, levelReq: 14, description: '푸짐한 연어덮밥. HP +180, 모든 능력 +5' },
         '장어구이': { cost: 200, fish: { name: '장어', count: 1 }, result: { name: '장어구이', count: 1 }, levelReq: 14, description: '정력에 좋은 장어구이. HP +150, 힘 +10' },
+        '장어덮밥': { cost: 220, fish: { name: '장어', count: 1 }, result: { name: '장어덮밥', count: 1 }, levelReq: 15, description: '든든한 장어덮밥. HP +170, 힘 +12' },
+        '장어백숙': { cost: 230, fish: { name: '장어', count: 1 }, result: { name: '장어백숙', count: 1 }, levelReq: 16, description: '보양 장어백숙. HP +180, 힘 +15, 방어 +5' },
         '도미찜': { cost: 180, fish: { name: '도미', count: 1 }, result: { name: '도미찜', count: 1 }, levelReq: 15, description: '담백한 도미찜. HP +130, 방어 +5' },
+        '도미회': { cost: 190, fish: { name: '도미', count: 1 }, result: { name: '도미회', count: 1 }, levelReq: 15, description: '쫄깃한 도미회. HP +135, 속도 +6' },
+        '도미조림': { cost: 175, fish: { name: '도미', count: 1 }, result: { name: '도미조림', count: 1 }, levelReq: 14, description: '매콤한 도미조림. HP +128, 공격 +5' },
         '우럭매운탕': { cost: 160, fish: { name: '우럭', count: 1 }, result: { name: '우럭매운탕', count: 1 }, levelReq: 13, description: '칼칼한 우럭매운탕. HP +140, 마력 +5' },
+        '우럭찜': { cost: 165, fish: { name: '우럭', count: 1 }, result: { name: '우럭찜', count: 1 }, levelReq: 14, description: '부드러운 우럭찜. HP +142, 방어 +5' },
+        '우럭회': { cost: 170, fish: { name: '우럭', count: 1 }, result: { name: '우럭회', count: 1 }, levelReq: 14, description: '쫄깃한 우럭회. HP +145, 속도 +5' },
         '갈치조림': { cost: 170, fish: { name: '갈치', count: 1 }, result: { name: '갈치조림', count: 1 }, levelReq: 14, description: '매콤달콤 갈치조림. HP +145 회복' },
+        '갈치구이': { cost: 175, fish: { name: '갈치', count: 1 }, result: { name: '갈치구이', count: 1 }, levelReq: 15, description: '노릇한 갈치구이. HP +148, 힘 +6' },
+        '갈치회': { cost: 185, fish: { name: '갈치', count: 1 }, result: { name: '갈치회', count: 1 }, levelReq: 16, description: '싱싱한 갈치회. HP +152, 속도 +6' },
         '가자미구이': { cost: 120, fish: { name: '가자미', count: 1 }, result: { name: '가자미구이', count: 1 }, levelReq: 11, description: '담백한 가자미구이. HP +110 회복' },
+        '가자미조림': { cost: 125, fish: { name: '가자미', count: 1 }, result: { name: '가자미조림', count: 1 }, levelReq: 12, description: '달콤한 가자미조림. HP +115 회복' },
+        '가자미회': { cost: 130, fish: { name: '가자미', count: 1 }, result: { name: '가자미회', count: 1 }, levelReq: 12, description: '싱싱한 가자미회. HP +118, 속도 +4' },
         '조기찜': { cost: 140, fish: { name: '조기', count: 1 }, result: { name: '조기찜', count: 1 }, levelReq: 12, description: '고소한 조기찜. HP +125 회복' },
+        '조기구이': { cost: 135, fish: { name: '조기', count: 1 }, result: { name: '조기구이', count: 1 }, levelReq: 11, description: '바삭한 조기구이. HP +122 회복' },
+        '조기조림': { cost: 145, fish: { name: '조기', count: 1 }, result: { name: '조기조림', count: 1 }, levelReq: 13, description: '달콤짭짤한 조기조림. HP +128 회복' },
+        '고등어구이': { cost: 130, fish: { name: '고등어', count: 1 }, result: { name: '고등어구이', count: 1 }, levelReq: 11, description: '기름진 고등어구이. HP +120, 힘 +5' },
+        '고등어조림': { cost: 135, fish: { name: '고등어', count: 1 }, result: { name: '고등어조림', count: 1 }, levelReq: 12, description: '매콤한 고등어조림. HP +125, 공격 +4' },
+        '삼치구이': { cost: 150, fish: { name: '삼치', count: 1 }, result: { name: '삼치구이', count: 1 }, levelReq: 13, description: '담백한 삼치구이. HP +135, 방어 +5' },
+        '삼치조림': { cost: 155, fish: { name: '삼치', count: 1 }, result: { name: '삼치조림', count: 1 }, levelReq: 14, description: '양념 삼치조림. HP +140 회복' },
+        '전어구이': { cost: 145, fish: { name: '전어', count: 1 }, result: { name: '전어구이', count: 1 }, levelReq: 12, description: '향긋한 전어구이. HP +130, 모든 능력 +3' },
+        '전어회': { cost: 155, fish: { name: '전어', count: 1 }, result: { name: '전어회', count: 1 }, levelReq: 13, description: '가을 전어회. HP +138, 속도 +5' },
+        '민어찜': { cost: 200, fish: { name: '민어', count: 1 }, result: { name: '민어찜', count: 1 }, levelReq: 16, description: '보양 민어찜. HP +160, 힘 +8' },
+        '민어회': { cost: 210, fish: { name: '민어', count: 1 }, result: { name: '민어회', count: 1 }, levelReq: 17, description: '귀한 민어회. HP +165, 모든 능력 +5' },
+        '농어세비체': { cost: 180, fish: { name: '농어', count: 2 }, result: { name: '농어세비체', count: 1 }, levelReq: 15, description: '상큼한 농어세비체. HP +155, 속도 +7' },
+        '송어무니엘': { cost: 160, fish: { name: '송어', count: 1 }, result: { name: '송어무니엘', count: 1 }, levelReq: 14, description: '버터향 송어무니엘. HP +145, 마력 +6' },
 
-        // ===== 고급 요리 (요리 레벨 20~35) =====
-        // 숙련된 요리사만 만들 수 있는 고급 요리입니다.
+        // =========================================================
+        // 고급 요리 (요리 레벨 20~35) - 숙련된 요리사 전용
+        // =========================================================
         '복어회': { cost: 300, fish: { name: '복어', count: 1 }, result: { name: '복어회', count: 1 }, levelReq: 20, description: '독을 제거한 복어회. HP +200, 공격 +12' },
+        '복어찜': { cost: 320, fish: { name: '복어', count: 1 }, result: { name: '복어찜', count: 1 }, levelReq: 21, description: '부드러운 복어찜. HP +210, 방어 +10' },
+        '복어튀김': { cost: 340, fish: { name: '복어', count: 1 }, result: { name: '복어튀김', count: 1 }, levelReq: 22, description: '바삭한 복어튀김. HP +220, 힘 +12' },
+        '복어죽': { cost: 280, fish: { name: '복어', count: 1 }, result: { name: '복어죽', count: 1 }, levelReq: 20, description: '영양만점 복어죽. HP +190, 모든 능력 +6' },
         '참치회': { cost: 400, fish: { name: '참치', count: 1 }, result: { name: '참치회', count: 1 }, levelReq: 22, description: '최고급 참치회. HP +250, 속도 +10' },
+        '참치뱃살': { cost: 500, fish: { name: '참치', count: 1 }, result: { name: '참치뱃살', count: 1 }, levelReq: 24, description: '마블링 최상 참치뱃살. HP +300, 모든 능력 +10' },
+        '참치스테이크': { cost: 450, fish: { name: '참치', count: 1 }, result: { name: '참치스테이크', count: 1 }, levelReq: 23, description: '육즙 가득 참치스테이크. HP +270, 공격 +15' },
+        '참치초밥': { cost: 420, fish: { name: '참치', count: 1 }, result: { name: '참치초밥', count: 3 }, levelReq: 22, description: '신선한 참치초밥 3개. HP +100 x3' },
         '방어회': { cost: 350, fish: { name: '방어', count: 1 }, result: { name: '방어회', count: 1 }, levelReq: 21, description: '겨울 방어회. HP +220, 방어 +10' },
+        '방어조림': { cost: 360, fish: { name: '방어', count: 1 }, result: { name: '방어조림', count: 1 }, levelReq: 22, description: '달콤한 방어조림. HP +230, 힘 +10' },
+        '방어구이': { cost: 370, fish: { name: '방어', count: 1 }, result: { name: '방어구이', count: 1 }, levelReq: 22, description: '노릇한 방어구이. HP +235, 공격 +10' },
         '대왕문어숙회': { cost: 800, fish: { name: '대왕문어', count: 1 }, result: { name: '대왕문어숙회', count: 1 }, levelReq: 25, description: '쫄깃한 대왕문어숙회. HP +300, 공격 +15' },
+        '대왕문어볶음': { cost: 750, fish: { name: '대왕문어', count: 1 }, result: { name: '대왕문어볶음', count: 1 }, levelReq: 24, description: '매콤한 대왕문어볶음. HP +280, 힘 +12' },
+        '대왕문어조림': { cost: 780, fish: { name: '대왕문어', count: 1 }, result: { name: '대왕문어조림', count: 1 }, levelReq: 25, description: '달콤한 대왕문어조림. HP +290, 방어 +12' },
         '킹크랩찜': { cost: 600, fish: { name: '킹크랩', count: 1 }, result: { name: '킹크랩찜', count: 1 }, levelReq: 23, description: '달콤한 킹크랩찜. HP +280, 힘 +12' },
+        '킹크랩구이': { cost: 650, fish: { name: '킹크랩', count: 1 }, result: { name: '킹크랩구이', count: 1 }, levelReq: 24, description: '버터향 킹크랩구이. HP +300, 모든 능력 +8' },
+        '킹크랩볶음': { cost: 620, fish: { name: '킹크랩', count: 1 }, result: { name: '킹크랩볶음', count: 1 }, levelReq: 23, description: '매콤한 킹크랩볶음. HP +285, 공격 +12' },
         '랍스터구이': { cost: 700, fish: { name: '대왕 랍스터', count: 1 }, result: { name: '랍스터구이', count: 1 }, levelReq: 24, description: '버터에 구운 랍스터. HP +290, 마력 +10' },
+        '랍스터찜': { cost: 720, fish: { name: '대왕 랍스터', count: 1 }, result: { name: '랍스터찜', count: 1 }, levelReq: 25, description: '부드러운 랍스터찜. HP +300, 방어 +12' },
+        '랍스터파스타': { cost: 750, fish: { name: '대왕 랍스터', count: 1 }, result: { name: '랍스터파스타', count: 1 }, levelReq: 26, description: '고급 랍스터파스타. HP +320, 모든 능력 +9' },
         '전복죽': { cost: 550, fish: { name: '황금 전복', count: 1 }, result: { name: '전복죽', count: 1 }, levelReq: 22, description: '영양 만점 전복죽. HP +260, 전체 회복' },
+        '전복구이': { cost: 580, fish: { name: '황금 전복', count: 1 }, result: { name: '전복구이', count: 1 }, levelReq: 23, description: '쫄깃한 전복구이. HP +275, 힘 +10' },
+        '전복회': { cost: 600, fish: { name: '황금 전복', count: 1 }, result: { name: '전복회', count: 1 }, levelReq: 24, description: '신선한 전복회. HP +285, 속도 +10' },
         '해물파전': { cost: 450, fish: { name: '오징어', count: 2 }, result: { name: '해물파전', count: 1 }, levelReq: 20, description: '바삭한 해물파전. HP +200, 모든 능력 +3' },
+        '오징어볶음': { cost: 400, fish: { name: '오징어', count: 2 }, result: { name: '오징어볶음', count: 1 }, levelReq: 20, description: '매콤한 오징어볶음. HP +180, 공격 +8' },
+        '오징어회': { cost: 420, fish: { name: '오징어', count: 1 }, result: { name: '오징어회', count: 1 }, levelReq: 21, description: '쫄깃한 오징어회. HP +190, 속도 +7' },
+        '오징어순대': { cost: 480, fish: { name: '오징어', count: 2 }, result: { name: '오징어순대', count: 1 }, levelReq: 22, description: '속 꽉 찬 오징어순대. HP +220, 힘 +8' },
+        '성게알밥': { cost: 650, fish: { name: '성게', count: 2 }, result: { name: '성게알밥', count: 1 }, levelReq: 25, description: '바다의 보석 성게알밥. HP +310, 마력 +12' },
+        '성게회': { cost: 680, fish: { name: '성게', count: 1 }, result: { name: '성게회', count: 1 }, levelReq: 26, description: '진한 성게회. HP +320, 모든 능력 +10' },
+        '가리비구이': { cost: 380, fish: { name: '가리비', count: 2 }, result: { name: '가리비구이', count: 1 }, levelReq: 21, description: '버터향 가리비구이. HP +200, 힘 +8' },
+        '가리비찜': { cost: 400, fish: { name: '가리비', count: 2 }, result: { name: '가리비찜', count: 1 }, levelReq: 22, description: '부드러운 가리비찜. HP +210, 방어 +8' },
+        '홍합탕': { cost: 350, fish: { name: '홍합', count: 3 }, result: { name: '홍합탕', count: 1 }, levelReq: 20, description: '시원한 홍합탕. HP +180, 마력 +6' },
+        '홍합찜': { cost: 360, fish: { name: '홍합', count: 3 }, result: { name: '홍합찜', count: 1 }, levelReq: 21, description: '와인향 홍합찜. HP +190, 모든 능력 +5' },
+        '대하구이': { cost: 420, fish: { name: '대하', count: 2 }, result: { name: '대하구이', count: 1 }, levelReq: 22, description: '통통한 대하구이. HP +210, 힘 +9' },
+        '대하찜': { cost: 440, fish: { name: '대하', count: 2 }, result: { name: '대하찜', count: 1 }, levelReq: 23, description: '달콤한 대하찜. HP +225, 속도 +8' },
+        '새우튀김': { cost: 380, fish: { name: '새우', count: 3 }, result: { name: '새우튀김', count: 1 }, levelReq: 21, description: '바삭한 새우튀김. HP +195, 공격 +7' },
+        '광어세비체': { cost: 450, fish: { name: '광어', count: 2 }, result: { name: '광어세비체', count: 1 }, levelReq: 24, description: '상큼한 광어세비체. HP +240, 속도 +10' },
+        '우니파스타': { cost: 700, fish: { name: '성게', count: 2 }, result: { name: '우니파스타', count: 1 }, levelReq: 27, description: '크리미한 우니파스타. HP +340, 마력 +15' },
 
-        // ===== 특급 요리 (요리 레벨 35~50) =====
-        // 희귀한 재료가 필요한 특별한 요리입니다.
+        // =========================================================
+        // 특급 요리 (요리 레벨 35~50) - 희귀 재료 필요
+        // =========================================================
         '고래찜': { cost: 1000, fish: { name: '고래', count: 1 }, result: { name: '고래찜', count: 1 }, levelReq: 35, description: '거대한 고래찜. HP +400, 힘 +20' },
+        '고래스테이크': { cost: 1100, fish: { name: '고래', count: 1 }, result: { name: '고래스테이크', count: 1 }, levelReq: 36, description: '육즙 가득 고래스테이크. HP +420, 공격 +22' },
+        '고래백숙': { cost: 1050, fish: { name: '고래', count: 1 }, result: { name: '고래백숙', count: 1 }, levelReq: 36, description: '보양 고래백숙. HP +410, 모든 능력 +12' },
         '상어지느러미수프': { cost: 1200, fish: { name: '상어', count: 1 }, result: { name: '상어지느러미수프', count: 1 }, levelReq: 38, description: '진귀한 상어수프. HP +450, 방어 +18' },
+        '상어스테이크': { cost: 1150, fish: { name: '상어', count: 1 }, result: { name: '상어스테이크', count: 1 }, levelReq: 37, description: '희귀한 상어스테이크. HP +440, 공격 +20' },
+        '상어회': { cost: 1180, fish: { name: '상어', count: 1 }, result: { name: '상어회', count: 1 }, levelReq: 38, description: '담대한 상어회. HP +445, 속도 +15' },
         '다금바리회': { cost: 1500, fish: { name: '황금 다금바리', count: 1 }, result: { name: '다금바리회', count: 1 }, levelReq: 40, description: '환상적인 다금바리회. HP +500, 공격 +25' },
+        '다금바리찜': { cost: 1550, fish: { name: '황금 다금바리', count: 1 }, result: { name: '다금바리찜', count: 1 }, levelReq: 41, description: '부드러운 다금바리찜. HP +520, 방어 +20' },
+        '다금바리탕': { cost: 1480, fish: { name: '황금 다금바리', count: 1 }, result: { name: '다금바리탕', count: 1 }, levelReq: 40, description: '맑은 다금바리탕. HP +490, 모든 능력 +15' },
         '용궁도미찜': { cost: 1300, fish: { name: '용궁의 도미', count: 1 }, result: { name: '용궁도미찜', count: 1 }, levelReq: 42, description: '신비로운 용궁도미. HP +480, 마력 +20' },
+        '용궁도미회': { cost: 1350, fish: { name: '용궁의 도미', count: 1 }, result: { name: '용궁도미회', count: 1 }, levelReq: 43, description: '신비한 용궁도미회. HP +500, 속도 +18' },
+        '용궁도미탕': { cost: 1280, fish: { name: '용궁의 도미', count: 1 }, result: { name: '용궁도미탕', count: 1 }, levelReq: 42, description: '영험한 용궁도미탕. HP +470, 모든 능력 +14' },
         '청룡어구이': { cost: 1800, fish: { name: '청룡어', count: 1 }, result: { name: '청룡어구이', count: 1 }, levelReq: 45, description: '용의 기운이 담긴 구이. HP +550, 공격 +30' },
+        '청룡어회': { cost: 1850, fish: { name: '청룡어', count: 1 }, result: { name: '청룡어회', count: 1 }, levelReq: 46, description: '용의 힘을 담은 회. HP +560, 속도 +20' },
+        '청룡어탕': { cost: 1780, fish: { name: '청룡어', count: 1 }, result: { name: '청룡어탕', count: 1 }, levelReq: 45, description: '용의 기운이 담긴 탕. HP +540, 모든 능력 +18' },
+        '만타레이구이': { cost: 1600, fish: { name: '만타레이', count: 1 }, result: { name: '만타레이구이', count: 1 }, levelReq: 43, description: '바다 날개 구이. HP +520, 방어 +22' },
+        '만타레이찜': { cost: 1650, fish: { name: '만타레이', count: 1 }, result: { name: '만타레이찜', count: 1 }, levelReq: 44, description: '부드러운 만타레이찜. HP +530, 마력 +18' },
+        '심해어조림': { cost: 1400, fish: { name: '심해어', count: 1 }, result: { name: '심해어조림', count: 1 }, levelReq: 40, description: '심해의 맛 조림. HP +480, 힘 +18' },
+        '심해어탕': { cost: 1450, fish: { name: '심해어', count: 1 }, result: { name: '심해어탕', count: 1 }, levelReq: 41, description: '깊은 바다의 탕. HP +490, 모든 능력 +14' },
+        '오로라연어구이': { cost: 1700, fish: { name: '오로라연어', count: 1 }, result: { name: '오로라연어구이', count: 1 }, levelReq: 44, description: '오로라빛 연어구이. HP +540, 마력 +22' },
+        '오로라연어회': { cost: 1750, fish: { name: '오로라연어', count: 1 }, result: { name: '오로라연어회', count: 1 }, levelReq: 45, description: '신비한 오로라연어회. HP +550, 모든 능력 +16' },
+        '천상의광어': { cost: 1900, fish: { name: '천상광어', count: 1 }, result: { name: '천상의광어', count: 1 }, levelReq: 47, description: '하늘의 축복을 받은 광어. HP +580, 모든 능력 +20' },
+        '심연의문어요리': { cost: 2000, fish: { name: '심연문어', count: 1 }, result: { name: '심연의문어요리', count: 1 }, levelReq: 48, description: '심연의 힘을 담은 요리. HP +600, 공격 +35' },
+        '드래곤피쉬구이': { cost: 2200, fish: { name: '드래곤피쉬', count: 1 }, result: { name: '드래곤피쉬구이', count: 1 }, levelReq: 49, description: '용의 피가 담긴 구이. HP +650, 모든 능력 +22' },
 
-        // ===== 전설 요리 (요리 레벨 50+) =====
-        // 신화적 재료로 만드는 전설의 요리입니다.
+        // =========================================================
+        // 전설 요리 (요리 레벨 50+) - 신화적 재료 필요
+        // =========================================================
         '용왕의 만찬': { cost: 5000, fish: { name: '해룡', count: 1 }, result: { name: '용왕의 만찬', count: 1 }, levelReq: 50, description: '용왕이 즐기는 만찬. HP +1000, 모든 능력 +30' },
+        '용왕의 정찬': { cost: 5500, fish: { name: '해룡', count: 1 }, result: { name: '용왕의 정찬', count: 1 }, levelReq: 52, description: '용왕의 정성스런 정찬. HP +1100, 모든 능력 +35' },
+        '용왕의 비밀요리': { cost: 6000, fish: { name: '해룡', count: 1 }, result: { name: '용왕의 비밀요리', count: 1 }, levelReq: 55, description: '용왕만이 아는 비법. HP +1200, 모든 능력 +40' },
         '인어의 눈물': { cost: 8000, fish: { name: '인어', count: 1 }, result: { name: '인어의 눈물', count: 1 }, levelReq: 55, description: '슬픔을 담은 요리. HP +1200, 마력 +50' },
+        '인어의 노래': { cost: 8500, fish: { name: '인어', count: 1 }, result: { name: '인어의 노래', count: 1 }, levelReq: 57, description: '아름다운 선율의 요리. HP +1300, 모든 능력 +40' },
+        '인어의 축복': { cost: 9000, fish: { name: '인어', count: 1 }, result: { name: '인어의 축복', count: 1 }, levelReq: 58, description: '인어의 가호를 담은 요리. HP +1400, 마력 +60' },
         '백룡의 정수': { cost: 7000, fish: { name: '백룡', count: 1 }, result: { name: '백룡의 정수', count: 1 }, levelReq: 52, description: '행운을 가져다주는 요리. HP +900, 행운 +100' },
+        '백룡의 심장': { cost: 7500, fish: { name: '백룡', count: 1 }, result: { name: '백룡의 심장', count: 1 }, levelReq: 54, description: '용의 핵심을 담은 요리. HP +1000, 힘 +40' },
+        '백룡의 숨결': { cost: 7800, fish: { name: '백룡', count: 1 }, result: { name: '백룡의 숨결', count: 1 }, levelReq: 55, description: '용의 숨결을 담은 요리. HP +1050, 모든 능력 +35' },
         '크라켄 요리': { cost: 6000, fish: { name: '크라켄의 촉수', count: 1 }, result: { name: '크라켄 요리', count: 1 }, levelReq: 53, description: '심해 괴물 요리. HP +800, 공격 +40' },
+        '크라켄 스테이크': { cost: 6500, fish: { name: '크라켄의 촉수', count: 1 }, result: { name: '크라켄 스테이크', count: 1 }, levelReq: 55, description: '거대한 촉수 스테이크. HP +880, 공격 +45' },
+        '크라켄 수프': { cost: 6200, fish: { name: '크라켄의 촉수', count: 1 }, result: { name: '크라켄 수프', count: 1 }, levelReq: 54, description: '심해의 정수를 담은 수프. HP +850, 힘 +35' },
         '황금어 정식': { cost: 20000, fish: { name: '황금 물고기', count: 1 }, result: { name: '황금어 정식', count: 1 }, levelReq: 60, description: '소원을 이루는 요리. HP +2000, 모든 능력 +50' },
+        '황금어 만찬': { cost: 25000, fish: { name: '황금 물고기', count: 1 }, result: { name: '황금어 만찬', count: 1 }, levelReq: 65, description: '전설 속 만찬. HP +2500, 모든 능력 +60' },
+        '황금어 신찬': { cost: 30000, fish: { name: '황금 물고기', count: 1 }, result: { name: '황금어 신찬', count: 1 }, levelReq: 70, description: '신들도 부러워하는 요리. HP +3000, 모든 능력 +70' },
+        '리바이어던 스테이크': { cost: 15000, fish: { name: '리바이어던의 비늘', count: 1 }, result: { name: '리바이어던 스테이크', count: 1 }, levelReq: 58, description: '바다 군주의 요리. HP +1800, 방어 +50' },
+        '리바이어던 수프': { cost: 14000, fish: { name: '리바이어던의 비늘', count: 1 }, result: { name: '리바이어던 수프', count: 1 }, levelReq: 57, description: '대양의 힘을 담은 수프. HP +1700, 힘 +45' },
+        '심연어 요리': { cost: 12000, fish: { name: '심연의 물고기', count: 1 }, result: { name: '심연어 요리', count: 1 }, levelReq: 55, description: '심연의 맛. HP +1500, 공격 +40' },
+        '천상어 요리': { cost: 18000, fish: { name: '천상의 물고기', count: 1 }, result: { name: '천상어 요리', count: 1 }, levelReq: 62, description: '하늘의 맛. HP +2200, 마력 +55' },
+        '불사조어 요리': { cost: 22000, fish: { name: '불사조어', count: 1 }, result: { name: '불사조어 요리', count: 1 }, levelReq: 65, description: '불멸의 요리. HP +2400, 부활 효과' },
+        '성스러운 연어': { cost: 16000, fish: { name: '성스러운 연어', count: 1 }, result: { name: '성스러운 연어 요리', count: 1 }, levelReq: 60, description: '축복받은 요리. HP +1900, 모든 능력 +45' },
 
-        // ===== 특수 조합 요리 =====
-        // 여러 재료를 조합하여 만드는 요리입니다.
+        // =========================================================
+        // 특수 조합 요리 - 여러 재료 필요
+        // =========================================================
         '해물모둠': { cost: 500, fish: { name: '오징어', count: 1 }, materials: [{ name: '새우', count: 2 }], result: { name: '해물모둠', count: 1 }, levelReq: 25, description: '다양한 해산물 모둠. HP +350, 모든 능력 +8' },
+        '해물탕': { cost: 550, fish: { name: '오징어', count: 1 }, materials: [{ name: '홍합', count: 2 }, { name: '새우', count: 2 }], result: { name: '해물탕', count: 1 }, levelReq: 26, description: '얼큰한 해물탕. HP +380, 힘 +10' },
+        '해물찜': { cost: 600, fish: { name: '대왕문어', count: 1 }, materials: [{ name: '새우', count: 2 }], result: { name: '해물찜', count: 1 }, levelReq: 28, description: '푸짐한 해물찜. HP +400, 모든 능력 +10' },
         '황혼의 스튜': { cost: 300, fish: { name: '연어', count: 2 }, result: { name: '황혼의 스튜', count: 1 }, levelReq: 18, description: '따뜻한 연어 스튜. HP +180, 방어 +8' },
         '바다의 축제': { cost: 2000, fish: { name: '참치', count: 1 }, materials: [{ name: '연어', count: 1 }, { name: '광어', count: 1 }], result: { name: '바다의 축제', count: 1 }, levelReq: 30, description: '최고급 해산물 코스. HP +600, 모든 능력 +15' },
-        '용의 비늘 수프': { cost: 3000, fish: { name: '리바이어던의 비늘', count: 1 }, result: { name: '용의 비늘 수프', count: 1 }, levelReq: 48, description: '전설의 수프. HP +700, 방어 +35' }
+        '바다의 향연': { cost: 3000, fish: { name: '참치', count: 1 }, materials: [{ name: '방어', count: 1 }, { name: '복어', count: 1 }], result: { name: '바다의 향연', count: 1 }, levelReq: 35, description: '화려한 해산물 코스. HP +750, 모든 능력 +20' },
+        '바다의 신비': { cost: 5000, fish: { name: '황금 다금바리', count: 1 }, materials: [{ name: '황금 전복', count: 1 }], result: { name: '바다의 신비', count: 1 }, levelReq: 45, description: '신비한 바다 요리. HP +1000, 모든 능력 +30' },
+        '용의 비늘 수프': { cost: 3000, fish: { name: '리바이어던의 비늘', count: 1 }, result: { name: '용의 비늘 수프', count: 1 }, levelReq: 48, description: '전설의 수프. HP +700, 방어 +35' },
+        '용왕의 비밀국': { cost: 8000, fish: { name: '해룡', count: 1 }, materials: [{ name: '인어', count: 1 }], result: { name: '용왕의 비밀국', count: 1 }, levelReq: 60, description: '용왕의 비밀 레시피. HP +1500, 모든 능력 +45' },
+        '신들의 만찬': { cost: 30000, fish: { name: '황금 물고기', count: 1 }, materials: [{ name: '해룡', count: 1 }, { name: '백룡', count: 1 }], result: { name: '신들의 만찬', count: 1 }, levelReq: 70, description: '신들도 감탄하는 요리. HP +3500, 모든 능력 +80' },
+        '전설의 코스': { cost: 25000, fish: { name: '크라켄의 촉수', count: 1 }, materials: [{ name: '리바이어던의 비늘', count: 1 }], result: { name: '전설의 코스', count: 1 }, levelReq: 65, description: '심해 전설의 맛. HP +2800, 모든 능력 +55' },
+        '오메가 요리': { cost: 20000, fish: { name: '천상의 물고기', count: 1 }, materials: [{ name: '불사조어', count: 1 }], result: { name: '오메가 요리', count: 1 }, levelReq: 68, description: '궁극의 요리. HP +3000, 모든 능력 +65' }
     }
 };
 
@@ -7593,17 +7724,119 @@ var BattlegroundRewards = [
 ];
 
 var ExtraRecipes = {
+    // ========================================
+    // 일반 제작 레시피 (General Crafting) - 대폭 확장판
+    // ========================================
+    // 다양한 장비, 액세서리, 소모품을 제작할 수 있습니다.
+    // 사용법: .제작 <아이템명> 또는 .제작 목록
     combination: {
-        '강철 방패': { cost: 300, materials: [{ name: '철조각', count: 6 }], result: { name: '강철 방패', count: 1 } },
-        '치유의 링': { cost: 500, materials: [{ name: '보석', count: 1 }, { name: '약초', count: 5 }], result: { name: '치유의 링', count: 1 } },
-        '전사의 벨트': { cost: 400, materials: [{ name: '가죽 조각', count: 6 }, { name: '철조각', count: 2 }], result: { name: '전사의 벨트', count: 1 } },
-        '미스릴 검': { cost: 1500, materials: [{ name: '미스릴 광석', count: 4 }], result: { name: '미스릴검', count: 1 }, levelReq: 10 },
-        '룬 방패': { cost: 2500, materials: [{ name: '룬석', count: 2 }, { name: '강철조각', count: 4 }], result: { name: '룬 방패', count: 1 }, levelReq: 15 },
-        '사막 비단망토': { cost: 1200, materials: [{ name: '사막 장인의 설계도', count: 1 }, { name: '사막향신료', count: 3 }, { name: '태양석파편', count: 2 }, { name: '천조각', count: 6 }], result: { name: '사막 비단망토', count: 1 }, levelReq: 6 },
-        '빙설 수호망토': { cost: 2000, materials: [{ name: '북방 제련 설계도', count: 1 }, { name: '빙설결정', count: 3 }, { name: '서리꽃', count: 2 }, { name: '고급천', count: 4 }], result: { name: '빙설 수호망토', count: 1 }, levelReq: 12 },
-        '늪지 안개망토': { cost: 3000, materials: [{ name: '습지 비전 설계도', count: 1 }, { name: '늪지이끼덩이', count: 4 }, { name: '유령의 정수', count: 2 }, { name: '고급천', count: 4 }], result: { name: '늪지 안개망토', count: 1 }, levelReq: 18 },
-        '천공 비행망토': { cost: 4500, materials: [{ name: '천공 공학 설계도', count: 1 }, { name: '폭풍결정', count: 3 }, { name: '천둥돌', count: 2 }, { name: '마력의천', count: 2 }], result: { name: '천공 비행망토', count: 1 }, levelReq: 24 },
-        '고대 서고망토': { cost: 6500, materials: [{ name: '폐허 고대 설계도', count: 1 }, { name: '고대 마법석', count: 2 }, { name: '차원의 파편', count: 2 }, { name: '마력의천', count: 3 }], result: { name: '고대 서고망토', count: 1 }, levelReq: 30 }
+        // =========================================================
+        // 초급 제작 (레벨 1~10) - 기본 장비 및 소모품
+        // =========================================================
+        '강철 방패': { cost: 300, materials: [{ name: '철조각', count: 6 }], result: { name: '강철 방패', count: 1 }, levelReq: 1, description: '기본 방패. 방어력 +5' },
+        '치유의 링': { cost: 500, materials: [{ name: '보석', count: 1 }, { name: '약초', count: 5 }], result: { name: '치유의 링', count: 1 }, levelReq: 2, description: '체력 회복 반지. HP +20' },
+        '전사의 벨트': { cost: 400, materials: [{ name: '가죽 조각', count: 6 }, { name: '철조각', count: 2 }], result: { name: '전사의 벨트', count: 1 }, levelReq: 3, description: '튼튼한 벨트. 힘 +3' },
+        '구리 귀걸이': { cost: 200, materials: [{ name: '구리 조각', count: 3 }], result: { name: '구리 귀걸이', count: 1 }, levelReq: 1, description: '소박한 귀걸이. 마력 +2' },
+        '가죽 팔찌': { cost: 250, materials: [{ name: '가죽 조각', count: 4 }], result: { name: '가죽 팔찌', count: 1 }, levelReq: 1, description: '가죽 팔찌. 속도 +2' },
+        '약초 주머니': { cost: 150, materials: [{ name: '천조각', count: 3 }, { name: '약초', count: 3 }], result: { name: '약초 주머니', count: 1 }, levelReq: 1, description: '약초 보관용 주머니. 인벤토리 +1' },
+        '초급 낚시대': { cost: 300, materials: [{ name: '나무조각', count: 5 }, { name: '철조각', count: 2 }], result: { name: '초급 낚시대', count: 1 }, levelReq: 2, description: '기본 낚시대. 낚시 확률 +5%' },
+        '초급 곡괭이': { cost: 350, materials: [{ name: '나무조각', count: 3 }, { name: '철조각', count: 5 }], result: { name: '초급 곡괭이', count: 1 }, levelReq: 2, description: '기본 곡괭이. 채광 확률 +5%' },
+        '초급 낫': { cost: 320, materials: [{ name: '나무조각', count: 3 }, { name: '철조각', count: 4 }], result: { name: '초급 낫', count: 1 }, levelReq: 2, description: '기본 낫. 약초채집 확률 +5%' },
+        '철 목걸이': { cost: 400, materials: [{ name: '철조각', count: 5 }], result: { name: '철 목걸이', count: 1 }, levelReq: 3, description: '철 목걸이. 방어 +3' },
+        '행운의 부적': { cost: 600, materials: [{ name: '천조각', count: 2 }, { name: '보석', count: 1 }], result: { name: '행운의 부적', count: 1 }, levelReq: 4, description: '행운의 부적. 드롭률 +3%' },
+        '속도의 장화': { cost: 700, materials: [{ name: '가죽 조각', count: 8 }, { name: '철조각', count: 2 }], result: { name: '속도의 장화', count: 1 }, levelReq: 5, description: '빠른 장화. 속도 +5' },
+        '마력의 팔찌': { cost: 650, materials: [{ name: '보석', count: 2 }, { name: '마력의 돌', count: 1 }], result: { name: '마력의 팔찌', count: 1 }, levelReq: 5, description: '마력 팔찌. 마력 +8' },
+        '전투 장갑': { cost: 550, materials: [{ name: '가죽 조각', count: 6 }, { name: '철조각', count: 3 }], result: { name: '전투 장갑', count: 1 }, levelReq: 4, description: '전투 장갑. 공격 +4' },
+        '강화된 허리띠': { cost: 800, materials: [{ name: '가죽 조각', count: 5 }, { name: '철조각', count: 5 }, { name: '보석', count: 1 }], result: { name: '강화된 허리띠', count: 1 }, levelReq: 6, description: '강화 벨트. 힘 +5, 방어 +3' },
+        '은빛 귀걸이': { cost: 900, materials: [{ name: '은광석', count: 3 }, { name: '보석', count: 1 }], result: { name: '은빛 귀걸이', count: 1 }, levelReq: 7, description: '은 귀걸이. 마력 +6, 속도 +3' },
+        '강철 팔보호대': { cost: 750, materials: [{ name: '철조각', count: 8 }, { name: '가죽 조각', count: 3 }], result: { name: '강철 팔보호대', count: 1 }, levelReq: 6, description: '팔 보호대. 방어 +6' },
+        '모험가의 배낭': { cost: 1000, materials: [{ name: '가죽 조각', count: 10 }, { name: '천조각', count: 5 }], result: { name: '모험가의 배낭', count: 1 }, levelReq: 8, description: '모험가 배낭. 인벤토리 +3' },
+        '중급 낚시대': { cost: 1200, materials: [{ name: '초급 낚시대', count: 1 }, { name: '철조각', count: 5 }, { name: '은광석', count: 2 }], result: { name: '중급 낚시대', count: 1 }, levelReq: 8, description: '중급 낚시대. 낚시 확률 +10%' },
+        '중급 곡괭이': { cost: 1300, materials: [{ name: '초급 곡괭이', count: 1 }, { name: '철조각', count: 6 }, { name: '은광석', count: 2 }], result: { name: '중급 곡괭이', count: 1 }, levelReq: 8, description: '중급 곡괭이. 채광 확률 +10%' },
+        '중급 낫': { cost: 1250, materials: [{ name: '초급 낫', count: 1 }, { name: '철조각', count: 5 }, { name: '은광석', count: 2 }], result: { name: '중급 낫', count: 1 }, levelReq: 8, description: '중급 낫. 약초채집 확률 +10%' },
+
+        // =========================================================
+        // 중급 제작 (레벨 10~20) - 강화된 장비
+        // =========================================================
+        '미스릴 검': { cost: 1500, materials: [{ name: '미스릴 광석', count: 4 }], result: { name: '미스릴검', count: 1 }, levelReq: 10, description: '미스릴 검. 공격력 +15' },
+        '미스릴 방패': { cost: 1600, materials: [{ name: '미스릴 광석', count: 5 }], result: { name: '미스릴 방패', count: 1 }, levelReq: 10, description: '미스릴 방패. 방어력 +12' },
+        '미스릴 갑옷': { cost: 2000, materials: [{ name: '미스릴 광석', count: 8 }, { name: '가죽 조각', count: 5 }], result: { name: '미스릴 갑옷', count: 1 }, levelReq: 12, description: '미스릴 갑옷. 방어력 +18, HP +30' },
+        '황금 목걸이': { cost: 1800, materials: [{ name: '금광석', count: 4 }, { name: '보석', count: 2 }], result: { name: '황금 목걸이', count: 1 }, levelReq: 11, description: '황금 목걸이. 모든 능력 +3' },
+        '마법사의 반지': { cost: 2200, materials: [{ name: '마력의 돌', count: 3 }, { name: '은광석', count: 4 }, { name: '보석', count: 2 }], result: { name: '마법사의 반지', count: 1 }, levelReq: 12, description: '마법 반지. 마력 +15' },
+        '전사의 반지': { cost: 2200, materials: [{ name: '철조각', count: 8 }, { name: '용의 비늘', count: 1 }, { name: '보석', count: 2 }], result: { name: '전사의 반지', count: 1 }, levelReq: 12, description: '전사 반지. 힘 +12, 공격 +5' },
+        '신속의 부츠': { cost: 2500, materials: [{ name: '가죽 조각', count: 10 }, { name: '마력의 돌', count: 2 }, { name: '바람의 정수', count: 1 }], result: { name: '신속의 부츠', count: 1 }, levelReq: 13, description: '빠른 부츠. 속도 +15' },
+        '강철 투구': { cost: 1400, materials: [{ name: '철조각', count: 10 }, { name: '가죽 조각', count: 3 }], result: { name: '강철 투구', count: 1 }, levelReq: 10, description: '강철 투구. 방어 +8, HP +15' },
+        '룬 방패': { cost: 2500, materials: [{ name: '룬석', count: 2 }, { name: '강철조각', count: 4 }], result: { name: '룬 방패', count: 1 }, levelReq: 15, description: '룬 방패. 방어 +15, 마력 저항 +10' },
+        '수호자의 팔찌': { cost: 2800, materials: [{ name: '미스릴 광석', count: 3 }, { name: '보석', count: 3 }, { name: '마력의 돌', count: 2 }], result: { name: '수호자의 팔찌', count: 1 }, levelReq: 14, description: '수호 팔찌. 방어 +10, HP +40' },
+        '암살자의 단검': { cost: 2600, materials: [{ name: '미스릴 광석', count: 4 }, { name: '독초', count: 5 }, { name: '암흑의 정수', count: 1 }], result: { name: '암살자의 단검', count: 1 }, levelReq: 15, description: '독 단검. 공격 +12, 치명타 +5%' },
+        '마력 충전석': { cost: 1500, materials: [{ name: '마력의 돌', count: 5 }, { name: '마나 결정', count: 2 }], result: { name: '마력 충전석', count: 3 }, levelReq: 11, description: 'MP 회복 아이템. MP +50 x3개' },
+        '생명의 부적': { cost: 3000, materials: [{ name: '생명의 씨앗', count: 2 }, { name: '치유초', count: 10 }, { name: '보석', count: 3 }], result: { name: '생명의 부적', count: 1 }, levelReq: 16, description: '생명 부적. HP +60, 회복력 +10%' },
+        '정령의 귀걸이': { cost: 3200, materials: [{ name: '정령의 핵', count: 1 }, { name: '금광석', count: 3 }, { name: '보석', count: 2 }], result: { name: '정령의 귀걸이', count: 1 }, levelReq: 17, description: '정령 귀걸이. 마력 +12, 모든 저항 +5' },
+        '기사의 망토': { cost: 2800, materials: [{ name: '고급천', count: 5 }, { name: '가죽 조각', count: 8 }, { name: '철조각', count: 5 }], result: { name: '기사의 망토', count: 1 }, levelReq: 15, description: '기사 망토. 방어 +8, 힘 +8' },
+        '마법사의 로브': { cost: 2900, materials: [{ name: '마력의천', count: 4 }, { name: '마력의 돌', count: 3 }, { name: '실크', count: 5 }], result: { name: '마법사의 로브', count: 1 }, levelReq: 16, description: '마법 로브. 마력 +18, MP +30' },
+        '도적의 두건': { cost: 2400, materials: [{ name: '고급천', count: 4 }, { name: '가죽 조각', count: 6 }, { name: '그림자의 정수', count: 1 }], result: { name: '도적의 두건', count: 1 }, levelReq: 14, description: '도적 두건. 속도 +10, 회피 +5%' },
+        '고급 낚시대': { cost: 3500, materials: [{ name: '중급 낚시대', count: 1 }, { name: '미스릴 광석', count: 3 }, { name: '정령의 핵', count: 1 }], result: { name: '고급 낚시대', count: 1 }, levelReq: 18, description: '고급 낚시대. 낚시 확률 +20%' },
+        '고급 곡괭이': { cost: 3800, materials: [{ name: '중급 곡괭이', count: 1 }, { name: '미스릴 광석', count: 4 }, { name: '정령의 핵', count: 1 }], result: { name: '고급 곡괭이', count: 1 }, levelReq: 18, description: '고급 곡괭이. 채광 확률 +20%' },
+        '고급 낫': { cost: 3600, materials: [{ name: '중급 낫', count: 1 }, { name: '미스릴 광석', count: 3 }, { name: '정령의 핵', count: 1 }], result: { name: '고급 낫', count: 1 }, levelReq: 18, description: '고급 낫. 약초채집 확률 +20%' },
+
+        // =========================================================
+        // 고급 제작 (레벨 20~35) - 희귀 장비
+        // =========================================================
+        '오리하르콘 검': { cost: 5000, materials: [{ name: '오리하르콘', count: 5 }, { name: '용의 비늘', count: 3 }], result: { name: '오리하르콘 검', count: 1 }, levelReq: 20, description: '오리하르콘 검. 공격력 +25' },
+        '오리하르콘 갑옷': { cost: 6000, materials: [{ name: '오리하르콘', count: 8 }, { name: '드래곤 가죽', count: 3 }], result: { name: '오리하르콘 갑옷', count: 1 }, levelReq: 22, description: '오리하르콘 갑옷. 방어력 +28, HP +50' },
+        '용사의 검': { cost: 8000, materials: [{ name: '미스릴검', count: 1 }, { name: '용의 비늘', count: 5 }, { name: '영웅의 메달', count: 1 }], result: { name: '용사의 검', count: 1 }, levelReq: 25, description: '용사의 검. 공격력 +35, 힘 +15' },
+        '드래곤슬레이어': { cost: 12000, materials: [{ name: '아다만타이트', count: 5 }, { name: '드래곤의 심장', count: 1 }, { name: '용의 이빨', count: 5 }], result: { name: '드래곤슬레이어', count: 1 }, levelReq: 30, description: '용 사냥꾼의 검. 공격력 +45, 용족 특공 +50%' },
+        '성기사의 갑옷': { cost: 10000, materials: [{ name: '오리하르콘', count: 10 }, { name: '빛의 정수', count: 3 }, { name: '천사의 깃털', count: 2 }], result: { name: '성기사의 갑옷', count: 1 }, levelReq: 28, description: '성스러운 갑옷. 방어력 +35, HP +80, 암흑 저항 +20' },
+        '마왕의 망토': { cost: 9500, materials: [{ name: '마력의천', count: 8 }, { name: '어둠의 정수', count: 3 }, { name: '악마의 심장', count: 1 }], result: { name: '마왕의 망토', count: 1 }, levelReq: 27, description: '어둠의 망토. 마력 +30, 암흑 마법 +25%' },
+        '천공의 날개': { cost: 15000, materials: [{ name: '천사의 깃털', count: 5 }, { name: '바람의 정수', count: 5 }, { name: '스타메탈', count: 3 }], result: { name: '천공의 날개', count: 1 }, levelReq: 32, description: '날개 장식. 속도 +30, 회피 +15%' },
+        '불사조의 반지': { cost: 18000, materials: [{ name: '불사조의 재', count: 3 }, { name: '피닉스의 깃털', count: 2 }, { name: '금광석', count: 10 }], result: { name: '불사조의 반지', count: 1 }, levelReq: 33, description: '부활 반지. 1회 부활 효과, HP +100' },
+        '드래곤의 목걸이': { cost: 14000, materials: [{ name: '용의 비늘', count: 8 }, { name: '용의 눈', count: 1 }, { name: '금광석', count: 8 }], result: { name: '드래곤의 목걸이', count: 1 }, levelReq: 30, description: '용의 목걸이. 모든 능력 +10, 용족 저항 +30%' },
+        '세계수의 지팡이': { cost: 16000, materials: [{ name: '세계수의 가지', count: 3 }, { name: '정령의 핵', count: 3 }, { name: '마나 결정', count: 5 }], result: { name: '세계수의 지팡이', count: 1 }, levelReq: 32, description: '자연의 지팡이. 마력 +40, MP 회복 +20%' },
+        '심판자의 투구': { cost: 11000, materials: [{ name: '오리하르콘', count: 6 }, { name: '빛의 정수', count: 2 }, { name: '천사의 깃털', count: 1 }], result: { name: '심판자의 투구', count: 1 }, levelReq: 28, description: '심판의 투구. 방어 +20, HP +60, 성스러운 힘 +15%' },
+        '암흑기사의 건틀릿': { cost: 10500, materials: [{ name: '아다만타이트', count: 4 }, { name: '어둠의 정수', count: 2 }, { name: '악마의 심장', count: 1 }], result: { name: '암흑기사의 건틀릿', count: 1 }, levelReq: 26, description: '암흑 장갑. 공격 +18, 생명력 흡수 +10%' },
+        '정령왕의 귀걸이': { cost: 13000, materials: [{ name: '정령의 핵', count: 5 }, { name: '정령의 꽃', count: 3 }, { name: '금광석', count: 5 }], result: { name: '정령왕의 귀걸이', count: 1 }, levelReq: 30, description: '정령 귀걸이. 마력 +25, 정령 소환 강화 +30%' },
+        '사막 비단망토': { cost: 1200, materials: [{ name: '사막 장인의 설계도', count: 1 }, { name: '사막향신료', count: 3 }, { name: '태양석파편', count: 2 }, { name: '천조각', count: 6 }], result: { name: '사막 비단망토', count: 1 }, levelReq: 6, description: '사막 망토. 열기 저항 +20%' },
+        '빙설 수호망토': { cost: 2000, materials: [{ name: '북방 제련 설계도', count: 1 }, { name: '빙설결정', count: 3 }, { name: '서리꽃', count: 2 }, { name: '고급천', count: 4 }], result: { name: '빙설 수호망토', count: 1 }, levelReq: 12, description: '빙설 망토. 냉기 저항 +25%' },
+        '늪지 안개망토': { cost: 3000, materials: [{ name: '습지 비전 설계도', count: 1 }, { name: '늪지이끼덩이', count: 4 }, { name: '유령의 정수', count: 2 }, { name: '고급천', count: 4 }], result: { name: '늪지 안개망토', count: 1 }, levelReq: 18, description: '늪지 망토. 독 저항 +30%' },
+        '천공 비행망토': { cost: 4500, materials: [{ name: '천공 공학 설계도', count: 1 }, { name: '폭풍결정', count: 3 }, { name: '천둥돌', count: 2 }, { name: '마력의천', count: 2 }], result: { name: '천공 비행망토', count: 1 }, levelReq: 24, description: '비행 망토. 속도 +20, 낙하 저항' },
+        '고대 서고망토': { cost: 6500, materials: [{ name: '폐허 고대 설계도', count: 1 }, { name: '고대 마법석', count: 2 }, { name: '차원의 파편', count: 2 }, { name: '마력의천', count: 3 }], result: { name: '고대 서고망토', count: 1 }, levelReq: 30, description: '고대 망토. 마력 +25, 모든 마법 강화 +15%' },
+        '명인 낚시대': { cost: 8000, materials: [{ name: '고급 낚시대', count: 1 }, { name: '오리하르콘', count: 3 }, { name: '바다의 정수', count: 2 }], result: { name: '명인 낚시대', count: 1 }, levelReq: 28, description: '명인 낚시대. 낚시 확률 +35%, 희귀어종 확률 +10%' },
+        '명인 곡괭이': { cost: 8500, materials: [{ name: '고급 곡괭이', count: 1 }, { name: '오리하르콘', count: 4 }, { name: '대지의 정수', count: 2 }], result: { name: '명인 곡괭이', count: 1 }, levelReq: 28, description: '명인 곡괭이. 채광 확률 +35%, 희귀광물 확률 +10%' },
+        '명인 낫': { cost: 7800, materials: [{ name: '고급 낫', count: 1 }, { name: '오리하르콘', count: 3 }, { name: '자연의 정수', count: 2 }], result: { name: '명인 낫', count: 1 }, levelReq: 28, description: '명인 낫. 약초채집 확률 +35%, 희귀약초 확률 +10%' },
+
+        // =========================================================
+        // 특급 제작 (레벨 35~50) - 전설 장비
+        // =========================================================
+        '아다만타이트 풀세트': { cost: 25000, materials: [{ name: '아다만타이트', count: 20 }, { name: '드래곤 가죽', count: 10 }, { name: '용의 비늘', count: 8 }], result: { name: '아다만타이트 풀세트', count: 1 }, levelReq: 35, description: '최강 방어구 세트. 방어력 +50, HP +120' },
+        '엑스칼리버': { cost: 30000, materials: [{ name: '스타메탈', count: 8 }, { name: '빛의 정수', count: 5 }, { name: '천사의 깃털', count: 3 }, { name: '영웅의 메달', count: 3 }], result: { name: '엑스칼리버', count: 1 }, levelReq: 40, description: '전설의 성검. 공격력 +60, 성스러운 힘 +40%' },
+        '저주받은 마검': { cost: 28000, materials: [{ name: '혼돈의 결정', count: 5 }, { name: '어둠의 정수', count: 8 }, { name: '악마의 심장', count: 3 }, { name: '저주의 가루', count: 10 }], result: { name: '저주받은 마검', count: 1 }, levelReq: 38, description: '저주의 검. 공격력 +55, 암흑 마법 +50%, HP -30' },
+        '시간의 모래시계': { cost: 35000, materials: [{ name: '시간의 모래', count: 10 }, { name: '공간의 파편', count: 5 }, { name: '운명의 실', count: 3 }], result: { name: '시간의 모래시계', count: 1 }, levelReq: 42, description: '시간 조작 도구. 쿨타임 30% 감소, 속도 +25' },
+        '운명의 반지': { cost: 32000, materials: [{ name: '운명의 실', count: 5 }, { name: '기억의 조각', count: 5 }, { name: '꿈의 결정', count: 3 }, { name: '금광석', count: 15 }], result: { name: '운명의 반지', count: 1 }, levelReq: 40, description: '운명의 반지. 모든 능력 +15, 치명타 +15%' },
+        '영원의 왕관': { cost: 40000, materials: [{ name: '영원의 얼음', count: 5 }, { name: '태양 조각', count: 5 }, { name: '월광석', count: 5 }, { name: '성운 조각', count: 3 }], result: { name: '영원의 왕관', count: 1 }, levelReq: 45, description: '영원의 왕관. 모든 능력 +20, HP/MP +150' },
+        '대지의 심장': { cost: 28000, materials: [{ name: '대지의 정수', count: 10 }, { name: '거인의 뼈', count: 5 }, { name: '아다만타이트', count: 8 }], result: { name: '대지의 심장', count: 1 }, levelReq: 38, description: '대지의 심장. 방어력 +40, HP +200, 넉백 면역' },
+        '폭풍의 눈': { cost: 30000, materials: [{ name: '바람의 정수', count: 10 }, { name: '천둥돌', count: 8 }, { name: '그리폰의 발톱', count: 3 }], result: { name: '폭풍의 눈', count: 1 }, levelReq: 40, description: '폭풍의 눈. 공격력 +40, 번개 마법 +50%' },
+        '심연의 결계석': { cost: 33000, materials: [{ name: '심연의 결정', count: 8 }, { name: '허공의 조각', count: 5 }, { name: '혼돈의 정수', count: 5 }], result: { name: '심연의 결계석', count: 1 }, levelReq: 42, description: '결계석. 모든 저항 +30%, 데미지 반사 +10%' },
+        '그리폰의 안장': { cost: 25000, materials: [{ name: '그리폰의 발톱', count: 5 }, { name: '드래곤 가죽', count: 8 }, { name: '고급천', count: 10 }], result: { name: '그리폰의 안장', count: 1 }, levelReq: 36, description: '탈것 안장. 이동속도 +50%, 낙하 면역' },
+        '유니콘의 축복': { cost: 35000, materials: [{ name: '유니콘의 뿔', count: 3 }, { name: '달빛이슬', count: 10 }, { name: '생명의 씨앗', count: 5 }], result: { name: '유니콘의 축복', count: 1 }, levelReq: 44, description: '축복의 아뮬렛. HP 회복 +50%, 저주 면역' },
+        '전설 낚시대': { cost: 20000, materials: [{ name: '명인 낚시대', count: 1 }, { name: '스타메탈', count: 3 }, { name: '세계수의 가지', count: 1 }, { name: '해룡의 비늘', count: 2 }], result: { name: '전설 낚시대', count: 1 }, levelReq: 40, description: '전설 낚시대. 낚시 확률 +50%, 전설어종 확률 +5%' },
+        '전설 곡괭이': { cost: 22000, materials: [{ name: '명인 곡괭이', count: 1 }, { name: '스타메탈', count: 4 }, { name: '대지의 심장', count: 1 }, { name: '드래곤광석', count: 3 }], result: { name: '전설 곡괭이', count: 1 }, levelReq: 40, description: '전설 곡괭이. 채광 확률 +50%, 전설광물 확률 +5%' },
+        '전설 낫': { cost: 21000, materials: [{ name: '명인 낫', count: 1 }, { name: '스타메탈', count: 3 }, { name: '세계수의 가지', count: 2 }, { name: '천년초', count: 3 }], result: { name: '전설 낫', count: 1 }, levelReq: 40, description: '전설 낫. 약초채집 확률 +50%, 전설약초 확률 +5%' },
+
+        // =========================================================
+        // 전설 제작 (레벨 50+) - 신화 장비
+        // =========================================================
+        '신들의 검': { cost: 100000, materials: [{ name: '엑스칼리버', count: 1 }, { name: '신성한 금속', count: 10 }, { name: '천사의 깃털', count: 10 }, { name: '빛의 정수', count: 15 }], result: { name: '신들의 검', count: 1 }, levelReq: 50, description: '신의 검. 공격력 +100, 모든 능력 +30' },
+        '차원의 갑옷': { cost: 90000, materials: [{ name: '차원의 파편', count: 15 }, { name: '허공의 조각', count: 10 }, { name: '시간의 모래', count: 8 }, { name: '공간의 파편', count: 8 }], result: { name: '차원의 갑옷', count: 1 }, levelReq: 52, description: '차원 갑옷. 방어력 +70, 차원 이동 가능' },
+        '태초의 지팡이': { cost: 95000, materials: [{ name: '태초의 광석', count: 10 }, { name: '세계수의 가지', count: 5 }, { name: '정령의 핵', count: 10 }, { name: '마나 결정', count: 20 }], result: { name: '태초의 지팡이', count: 1 }, levelReq: 55, description: '태초의 지팡이. 마력 +80, 모든 마법 2배' },
+        '창조의 왕관': { cost: 150000, materials: [{ name: '영원의 왕관', count: 1 }, { name: '신성한 금속', count: 15 }, { name: '성운 조각', count: 10 }, { name: '드래곤의 심장', count: 3 }], result: { name: '창조의 왕관', count: 1 }, levelReq: 60, description: '창조의 왕관. 모든 능력 +50, 경험치 +100%' },
+        '세계수의 갑옷': { cost: 120000, materials: [{ name: '세계수의 가지', count: 10 }, { name: '생명의 씨앗', count: 15 }, { name: '자연의 정수', count: 20 }, { name: '천년초', count: 10 }], result: { name: '세계수의 갑옷', count: 1 }, levelReq: 55, description: '세계수 갑옷. 방어력 +60, HP 재생 +100/초' },
+        '혼돈의 오브': { cost: 130000, materials: [{ name: '혼돈의 결정', count: 15 }, { name: '혼돈의 정수', count: 10 }, { name: '심연의 결정', count: 10 }, { name: '악마의 심장', count: 5 }], result: { name: '혼돈의 오브', count: 1 }, levelReq: 58, description: '혼돈의 오브. 마력 +70, 혼돈 마법 3배' },
+        '켈베로스의 목줄': { cost: 80000, materials: [{ name: '켈베로스의 송곳니', count: 5 }, { name: '지옥의 가죽', count: 10 }, { name: '악마의 심장', count: 3 }, { name: '용염석', count: 8 }], result: { name: '켈베로스의 목줄', count: 1 }, levelReq: 50, description: '켈베로스 소환. 화염 마법 +60%, 지옥견 소환' },
+        '히드라의 갑옷': { cost: 110000, materials: [{ name: '히드라의 비늘', count: 20 }, { name: '독의 정수', count: 15 }, { name: '재생의 핵', count: 5 }, { name: '신비의 버섯', count: 10 }], result: { name: '히드라의 갑옷', count: 1 }, levelReq: 54, description: '히드라 갑옷. 방어력 +55, 독 면역, 재생 +50/초' },
+        '바실리스크의 눈': { cost: 75000, materials: [{ name: '바실리스크의 눈', count: 2 }, { name: '저주의 가루', count: 20 }, { name: '암흑의 정수', count: 10 }], result: { name: '바실리스크의 눈 장식', count: 1 }, levelReq: 48, description: '바실리스크의 눈. 석화 마법 사용, 암흑 저항 +40%' },
+        '신화 낚시대': { cost: 50000, materials: [{ name: '전설 낚시대', count: 1 }, { name: '신성한 금속', count: 5 }, { name: '해룡의 비늘', count: 5 }, { name: '태초의 광석', count: 3 }], result: { name: '신화 낚시대', count: 1 }, levelReq: 55, description: '신화 낚시대. 모든 물고기 낚시 가능, 신화어종 확률 +3%' },
+        '신화 곡괭이': { cost: 55000, materials: [{ name: '전설 곡괭이', count: 1 }, { name: '신성한 금속', count: 6 }, { name: '태초의 광석', count: 5 }, { name: '대지의 심장', count: 2 }], result: { name: '신화 곡괭이', count: 1 }, levelReq: 55, description: '신화 곡괭이. 모든 광물 채굴 가능, 신화광물 확률 +3%' },
+        '신화 낫': { cost: 52000, materials: [{ name: '전설 낫', count: 1 }, { name: '신성한 금속', count: 5 }, { name: '세계수의 가지', count: 5 }, { name: '생명의 씨앗', count: 5 }], result: { name: '신화 낫', count: 1 }, levelReq: 55, description: '신화 낫. 모든 약초 채집 가능, 신화약초 확률 +3%' }
     },
     cooking: {
         '연어스테이크': { cost: 150, fish: { name: '연어', count: 1 }, result: { name: '연어스테이크', count: 1 } },
@@ -7613,26 +7846,116 @@ var ExtraRecipes = {
     }
 };
 
-var RareMaterials = ['룬석', '심연의 파편', '용의 비늘', '미스릴 광석'];
+var RareMaterials = [
+    // 기본 희귀 재료
+    '룬석', '심연의 파편', '용의 비늘', '미스릴 광석',
+    // 마법 재료
+    '마력의 결정', '고대 마법석', '차원의 파편', '영혼석', '정령의 핵',
+    '마나 결정', '에테르 조각', '혼돈의 정수', '빛의 정수', '어둠의 정수',
+    // 용 계열 재료
+    '드래곤의 심장', '용의 발톱', '용의 눈', '드래곤 가죽', '용의 이빨',
+    '고대룡의 뼈', '용염석', '빙룡의 숨결', '뇌룡의 비늘', '암룡의 정수',
+    // 금속/광물 계열
+    '오리하르콘', '아다만타이트', '스타메탈', '천상의 광석', '심연의 결정',
+    '태초의 광석', '신성한 금속', '혼돈의 결정', '정제된 미스릴', '고대 합금',
+    // 자연 계열
+    '세계수의 가지', '정령의 꽃', '천년초', '신비의 버섯', '달빛이슬',
+    '태양의 눈물', '별빛가루', '무지개 조각', '황금 잎사귀', '생명의 씨앗',
+    // 몬스터 드롭
+    '악마의 심장', '천사의 깃털', '불사조의 재', '피닉스의 깃털', '거인의 뼈',
+    '유니콘의 뿔', '그리폰의 발톱', '바실리스크의 눈', '켈베로스의 송곳니', '히드라의 비늘',
+    // 특수 재료
+    '시간의 모래', '공간의 파편', '운명의 실', '기억의 조각', '꿈의 결정',
+    '영원의 얼음', '태양 조각', '월광석', '성운 조각', '허공의 조각'
+];
 
 var RaidSets = {
+    // 드래곤 계열 세트
     '어비스 드래곤 세트': { items: ['어비스의 숨결', '드래곤의 심장'], bonus: { attMul: 1.1, defMul: 1.1 } },
-    '성기사의 맹세': { items: ['성기사의 갑옷', '빛의 성검'], bonus: { hpBonus: 100 } }
+    '빙룡의 세트': { items: ['빙룡의 갑옷', '빙룡의 검', '빙룡의 투구'], bonus: { defMul: 1.15, iceRes: 50 } },
+    '화룡의 세트': { items: ['화룡의 갑옷', '화룡의 검', '화룡의 투구'], bonus: { attMul: 1.15, fireRes: 50 } },
+    '뇌룡의 세트': { items: ['뇌룡의 갑옷', '뇌룡의 검', '뇌룡의 투구'], bonus: { spdMul: 1.2, lightningRes: 50 } },
+    '암룡의 세트': { items: ['암룡의 갑옷', '암룡의 검', '암룡의 투구'], bonus: { attMul: 1.1, lifesteal: 10 } },
+    // 성직자 계열 세트
+    '성기사의 맹세': { items: ['성기사의 갑옷', '빛의 성검'], bonus: { hpBonus: 100 } },
+    '대사제의 축복': { items: ['대사제의 로브', '신성한 지팡이', '빛의 왕관'], bonus: { hpBonus: 150, mpBonus: 100 } },
+    '심판자의 세트': { items: ['심판자의 투구', '심판자의 갑옷', '심판의 검'], bonus: { attMul: 1.12, defMul: 1.12 } },
+    // 암흑 계열 세트
+    '암흑기사의 세트': { items: ['암흑기사의 건틀릿', '암흑기사의 갑옷', '암흑의 검'], bonus: { attMul: 1.18, hpBonus: -50 } },
+    '마왕의 세트': { items: ['마왕의 망토', '마왕의 왕관', '마왕의 지팡이'], bonus: { mpMul: 1.3, magicPower: 1.25 } },
+    // 정령 계열 세트
+    '정령왕의 세트': { items: ['정령왕의 귀걸이', '정령왕의 로브', '정령왕의 지팡이'], bonus: { mpBonus: 200, summonPower: 1.5 } },
+    '세계수의 세트': { items: ['세계수의 갑옷', '세계수의 지팡이', '세계수의 왕관'], bonus: { hpRegen: 50, mpRegen: 30 } },
+    // 신화 계열 세트
+    '신들의 세트': { items: ['신들의 검', '차원의 갑옷', '창조의 왕관'], bonus: { allStat: 50, expMul: 2.0 } },
+    '혼돈의 세트': { items: ['혼돈의 오브', '혼돈의 갑옷', '혼돈의 왕관'], bonus: { magicPower: 2.0, chaosRes: 100 } },
+    // 몬스터 계열 세트
+    '히드라의 세트': { items: ['히드라의 갑옷', '히드라의 목걸이', '히드라의 반지'], bonus: { poisonImmune: true, hpRegen: 30 } },
+    '불사조의 세트': { items: ['불사조의 반지', '불사조의 망토', '불사조의 왕관'], bonus: { resurrection: 1, fireRes: 100 } }
 };
 
-var RaidMaterials = ['강화 코어', '심연의 정수', '용왕의 비늘'];
+var RaidMaterials = [
+    // 기본 레이드 재료
+    '강화 코어', '심연의 정수', '용왕의 비늘',
+    // 레이드 전용 재료
+    '보스의 핵', '심연의 심장', '어둠의 결정', '빛의 결정', '레이드 토큰',
+    '정복자의 증표', '용사의 훈장', '영웅의 메달', '전설의 파편', '신화의 조각',
+    // 장비 강화 재료
+    '초월의 정수', '각성의 결정', '진화의 촉매', '축복의 가루', '저주의 가루',
+    '강화석', '초월석', '정제된 코어', '순수한 에테르', '응축된 마력'
+];
 
 var GuildRaidRewards = [
-    { item: '강화 코어', chance: 0.4, qty: 1 },
+    // 기본 보상 (높은 확률)
+    { item: '강화 코어', chance: 0.35, qty: 1 },
     { item: '심연의 정수', chance: 0.25, qty: 1 },
     { item: '용왕의 비늘', chance: 0.2, qty: 1 },
-    { item: '전설의 보물상자', chance: 0.05, qty: 1 }
+    { item: '레이드 토큰', chance: 0.5, qty: 2 },
+    { item: '영웅의 메달', chance: 0.15, qty: 1 },
+    // 중급 보상 (중간 확률)
+    { item: '보스의 핵', chance: 0.12, qty: 1 },
+    { item: '초월의 정수', chance: 0.1, qty: 1 },
+    { item: '각성의 결정', chance: 0.1, qty: 1 },
+    { item: '강화석', chance: 0.18, qty: 2 },
+    { item: '초월석', chance: 0.08, qty: 1 },
+    // 희귀 보상 (낮은 확률)
+    { item: '전설의 보물상자', chance: 0.05, qty: 1 },
+    { item: '신화의 조각', chance: 0.03, qty: 1 },
+    { item: '드래곤의 심장', chance: 0.02, qty: 1 },
+    { item: '정복자의 증표', chance: 0.04, qty: 1 },
+    // 전설 보상 (매우 낮은 확률)
+    { item: '신화 장비 상자', chance: 0.01, qty: 1 },
+    { item: '태초의 광석', chance: 0.008, qty: 1 },
+    { item: '신성한 금속', chance: 0.005, qty: 1 }
 ];
 
 var GuildShopItems = [
-    { item: '길드 망토', cost: 800, level: 1 },
-    { item: '길드 표식', cost: 1200, level: 2 },
-    { item: '길드의 검', cost: 3000, level: 3 }
+    // 초급 아이템 (길드 레벨 1~5)
+    { item: '길드 망토', cost: 800, level: 1, description: '길드원 전용 망토. 방어 +5' },
+    { item: '길드 표식', cost: 1200, level: 2, description: '길드 소속 표식. 힘 +3' },
+    { item: '길드의 검', cost: 3000, level: 3, description: '길드 제식 검. 공격 +10' },
+    { item: '길드 물약 팩', cost: 500, level: 1, description: '포션 5개 세트' },
+    { item: '길드 버프 주문서', cost: 1500, level: 2, description: '1시간 경험치 +10%' },
+    // 중급 아이템 (길드 레벨 5~10)
+    { item: '길드 정예 망토', cost: 5000, level: 5, description: '정예 망토. 방어 +12, 속도 +5' },
+    { item: '길드 정예 검', cost: 8000, level: 6, description: '정예 검. 공격 +20' },
+    { item: '길드 전용 갑옷', cost: 10000, level: 7, description: '길드 갑옷. 방어 +25, HP +50' },
+    { item: '길드 경험치 부적', cost: 6000, level: 5, description: '경험치 +15% (영구)' },
+    { item: '길드 드롭률 부적', cost: 7000, level: 6, description: '드롭률 +10% (영구)' },
+    { item: '길드 귀환석', cost: 3000, level: 4, description: '길드 본부로 귀환 x10' },
+    // 고급 아이템 (길드 레벨 10~15)
+    { item: '길드 영웅 망토', cost: 20000, level: 10, description: '영웅 망토. 방어 +20, 모든 능력 +5' },
+    { item: '길드 영웅 검', cost: 25000, level: 11, description: '영웅 검. 공격 +35' },
+    { item: '길드 영웅 갑옷', cost: 30000, level: 12, description: '영웅 갑옷. 방어 +40, HP +100' },
+    { item: '길드 전용 탈것', cost: 50000, level: 13, description: '길드 전용 탈것. 이동속도 +30%' },
+    { item: '길드 창고 확장권', cost: 15000, level: 10, description: '길드 창고 +10칸' },
+    // 전설 아이템 (길드 레벨 15+)
+    { item: '길드 마스터 망토', cost: 80000, level: 15, description: '마스터 망토. 모든 능력 +15' },
+    { item: '길드 마스터 검', cost: 100000, level: 17, description: '마스터 검. 공격 +60' },
+    { item: '길드 마스터 갑옷', cost: 120000, level: 18, description: '마스터 갑옷. 방어 +70, HP +200' },
+    { item: '길드 전용 날개', cost: 200000, level: 20, description: '길드 날개. 이동속도 +50%, 회피 +10%' },
+    { item: '길드 부활석', cost: 30000, level: 15, description: '즉시 부활 x3' },
+    { item: '길드 축복 주문서', cost: 50000, level: 16, description: '24시간 모든 능력 +20%' }
 ];
 
 // -------------------------------------------
@@ -9642,20 +9965,90 @@ function rollTreasureBoxReward(boxTable) {
     return boxTable[boxTable.length - 1];
 }
 
+// ========================================
+// 채광 시스템 - 대폭 확장
+// ========================================
+// 채광 레벨에 따라 다양한 광석을 얻을 수 있습니다.
 function pickMiningReward(level) {
-    if (level < 5) return '구리 조각';
-    if (level < 10) return '철조각';
-    if (level < 20) return '은광석';
-    if (level < 30) return '금광석';
-    return '희귀광석';
+    // 초급 (레벨 1~10): 기본 광석
+    var tier1 = ['구리 조각', '주석 조각', '납 조각', '아연 조각'];
+    // 중급 (레벨 10~20): 일반 금속
+    var tier2 = ['철조각', '청동 조각', '니켈 조각', '코발트 조각', '망간 조각'];
+    // 고급 (레벨 20~35): 귀금속
+    var tier3 = ['은광석', '금광석', '백금 조각', '팔라듐 조각', '로듐 조각'];
+    // 특급 (레벨 35~50): 마법 광석
+    var tier4 = ['미스릴광석', '오리하르콘 조각', '아다만타이트', '드래곤광석', '스타메탈'];
+    // 전설 (레벨 50+): 희귀 광석
+    var tier5 = ['희귀광석', '영혼석 조각', '천상의 광석', '심연의 결정', '태초의 광석', '신성한 금속', '혼돈의 결정'];
+
+    // 레벨에 따른 기본 티어 선택
+    var mainPool, bonusPool;
+    if (level < 5) {
+        mainPool = tier1;
+        bonusPool = Math.random() < 0.05 ? tier2 : null;
+    } else if (level < 10) {
+        mainPool = tier1.concat(tier2.slice(0, 2));
+        bonusPool = Math.random() < 0.08 ? tier2 : null;
+    } else if (level < 20) {
+        mainPool = tier2;
+        bonusPool = Math.random() < 0.1 ? tier3 : null;
+    } else if (level < 35) {
+        mainPool = tier2.slice(2).concat(tier3);
+        bonusPool = Math.random() < 0.12 ? tier4 : null;
+    } else if (level < 50) {
+        mainPool = tier3.concat(tier4);
+        bonusPool = Math.random() < 0.15 ? tier5 : null;
+    } else {
+        mainPool = tier4.concat(tier5);
+        bonusPool = null;
+    }
+
+    // 보너스 풀에서 희귀 광석 확률
+    if (bonusPool) return pickRandom(bonusPool);
+    return pickRandom(mainPool);
 }
 
+// ========================================
+// 약초 채집 시스템 - 대폭 확장
+// ========================================
+// 약초 레벨에 따라 다양한 허브를 얻을 수 있습니다.
 function pickHerbReward(level) {
-    if (level < 5) return '약초';
-    if (level < 10) return '치유초';
-    if (level < 20) return '마력초';
-    if (level < 30) return '신비초';
-    return '영원의 꽃';
+    // 초급 (레벨 1~10): 기본 허브
+    var tier1 = ['약초', '들풀', '민들레', '쑥', '질경이', '클로버'];
+    // 중급 (레벨 10~20): 일반 허브
+    var tier2 = ['치유초', '마나허브', '해독초', '활력초', '진정초', '라벤더', '로즈마리'];
+    // 고급 (레벨 20~35): 고급 허브
+    var tier3 = ['마력초', '신비초', '생명의풀', '달빛허브', '태양꽃', '황금잎', '드루이드풀'];
+    // 특급 (레벨 35~50): 희귀 허브
+    var tier4 = ['영원의 꽃', '불사초', '용의허브', '심연의풀', '별빛꽃', '천상의허브', '세계수가지'];
+    // 전설 (레벨 50+): 신화 허브
+    var tier5 = ['신성한 허브', '태초의 씨앗', '생명의나무잎', '혼돈의 꽃', '운명의 허브', '창조의 잎', '불멸의 꽃'];
+
+    // 레벨에 따른 기본 티어 선택
+    var mainPool, bonusPool;
+    if (level < 5) {
+        mainPool = tier1;
+        bonusPool = Math.random() < 0.05 ? tier2 : null;
+    } else if (level < 10) {
+        mainPool = tier1.concat(tier2.slice(0, 3));
+        bonusPool = Math.random() < 0.08 ? tier2 : null;
+    } else if (level < 20) {
+        mainPool = tier2;
+        bonusPool = Math.random() < 0.1 ? tier3 : null;
+    } else if (level < 35) {
+        mainPool = tier2.slice(3).concat(tier3);
+        bonusPool = Math.random() < 0.12 ? tier4 : null;
+    } else if (level < 50) {
+        mainPool = tier3.concat(tier4);
+        bonusPool = Math.random() < 0.15 ? tier5 : null;
+    } else {
+        mainPool = tier4.concat(tier5);
+        bonusPool = null;
+    }
+
+    // 보너스 풀에서 희귀 허브 확률
+    if (bonusPool) return pickRandom(bonusPool);
+    return pickRandom(mainPool);
 }
 
 function pickFishByRarity(rarity) {
@@ -10430,46 +10823,387 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
     ensureSeasonDungeon();
 
     // 도움말
+    // ========================================
+    // 모험가 가이드 - 친숙한 명령어 안내
+    // ========================================
     if (cmd === '도움말' || cmd === '명령어') {
+        var helpArg = arg ? arg.trim().toLowerCase() : '';
+
+        // 카테고리별 상세 도움말
+        if (helpArg === '시작' || helpArg === '입문') {
+            replier.reply(
+                "🌟 [신규 모험가 가이드] 🌟\n\n" +
+                "묘냥의 숲에 오신 것을 환영해요!\n" +
+                "처음이시라면 이 순서로 시작해보세요:\n\n" +
+                "1️⃣ .시작 - 모험 시작! 첫 캐릭터를 만들어요\n" +
+                "   예: .시작 전사 (전사로 시작)\n" +
+                "   직업: 초보자, 전사, 마법사, 도적, 힐러, 궁수\n\n" +
+                "2️⃣ .정보 - 내 캐릭터 상태 확인\n" +
+                "3️⃣ .사냥 - 몬스터와 전투 시작!\n" +
+                "4️⃣ .공격 - 전투 중 몬스터 공격\n" +
+                "5️⃣ .휴식 - 체력/마나 회복\n" +
+                "6️⃣ .일일보상 - 매일 보상 받기 (잊지 마세요!)\n\n" +
+                "💡 팁: .튜토리얼 로 단계별 안내를 받을 수 있어요!\n" +
+                "💡 팁: .추천루트 로 레벨별 추천 콘텐츠를 확인하세요!"
+            );
+            return;
+        }
+
+        if (helpArg === '전투' || helpArg === '사냥') {
+            replier.reply(
+                "⚔️ [전투 가이드] ⚔️\n\n" +
+                "📍 기본 전투:\n" +
+                "• .사냥 - 현재 지역에서 몬스터와 전투 시작\n" +
+                "• .공격 (.공경) - 기본 공격으로 몬스터 때리기\n" +
+                "• .스킬 <이름> - 강력한 스킬 사용 (MP 소모)\n" +
+                "• .도망 - 위험하면 도망가세요!\n\n" +
+                "📍 스킬 관련:\n" +
+                "• .스킬목록 - 내 직업의 스킬 확인\n" +
+                "• 스킬은 MP를 소모해요. MP 없으면 .휴식!\n\n" +
+                "📍 고급 전투:\n" +
+                "• .정예사냥 - 강한 정예 몬스터 (보상 업!)\n" +
+                "• .던전 <이름> [난이도] - 던전 도전\n" +
+                "• .초보던전 / .중급던전 - 쉬운 던전 입장\n\n" +
+                "💡 팁: 레벨에 맞는 지역에서 사냥하세요!\n" +
+                "💡 팁: .지역목록 으로 추천 레벨 확인"
+            );
+            return;
+        }
+
+        if (helpArg === '파티' || helpArg === '레이드') {
+            replier.reply(
+                "👥 [파티 & 레이드 가이드] 👥\n\n" +
+                "📍 파티 만들기:\n" +
+                "• .파티생성 - 일반 파티 생성 (최대 4명)\n" +
+                "• .레이드생성 - 레이드 파티 생성 (최대 10명)\n" +
+                "• .파티초대 <닉네임> - 친구 초대하기\n" +
+                "• .파티수락 <리더닉네임> - 초대 수락\n\n" +
+                "📍 파티 관리:\n" +
+                "• .파티정보 - 파티원 목록 확인\n" +
+                "• .파티역할 <탱/힐/딜> - 역할 설정\n" +
+                "  - 탱: 몬스터 어그로, 방어 보너스\n" +
+                "  - 힐: 회복 보너스\n" +
+                "  - 딜: 공격력 보너스\n" +
+                "• .파티나가기 - 파티 탈퇴\n\n" +
+                "📍 함께 도전:\n" +
+                "• .길드레이드 - 길드 레이드 참여\n\n" +
+                "💡 팁: 탱+힐+딜 조합이면 보너스 효과!"
+            );
+            return;
+        }
+
+        if (helpArg === '던전') {
+            replier.reply(
+                "🏰 [던전 가이드] 🏰\n\n" +
+                "📍 던전 기본:\n" +
+                "• .던전목록 [카테고리] - 입장 가능한 던전 확인\n" +
+                "• .던전소개 <이름> - 던전 상세 정보\n" +
+                "• .던전 <이름> [난이도] - 던전 입장!\n" +
+                "  난이도: 노말 / 영웅 / 신화\n\n" +
+                "📍 특수 던전:\n" +
+                "• .초보던전 - 레벨 1~10 초보자 던전\n" +
+                "• .중급던전 - 레벨 10~20 중급 던전\n" +
+                "• .도전모드 <던전> [조건] - 특수 조건 던전\n" +
+                "  조건: 시간제한 / 노데미지\n" +
+                "• .변이던전 <던전> - 강화된 변이 던전\n\n" +
+                "📍 시즌 던전:\n" +
+                "• .시즌던전 - 시즌 한정 던전\n" +
+                "• .시즌던전랭킹 - 시즌 랭킹 확인\n" +
+                "• .시즌던전보상 - 시즌 보상 수령\n\n" +
+                "💡 팁: 영웅/신화 난이도는 보상이 더 좋아요!"
+            );
+            return;
+        }
+
+        if (helpArg === 'pvp' || helpArg === '전장' || helpArg === '결투') {
+            replier.reply(
+                "🏆 [PVP & 전장 가이드] 🏆\n\n" +
+                "📍 1:1 결투:\n" +
+                "• .결투 <닉네임> - 결투 신청\n" +
+                "• .결투수락 <신청자> - 결투 수락\n\n" +
+                "📍 전장 시스템:\n" +
+                "• .전장참가 - 전장 대기열 참가\n" +
+                "• .전장맵 - 전장 맵 종류 확인\n" +
+                "• .전장이벤트 - 오늘의 전장 이벤트\n\n" +
+                "📍 시즌 & 랭킹:\n" +
+                "• .시즌랭킹 - PVP 레이팅 순위\n" +
+                "• .시즌보상 - 시즌 보상 수령\n" +
+                "  (레이팅 1400 이상 필요)\n\n" +
+                "📍 보상 확인:\n" +
+                "• .보상표 전장 - 전장 보상 목록\n\n" +
+                "💡 팁: 연승하면 레이팅이 빨리 올라가요!"
+            );
+            return;
+        }
+
+        if (helpArg === '생산' || helpArg === '제작' || helpArg === '전문기술') {
+            replier.reply(
+                "🔨 [생산 & 전문기술 가이드] 🔨\n\n" +
+                "📍 전문기술 확인:\n" +
+                "• .전문기술 - 내 기술 레벨 보기\n\n" +
+                "📍 채집 계열:\n" +
+                "• .채광 - 광석 캐기 (레벨↑ 좋은 광석!)\n" +
+                "• .약초 - 약초 채집 (포션 재료)\n\n" +
+                "📍 제작 계열:\n" +
+                "• .연금 목록 - 만들 수 있는 포션 확인\n" +
+                "• .연금 <아이템> - 포션/영약 제작\n" +
+                "• .연금 정보 <아이템> - 재료 확인\n" +
+                "• .대장 <아이템> - 무기/방어구 제작\n" +
+                "• .제작 <아이템> - 일반 아이템 제작\n\n" +
+                "📍 요리:\n" +
+                "• .요리 목록 - 요리 레시피 확인\n" +
+                "• .요리 <요리명> - 요리 만들기 (물고기 필요)\n" +
+                "• .요리 정보 <요리명> - 재료 확인\n\n" +
+                "💡 팁: 레벨이 오를수록 고급 레시피 해금!"
+            );
+            return;
+        }
+
+        if (helpArg === '낚시') {
+            replier.reply(
+                "🎣 [낚시 가이드] 🎣\n\n" +
+                "📍 낚시 기본:\n" +
+                "• .낚시 - 물고기 낚기! (랜덤 물고기)\n" +
+                "• .낚시정보 - 낚시 레벨 & 통계\n" +
+                "• .낚시판매 - 잡은 물고기 일괄 판매\n\n" +
+                "📍 물고기 등급:\n" +
+                "• 일반: 멸치, 붕어, 잉어...\n" +
+                "• 희귀: 광어, 연어, 장어...\n" +
+                "• 전설: 황금 물고기, 해룡...\n\n" +
+                "📍 요리와 연계:\n" +
+                "• 잡은 물고기로 요리를 만들 수 있어요!\n" +
+                "• .요리 <요리명> 으로 맛있는 음식 제작\n" +
+                "• 요리는 강력한 버프 효과가 있어요!\n\n" +
+                "💡 팁: 낚시 레벨이 오르면 희귀 물고기 확률 업!"
+            );
+            return;
+        }
+
+        if (helpArg === '펫') {
+            replier.reply(
+                "🐾 [펫 가이드] 🐾\n\n" +
+                "📍 펫 획득:\n" +
+                "• .펫획득 - 랜덤 펫 획득 시도\n" +
+                "• 사냥/던전 중 펫 알 드롭!\n\n" +
+                "📍 펫 관리:\n" +
+                "• .펫정보 - 내 펫 상태 확인\n" +
+                "• .펫이름 <새이름> - 펫 이름 변경\n" +
+                "• .펫먹이 - 펫에게 먹이 주기 (호감도↑)\n" +
+                "• .펫훈련 - 펫 훈련시키기 (경험치↑)\n" +
+                "• .펫방생 - 펫 보내주기 (슬픔...)\n\n" +
+                "📍 펫 성장:\n" +
+                "• .펫진화 - 조건 충족시 진화!\n" +
+                "• .펫탐험 - 펫이 혼자 탐험 (아이템 획득)\n\n" +
+                "📍 펫 효과:\n" +
+                "• 펫은 전투에서 능력치 버프를 줘요!\n" +
+                "• 희귀한 펫일수록 버프가 강력해요!\n\n" +
+                "💡 팁: 펫 먹이는 .제작 펫 먹이 로 만들어요!"
+            );
+            return;
+        }
+
+        if (helpArg === '길드') {
+            replier.reply(
+                "🏛️ [길드 가이드] 🏛️\n\n" +
+                "📍 길드 가입/생성:\n" +
+                "• .길드생성 <이름> - 새 길드 만들기\n" +
+                "• .길드초대 <닉네임> - 길드원 초대\n" +
+                "• .길드수락 <길드장> - 초대 수락\n\n" +
+                "📍 길드 활동:\n" +
+                "• .길드정보 - 길드 상태 확인\n" +
+                "• .길드기부 - 길드에 골드 기부\n" +
+                "• .길드레이드 - 길드 레이드 참여!\n\n" +
+                "📍 길드 상점:\n" +
+                "• .길드상점 - 길드 전용 아이템\n" +
+                "• .길드구매 <아이템> - 길드 포인트로 구매\n\n" +
+                "💡 팁: 길드 기부로 길드 레벨을 올려요!\n" +
+                "💡 팁: 길드 레벨이 높으면 상점에 좋은 아이템!"
+            );
+            return;
+        }
+
+        if (helpArg === '장비' || helpArg === '아이템') {
+            replier.reply(
+                "🗡️ [장비 & 아이템 가이드] 🗡️\n\n" +
+                "📍 인벤토리:\n" +
+                "• .인벤 - 가방 속 아이템 확인\n" +
+                "• .장비 - 착용 중인 장비 확인\n" +
+                "• .아이템정보 <이름> - 아이템 상세 정보\n\n" +
+                "📍 장비 착용:\n" +
+                "• .장착 <아이템> - 장비 착용\n" +
+                "• .해제 <부위> - 장비 해제\n" +
+                "  부위: 무기/갑옷/방패/투구/장갑/신발 등\n\n" +
+                "📍 장비 강화:\n" +
+                "• .강화 <부위> - 장비 강화 (+1~+15)\n" +
+                "• .보석장착 <보석> - 보석으로 추가 능력치\n" +
+                "• .수리 <부위/전체> - 내구도 수리\n\n" +
+                "📍 세트 효과:\n" +
+                "• .세트효과 - 세트 아이템 보너스 확인\n" +
+                "• .세트요약 - 착용 세트 요약\n\n" +
+                "📍 룬 시스템:\n" +
+                "• .룬목록 - 보유 룬 확인\n" +
+                "• .룬각인 <부위> <룬> - 룬 장착\n" +
+                "• .룬확인 - 각인된 룬 확인"
+            );
+            return;
+        }
+
+        if (helpArg === '상점' || helpArg === '거래') {
+            replier.reply(
+                "🏪 [상점 & 거래 가이드] 🏪\n\n" +
+                "📍 상점 이용:\n" +
+                "• .상점 <상점명> [페이지] - 상점 둘러보기\n" +
+                "• .구매 <아이템> [수량] - 아이템 구매\n" +
+                "• .판매 <아이템> [수량] - 아이템 판매\n\n" +
+                "📍 주요 상점:\n" +
+                "• 시작마을잡화점, 시작마을무기점, 시작마을방어구점\n" +
+                "• 시작마을약국, 에테르니아무기점, 에테르니아방어구점...\n" +
+                "• (지역마다 다양한 상점이 있어요!)\n\n" +
+                "📍 경매장:\n" +
+                "• .경매목록 - 경매 중인 아이템\n" +
+                "• .경매등록 <아이템> <가격> - 아이템 등록\n" +
+                "• .경매구매 <번호> - 아이템 구매\n" +
+                "• .경매취소 <번호> - 등록 취소\n\n" +
+                "📍 특수 상점:\n" +
+                "• .평판상점 <진영> - 평판 상점\n" +
+                "• .길드상점 - 길드 전용 상점\n\n" +
+                "💡 팁: 상점 품목은 매일 바뀌어요!"
+            );
+            return;
+        }
+
+        if (helpArg === '퀘스트') {
+            replier.reply(
+                "📜 [퀘스트 가이드] 📜\n\n" +
+                "📍 퀘스트 기본:\n" +
+                "• .퀘스트목록 - 수락 가능한 퀘스트\n" +
+                "• .퀘스트수락 <ID> - 퀘스트 수락\n" +
+                "• .퀘스트현황 - 진행 중인 퀘스트\n" +
+                "• .퀘스트완료 <ID> - 퀘스트 완료!\n\n" +
+                "📍 일일/주간 퀘스트:\n" +
+                "• .일일퀘스트 - 오늘의 일일 퀘스트\n" +
+                "• .주간퀘스트 - 이번 주 주간 퀘스트\n" +
+                "• .일일완료 - 일일 퀘스트 보상 수령\n" +
+                "• .주간완료 - 주간 퀘스트 보상 수령\n\n" +
+                "📍 NPC 대화:\n" +
+                "• .대화 - 현재 지역 NPC 목록\n" +
+                "• .대화 <NPC이름> - NPC와 대화\n\n" +
+                "💡 팁: 일일/주간 퀘스트는 꼭 하세요!\n" +
+                "💡 팁: 퀘스트 보상으로 경험치와 골드를 많이 얻어요!"
+            );
+            return;
+        }
+
+        if (helpArg === '이동' || helpArg === '지역' || helpArg === '탐험') {
+            replier.reply(
+                "🗺️ [이동 & 탐험 가이드] 🗺️\n\n" +
+                "📍 지역 이동:\n" +
+                "• .지역목록 - 모든 지역 & 추천 레벨\n" +
+                "• .지역이동 <지역명> - 해당 지역으로 이동\n\n" +
+                "📍 주요 지역 (추천 레벨):\n" +
+                "• 묘냥의 숲 (1~15) - 시작 지역\n" +
+                "• 초원 평야 (5~20)\n" +
+                "• 불타는 사막 (15~35)\n" +
+                "• 얼어붙은 북방 (20~40)\n" +
+                "• 천공의 산맥 (35~55)\n" +
+                "• 심연의 균열 (55~70)\n\n" +
+                "📍 탐험:\n" +
+                "• .탐험 - 현재 지역 탐험 (랜덤 이벤트)\n" +
+                "• .도감 - 발견한 몬스터/아이템 도감\n\n" +
+                "💡 팁: 레벨에 맞는 지역에서 사냥하면 효율적!"
+            );
+            return;
+        }
+
+        if (helpArg === '집' || helpArg === '하우징') {
+            replier.reply(
+                "🏠 [하우징 가이드] 🏠\n\n" +
+                "📍 집 구매 & 관리:\n" +
+                "• .집구매 - 첫 집 구매 (3000G)\n" +
+                "• .집정보 - 내 집 상태 확인\n" +
+                "• .집확장 - 집 확장 (새 방 추가)\n\n" +
+                "📍 집 꾸미기:\n" +
+                "• .집꾸미기 <가구> <슬롯> - 가구 배치\n" +
+                "• .집정리 <슬롯> - 가구 치우기\n\n" +
+                "📍 방문:\n" +
+                "• .집방문 <닉네임> - 친구 집 방문\n\n" +
+                "📍 집 효과:\n" +
+                "• 집 레벨에 따라 일일보상 보너스!\n" +
+                "• 가구 배치시 추가 버프 효과\n" +
+                "• 휴식 쿨타임 감소\n\n" +
+                "💡 팁: 집을 꾸미면 여러 보너스 효과가 있어요!"
+            );
+            return;
+        }
+
+        if (helpArg === '기타' || helpArg === '타로' || helpArg === '특성') {
+            replier.reply(
+                "✨ [기타 시스템 가이드] ✨\n\n" +
+                "📍 타로 카드:\n" +
+                "• .타로카드 - 오늘의 운세 뽑기!\n" +
+                "• .타로상태 - 현재 타로 효과 확인\n" +
+                "• .타로집중 <옵션> - 타로 효과 집중\n" +
+                "  옵션: 공격/방어/체력/드랍/경험/골드/치유\n\n" +
+                "📍 특성 시스템:\n" +
+                "• .특성 - 내 특성 포인트 확인\n" +
+                "• .특성찍기 <공격/방어/HP> - 특성 투자\n\n" +
+                "📍 탈것:\n" +
+                "• .탈것획득 - 탈것 획득 시도\n" +
+                "• .탈것목록 - 보유 탈것 목록\n" +
+                "• .탈것타기 <이름> - 탈것 탑승\n\n" +
+                "📍 업적 & 칭호:\n" +
+                "• .업적 - 업적 목록 & 진행도\n" +
+                "• .칭호목록 - 획득한 칭호\n" +
+                "• .칭호설정 <이름> - 칭호 장착\n\n" +
+                "📍 평판:\n" +
+                "• .평판 <진영> - 진영 평판 확인\n" +
+                "• .평판작업 <진영> - 평판 퀘스트"
+            );
+            return;
+        }
+
+        if (helpArg === '월드' || helpArg === '이벤트' || helpArg === '월드보스') {
+            replier.reply(
+                "🌍 [월드 이벤트 가이드] 🌍\n\n" +
+                "📍 월드 이벤트:\n" +
+                "• .월드이벤트 - 진행 중인 이벤트 확인\n" +
+                "• .주간이벤트 - 이번 주 이벤트\n" +
+                "• .침공 - 침공 이벤트 참여\n\n" +
+                "📍 월드 보스:\n" +
+                "• .월드보스 - 현재 월드보스 정보\n" +
+                "• .월드보스공격 - 월드보스 공격!\n" +
+                "• .월드보스보상 - 보스 처치 보상 수령\n\n" +
+                "📍 특징:\n" +
+                "• 월드보스는 모든 서버 유저가 함께 공격!\n" +
+                "• 기여도에 따라 보상이 달라져요\n" +
+                "• 제한 시간 내 처치해야 해요\n\n" +
+                "💡 팁: 월드보스는 엄청난 보상을 줘요!"
+            );
+            return;
+        }
+
+        // 기본 도움말 (카테고리 안내)
         replier.reply(
-            "[묘냥의 숲 - 점RPG]\n" +
-            ".시작 [직업] .캐릭생성 <슬롯> [직업] .캐릭선택 <슬롯> .캐릭목록 .캐릭삭제 <슬롯> 확인\n" +
-            ".정보 .지역목록 .지역이동 <이름> .사냥 .공격(.공경) .도망\n" +
-            ".대화 <NPC>\n" +
-            ".스킬목록 .스킬 <이름> .휴식 .일일보상 .랭킹\n" +
-            ".파티생성 .레이드생성 .파티초대 <유저> .파티수락 <유저> .파티나가기 .파티역할 <탱/힐/딜>\n" +
-            ".던전목록 [카테고리] [페이지] .던전소개 <이름> .던전 <이름> [노말/영웅/신화] .인던 <이름> [난이도]\n" +
-            ".초보던전 .중급던전 .정예사냥 .도전모드 <던전> [시간/노데미지] .변이던전 <던전> [난이도]\n" +
-            ".결투 <유저> .결투수락 <유저> .전장참가 .전장맵 .전장이벤트 .시즌랭킹 .시즌보상\n" +
-            ".시즌던전 .시즌던전랭킹 .시즌던전보상\n" +
-            ".전문기술 .채광 .약초 .연금 <아이템> .대장 <아이템>\n" +
-            ".경매목록 .경매등록 <아이템> <가격> [수량] .경매구매 <번호> .경매취소 <번호>\n" +
-            ".업적 .칭호목록 .칭호설정 <이름>\n" +
-            ".평판 <진영> .평판작업 <진영> .평판상점 <진영> .평판구매 <진영> <아이템>\n" +
-            ".월드이벤트 .침공 .주간이벤트 .월드보스 .월드보스공격 .월드보스보상 .길드레이드\n" +
-            ".길드생성 <이름> .길드초대 <유저> .길드수락 <유저> .길드정보 .길드기부 .길드상점 .길드구매 <아이템>\n" +
-            ".세트효과 .세트요약\n" +
-            ".룬목록 .룬각인 <부위> <룬> .룬확인\n" +
-            ".튜토리얼 .추천루트\n" +
-            ".인던로그 .레이드로그 .로그탭 인던|레이드 보스|난이도 [페이지] .로그상세 인던|레이드 [난이도=] [보스=]\n" +
-            ".보상표 전장|레이드 .보상패널 전장|레이드 [짧게]\n" +
-            ".집구매 .집정보 .집확장 .집꾸미기 <아이템> <슬롯> .집정리 <슬롯> .집방문 <유저>\n" +
-            ".특성 .특성찍기 <공격/방어/HP>\n" +
-            ".탈것획득 .탈것목록 .탈것타기 <이름> .도감\n" +
-            ".지역목록 .지역이동 <이름> .탐험\n" +
-            ".강화 <무기/방어구/방패> .보석장착 <보석>\n" +
-            ".수리 <무기/방어구/방패/전체>\n" +
-            ".일일퀘스트 .주간퀘스트 .일일완료 .주간완료\n" +
-            ".인벤 .장비 .장착 <아이템> .해제 <슬롯>\n" +
-            ".사용 <아이템> .상점 <상점명> [페이지] .구매 <아이템> .판매 <아이템>\n" +
-            ".낚시 .낚시정보 .낚시판매\n" +
-            ".보물상자 <이름>\n" +
-            ".비판매목록 [아이템|펫|탈것] [페이지]\n" +
-            ".퀘스트목록 .퀘스트수락 <ID> .퀘스트현황 .퀘스트완료 <ID>\n" +
-            ".제작 <아이템> .요리 <아이템>\n" +
-            ".펫획득 .펫정보 .펫먹이 .펫훈련 .펫진화 .펫이름 <이름> .펫방생 .펫탐험\n" +
-            ".타로카드 .타로상태 .타로집중 <공격/방어/체력/드랍/경험/골드/치유>\n" +
-            ".보물상자 <이름>"
+            "🌲 [묘냥의 숲 - 모험가 가이드] 🌲\n\n" +
+            "환영해요, 모험가님! 아래 카테고리로\n" +
+            "자세한 도움말을 확인하세요:\n\n" +
+            "📖 .도움말 시작 - 신규 모험가 필독!\n" +
+            "⚔️ .도움말 전투 - 사냥 & 스킬\n" +
+            "👥 .도움말 파티 - 파티 & 레이드\n" +
+            "🏰 .도움말 던전 - 던전 공략\n" +
+            "🏆 .도움말 pvp - 결투 & 전장\n" +
+            "🔨 .도움말 생산 - 채광/약초/연금/제작\n" +
+            "🎣 .도움말 낚시 - 낚시 & 요리\n" +
+            "🐾 .도움말 펫 - 펫 시스템\n" +
+            "🏛️ .도움말 길드 - 길드 시스템\n" +
+            "🗡️ .도움말 장비 - 장비 & 강화\n" +
+            "🏪 .도움말 상점 - 상점 & 경매\n" +
+            "📜 .도움말 퀘스트 - 퀘스트\n" +
+            "🗺️ .도움말 이동 - 지역 & 탐험\n" +
+            "🏠 .도움말 집 - 하우징\n" +
+            "🌍 .도움말 월드 - 월드 이벤트\n" +
+            "✨ .도움말 기타 - 타로/특성/업적\n\n" +
+            "💡 빠른 시작: .시작 → .사냥 → .공격!"
         );
         return;
     }
@@ -10971,67 +11705,185 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
     }
 
     // ========================================
-    // 연금술 시스템 (Alchemy System)
+    // 연금술 시스템 (Alchemy System) - 대폭 확장판
     // ========================================
     // 연금술로 포션과 영약을 제작할 수 있습니다.
     // 연금 레벨이 오르면 더 강력한 물약을 만들 수 있습니다.
-    // 사용법: .연금 <아이템이름> 또는 .연금 목록
+    // 사용법: .연금 <아이템이름> 또는 .연금 목록 또는 .연금 정보 <아이템이름>
     if (cmd === '연금') {
         var alchemyItem = arg;
         var alchemyLevel = player.professions.alchemy || 1;
 
-        // 연금술 레시피 데이터베이스
+        // 연금술 레시피 데이터베이스 - 대폭 확장
         var alchemyRecipes = {
-            // ===== 초급 연금 (레벨 1~10) =====
+            // =========================================================
+            // 초급 연금 (레벨 1~10) - 입문자용 기본 물약
+            // =========================================================
             '포션': { levelReq: 1, materials: [{ name: '약초', count: 1 }], altMaterials: [{ name: '치유초', count: 1 }], result: '포션', description: '기본 체력 회복 포션. HP +100 회복' },
             '마나 포션': { levelReq: 1, materials: [{ name: '마나허브', count: 1 }], altMaterials: [{ name: '약초', count: 1 }], result: '마나 포션', description: '기본 마나 회복 포션. MP +70 회복' },
             '하급체력포션': { levelReq: 2, materials: [{ name: '약초', count: 2 }], result: '하급체력포션', description: '소량의 체력 회복. HP +50 회복' },
             '하급마나포션': { levelReq: 2, materials: [{ name: '마나허브', count: 2 }], result: '하급마나포션', description: '소량의 마나 회복. MP +30 회복' },
+            '하급회복포션': { levelReq: 3, materials: [{ name: '약초', count: 1 }, { name: '마나허브', count: 1 }], result: '하급회복포션', description: 'HP +30, MP +20 회복' },
             '해독포션': { levelReq: 3, materials: [{ name: '약초', count: 1 }, { name: '독버섯', count: 1 }], result: '해독포션', description: '독 상태를 해제합니다.' },
             '해동포션': { levelReq: 3, materials: [{ name: '치유초', count: 1 }, { name: '불의정수', count: 1 }], result: '해동포션', description: '빙결 상태를 해제합니다.' },
+            '해소포션': { levelReq: 4, materials: [{ name: '약초', count: 1 }, { name: '바람의정수', count: 1 }], result: '해소포션', description: '마비 상태를 해제합니다.' },
+            '각성포션': { levelReq: 4, materials: [{ name: '마나허브', count: 2 }, { name: '약초', count: 1 }], result: '각성포션', description: '수면 상태를 해제합니다.' },
+            '하급힘의포션': { levelReq: 5, materials: [{ name: '약초', count: 2 }, { name: '구리 조각', count: 1 }], result: '하급힘의포션', description: '3분간 공격력 +5' },
+            '하급방어포션': { levelReq: 5, materials: [{ name: '약초', count: 2 }, { name: '철조각', count: 1 }], result: '하급방어포션', description: '3분간 방어력 +5' },
+            '하급속도포션': { levelReq: 6, materials: [{ name: '약초', count: 2 }, { name: '바람의정수', count: 1 }], result: '하급속도포션', description: '3분간 속도 +10' },
+            '집중포션': { levelReq: 6, materials: [{ name: '마나허브', count: 2 }, { name: '치유초', count: 1 }], result: '집중포션', description: '3분간 명중률 +10%' },
+            '행운포션': { levelReq: 7, materials: [{ name: '약초', count: 3 }, { name: '금광석', count: 1 }], result: '행운포션', description: '3분간 드롭률 +5%' },
+            '시야포션': { levelReq: 7, materials: [{ name: '약초', count: 2 }, { name: '신비초', count: 1 }], result: '시야포션', description: '어둠 지역에서 시야 확보' },
+            '야행포션': { levelReq: 8, materials: [{ name: '독버섯', count: 2 }, { name: '치유초', count: 1 }], result: '야행포션', description: '밤에 능력치 +10%' },
+            '수중호흡포션': { levelReq: 8, materials: [{ name: '약초', count: 3 }, { name: '물의정수', count: 1 }], result: '수중호흡포션', description: '5분간 수중 호흡 가능' },
+            '내열포션': { levelReq: 9, materials: [{ name: '치유초', count: 2 }, { name: '불의정수', count: 1 }], result: '내열포션', description: '화염 피해 30% 감소' },
+            '내한포션': { levelReq: 9, materials: [{ name: '치유초', count: 2 }, { name: '얼음의정수', count: 1 }], result: '내한포션', description: '냉기 피해 30% 감소' },
+            '독면역포션': { levelReq: 10, materials: [{ name: '독버섯', count: 3 }, { name: '약초', count: 2 }], result: '독면역포션', description: '5분간 독 면역' },
 
-            // ===== 중급 연금 (레벨 10~25) =====
+            // =========================================================
+            // 중급 연금 (레벨 10~25) - 전투용 기본 물약
+            // =========================================================
             '중급체력포션': { levelReq: 10, materials: [{ name: '약초', count: 3 }, { name: '치유초', count: 1 }], result: '중급체력포션', description: '체력을 250 회복합니다.' },
             '중급마나포션': { levelReq: 10, materials: [{ name: '마나허브', count: 3 }, { name: '약초', count: 1 }], result: '중급마나포션', description: '마나를 150 회복합니다.' },
             '회복포션': { levelReq: 12, materials: [{ name: '약초', count: 2 }, { name: '마나허브', count: 2 }], result: '회복포션', description: 'HP 100, MP 50 동시 회복' },
+            '재생포션': { levelReq: 12, materials: [{ name: '치유초', count: 3 }, { name: '생명의정수', count: 1 }], result: '재생포션', description: '5분간 초당 HP +5 회복' },
+            '마력재생포션': { levelReq: 13, materials: [{ name: '마나허브', count: 3 }, { name: '마력의정수', count: 1 }], result: '마력재생포션', description: '5분간 초당 MP +3 회복' },
             '힘의포션': { levelReq: 15, materials: [{ name: '트롤의 피', count: 1 }, { name: '약초', count: 2 }], result: '힘의포션', description: '5분간 공격력 +20' },
             '방어의포션': { levelReq: 15, materials: [{ name: '골렘의 핵', count: 1 }, { name: '약초', count: 2 }], result: '방어의포션', description: '5분간 방어력 +20' },
+            '민첩의포션': { levelReq: 16, materials: [{ name: '늑대의발톱', count: 1 }, { name: '약초', count: 2 }], result: '민첩의포션', description: '5분간 회피율 +15%' },
+            '지능의포션': { levelReq: 16, materials: [{ name: '현자의뿌리', count: 1 }, { name: '마나허브', count: 2 }], result: '지능의포션', description: '5분간 마법 공격력 +20' },
+            '정신의포션': { levelReq: 17, materials: [{ name: '영원의꽃', count: 1 }, { name: '마나허브', count: 2 }], result: '정신의포션', description: '5분간 마법 방어력 +20' },
             '속도의포션': { levelReq: 18, materials: [{ name: '바람의정수', count: 1 }, { name: '약초', count: 2 }], result: '속도의포션', description: '5분간 속도 +30' },
+            '치명타포션': { levelReq: 18, materials: [{ name: '독버섯', count: 2 }, { name: '늑대의발톱', count: 1 }], result: '치명타포션', description: '5분간 치명타 확률 +10%' },
+            '흡혈포션': { levelReq: 19, materials: [{ name: '박쥐날개', count: 2 }, { name: '트롤의 피', count: 1 }], result: '흡혈포션', description: '5분간 공격시 HP 5% 회복' },
+            '흡마포션': { levelReq: 19, materials: [{ name: '마력의정수', count: 2 }, { name: '마나허브', count: 2 }], result: '흡마포션', description: '5분간 공격시 MP 3% 회복' },
             '만병통치약': { levelReq: 20, materials: [{ name: '약초', count: 3 }, { name: '독버섯', count: 2 }, { name: '불의정수', count: 1 }], result: '만병통치약', description: '모든 상태이상 해제' },
+            '강화체력포션': { levelReq: 20, materials: [{ name: '약초', count: 4 }, { name: '트롤의 피', count: 1 }], result: '강화체력포션', description: '체력을 300 회복하고 최대HP +50' },
+            '강화마나포션': { levelReq: 20, materials: [{ name: '마나허브', count: 4 }, { name: '마력의정수', count: 1 }], result: '강화마나포션', description: '마나를 200 회복하고 최대MP +30' },
+            '중급힘의영약': { levelReq: 22, materials: [{ name: '트롤의 피', count: 2 }, { name: '약초', count: 3 }], result: '중급힘의영약', description: '5분간 공격력 +30' },
+            '중급방어영약': { levelReq: 22, materials: [{ name: '골렘의 핵', count: 2 }, { name: '약초', count: 3 }], result: '중급방어영약', description: '5분간 방어력 +30' },
+            '투명포션': { levelReq: 23, materials: [{ name: '그림자의정수', count: 2 }, { name: '신비초', count: 2 }], result: '투명포션', description: '3분간 투명 상태' },
+            '변신포션': { levelReq: 24, materials: [{ name: '변이의가루', count: 3 }, { name: '마나허브', count: 3 }], result: '변신포션', description: '10분간 외형 변경' },
+            '광폭화포션': { levelReq: 25, materials: [{ name: '트롤의 피', count: 3 }, { name: '분노의정수', count: 1 }], result: '광폭화포션', description: '3분간 공격력 +50, 방어력 -20' },
 
-            // ===== 고급 연금 (레벨 25~40) =====
+            // =========================================================
+            // 고급 연금 (레벨 25~40) - 상급 전투용 물약
+            // =========================================================
             '상급체력포션': { levelReq: 25, materials: [{ name: '약초', count: 5 }, { name: '치유초', count: 3 }], result: '상급체력포션', description: '체력을 500 회복합니다.' },
-            '상급마나포션': { levelReq: 25, materials: [{ name: '마나허브', count: 5 }, { name: '마나허브', count: 3 }], result: '상급마나포션', description: '마나를 300 회복합니다.' },
+            '상급마나포션': { levelReq: 25, materials: [{ name: '마나허브', count: 5 }, { name: '신비초', count: 3 }], result: '상급마나포션', description: '마나를 300 회복합니다.' },
+            '상급회복포션': { levelReq: 26, materials: [{ name: '약초', count: 4 }, { name: '마나허브', count: 4 }, { name: '치유초', count: 2 }], result: '상급회복포션', description: 'HP 300, MP 200 동시 회복' },
             '엘릭서': { levelReq: 30, materials: [{ name: '약초', count: 3 }, { name: '치유초', count: 3 }, { name: '마나허브', count: 2 }], result: '엘릭서', description: '체력과 마나를 완전 회복합니다.' },
+            '소형엘릭서': { levelReq: 28, materials: [{ name: '약초', count: 3 }, { name: '치유초', count: 2 }, { name: '마나허브', count: 2 }], result: '소형엘릭서', description: 'HP/MP 500씩 회복' },
+            '대형엘릭서': { levelReq: 35, materials: [{ name: '약초', count: 5 }, { name: '치유초', count: 5 }, { name: '마나허브', count: 5 }], result: '대형엘릭서', description: 'HP/MP 완전 회복, 상태이상 해제' },
             '거인의포션': { levelReq: 35, materials: [{ name: '트롤의 피', count: 3 }, { name: '오우거의 가죽', count: 1 }], result: '거인의포션', description: '3분간 공격력 +50' },
             '철벽의포션': { levelReq: 35, materials: [{ name: '골렘의 핵', count: 3 }, { name: '용의 비늘', count: 1 }], result: '철벽의포션', description: '3분간 방어력 +50' },
+            '질풍의포션': { levelReq: 36, materials: [{ name: '바람의정수', count: 3 }, { name: '매의깃털', count: 2 }], result: '질풍의포션', description: '3분간 속도 +60' },
+            '천둥의포션': { levelReq: 37, materials: [{ name: '번개의정수', count: 3 }, { name: '전기뱀장어', count: 1 }], result: '천둥의포션', description: '3분간 번개 데미지 추가' },
+            '화염의포션': { levelReq: 37, materials: [{ name: '불의정수', count: 3 }, { name: '화염의심장', count: 1 }], result: '화염의포션', description: '3분간 화염 데미지 추가' },
+            '빙결의포션': { levelReq: 37, materials: [{ name: '얼음의정수', count: 3 }, { name: '빙결의심장', count: 1 }], result: '빙결의포션', description: '3분간 빙결 데미지 추가' },
             '경험치포션': { levelReq: 30, materials: [{ name: '혼돈의 정수', count: 1 }, { name: '약초', count: 5 }], result: '경험치포션', description: '10분간 경험치 +50%' },
             '황금의포션': { levelReq: 30, materials: [{ name: '금광석', count: 3 }, { name: '약초', count: 5 }], result: '황금의포션', description: '10분간 골드 획득 +50%' },
+            '대형경험치포션': { levelReq: 38, materials: [{ name: '혼돈의 정수', count: 2 }, { name: '약초', count: 8 }, { name: '신비초', count: 2 }], result: '대형경험치포션', description: '30분간 경험치 +100%' },
+            '대형황금포션': { levelReq: 38, materials: [{ name: '금광석', count: 5 }, { name: '약초', count: 8 }, { name: '신비초', count: 2 }], result: '대형황금포션', description: '30분간 골드 획득 +100%' },
+            '드롭률포션': { levelReq: 32, materials: [{ name: '행운의꽃', count: 2 }, { name: '금광석', count: 2 }], result: '드롭률포션', description: '10분간 드롭률 +30%' },
+            '대형드롭률포션': { levelReq: 40, materials: [{ name: '행운의꽃', count: 5 }, { name: '금광석', count: 5 }], result: '대형드롭률포션', description: '30분간 드롭률 +50%' },
+            '보스헌터포션': { levelReq: 38, materials: [{ name: '용의 비늘', count: 2 }, { name: '트롤의 피', count: 3 }], result: '보스헌터포션', description: '보스에게 데미지 +30%' },
+            '던전탐험포션': { levelReq: 35, materials: [{ name: '탐험가의허브', count: 3 }, { name: '약초', count: 5 }], result: '던전탐험포션', description: '던전에서 능력치 +15%' },
 
-            // ===== 특급 연금 (레벨 40~60) =====
+            // =========================================================
+            // 특급 연금 (레벨 40~60) - 영약 및 특수 포션
+            // =========================================================
             '최상급체력포션': { levelReq: 40, materials: [{ name: '약초', count: 10 }, { name: '치유초', count: 5 }, { name: '드래곤의 심장', count: 1 }], result: '최상급체력포션', description: '체력을 1000 회복합니다.' },
             '최상급마나포션': { levelReq: 40, materials: [{ name: '마나허브', count: 10 }, { name: '마력의 돌', count: 3 }], result: '최상급마나포션', description: '마나를 600 회복합니다.' },
+            '최상급회복포션': { levelReq: 42, materials: [{ name: '약초', count: 8 }, { name: '마나허브', count: 8 }, { name: '생명의 물', count: 1 }], result: '최상급회복포션', description: 'HP 800, MP 500 동시 회복' },
             '전사의영약': { levelReq: 45, materials: [{ name: '트롤의 피', count: 5 }, { name: '오우거의 가죽', count: 2 }, { name: '불의 정수', count: 2 }], result: '전사의영약', description: '5분간 공격력/방어력 +30' },
+            '마법사의영약': { levelReq: 45, materials: [{ name: '마력의 돌', count: 3 }, { name: '마나허브', count: 8 }, { name: '신비초', count: 5 }], result: '마법사의영약', description: '5분간 마력/마방 +40' },
+            '암살자의영약': { levelReq: 46, materials: [{ name: '독버섯', count: 5 }, { name: '그림자의정수', count: 2 }, { name: '늑대의발톱', count: 3 }], result: '암살자의영약', description: '5분간 치명타 +25%, 회피 +20%' },
+            '탱커의영약': { levelReq: 46, materials: [{ name: '골렘의 핵', count: 3 }, { name: '용의 비늘', count: 3 }, { name: '트롤의 피', count: 3 }], result: '탱커의영약', description: '5분간 방어력 +60, HP +500' },
+            '힐러의영약': { levelReq: 47, materials: [{ name: '치유초', count: 10 }, { name: '생명의 물', count: 2 }, { name: '축복의 정수', count: 1 }], result: '힐러의영약', description: '5분간 회복량 +50%' },
+            '궁수의영약': { levelReq: 47, materials: [{ name: '매의깃털', count: 5 }, { name: '바람의정수', count: 3 }, { name: '약초', count: 5 }], result: '궁수의영약', description: '5분간 명중률 +30%, 속도 +40' },
             '힘의 영약': { levelReq: 50, materials: [{ name: '트롤의 피', count: 3 }, { name: '오우거의 가죽', count: 2 }, { name: '불의 정수', count: 2 }], result: '힘의 영약', description: '영구적으로 힘 +1 증가' },
             '수호의 영약': { levelReq: 50, materials: [{ name: '골렘의 핵', count: 2 }, { name: '용의 비늘', count: 3 }, { name: '지옥의 가죽', count: 2 }], result: '수호의 영약', description: '영구적으로 방어 +1 증가' },
+            '민첩의 영약': { levelReq: 50, materials: [{ name: '바람의정수', count: 3 }, { name: '매의깃털', count: 5 }, { name: '늑대의발톱', count: 3 }], result: '민첩의 영약', description: '영구적으로 민첩 +1 증가' },
+            '지능의 영약': { levelReq: 50, materials: [{ name: '현자의뿌리', count: 3 }, { name: '마력의 돌', count: 3 }, { name: '신비초', count: 5 }], result: '지능의 영약', description: '영구적으로 지능 +1 증가' },
+            '체력의 영약': { levelReq: 52, materials: [{ name: '생명의 물', count: 2 }, { name: '용의 비늘', count: 2 }, { name: '치유초', count: 8 }], result: '체력의 영약', description: '영구적으로 최대HP +10 증가' },
+            '마력의 영약': { levelReq: 52, materials: [{ name: '마력의 돌', count: 3 }, { name: '신성한 빛', count: 1 }, { name: '마나허브', count: 8 }], result: '마력의 영약', description: '영구적으로 최대MP +10 증가' },
             '영웅의영약': { levelReq: 55, materials: [{ name: '트롤의 피', count: 5 }, { name: '드래곤의 심장', count: 1 }, { name: '불의 정수', count: 3 }], result: '영웅의영약', description: '5분간 공격력/방어력 +60' },
+            '전설의영약': { levelReq: 58, materials: [{ name: '드래곤의 심장', count: 2 }, { name: '불사조의깃털', count: 1 }, { name: '혼돈의 정수', count: 2 }], result: '전설의영약', description: '5분간 모든 능력치 +50' },
+            '축복의영약': { levelReq: 55, materials: [{ name: '축복의 정수', count: 3 }, { name: '신성한 빛', count: 1 }, { name: '생명의 물', count: 2 }], result: '축복의영약', description: '10분간 경험치/골드/드롭 +30%' },
 
-            // ===== 전설 연금 (레벨 60+) =====
+            // =========================================================
+            // 전설 연금 (레벨 60+) - 최고급 영약
+            // =========================================================
             '불사의영약': { levelReq: 60, materials: [{ name: '드래곤의 심장', count: 2 }, { name: '불사조의깃털', count: 1 }, { name: '생명의 물', count: 3 }], result: '불사의영약', description: '체력 완전 회복' },
             '영혼의물': { levelReq: 60, materials: [{ name: '혼돈의 정수', count: 2 }, { name: '마력의 돌', count: 5 }, { name: '신성한 빛', count: 1 }], result: '영혼의물', description: '마나 완전 회복' },
+            '신성한물약': { levelReq: 62, materials: [{ name: '신성한 빛', count: 2 }, { name: '축복의 정수', count: 3 }, { name: '생명의 물', count: 3 }], result: '신성한물약', description: 'HP/MP 완전 회복, 모든 상태이상 해제' },
+            '용의숨결': { levelReq: 63, materials: [{ name: '드래곤의 심장', count: 2 }, { name: '불의정수', count: 5 }], result: '용의숨결', description: '10분간 화염 면역, 화염 데미지 +50%' },
+            '빙룡의숨결': { levelReq: 63, materials: [{ name: '빙룡의 심장', count: 2 }, { name: '얼음의정수', count: 5 }], result: '빙룡의숨결', description: '10분간 냉기 면역, 냉기 데미지 +50%' },
+            '뇌룡의숨결': { levelReq: 63, materials: [{ name: '뇌룡의 심장', count: 2 }, { name: '번개의정수', count: 5 }], result: '뇌룡의숨결', description: '10분간 전기 면역, 전기 데미지 +50%' },
+            '부활의영약': { levelReq: 65, materials: [{ name: '불사조의깃털', count: 2 }, { name: '생명의 물', count: 5 }, { name: '축복의 정수', count: 3 }], result: '부활의영약', description: '사망시 자동 부활 (체력 100%)' },
+            '완전부활영약': { levelReq: 68, materials: [{ name: '불사조의깃털', count: 3 }, { name: '생명의 물', count: 8 }, { name: '신성한 빛', count: 2 }], result: '완전부활영약', description: '사망시 자동 부활 (HP/MP 100%)' },
             '성장의 영약': { levelReq: 70, materials: [{ name: '혼돈의 정수', count: 2 }, { name: '드래곤의 심장', count: 2 }, { name: '신성한 빛', count: 2 }], result: '성장의 영약', description: '즉시 레벨업' },
-            '부활의영약': { levelReq: 65, materials: [{ name: '불사조의깃털', count: 2 }, { name: '생명의 물', count: 5 }, { name: '축복의 정수', count: 3 }], result: '부활의영약', description: '사망시 자동 부활 (체력 100%)' }
+            '초월의 영약': { levelReq: 72, materials: [{ name: '신성한 빛', count: 3 }, { name: '혼돈의 정수', count: 3 }, { name: '드래곤의 심장', count: 2 }], result: '초월의 영약', description: '영구적으로 모든 능력치 +2' },
+            '신의축복': { levelReq: 75, materials: [{ name: '신성한 빛', count: 5 }, { name: '축복의 정수', count: 5 }, { name: '불사조의깃털', count: 2 }], result: '신의축복', description: '30분간 모든 능력치 +100' },
+            '용왕의영약': { levelReq: 78, materials: [{ name: '드래곤의 심장', count: 3 }, { name: '용왕의 비늘', count: 1 }, { name: '혼돈의 정수', count: 3 }], result: '용왕의영약', description: '10분간 용에게 +200% 데미지' },
+            '불멸의영약': { levelReq: 80, materials: [{ name: '불사조의깃털', count: 5 }, { name: '신성한 빛', count: 5 }, { name: '혼돈의 정수', count: 5 }], result: '불멸의영약', description: '5분간 무적 상태' }
         };
 
         // 연금 목록 보기
         if (!alchemyItem || alchemyItem === '목록') {
             var availableRecipes = [];
+            var categories = { '초급': [], '중급': [], '고급': [], '특급': [], '전설': [] };
             for (var recipeName in alchemyRecipes) {
                 var recipe = alchemyRecipes[recipeName];
                 var status = alchemyLevel >= recipe.levelReq ? '✓' : '✗';
-                availableRecipes.push(status + ' ' + recipeName + ' (Lv.' + recipe.levelReq + ')');
+                var entry = status + ' ' + recipeName + ' (Lv.' + recipe.levelReq + ')';
+                if (recipe.levelReq <= 10) categories['초급'].push(entry);
+                else if (recipe.levelReq <= 25) categories['중급'].push(entry);
+                else if (recipe.levelReq <= 40) categories['고급'].push(entry);
+                else if (recipe.levelReq <= 60) categories['특급'].push(entry);
+                else categories['전설'].push(entry);
             }
-            replier.reply('[연금술 레시피 목록]\n현재 연금 레벨: ' + alchemyLevel + '\n\n' + availableRecipes.slice(0, 15).join('\n') + '\n\n사용법: .연금 <아이템이름>\n상세정보: .연금 정보 <아이템이름>' + buildNextActionHint('alchemy'));
+            var output = '[연금술 레시피 목록]\n현재 연금 레벨: ' + alchemyLevel + '\n\n';
+            output += '📗 초급 (' + categories['초급'].length + '개)\n';
+            output += '📘 중급 (' + categories['중급'].length + '개)\n';
+            output += '📙 고급 (' + categories['고급'].length + '개)\n';
+            output += '📕 특급 (' + categories['특급'].length + '개)\n';
+            output += '📓 전설 (' + categories['전설'].length + '개)\n\n';
+            output += '사용: .연금 <아이템이름>\n정보: .연금 정보 <아이템이름>\n목록: .연금 목록 초급/중급/고급/특급/전설';
+            replier.reply(output + buildNextActionHint('alchemy'));
+            return;
+        }
+
+        // 카테고리별 목록
+        if (alchemyItem === '목록 초급' || alchemyItem === '초급') {
+            var list = [];
+            for (var r in alchemyRecipes) { if (alchemyRecipes[r].levelReq <= 10) list.push((alchemyLevel >= alchemyRecipes[r].levelReq ? '✓' : '✗') + ' ' + r + ' (Lv.' + alchemyRecipes[r].levelReq + ')'); }
+            replier.reply('[초급 연금 목록]\n' + list.join('\n') + buildNextActionHint('alchemy'));
+            return;
+        }
+        if (alchemyItem === '목록 중급' || alchemyItem === '중급') {
+            var list2 = [];
+            for (var r2 in alchemyRecipes) { if (alchemyRecipes[r2].levelReq > 10 && alchemyRecipes[r2].levelReq <= 25) list2.push((alchemyLevel >= alchemyRecipes[r2].levelReq ? '✓' : '✗') + ' ' + r2 + ' (Lv.' + alchemyRecipes[r2].levelReq + ')'); }
+            replier.reply('[중급 연금 목록]\n' + list2.join('\n') + buildNextActionHint('alchemy'));
+            return;
+        }
+        if (alchemyItem === '목록 고급' || alchemyItem === '고급') {
+            var list3 = [];
+            for (var r3 in alchemyRecipes) { if (alchemyRecipes[r3].levelReq > 25 && alchemyRecipes[r3].levelReq <= 40) list3.push((alchemyLevel >= alchemyRecipes[r3].levelReq ? '✓' : '✗') + ' ' + r3 + ' (Lv.' + alchemyRecipes[r3].levelReq + ')'); }
+            replier.reply('[고급 연금 목록]\n' + list3.join('\n') + buildNextActionHint('alchemy'));
+            return;
+        }
+        if (alchemyItem === '목록 특급' || alchemyItem === '특급') {
+            var list4 = [];
+            for (var r4 in alchemyRecipes) { if (alchemyRecipes[r4].levelReq > 40 && alchemyRecipes[r4].levelReq <= 60) list4.push((alchemyLevel >= alchemyRecipes[r4].levelReq ? '✓' : '✗') + ' ' + r4 + ' (Lv.' + alchemyRecipes[r4].levelReq + ')'); }
+            replier.reply('[특급 연금 목록]\n' + list4.join('\n') + buildNextActionHint('alchemy'));
+            return;
+        }
+        if (alchemyItem === '목록 전설' || alchemyItem === '전설') {
+            var list5 = [];
+            for (var r5 in alchemyRecipes) { if (alchemyRecipes[r5].levelReq > 60) list5.push((alchemyLevel >= alchemyRecipes[r5].levelReq ? '✓' : '✗') + ' ' + r5 + ' (Lv.' + alchemyRecipes[r5].levelReq + ')'); }
+            replier.reply('[전설 연금 목록]\n' + list5.join('\n') + buildNextActionHint('alchemy'));
             return;
         }
 
@@ -11107,19 +11959,165 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         return;
     }
 
-    // 대장
+    // ========================================
+    // 대장장이 시스템 (Blacksmith System) - 대폭 확장
+    // ========================================
+    // 대장장이로 무기와 방어구를 제작할 수 있습니다.
+    // 대장 레벨이 오르면 더 강력한 장비를 만들 수 있습니다.
+    // 사용법: .대장 <아이템이름> 또는 .대장 목록
     if (cmd === '대장') {
         var smithItem = arg;
-        if (!smithItem) { replier.reply('사용: .대장 <아이템>'); return; }
-        if (smithItem !== '철검' && smithItem !== '강철검') { replier.reply('대장 제작: 철검/강철검'); return; }
-        var needOre = (smithItem === '강철검') ? '철조각' : '구리 조각';
-        var needCnt = (smithItem === '강철검') ? 3 : 2;
-        if (findItemCount(player, needOre) < needCnt) { replier.reply('재료 부족'); return; }
-        removeItem(player, needOre, needCnt);
-        addItem(player, smithItem, 1);
+        var smithLevel = player.professions.blacksmith || 1;
+
+        // 대장장이 레시피 데이터베이스
+        var smithRecipes = {
+            // ===== 초급 대장 (레벨 1~10) =====
+            '구리단검': { levelReq: 1, materials: [{ name: '구리 조각', count: 2 }], result: '구리단검', type: 'weapon', description: '초보자용 단검. 공격력 +5' },
+            '구리검': { levelReq: 2, materials: [{ name: '구리 조각', count: 3 }], result: '구리검', type: 'weapon', description: '구리로 만든 검. 공격력 +8' },
+            '구리방패': { levelReq: 2, materials: [{ name: '구리 조각', count: 3 }], result: '구리방패', type: 'shield', description: '구리로 만든 방패. 방어력 +5' },
+            '철단검': { levelReq: 3, materials: [{ name: '철조각', count: 2 }], result: '철단검', type: 'weapon', description: '철로 만든 단검. 공격력 +10' },
+            '철검': { levelReq: 4, materials: [{ name: '철조각', count: 3 }], result: '철검', type: 'weapon', description: '철로 만든 검. 공격력 +15' },
+            '철방패': { levelReq: 4, materials: [{ name: '철조각', count: 3 }], result: '철방패', type: 'shield', description: '철로 만든 방패. 방어력 +10' },
+            '철투구': { levelReq: 5, materials: [{ name: '철조각', count: 2 }], result: '철투구', type: 'helm', description: '철로 만든 투구. 방어력 +5' },
+            '철갑옷': { levelReq: 6, materials: [{ name: '철조각', count: 5 }], result: '철갑옷', type: 'armor', description: '철로 만든 갑옷. 방어력 +15' },
+            '철장갑': { levelReq: 5, materials: [{ name: '철조각', count: 2 }], result: '철장갑', type: 'gloves', description: '철로 만든 장갑. 공격력 +3' },
+            '철부츠': { levelReq: 5, materials: [{ name: '철조각', count: 2 }], result: '철부츠', type: 'boots', description: '철로 만든 부츠. 속도 +5' },
+            '철창': { levelReq: 7, materials: [{ name: '철조각', count: 4 }], result: '철창', type: 'weapon', description: '철로 만든 창. 공격력 +18' },
+            '철도끼': { levelReq: 7, materials: [{ name: '철조각', count: 4 }], result: '철도끼', type: 'weapon', description: '철로 만든 도끼. 공격력 +20' },
+            '철망치': { levelReq: 8, materials: [{ name: '철조각', count: 5 }], result: '철망치', type: 'weapon', description: '묵직한 철망치. 공격력 +22' },
+            '철활': { levelReq: 8, materials: [{ name: '철조각', count: 3 }, { name: '가죽', count: 2 }], result: '철활', type: 'weapon', description: '강화된 활. 공격력 +16' },
+
+            // ===== 중급 대장 (레벨 10~25) =====
+            '강철검': { levelReq: 10, materials: [{ name: '철조각', count: 5 }, { name: '석탄', count: 2 }], result: '강철검', type: 'weapon', description: '강철로 만든 검. 공격력 +25' },
+            '강철대검': { levelReq: 12, materials: [{ name: '철조각', count: 8 }, { name: '석탄', count: 3 }], result: '강철대검', type: 'weapon', description: '거대한 강철대검. 공격력 +35' },
+            '강철갑옷': { levelReq: 12, materials: [{ name: '철조각', count: 8 }, { name: '석탄', count: 2 }], result: '강철갑옷', type: 'armor', description: '강철 갑옷. 방어력 +25' },
+            '강철방패': { levelReq: 11, materials: [{ name: '철조각', count: 5 }, { name: '석탄', count: 2 }], result: '강철방패', type: 'shield', description: '강철 방패. 방어력 +18' },
+            '강철투구': { levelReq: 13, materials: [{ name: '철조각', count: 4 }, { name: '석탄', count: 1 }], result: '강철투구', type: 'helm', description: '강철 투구. 방어력 +12' },
+            '강철장갑': { levelReq: 13, materials: [{ name: '철조각', count: 3 }, { name: '석탄', count: 1 }], result: '강철장갑', type: 'gloves', description: '강철 장갑. 공격력 +8' },
+            '강철부츠': { levelReq: 14, materials: [{ name: '철조각', count: 3 }, { name: '석탄', count: 1 }], result: '강철부츠', type: 'boots', description: '강철 부츠. 속도 +10' },
+            '은검': { levelReq: 15, materials: [{ name: '은광석', count: 5 }], result: '은검', type: 'weapon', description: '언데드 특효. 공격력 +28' },
+            '은방패': { levelReq: 15, materials: [{ name: '은광석', count: 5 }], result: '은방패', type: 'shield', description: '은빛 방패. 방어력 +20' },
+            '미스릴단검': { levelReq: 18, materials: [{ name: '미스릴광석', count: 3 }], result: '미스릴단검', type: 'weapon', description: '가벼운 미스릴 단검. 공격력 +32' },
+            '미스릴검': { levelReq: 20, materials: [{ name: '미스릴광석', count: 5 }], result: '미스릴검', type: 'weapon', description: '미스릴 검. 공격력 +40' },
+            '미스릴갑옷': { levelReq: 22, materials: [{ name: '미스릴광석', count: 8 }], result: '미스릴갑옷', type: 'armor', description: '가볍고 튼튼한 갑옷. 방어력 +35' },
+            '미스릴방패': { levelReq: 20, materials: [{ name: '미스릴광석', count: 5 }], result: '미스릴방패', type: 'shield', description: '미스릴 방패. 방어력 +28' },
+            '전투도끼': { levelReq: 18, materials: [{ name: '철조각', count: 8 }, { name: '미스릴광석', count: 2 }], result: '전투도끼', type: 'weapon', description: '강력한 전투도끼. 공격력 +38' },
+            '전투망치': { levelReq: 19, materials: [{ name: '철조각', count: 10 }, { name: '미스릴광석', count: 2 }], result: '전투망치', type: 'weapon', description: '파괴적인 망치. 공격력 +42' },
+
+            // ===== 고급 대장 (레벨 25~40) =====
+            '기사의검': { levelReq: 25, materials: [{ name: '미스릴광석', count: 8 }, { name: '금광석', count: 2 }], result: '기사의검', type: 'weapon', description: '기사단 정식 검. 공격력 +50' },
+            '기사의갑옷': { levelReq: 28, materials: [{ name: '미스릴광석', count: 10 }, { name: '금광석', count: 3 }], result: '기사의갑옷', type: 'armor', description: '기사단 갑옷. 방어력 +45' },
+            '기사의방패': { levelReq: 26, materials: [{ name: '미스릴광석', count: 6 }, { name: '금광석', count: 2 }], result: '기사의방패', type: 'shield', description: '기사단 방패. 방어력 +35' },
+            '화염의검': { levelReq: 30, materials: [{ name: '미스릴광석', count: 5 }, { name: '불의정수', count: 3 }], result: '화염의검', type: 'weapon', description: '불타는 검. 공격력 +55, 화염 +20' },
+            '빙결의검': { levelReq: 30, materials: [{ name: '미스릴광석', count: 5 }, { name: '얼음의정수', count: 3 }], result: '빙결의검', type: 'weapon', description: '얼어붙은 검. 공격력 +55, 빙결 +20' },
+            '번개의검': { levelReq: 30, materials: [{ name: '미스릴광석', count: 5 }, { name: '번개의정수', count: 3 }], result: '번개의검', type: 'weapon', description: '번개치는 검. 공격력 +55, 전기 +20' },
+            '어둠의검': { levelReq: 32, materials: [{ name: '미스릴광석', count: 8 }, { name: '그림자의정수', count: 3 }], result: '어둠의검', type: 'weapon', description: '어둠의 힘. 공격력 +60' },
+            '성스러운검': { levelReq: 32, materials: [{ name: '미스릴광석', count: 8 }, { name: '신성한 빛', count: 2 }], result: '성스러운검', type: 'weapon', description: '신성한 힘. 공격력 +58, 성스러움 +25' },
+            '아다만타이트검': { levelReq: 35, materials: [{ name: '아다만타이트', count: 5 }], result: '아다만타이트검', type: 'weapon', description: '최강의 검. 공격력 +70' },
+            '아다만타이트갑옷': { levelReq: 38, materials: [{ name: '아다만타이트', count: 8 }], result: '아다만타이트갑옷', type: 'armor', description: '최강의 갑옷. 방어력 +60' },
+            '아다만타이트방패': { levelReq: 36, materials: [{ name: '아다만타이트', count: 5 }], result: '아다만타이트방패', type: 'shield', description: '최강의 방패. 방어력 +50' },
+            '용살검': { levelReq: 38, materials: [{ name: '아다만타이트', count: 5 }, { name: '용의 비늘', count: 3 }], result: '용살검', type: 'weapon', description: '용 특효. 공격력 +75' },
+            '거인의도끼': { levelReq: 35, materials: [{ name: '아다만타이트', count: 8 }, { name: '오우거의 가죽', count: 2 }], result: '거인의도끼', type: 'weapon', description: '거대한 도끼. 공격력 +80' },
+
+            // ===== 특급 대장 (레벨 40~60) =====
+            '드래곤슬레이어': { levelReq: 45, materials: [{ name: '아다만타이트', count: 10 }, { name: '드래곤의 심장', count: 1 }], result: '드래곤슬레이어', type: 'weapon', description: '용을 베는 검. 공격력 +100' },
+            '드래곤스케일갑옷': { levelReq: 48, materials: [{ name: '용의 비늘', count: 10 }, { name: '아다만타이트', count: 5 }], result: '드래곤스케일갑옷', type: 'armor', description: '용 비늘 갑옷. 방어력 +80' },
+            '드래곤스케일방패': { levelReq: 46, materials: [{ name: '용의 비늘', count: 8 }, { name: '아다만타이트', count: 3 }], result: '드래곤스케일방패', type: 'shield', description: '용 비늘 방패. 방어력 +65' },
+            '룬블레이드': { levelReq: 50, materials: [{ name: '룬석', count: 5 }, { name: '아다만타이트', count: 5 }], result: '룬블레이드', type: 'weapon', description: '룬이 새겨진 검. 공격력 +90, 마력 +30' },
+            '어비스소드': { levelReq: 52, materials: [{ name: '심연의 파편', count: 3 }, { name: '아다만타이트', count: 8 }], result: '어비스소드', type: 'weapon', description: '심연의 힘. 공격력 +110' },
+            '어비스플레이트': { levelReq: 55, materials: [{ name: '심연의 파편', count: 5 }, { name: '드래곤의 심장', count: 1 }], result: '어비스플레이트', type: 'armor', description: '심연의 갑옷. 방어력 +95' },
+            '황혼의검': { levelReq: 50, materials: [{ name: '황혼의정수', count: 3 }, { name: '아다만타이트', count: 8 }], result: '황혼의검', type: 'weapon', description: '황혼의 힘. 공격력 +95' },
+            '황혼의갑옷': { levelReq: 53, materials: [{ name: '황혼의정수', count: 5 }, { name: '아다만타이트', count: 8 }], result: '황혼의갑옷', type: 'armor', description: '황혼의 갑옷. 방어력 +85' },
+            '천상의검': { levelReq: 55, materials: [{ name: '신성한 빛', count: 3 }, { name: '아다만타이트', count: 10 }], result: '천상의검', type: 'weapon', description: '천상의 검. 공격력 +105, 성스러움 +40' },
+            '천상의갑옷': { levelReq: 58, materials: [{ name: '신성한 빛', count: 5 }, { name: '아다만타이트', count: 10 }], result: '천상의갑옷', type: 'armor', description: '천상의 갑옷. 방어력 +100' },
+
+            // ===== 전설 대장 (레벨 60+) =====
+            '엑스칼리버': { levelReq: 65, materials: [{ name: '신성한 빛', count: 5 }, { name: '드래곤의 심장', count: 2 }, { name: '아다만타이트', count: 15 }], result: '엑스칼리버', type: 'weapon', description: '전설의 성검. 공격력 +150' },
+            '라그나로크': { levelReq: 70, materials: [{ name: '혼돈의 정수', count: 5 }, { name: '드래곤의 심장', count: 3 }, { name: '아다만타이트', count: 20 }], result: '라그나로크', type: 'weapon', description: '최후의 검. 공격력 +180' },
+            '신의갑옷': { levelReq: 68, materials: [{ name: '신성한 빛', count: 8 }, { name: '드래곤의 심장', count: 2 }, { name: '아다만타이트', count: 15 }], result: '신의갑옷', type: 'armor', description: '신의 가호. 방어력 +130' },
+            '용왕의갑옷': { levelReq: 72, materials: [{ name: '용왕의 비늘', count: 3 }, { name: '드래곤의 심장', count: 3 }, { name: '아다만타이트', count: 18 }], result: '용왕의갑옷', type: 'armor', description: '용왕의 갑옷. 방어력 +150' },
+            '이지스방패': { levelReq: 70, materials: [{ name: '신성한 빛', count: 5 }, { name: '아다만타이트', count: 15 }], result: '이지스방패', type: 'shield', description: '신의 방패. 방어력 +120' }
+        };
+
+        // 대장 목록 보기
+        if (!smithItem || smithItem === '목록') {
+            var smithCategories = { '초급': [], '중급': [], '고급': [], '특급': [], '전설': [] };
+            for (var sName in smithRecipes) {
+                var sRecipe = smithRecipes[sName];
+                var sStatus = smithLevel >= sRecipe.levelReq ? '✓' : '✗';
+                var sEntry = sStatus + ' ' + sName + ' (Lv.' + sRecipe.levelReq + ')';
+                if (sRecipe.levelReq <= 10) smithCategories['초급'].push(sEntry);
+                else if (sRecipe.levelReq <= 25) smithCategories['중급'].push(sEntry);
+                else if (sRecipe.levelReq <= 40) smithCategories['고급'].push(sEntry);
+                else if (sRecipe.levelReq <= 60) smithCategories['특급'].push(sEntry);
+                else smithCategories['전설'].push(sEntry);
+            }
+            var sOutput = '[대장장이 레시피 목록]\n현재 대장 레벨: ' + smithLevel + '\n\n';
+            sOutput += '🔨 초급 (' + smithCategories['초급'].length + '개)\n';
+            sOutput += '⚒️ 중급 (' + smithCategories['중급'].length + '개)\n';
+            sOutput += '🗡️ 고급 (' + smithCategories['고급'].length + '개)\n';
+            sOutput += '⚔️ 특급 (' + smithCategories['특급'].length + '개)\n';
+            sOutput += '👑 전설 (' + smithCategories['전설'].length + '개)\n\n';
+            sOutput += '사용: .대장 <아이템이름>\n정보: .대장 정보 <아이템이름>';
+            replier.reply(sOutput + buildNextActionHint('smith'));
+            return;
+        }
+
+        // 대장 정보 보기
+        if (smithItem.startsWith('정보 ')) {
+            var sInfoName = smithItem.substring(3).trim();
+            var sInfoRecipe = smithRecipes[sInfoName];
+            if (!sInfoRecipe) { replier.reply('해당 대장 레시피가 없습니다.'); return; }
+            var sMatList = sInfoRecipe.materials.map(function(m) { return m.name + ' x' + m.count; }).join(', ');
+            replier.reply('[대장 정보] ' + sInfoName + '\n필요 레벨: ' + sInfoRecipe.levelReq + '\n종류: ' + sInfoRecipe.type + '\n재료: ' + sMatList + '\n설명: ' + sInfoRecipe.description + buildNextActionHint('smith'));
+            return;
+        }
+
+        // 대장 제작
+        var sRecipe = smithRecipes[smithItem];
+        if (!sRecipe) {
+            replier.reply('대장 레시피가 없습니다.\n사용법: .대장 목록 으로 레시피를 확인하세요.' + buildNextActionHint('smith'));
+            return;
+        }
+
+        if (smithLevel < sRecipe.levelReq) {
+            replier.reply('대장 레벨이 부족합니다. (현재: ' + smithLevel + ', 필요: ' + sRecipe.levelReq + ')');
+            return;
+        }
+
+        // 재료 확인
+        var sHasMaterials = true;
+        for (var si = 0; si < sRecipe.materials.length; si++) {
+            var sMat = sRecipe.materials[si];
+            if (findItemCount(player, sMat.name) < sMat.count) {
+                sHasMaterials = false;
+                break;
+            }
+        }
+
+        if (!sHasMaterials) {
+            var sNeededMats = sRecipe.materials.map(function(m) { return m.name + ' x' + m.count; }).join(', ');
+            replier.reply('재료가 부족합니다.\n필요 재료: ' + sNeededMats);
+            return;
+        }
+
+        // 재료 소비
+        for (var sk = 0; sk < sRecipe.materials.length; sk++) {
+            var sUseMat = sRecipe.materials[sk];
+            removeItem(player, sUseMat.name, sUseMat.count);
+        }
+
+        // 결과물 생성
+        addItem(player, sRecipe.result, 1);
         player.professions.blacksmith += 1;
         saveState();
-        replier.reply(applyActionEffect('대장 제작 완료: ' + smithItem, 'smith'));
+
+        var sLevelUpMsg = '';
+        if (player.professions.blacksmith % 10 === 0) {
+            sLevelUpMsg = '\n🎉 대장 레벨이 ' + player.professions.blacksmith + '로 올랐습니다!';
+        }
+
+        replier.reply(applyActionEffect('🔨 대장 제작 완료: ' + sRecipe.result + '\n' + sRecipe.description + sLevelUpMsg, 'smith') + buildNextActionHint('smith'));
         return;
     }
 
